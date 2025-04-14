@@ -248,7 +248,7 @@ class DesignOfExperiments(metaclass=ABCMeta):
         new_data = pd.DataFrame.from_dict(data_dict, orient="index")
         if output_path.exists():
             existing_data = pd.read_csv(output_path, index_col=0)
-            combined_data = pd.concat([existing_data, new_data], axis=1)
+            combined_data = pd.concat([existing_data, new_data], axis=0)
             combined_data.to_csv(output_path, mode="w", index=True)
         else:
             new_data.to_csv(output_path, mode="w", header=True, index=True)
@@ -353,7 +353,7 @@ class DesignOfExperiments(metaclass=ABCMeta):
 
         """
         # Simulation run statement
-        print(f"Running simulation {index} ({index+1}/{self.total_runs})")
+        print(f"Running simulation {index} ({index + 1}/{self.total_runs})")
         points = list(self.doe_dicts.keys())
         param = self.doe_dicts[points[design_point]]
         parameters = self.parameters(**param)
