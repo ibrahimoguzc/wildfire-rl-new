@@ -1,0 +1,124 @@
+{
+    "name": "WildfireDefault",
+    "time_step": 1.0,
+    "enable_adaptive_time_step": false,
+    "mission_start": "2025-01-07T10:30:00",
+    "max_runtime": 86400,
+    "output_sampling_time": 300,
+    "run_headless": false,
+    "map_in_map": true,
+    "export_img": false,
+    "import_features_osm": true,
+    "deploy_osm_airport_locations": true,
+    "k_nearest_airports": 1,
+    "terrain_inputs": {
+        "file_namespace_operational": "Palisades_128x128_800",
+        "file_namespace": "Palisades_2004x1996_5m",
+        "cell_size": 5,
+        "height_scale_factor": 1.0,
+        "priority_map_sigma": 30,
+        "import_features_osm": true
+    },
+    "max_elevation": 1,
+    "run_api_for_atmosphere": false,
+    "atmosphere_inputs": {
+        "temperature_range": [
+            10,
+            23,
+            17
+        ],
+        "temperature_times": [
+            5,
+            13
+        ],
+        "sun_times": [
+            6,
+            20
+        ],
+        "time_of_max_solar_height": 12,
+        "humidity_range": [
+            22,
+            90
+        ],
+        "wind_run": 320,
+        "general_winddirection": 15,
+        "range_winddirection": 45,
+        "update_frequency": 600,
+        "latitude": 42.865,
+        "longitude": 0.022
+    },
+    "correction_coefficient": 0.4,
+    "ignition_centers": [
+        {
+            "gps_coords": [
+                34.07022,
+                -118.54453
+            ]
+        }
+    ],
+    "airports": [
+        {
+            "gps_coords": [
+                38.6934,
+                -9.4192
+            ]
+        },
+        {
+            "gps_coords": [
+                33.94126,
+                -118.42077
+            ]
+        }
+    ],
+    "deploy_osm_waters": true,
+    "water_sources": [
+        {
+            "gps_coords": [
+                34.0378973891474,
+                -118.5463204448615
+            ]
+        }
+    ],
+    "protection_locations": [],
+    "urban_locations": [],
+    "response_time": 3600,
+    "takeoff_interval": 300,
+    "turnaround_time": 100,
+    "suppression_altitude": 50,
+    "resupply_altitude": 15,
+    "enable_nighttime_operations": true,
+    "agents": [
+        {
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                1,
+                0
+            ],
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "water"
+                }
+            }
+        },
+        {
+            "file_name": "example_sepalane_hybrid_1.json",
+            "agents_per_base": [
+                1,
+                0
+            ],
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "indirect",
+                    "track_poi": "indirect",
+                    "suppress": "indirect"
+                }
+            }
+        }
+    ],
+    "scoop_time": 30,
+    "distance_cost_weight": 1.0,
+    "vip_cost_weight": 1.0,
+    "priority_cost_weight": 1.0,
+    "vegetation_cost_weight": 1.0,
+    "topography_cost_weight": 1.0
+}

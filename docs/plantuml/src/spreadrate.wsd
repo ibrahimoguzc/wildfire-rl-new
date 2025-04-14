@@ -1,0 +1,20 @@
+@startuml spreadrate
+skinparam shadowing false
+skinparam monochrome true
+start
+if (Fire State is Full Burning?) then (Yes)
+    :Calculate Initial Spread Rate Coefficient;
+    if (Propagation Aspect is Defined?) then (Yes)
+        :Calculate Wind Coefficient;
+        :Calculate Slope Coefficient;
+    else (No)
+        :Set Wind & Slope Coefficient to 1;
+    endif
+    :Retrieve Combustibility Coefficient;
+    :Calculate Spread Rate;
+    :Return Spread Rate;
+else (No)
+    :Return 0;
+endif
+stop
+@enduml

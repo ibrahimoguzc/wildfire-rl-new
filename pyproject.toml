@@ -1,0 +1,54 @@
+[tool.ruff]
+target-version = "py310"
+line-length = 79
+
+[tool.ruff.lint.pycodestyle]
+# Strict PEP-8 Guidelines for Line-Length and Doc-Strings
+max-line-length = 79
+max-doc-length = 72
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "B905",  # Always specify strict when using zip
+    "COM812",  # Trailing comma missing
+    "D107",  # Missing docstring in __init__
+    "D104",  # Missing docstring in public package
+    "DTZ005",  # Specify the timezone in datetime
+    "EM", "TRY003",  # Use Exception(msg) instead of Expection("literal")
+    "FBT",  # Booleans should be keyword arguments
+    "FIX",  # Line contains TODO/FIXME, consider resolving the issue
+    "ISC001",  # Implicitly concatenated string literals on one line (incompatible with format)
+    "PLR0913",  # Too many argument in function definition
+    "T201",  # Don't use print statements (should be enabled in the future)
+    "S603",  # subprocess call: check for execution of untrusted input (not testable)
+    "TD002",  # Missing author in TODO
+    "TD003", # Missing issue link on the line following this TODO
+]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = [
+    "INP001",  # File {filename} is part of an implicit namespace package. Add an __init__.py.
+]
+"examples/uam/scripts/*.py" = [
+    "INP001",  # File {filename} is part of an implicit namespace package. Add an __init__.py.
+]
+"tests/*.py" = [
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+]
+
+[tool.ruff.lint.flake8-tidy-imports]
+# Disallow all relative imports.
+ban-relative-imports = "all"
+
+[tool.ruff.lint.mccabe]
+# Cyclomatic McCabe Complexity
+max-complexity = 10
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+# Enable reformatting of code snippets in docstrings.
+docstring-code-format = true

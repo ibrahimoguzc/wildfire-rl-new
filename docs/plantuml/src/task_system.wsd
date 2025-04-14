@@ -1,0 +1,76 @@
+@startuml object_diagram
+page 1x2
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "SoSID Toolkit" #DDDDDD {
+    TaskStatus - TaskScheduler
+    collections.deque <|-- TaskQueue
+    TaskScheduler *-- "1..1" TaskQueue
+    Agent *-- "0..*" Task
+    Agent *-- "1..1" TaskScheduler
+    Task - TaskPriority
+    Task - TaskScheduler
+    Task - TaskStatus
+
+    object Agent {
+        unique_id: int
+        model: AgentBasedModel
+        tasks: TaskScheduler
+        {abstract} step(time_step): None
+        + __gui_repr__(): dict
+    }
+
+    enum TaskStatus {
+    IN_PROGRESS
+    COMPLETE
+    FAILED
+    }
+
+    enum TaskPriority {
+        LOWEST
+        LOW
+        NORMAL
+        HIGH
+        HIGHEST
+    }
+
+    class TaskScheduler {
+        __slots__: List[str]
+        __queue__: TaskQueue
+        agent: Agent
+        idle: bool
+        + add(): None
+        + populate_queue(): None
+        + set_active(): None
+        + run_active(): None
+        + ensure_task: Task
+    }
+
+    class TaskQueue {
+        + insort(): None
+    }
+
+    class Task {
+        __slots__: List[str]
+        priority: TaskPriority
+        task_method: Callable
+        complete_method: Callable
+        fail_method: Callable
+        + __call__(): Union[Task, TaskStatus]
+        + on_complete(): Callable
+        + on_fail(): Callable
+        + __repr__(): str
+        + __lt__(): bool
+        + __le__(): bool
+        + __eq__(): bool
+        + __ne__(): bool
+        + __ge__(): bool
+        + __gt__(): bool
+    }
+}
+
+
+@enduml

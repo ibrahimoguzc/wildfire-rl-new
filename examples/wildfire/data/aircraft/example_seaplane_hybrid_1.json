@@ -1,0 +1,100 @@
+{
+    "icon": "seaplane.svg",
+    "takeoff_landing_type": "water",
+    "autonomous": false,
+    "mtom": 10555.59,
+    "empty_mass": 7716.82,
+    "payload": 2205.396,
+    "flow_rate": 1.2,
+    "can_scoop": true,
+    "scooping_distance": 200,
+    "span": 20.9362387735212,
+    "propulsion_input": {
+        "architecture": "hybrid",
+        "hybridization_ratio": 0.26,
+        "conventional": {
+            "total_propellant": 513.934887,
+            "reserve_propellant": 154.601887,
+            "propellant_unit": "kg",
+            "refueling_rate": 15.14,
+            "taxi_out_fc": 0.015734264524707456,
+            "taxi_in_fc": 0.015734264524707456,
+            "transition_fc": 0.0,
+            "retransition_fc": 0.0,
+            "takeoff_fc": 0.0366833333333333,
+            "cruise_climb_fc": {
+                "10555": 0.03043497267759563,
+                "7716": 0.01739141414141414
+            },
+            "cruise_descent_fc": {
+                "10555": 0.0339924554183813,
+                "7716": 0.0340747835958563
+            },
+            "cruise_fc": {
+                "10555": 0.0440772434551309,
+                "7716": 0.0437137968744488
+            },
+            "landing_fc": 0.0340747835958563,
+            "loiter_fc": 0.0433637394444444
+        },
+        "electric": {
+            "total_propellant": 646234.93,
+            "reserve_propellant": 520301.00016000005,
+            "propellant_unit": "kJ",
+            "charging_power": 359.019,
+            "battery_swap_enabled": true,
+            "battery_swap_time": 600.0,
+            "taxi_out_power": 38.0,
+            "taxi_in_power": 38.0,
+            "transition_power": 0.0,
+            "retransition_power": 0.0,
+            "takeoff_power": {
+                "7716": 1014.471,
+                "10555": 1090.847
+            },
+            "cruise_climb_power": {
+                "7716": 997.668,
+                "10555": 995.823
+            },
+            "cruise_power": {
+                "7716": 952.817,
+                "10555": 949.886
+            },
+            "cruise_descent_power": {
+                "7716": 641.143,
+                "10555": 641.15
+            },
+            "landing_power": {
+                "7716": 641.143,
+                "10555": 641.15
+            },
+            "hover_power": {
+                "7716": 360.466,
+                "10555": 443.336
+            },
+            "loiter_power": {
+                "7716": 360.466,
+                "10555": 443.336
+            }
+        }
+    },
+    "profile_parameters": {
+        "taxi_out_duration": 120.0,
+        "taxi_in_duration": 120.0,
+        "transition_duration": 0.0,
+        "retransition_duration": 0.0,
+        "takeoff_altitude": 457.20000000000005,
+        "takeoff_climb_rate": 26.28428729357072,
+        "takeoff_ground_speed": 37.576603959668915,
+        "cruise_climb_rate": 3.71963529376,
+        "cruise_climb_ground_speed": 59.508,
+        "cruise_altitude": 4158.569,
+        "cruise_speed": 144.223,
+        "cruise_descent_rate": 2.941,
+        "cruise_descent_ground_speed": 77.243,
+        "landing_altitude": 457.20000000000005,
+        "landing_descent_rate": 30.03307967264758,
+        "landing_ground_speed": 40.68109634131444,
+        "loiter_speed": 61.336
+    }
+}

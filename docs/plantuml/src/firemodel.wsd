@@ -1,0 +1,67 @@
+@startuml firemodel
+skinparam shadowing false
+skinparam monochrome true
+|Preprocessing|
+start
+while (Iterated Through all Neighbors?) is (No)
+        :Retrieve Neighboring Cell State;
+    if (Fire State is Full Burning?) then (Yes)
+        :Set Current Cell as Ignitable;
+        :Increment i and j Vector Components;
+    elseif (Fire State >= Full Burning or is Nonflammable) then (Yes)
+        :Increment Extinguishable Count;
+    else (No)
+        :Pass;
+    endif
+endwhile (Yes)
+:Compute Fire Propagation Aspect;
+:Determine if Cell is Extinguishable;
+:Return Prop. Aspect, Ignitability, and Extinguishability;
+|Spread Rate Calculation|
+if (Fire State is Full Burning?) then (Yes)
+    :Calculate Initial Spread Rate Coefficient;
+    if (Propagation Aspect is Defined?) then (Yes)
+        :Calculate Wind Coefficient;
+        :Calculate Slope Coefficient;
+    else (No)
+        :Set Wind & Slope Coefficient to 1;
+    endif
+    :Retrieve Combustibility Coefficient;
+    :Calculate Spread Rate;
+    :Return Spread Rate;
+else (No)
+    :Return 0;
+endif
+|Transition Rule Evaluation|
+:Initialize Spread Rate Sum Variable;
+if (Current Cell is Ignitable?) then (Yes)
+    while (Iterated Through all Neighbors?) is (No)
+        :Sum Neighboring Spread Rate;
+    endwhile (Yes)
+    :Compute Current Fire State Value;
+    :In-Place Sum Current Fire State with Intermediate State;
+else (No)
+endif
+if (Current Cell is Nonflammable?) then (Yes)
+    :Set Fire State to NonFlammable;
+elseif (Current Cell is Combustible and Ignitable?) then (Yes)
+    if (Early Burning < Current Fire State Value <= Full Burning?) then (Yes)
+        :Set Fire State to Early Burning;
+    elseif (Full Burning < Current Fire State Value?) then (Yes)
+        :Set Fire State to Full Burning;
+    else (No)
+    endif
+elseif (Current Cell is Early Burning?) then (Yes)
+    :Set Fire State to Full Burning;
+elseif (Current Cell is Full Burning?) then (Yes)
+    if (Current Cell is Extinguishable?) then (Yes)
+        :Set Fire State to Extinguishing;
+    ' else (No)
+    '     :Pass;
+    endif
+elseif (Current Cell is Extinguishing?) then (Yes)
+    :Set Fire State to Burnt;
+else (No)
+endif
+stop
+@enduml

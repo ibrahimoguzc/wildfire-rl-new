@@ -1,0 +1,311 @@
+/* FIXME Adjust admonition colors */
+/* TODO Comment each style change */
+/* TODO fix search bar text color, add animation for focus */
+/* FIXME Bug discovered again with nested-collapsed menubar having wrong
+color when right-click highlighted */
+
+h1, .h1 {
+    font-size: 42px;
+}
+
+h2, .h2 {
+    font-size: 34px;
+}
+
+h3, .h3 {
+    font-size: 26px;
+}
+
+/* --- Dark Navbar Theming ------------------------------------------------- */
+/* .navbar {
+    height: 62px
+} */
+
+.navbar {
+    background: #1e1e1e;
+}
+
+/* Button-used to toggle collapsable navbar on small screens */
+.navbar-default .navbar-toggle .icon-bar {
+    background: #b6b6b6;
+}
+.navbar-default .navbar-toggle:hover .icon-bar {
+    background: #fbfbfb;
+}
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background: #fbfbfb;
+}
+
+/* Lightening nav-bar text color */
+.navbar-default .navbar-nav li a {
+    color: #b6b6b6;
+}
+
+/* Off-white for nav-bar hover text color */
+.navbar-default .navbar-nav li a:hover{
+    color: #fbfbfb;
+}
+
+/* Fixes bug after right-click on nav-bar when cursor
+is moved away from the nav-bar */
+.navbar-default .navbar-nav li a:focus{
+    color: #fbfbfb;
+}
+
+/* Editing nav-bar brand color */
+.navbar-default .navbar-brand {
+    font-size: 30px;
+    color: #c9c9c9;
+}
+
+
+/* Moving logo image to the left  */
+.navbar .container .navbar-brand {
+    margin-left: -55px;
+}
+.navbar-default .navbar-brand img {
+    height: 1.1em;
+    margin-top: -7px;
+    filter: drop-shadow( 0px 3px 2px rgba(0, 0, 0, .7));
+}
+/* Lightening Main Logo Text Colors */
+.navbar-default .navbar-brand:hover {
+    color: #fbfbfb;
+}
+/* Lightest Main Logo Text Colors (On-click) */
+.navbar-default .navbar-brand:focus {
+    color: white;
+}
+
+/* .navbar-nav  li .dropdown-menu {
+    margin-top: 4px;
+} */
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #171717;
+    /* border: 1px solid #cccccc; */
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    background-clip: padding-box;
+}
+
+/* Removing dropdown divider */
+.dropdown-menu .divider {
+    background: none;
+    margin: 0;
+    /* background-color: #343a45; UNCOMMENT FOR Darkened Dividers*/
+}
+
+/* Removing background of individual dropdown elements */
+.dropdown-menu li a.reference.internal {
+    background: none;
+}
+
+.dropdown-menu li a:hover {
+    border-radius: 0px;
+    /* z-index: -20; */
+}
+
+
+/* .dropdown .globaltoc-container .open {
+    background: #171717;
+    color: white;
+}
+
+.dropdown .globaltoc-container .open:hover {
+    background: #171717;
+    color: white;
+}
+
+.dropdown .globaltoc-container .open:focus {
+    background: #171717;
+    color: white;
+} */
+
+/* Darkening collapsed nav-bar drop-down */
+.navbar-nav .open .dropdown-menu {
+    background: #171717;
+}
+
+/* Collapsed nav-bar nested drop-down */
+.navbar-default .navbar-nav .open .dropdown-menu li a {
+    color: #b6b6b6;
+}
+/* Collapsed nav-bar nested drop-down hover effect */
+.navbar-default .navbar-nav .open .dropdown-menu li a:hover {
+    color: white;
+}
+
+/* TODO consider making base open color off-white such that hover still
+provides an animation */
+/* Darkening open nav-bar background and forcing text to be white  */
+.navbar-default .navbar-nav .open a {
+    background: #171717;
+    color: white;
+}
+.navbar-default .navbar-nav .open a:hover {
+    background: #171717;
+    color: white;
+}
+.navbar-default .navbar-nav .open a:focus {
+    background-color: #171717;
+    color: white;
+}
+
+.nav li a {
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+/* Lightening footer border for aesthetics */
+.footer {
+    border-top: 1px solid #ececec;
+}
+
+/* Enlarging Decorator "@" symbol and removing right-border */
+.code.desclassname {
+    font-size: large;
+    padding-right: 0px;
+}
+
+/* Ensuring internal references have white background & border radius */
+a.reference.internal {
+    background: white;
+    border-radius: 3px;
+}
+/* TODO this can also be changed within the div.admonition class  */
+code.xref {
+    background: white;
+}
+code {
+    /* change this class to modify all code (monospaced) text DOES NOT
+    INCLUDE EXAMPLES */
+    /* color: #c7254e; DEFAULT VALUE */
+    color: #3897ff;
+}
+
+/* Shades code-headers for readability */
+dt {
+    background-color: #e4e4e4;
+    border-top-style: solid;
+    border-top-color: #d2d2d2;
+    padding-left: 5px;
+}
+
+/* Removes Background and top-border from Parameter lists
+and aligns them w/ other admonitions  */
+dl.field-list {
+    padding-left: 0px;
+}
+
+dt.field-odd {
+    background: none;
+    border-top-style: none;
+    padding-left: 0px;
+}
+
+dt.field-even {
+    background: none;
+    border-top-style: none;
+    padding-left: 0px;
+}
+
+/* Indents nested-code blocks for readability */
+dd {
+    margin-left: 2em;
+}
+
+/* Make [source] labels smaller and monochrome */
+.viewcode-link {
+    font-weight: small;
+    padding-right: 5px;
+    color: #989898;
+}
+
+.viewcode-link:hover {
+    color: #27AE60;
+}
+
+/* --- Admonitions --------------------------------------------------------- */
+/* TODO CLEAN UP ADMONITIONS PREFER SYNTAX div.admonition.seealso */
+div.admonition {
+    padding: 10px;
+    border-radius: 0px;
+}
+
+p.admonition-title {
+    margin: -10px -10px 0px;
+    background: #0003;
+    padding-left: 10px;
+}
+/* .alert {
+    background-color: #9c27b0;
+    border-top-style: solid;
+    border-top-color: #303030;
+    border-radius: 0px;
+    border-top-width: thick;
+} */
+
+div.admonition.seealso {
+    background: #426e8a;
+}
+
+.alert-warning {
+    background: #ff7e00;
+}
+
+.alert-danger {
+   background: #e51c23
+}
+
+div.admonition.tip.alert.alert-info {
+    background: #1abc9c;
+}
+
+body {
+    font-size: 14px;
+}
+
+div.body {
+    max-width: 930px
+}
+
+/* --- Dynamic Scaling of Elements ----------------------------------------- */
+
+@media (min-width: 768px) {
+    .container {
+        width: 700px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 930px;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar .form-control {
+        display: none;
+    }
+}
+
+/* Hide version number when screen is < 350px*/
+@media (max-width: 350px) {
+    .navbar-default .navbar-text {
+      display: none;
+    }
+}

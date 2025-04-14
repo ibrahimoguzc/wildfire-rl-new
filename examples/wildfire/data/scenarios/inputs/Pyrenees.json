@@ -1,0 +1,136 @@
+{
+    "name": "Pyrenees",
+    "time_step": 1.0,
+    "enable_adaptive_time_step": false,
+    "mission_start": "2023-08-17T06:15:00",
+    "max_runtime": 43200,
+    "run_headless": false,
+    "output_sampling_time": 300,
+    "map_in_map": true,
+    "export_img": false,
+    "import_features_osm": true,
+    "deploy_osm_airport_locations": true,
+    "k_nearest_airports": -1,
+    "terrain_inputs": {
+        "file_namespace_operational": "Pyrenees_128x128_800",
+        "file_namespace": "Pyrenees_2000x1996_5m",
+        "cell_size": 5,
+        "height_scale_factor": 1.0,
+        "priority_map_sigma": 30,
+        "import_features_osm": true
+    },
+    "max_elevation": 1,
+    "estimate_cost": true,
+    "run_api_for_atmosphere": false,
+    "atmosphere_inputs": {
+        "temperature_range": [
+            10,
+            25,
+            10
+        ],
+        "temperature_times": [
+            5,
+            15
+        ],
+        "sun_times": [
+            6,
+            20
+        ],
+        "time_of_max_solar_height": 12,
+        "humidity_range": [
+            20,
+            70
+        ],
+        "wind_run": 350,
+        "general_winddirection": 300,
+        "range_winddirection": 30,
+        "update_frequency": 600,
+        "latitude": 42.865,
+        "longitude": 0.022
+    },
+    "correction_coefficient": 0.4,
+    "ignition_centers": [
+        {
+            "gps_coords": [
+                42.86248,
+                0.00652
+            ]
+        }
+    ],
+    "airports": [
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        }
+    ],
+    "deploy_osm_waters": true,
+    "water_sources": [],
+    "protection_locations": [],
+    "urban_locations": [],
+    "response_time": 1800,
+    "takeoff_interval": 300,
+    "turnaround_time": 100,
+    "suppression_altitude": 50,
+    "resupply_altitude": 15,
+    "enable_nighttime_operations": true,
+    "agents": [
+        {
+            "file_name": "example_aircraft_1.json",
+            "agents_per_base": [
+                2,
+                0,
+                0,
+                0
+            ],
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "water"
+                },
+                "alternative": {
+                    "threshold": [
+                        17,
+                        4
+                    ],
+                    "change_condition": "no_change",
+                    "alternative_tactic": {
+                        "select_poi": "vip"
+                    }
+                }
+            }
+        }
+    ],
+    "scoop_time": 30,
+    "distance_cost_weight": 1.0,
+    "vip_cost_weight": 1.0,
+    "priority_cost_weight": 1.0,
+    "vegetation_cost_weight": 1.0,
+    "topography_cost_weight": 1.0
+}

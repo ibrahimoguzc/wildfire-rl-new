@@ -1,0 +1,36 @@
+@startuml firemodel
+skinparam shadowing false
+skinparam monochrome true
+start
+:Initialize Spread Rate Sum Variable;
+if (Current Cell is Ignitable?) then (Yes)
+    while (Iterated Through all Neighbors?) is (No)
+        :Sum Neighboring Spread Rate;
+    endwhile (Yes)
+    :Compute Current Fire State Value;
+    :In-Place Sum Current Fire State with Intermediate State;
+else (No)
+endif
+if (Current Cell is Nonflammable?) then (Yes)
+    :Set Fire State to NonFlammable;
+elseif (Current Cell is Combustible and Ignitable?) then (Yes)
+    if (Early Burning < Current Fire State Value <= Full Burning?) then (Yes)
+        :Set Fire State to Early Burning;
+    elseif (Full Burning < Current Fire State Value?) then (Yes)
+        :Set Fire State to Full Burning;
+    else (No)
+    endif
+elseif (Current Cell is Early Burning?) then (Yes)
+    :Set Fire State to Full Burning;
+elseif (Current Cell is Full Burning?) then (Yes)
+    if (Current Cell is Extinguishable?) then (Yes)
+        :Set Fire State to Extinguishing;
+    ' else (No)
+    '     :Pass;
+    endif
+elseif (Current Cell is Extinguishing?) then (Yes)
+    :Set Fire State to Burnt;
+else (No)
+endif
+stop
+@enduml

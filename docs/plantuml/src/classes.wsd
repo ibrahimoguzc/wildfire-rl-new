@@ -1,0 +1,201 @@
+@startuml object_diagram
+page 1x2
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "SoSID Toolkit" #DDDDDD {
+
+    ' Connections:
+    Environment *-- "1..1" Terrain
+    Environment *-- "1..1" Features
+    Simulation *-- "1..1" SimulationParameters
+    Simulation *-- "1..*" Model
+    CellularAutomataModel *-- "1..1" GridData
+    abc.ABCMeta <|-- Model
+    threading.Thread <|-- Simulation
+    abc.ABCMeta <|-- Simulation
+    Model <|-- CellularAutomataModel
+    Model <|-- AgentBasedModel
+    AgentBasedModel *-- "1..*" Agent
+    Agent <|-- MovingAgent
+    abc.ABCMeta <|-- Agent
+    mesa.Agent <|-- Agent
+    mesa.Model <|-- AgentBasedModel
+    mesa.Model *-- "1..1" mesa.BaseScheduler
+    mesa.Model *-- "1..*" mesa.Agent
+    Viewer2D *-- "1..1" Simulation
+    Environment - Simulation
+    Viewer2D *-- "1..*" SimulationItem
+
+    class Environment {
+        simulation: Simulation
+        terrain: Terrain
+        features: Features
+        + load_terrain(): np.ndarray
+        + __gui_repr__(): dict
+    }
+
+    class abc.ABCMeta << (M,#FF7700) metaclass >> {
+        + register(): None
+        + __subclasshook__(): Union[bool, NotImplemented]
+    }
+
+    abstract class Model {
+        {abstract} step: None
+    }
+
+    class GridData << (D,#FF7700) dataclass >> {
+        asdict: dict
+        + preallocate(): None
+    }
+
+    class CellularAutomataModel {
+        simulation: Simulation
+        {abstract} __data__: GridData
+        shape: Tuple[int, int]
+        + __gui_repr__(): dict
+    }
+
+    class AgentBasedModel {
+        simulation: Simulation
+        random: random.Random
+        running: bool = False
+        agents: List[Agent]
+        schedule: mesa.BaseScheduler
+        space: Union[mesa.Grid, mesa.ContinousSpace]
+        + __gui_repr__(): List[dict]
+    }
+
+    class Agent {
+        unique_id: int
+        model: AgentBasedModel
+        tasks: TaskScheduler
+        {abstract} step(time_step): None
+        + __gui_repr__(): dict
+    }
+
+    class MovingAgent {
+        velocity: float
+        heading: np.ndarray
+        pos: np.ndarray
+        + navigate_to(): TaskStatus
+    }
+
+    class mesa.Model {
+        _seed = time.time()
+        running: bool
+        schedule: BaseScheduler
+        current_id: int
+        + run_model(): None
+        + step(): None
+        + next_id(): int
+        + reset_randomizer(): None
+
+
+    }
+
+    class mesa.Agent {
+        unique_id: int
+        random: random.Random
+        model: mesa.Model
+        + step(): None
+    }
+
+    class mesa.BaseScheduler {
+        model: mesa.Model
+        steps: int
+        time: int
+        _agents: OrderedDict
+        agents: List[mesa.Agent]
+        + add(): None
+        + remove(): None
+        + step(): None
+        + get_agent_count(): int
+        + agent_buffer(): Generator[mesa.Agent, None, None]
+    }
+
+
+    class Terrain {
+        elevation: np.ndarray
+        cell_size: float = 1
+        gradients: Tuple[np.ndarray, np.ndarray]
+        slopes: np.ndarray
+        aspects: np.ndarray
+        + hillshade(): np.ndarray
+        + hillshade_matplotlib(): np.ndarray
+        + to_azimuth(): Union[float, np.ndarray]
+        + to_zenith(): Union[float, np.ndarray]
+        + plot_3d(): matplotlib.axes.Axes
+        + plot(): None
+        + __gui_repr__(): dict
+    }
+
+    class Features {
+        combustibilities: np.ndarray
+    }
+
+    class threading.Thread {
+        name: str
+        ident: Union[int, None]
+        native_id: Union[int, None]
+        daemon: bool
+        + start(): None
+        + run(): None
+        + join(): None
+        + get_name(): str
+        + set_name(): None
+        + is_alive(): None
+        + is_daemon(): bool
+        + set_daemon(): None
+    }
+
+    class Simulation {
+        random: random.Random
+        parameters: SimulationParameters
+        time_step: datetime.timedelta
+        timer: SimulationTimer
+        iterations: int
+        is_running: threading.Event
+        {abstract} models: None
+        + step(): None
+        + start(): None
+        + run(): None
+        + pause(): None
+        + play(): None
+    }
+
+    class SimulationParameters << (D,#FF7700) dataclass >> {
+        time_step: float
+        max_iter: Union[int, None]
+        + evaluate_distributions(): None
+        + __post_init__(): None
+    }
+
+    class SimulationItem {
+        object: object
+        painter: QtGui.QPainter
+        on_update: Callable
+        item: QtGui.QGraphicsItem
+        z_order: int
+        + update(): None
+    }
+
+    class Viewer2D {
+        simulation: Simulation
+        items: SimulationItem
+        updateables: SimulationItem
+        ui: QtWidgets.QMainWindow
+        + addViewBox(): None
+        + addAxes(): None
+        + addFPSCounter(): None
+        + addSimulationControls():
+        + initializeUI(): None
+        + getSimulationItems(): Generator[SimulationItem, None, None]
+        {static} getUpdatables(): List[SimulationItem]
+        - _update(): None
+    }
+}
+
+@enduml

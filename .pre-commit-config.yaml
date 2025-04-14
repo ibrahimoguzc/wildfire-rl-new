@@ -1,0 +1,24 @@
+repos:
+    - repo: local
+      hooks:
+          - id: ruff-format
+            name: Ruff format
+            language: python
+            entry: python scripts/ruff_format.py
+            types_or: [python, pyi, jupyter]
+            args: ["--git-diff=--staged", "--check"]
+            require_serial: true
+            additional_dependencies: [ruff, gitpython, unidiff]
+          - id: ruff-check
+            name: Ruff check
+            language: python
+            entry: python scripts/ruff_check.py
+            types_or: [python, pyi, jupyter]
+            args: ["--git-diff=--staged"]
+            require_serial: true
+            additional_dependencies: [ruff, gitpython, unidiff]
+          - id: commit-message-check
+            name: Check commit message
+            language: python
+            entry: python scripts/check_commit.py
+            stages: [commit-msg]
