@@ -106,6 +106,10 @@ class DesignOfExperiments(metaclass=ABCMeta):
         """Executes the Design of Experiments."""
 
         self._log_doe_start()
+        if self.batch_size == 0:
+            self.batch_size = len(
+                self.doe_dicts
+            )  # Fit batch size to number of design points
 
         indices, design_points, runs, seeds = self._prepare_doe_run_arrays()
 
@@ -248,6 +252,10 @@ class DesignOfExperiments(metaclass=ABCMeta):
         new_data = pd.DataFrame.from_dict(data_dict, orient="index")
         if output_path.exists():
             existing_data = pd.read_csv(output_path, index_col=0)
+
+            # Reindex new data to match existing columns
+            new_data = new_data.reindex(columns=existing_data.columns)
+
             combined_data = pd.concat([existing_data, new_data], axis=0)
             combined_data.to_csv(output_path, mode="w", index=True)
         else:
