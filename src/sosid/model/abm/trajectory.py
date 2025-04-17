@@ -845,6 +845,7 @@ def generate_straight_trajectory(
     include_landing: bool = False,
     include_taxi_out: bool = False,
     include_taxi_in: bool = False,
+    loiter_time: int = 0,
 ) -> StraightTrajectory:
     """Create a straight trajectory between two points.
 
@@ -1027,6 +1028,11 @@ def generate_straight_trajectory(
         distances.append(0.0)
         altitudes.append(altitude_end)
         flight_states.append(FlightState.TAXI_IN)
+    if loiter_time:
+        durations.append(loiter_time)
+        distances.append(0.0)
+        altitudes.append(altitude_end)
+        flight_states.append(FlightState.LOITER)
     return StraightTrajectory(
         start_datetime=start_datetime,
         timestamps=np.insert(np.cumsum(durations), 0, 0.0),

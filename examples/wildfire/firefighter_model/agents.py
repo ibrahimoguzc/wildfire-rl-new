@@ -227,6 +227,11 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         """Returns the fleet size."""
         return self.model.simulation.n_agents
 
+    @property
+    def scoop_time(self) -> int:
+        """Returns the scoop time."""
+        return self.parameters.scoop_time
+
     @cached_property
     def airports(self):
         """Returns agents of class `AirTrafficManager`."""
@@ -383,6 +388,9 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
             alt_start = self.get_cruise_descent_altitude(
                 starting_pos, destination_type
             )
+        scooping_time = 0
+        if destination_type == DestinationType.WATER:
+            scooping_time = self.scoop_time
         if reverse:
             return generate_straight_trajectory(
                 profile=self.profile_parameters,
@@ -409,6 +417,7 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
             elevation_end=elev_end,
             include_landing=destination_type == DestinationType.BASE,
             include_takeoff=is_after_takeoff,
+            loiter_time=scooping_time,
         )
 
     def get_cruise_descent_altitude(
