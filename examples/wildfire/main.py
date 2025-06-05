@@ -42,6 +42,7 @@ if RUN_PROFILER:
     sim.join()
     sim.context.open_in_browser()
 elif parameters.run_headless:
+    print("Running Headless")
     sim.start()
     sim.is_stopped.wait()
 else:

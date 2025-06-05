@@ -425,8 +425,7 @@ class TerrainParameters(BaseModel):
 
     @property
     def water_map_dimensions(self):
-        """Larger map dimensions with the proper transform of width and
-        height."""
+        """Larger map dimensions with the prop transform of w and h."""
         water_map_dimensions_w = self.water_map_grid_shape[1] * self.cell_size
         water_map_dimensions_h = self.water_map_grid_shape[0] * self.cell_size
         return (water_map_dimensions_w, water_map_dimensions_h)
@@ -436,8 +435,7 @@ class TerrainParameters(BaseModel):
     def check_width_is_multiple_of_four(
         cls, value
     ) -> tuple[PositiveInt, PositiveInt]:
-        """Verify dimensions of input elevation file to be multiples of
-        four."""
+        """Verify dim of input eval file to be multiples of four."""
         assert value[1] % 4 == 0, (
             f"Elevation file width {value[1]} is not divisible by 4, which is "
             f"incompatible with fire_models IndexedImageItem representation"
@@ -522,6 +520,7 @@ class WildfireParameters(SimulationParameters):
     """Define inputs and validators for `WildfireSimulation`."""
 
     # Simulation Parameters
+    run_headless: bool  # Lets you run the simulation headless or with no gui
     name: str  # identifier of the simulation
     time_step: PositiveFloat
     mission_start: datetime
@@ -885,7 +884,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
         self.wildfire.ignite(self.ignition_centers)
         super().start()
 
-    def stop(self) -> None:  # noqa D102
+    def stop(self) -> None:
         """Stops the simulation and prints useful output info."""
         super().stop()
         print(
@@ -1011,18 +1010,17 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
         burnt_area = self.wildfire.burnt_area
         if burnt_area < CLASS_1:
             return 1
-        elif burnt_area < CLASS_2:
+        if burnt_area < CLASS_2:
             return 2
-        elif burnt_area < CLASS_3:
+        if burnt_area < CLASS_3:
             return 3
-        elif burnt_area < CLASS_4:
+        if burnt_area < CLASS_4:
             return 4
-        elif burnt_area < CLASS_5:
+        if burnt_area < CLASS_5:
             return 5
-        elif burnt_area < CLASS_6:
+        if burnt_area < CLASS_6:
             return 6
-        else:
-            return 7
+        return 7
 
     @Output(target_key=TargetKey.SIMULATION)
     def sampled_times(self):  # noqa D102
@@ -1146,8 +1144,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
             _, distance = self.agent_methods.nearest_position(
                 self.atm_pos, center.pos
             )
-            if distance < min_distance:
-                min_distance = distance
+            min_distance = min(min_distance, distance)
         return min_distance
 
     @Output(target_key=TargetKey.SIMULATION)
@@ -1157,8 +1154,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
             distances = self.agent_methods.distance(center.pos, self.atm_pos)
             max_idx = np.argmax(distances)
             farthest_distance = distances[max_idx]
-            if farthest_distance > max_distance:
-                max_distance = farthest_distance
+            max_distance = max(max_distance, farthest_distance)
         return max_distance
 
     @Output(target_key=TargetKey.SIMULATION)
@@ -1174,8 +1170,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
                 )
             else:
                 distance = math.inf
-            if distance < min_distance:
-                min_distance = distance
+            min_distance = min(min_distance, distance)
         return min_distance
 
     @Output(target_key=TargetKey.SIMULATION)
@@ -1184,17 +1179,13 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
         min_water_distance = self.min_distance_water_to_fire
         if min_airport_distance < min_water_distance:
             return min_airport_distance
-        else:
-            return min_water_distance
+        return min_water_distance
 
     @Output(target_key=TargetKey.SIMULATION)
     def min_resupply_loc_is_water(self) -> bool:  # noqa D102
         min_water_distance = self.min_distance_water_to_fire
         min_resupply_distance = self.min_distance_resupply_to_fire
-        if min_resupply_distance == min_water_distance:
-            return True
-        else:
-            return False
+        return min_resupply_distance == min_water_distance
 
     @Output(target_key=TargetKey.SIMULATION)
     def average_distance_airport_to_fire(self):  # noqa D102
@@ -1248,7 +1239,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
 
         return int(total_casualties)
 
-    def export_env_image(  # noqa D102
+    def export_env_image(
         self, img_path: str | None = None, img_name: str | None = None
     ) -> None:
         """Exports a '.png' image of the simulation environment state.
@@ -1262,7 +1253,6 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
                 the time and date of the export in 'hhmmss_DDMMYYYY'
                 format.
         """
-
         fire_states = self.wildfire.fire_states
         fire_states = np.array(
             [list(map(COLOR_TABLE.__getitem__, row)) for row in fire_states]
@@ -1272,7 +1262,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
         hillshade = np.reshape(np.repeat(hillshade, 4), np.shape(color_map))
 
         fire_img = Image.fromarray(np.uint8(fire_states))
-        features_img = Image.fromarray(np.uint8((color_map * hillshade)))
+        features_img = Image.fromarray(np.uint8(color_map * hillshade))
 
         img = Image.alpha_composite(features_img, fire_img)
 
@@ -1335,5 +1325,4 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
                 self.firefighters.time_at_next_iter
                 - self.wildfire.internal_model_time
             )
-        else:
-            return self.wildfire.model_time_step
+        return self.wildfire.model_time_step

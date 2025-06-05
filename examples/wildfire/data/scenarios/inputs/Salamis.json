@@ -1,10 +1,10 @@
 {
     "name": "Salamis",
     "time_step": 1.0,
-    "enable_adaptive_time_step": false,
+    "enable_adaptive_time_step": true,
     "mission_start": "2023-07-17T15:39:00",
     "max_runtime": 43200,
-    "run_headless": false,
+    "run_headless": true,
     "output_sampling_time": 300,
     "map_in_map": true,
     "export_img": false,
