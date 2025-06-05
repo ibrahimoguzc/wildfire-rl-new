@@ -1,5 +1,6 @@
-""" Contains the definition of the mapping between human-readable
-wildfire states and their integer value """
+"""Contains the definition of the mapping between human-readable
+wildfire states and their integer value
+"""
 
 # Wildfire States:
 nonflammable = 0

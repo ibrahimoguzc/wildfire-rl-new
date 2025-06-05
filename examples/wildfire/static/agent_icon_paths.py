@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Icon:
-
     # Icon paths
     helicopter: str = "helicopter.svg"
     drone: str = "drone.svg"

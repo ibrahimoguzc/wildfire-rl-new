@@ -1,5 +1,3 @@
-import json
-
 import pytest
 
 from examples.uam.intraCity.demand_model.agents import RevenueDemand
@@ -76,16 +74,16 @@ class TestIntraCitySimulationOutputPD:
         assert isinstance(sim, IntraCitySimulationPD)
         assert sim.is_stopped
         assert len(all_missions) > 0, "No missions are scheduled."
-        assert len(all_missions) == len(
-            set(all_missions)
-        ), "There are duplicate missions."
+        assert len(all_missions) == len(set(all_missions)), (
+            "There are duplicate missions."
+        )
         for mission in all_missions:
-            assert len(mission.passengers) == len(
-                set(mission.passengers)
-            ), "Duplicate passengers found in a single mission."
-        assert all(
-            len(p.itineraries) > 0 for p in all_uam_passengers
-        ), "There are passengers that chose UAM without itineraries."
+            assert len(mission.passengers) == len(set(mission.passengers)), (
+                "Duplicate passengers found in a single mission."
+            )
+        assert all(len(p.itineraries) > 0 for p in all_uam_passengers), (
+            "There are passengers that chose UAM without itineraries."
+        )
 
     def test_passenger_counters(self, simulation):
         sim: IntraCitySimulationPD = simulation

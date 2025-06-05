@@ -110,7 +110,6 @@ ELLIPSE_SCENARIOS = {
 
 
 class TestEllipse(RasterizedShapeTester):
-
     scenarios = ELLIPSE_SCENARIOS
     test_class = Ellipse
 
@@ -188,7 +187,6 @@ RECTANGLE_SCENARIOS = {
 
 
 class TestRectangle(RasterizedShapeTester):
-
     scenarios = RECTANGLE_SCENARIOS
     test_class = Rectangle
 
@@ -260,7 +258,6 @@ LINESEGMENT_SCENARIOS = {
 
 
 class TestLineSegment(RasterizedShapeTester):
-
     scenarios = LINESEGMENT_SCENARIOS
     test_class = LineSegment
 

@@ -11,12 +11,12 @@ from .raster import Ellipse, LineSegment, RasterizedShape, Rectangle
 
 __all__ = [
     "CellularAutomataModel",
-    "GridData",
-    "RasterizedShape",
     "Ellipse",
-    "Rectangle",
+    "GridData",
     "LineSegment",
-    "Neighborhood",
     "MooreNeighborhood",
+    "Neighborhood",
     "NeumannNeighborhood",
+    "RasterizedShape",
+    "Rectangle",
 ]

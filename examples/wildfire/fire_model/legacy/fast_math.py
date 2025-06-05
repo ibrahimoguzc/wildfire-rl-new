@@ -1,5 +1,4 @@
 import math
-from typing import Tuple, Optional
 
 import numba
 
@@ -26,11 +25,11 @@ def magnitude_2d(i: float, j: float) -> float:
     Returns:
         Scalar magnitude of a vector computed from its components
     """
-    return math.sqrt(i ** 2 + j ** 2)
+    return math.sqrt(i**2 + j**2)
 
 
 @numba.jit(nopython=True, fastmath=True)
-def normalize_2d(i: float, j: float) -> Tuple[float, float]:
+def normalize_2d(i: float, j: float) -> tuple[float, float]:
     """Normalizes a 2D vector (1D array) into a unit-vector with a
     magnitude equal to 1.
 
@@ -50,7 +49,7 @@ def normalize_2d(i: float, j: float) -> Tuple[float, float]:
 
 
 @numba.jit(nopython=True, fastmath=True)
-def dot_2d(a: Tuple[float, float], b: Tuple[float, float]) -> float:
+def dot_2d(a: tuple[float, float], b: tuple[float, float]) -> float:
     """Dot product of two 2D vectors (1D arrays), ``a`` and ``b``.
 
     Args:
@@ -69,7 +68,7 @@ def dot_2d(a: Tuple[float, float], b: Tuple[float, float]) -> float:
 # TODO consider moving to jit_funcs of fire_model
 @numba.jit(nopython=True, fastmath=True)
 def bearing_2d(
-    vector: Tuple[float, float], true_north: Optional[Tuple[int]] = (-1, 0)
+    vector: tuple[float, float], true_north: tuple[int] | None = (-1, 0)
 ) -> float:
     """Converts the provided ``vector`` in to a scalar bearing in SI
     degree. Default Orientation is North = 0 deg, East = 90 deg,

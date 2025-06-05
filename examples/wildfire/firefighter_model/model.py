@@ -11,7 +11,6 @@ from collections import defaultdict
 from datetime import datetime
 from functools import cached_property
 from itertools import chain
-from typing import Any, List, Optional, Tuple
 
 import numpy as np
 import shapely.geometry as geom
@@ -39,8 +38,6 @@ from sosid.model.abm.schedule import RandomActivationByBreed
 from sosid.model.ca.jit_funcs.geom2d import calculate_confidence_area
 from sosid.model.transform import (
     gps_to_pos,
-    pos_small_to_large_grid,
-    pos_to_gps,
     pos_to_index,
 )
 
@@ -58,7 +55,7 @@ class FireBlockData:
 
 
 class FirefighterModel(AgentBasedModel, FireBlockData):
-    def __init__(self, simulation: Optional[object] = None) -> None:
+    def __init__(self, simulation: object | None = None) -> None:
         super().__init__(simulation)
         self.__cache__ = {}
         self.schedule = RandomActivationByBreed(model=self)
@@ -70,7 +67,7 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
         )  # type: ignore
         self.agents_by_type = defaultdict(list)  # type: ignore
         self.agents = []  # type: ignore
-        self.unique_aircraft_definitions: List[SuppressionUAV] = []
+        self.unique_aircraft_definitions: list[SuppressionUAV] = []
         self.air_traffic_managers
         self.water_sources
         self.firefighters
@@ -188,28 +185,24 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
     @cached_property
     def largest_suppression_patch(self) -> float:
         """Returns the largest suppression patch dimensions (cells)."""
-
         largest_dim = 0
         for agent in self.unique_aircraft_definitions:
             patch_size = agent.suppression_patch(
                 agent.payload, agent.flow_rate
             )
-            if max(patch_size) > largest_dim:
-                largest_dim = max(patch_size)
+            largest_dim = max(largest_dim, max(patch_size))
         return largest_dim
 
     @cached_property
     def smallest_suppression_patch(self) -> float:
         """Returns the largest smaller suppression patch dimensions."""
-
         smallest_dim = 0
         # Loop over unique aircraft definitions
         for agent in self.unique_aircraft_definitions:
             patch_size = agent.suppression_patch(
                 agent.payload, agent.suppressant_flow_rate
             )
-            if min(patch_size) > smallest_dim:
-                smallest_dim = min(patch_size)
+            smallest_dim = max(smallest_dim, min(patch_size))
         return smallest_dim
 
     @cached_property
@@ -489,8 +482,8 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
 
     def create_fire_block_ellipse(self):
         """Create fire block ellipse for the agents to follow and block
-        the fire from extending pass it."""
-
+        the fire from extending pass it.
+        """
         # Get burning indices
         fire_indices = self.wildfire.fire_indices[: self.wildfire.n_burning]
 
@@ -551,7 +544,6 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
         diagonal grid spaces and therefore it is necessary to patch
         together diagonals.
         """
-
         prev = self.fire_block_indices[starting_idx, :]
         new_indices = self.fire_block_indices
         n_new = 0
@@ -567,8 +559,8 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
 
     def update_fire_block_ellipse(self):
         """Update fire block ellipse and connect it with the last fire
-        block ellipse."""
-
+        block ellipse.
+        """
         # Save the current fire block indices
         current_fire_block_indices = self.fire_block_indices[
             self.current_block_index, :
@@ -606,7 +598,6 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
 
     def is_fire_containable(self) -> bool:
         """Check if fire is containable and close fire block ellipse."""
-
         # Avoid multiple method calls after fire is contained
         if self.fire_contained or self.wildfire.n_burning == 0:
             return True
@@ -688,7 +679,6 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
 
     def sort_indices_clockwise(self, indices, center):
         """Sort unordered array of indices clockwise."""
-
         # Calculate angles with respect to the center
         angles = np.arctan2(
             indices[:, 0] - center[0], indices[:, 1] - center[1]
@@ -714,12 +704,11 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
 
         return clockwise_indices
 
-    def find_max_spread_rate_angle(self, center: Tuple):
+    def find_max_spread_rate_angle(self, center: tuple):
         """Find the direction at which the fire spreads the fastest.
 
         center : Reference point from which the angle is calculated.
         """
-
         # Get the index for the maximum fire spread rate
         burning_indices = self.wildfire.burning_indices
         fire_spread_rates = self.wildfire.get_spread_rates(burning_indices)
@@ -739,7 +728,6 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
     @property
     def min_distance_fire_urban(self):
         """Return shortest distance from fire to residential areas."""
-
         if "min_distance_fire_urban" in self.__cache__:
             return self.__cache__["min_distance_fire_urban"]
         fire_indices = self.wildfire.burning_indices
@@ -758,7 +746,6 @@ class FirefighterModel(AgentBasedModel, FireBlockData):
     @property
     def min_distance_fire_fireblock(self):
         """Return shortest distance from fire to fire block."""
-
         if "min_distance_fire_fireblock" in self.__cache__:
             return self.__cache__["min_distance_fire_fireblock"]
         block_indices = self.fire_block_indices[: self.current_block_index]

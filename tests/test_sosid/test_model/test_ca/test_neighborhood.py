@@ -28,7 +28,6 @@ NEIGHBORHOOD_SCENARIOS = {
 
 
 class TestNeighborhood(ScenarioTestSuite):
-
     test_class = Neighborhood
     test_obj = Neighborhood(radius=1, include_center=False)
     scenarios = NEIGHBORHOOD_SCENARIOS
@@ -65,7 +64,6 @@ class TestNeighborhood(ScenarioTestSuite):
 
 
 class NeighborhoodTester(ScenarioTestSuite):
-
     scenarios = NEIGHBORHOOD_SCENARIOS
 
     def test__dim__(self):
@@ -88,7 +86,6 @@ class NeighborhoodTester(ScenarioTestSuite):
 
 
 class TestMooreNeighborhood(NeighborhoodTester):
-
     test_class = MooreNeighborhood
     test_obj = MooreNeighborhood(radius=1, include_center=False)
     scenarios = NEIGHBORHOOD_SCENARIOS
@@ -102,7 +99,6 @@ class TestMooreNeighborhood(NeighborhoodTester):
 
 
 class TestNeumannNeighborhood(NeighborhoodTester):
-
     test_class = NeumannNeighborhood
     test_obj = NeumannNeighborhood(radius=1, include_center=False)
     scenarios = NEIGHBORHOOD_SCENARIOS

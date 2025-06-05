@@ -7,7 +7,6 @@
 
 import copy
 from datetime import datetime, timedelta
-from typing import Optional
 
 import numpy as np
 import pytest
@@ -97,8 +96,9 @@ TIME_STEP = 1
 ORIGIN_GPS = BOUNDS[0]
 DESTINATION_GPS = BOUNDS[1]
 
+
 class MockModel:
-    def __init__(self, positions: Optional[np.ndarray]):
+    def __init__(self, positions: np.ndarray | None):
         class MockTimer:
             def __init__(self):
                 self.mission_start = datetime.now()
@@ -117,7 +117,7 @@ class MockModel:
 
 
 class MockAgent:
-    "A minimal mock agent"
+    """A minimal mock agent"""
 
     def __init__(self, pos):
         self.pos = pos
@@ -227,7 +227,8 @@ class AgentWithGPSTester(AgentTester):
     def test_distance(self):
         """Override test for `AgentWithGPS`.
 
-        Tests against `distance_with_gps` result."""
+        Tests against `distance_with_gps` result.
+        """
         distance = self.test_obj.distance((0, 0), (RIGHT - LEFT, BOTTOM - TOP))
         expected_distance = self.test_obj.distance_gps(
             ORIGIN_GPS, DESTINATION_GPS

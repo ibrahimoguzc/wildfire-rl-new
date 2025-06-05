@@ -10,10 +10,10 @@
 from __future__ import annotations
 
 import math
+from collections.abc import Callable, Generator
 from datetime import datetime, timedelta
 from functools import lru_cache
 from random import Random
-from typing import Callable, Generator, List, Optional, Tuple, Union
 
 import numba
 import numpy as np
@@ -34,7 +34,7 @@ from sosid.util.abc import ABCMeta, abstractattribute, abstractmethod
 
 from .task import Task, TaskPriority, TaskScheduler, TaskStatus
 
-__all__ = ["Agent", "Task", "TaskStatus", "TaskPriority"]
+__all__ = ["Agent", "Task", "TaskPriority", "TaskStatus"]
 
 
 # TODO Consider defining slots for base classes -> May make demand
@@ -62,7 +62,6 @@ class Agent(MesaAgent, Viewable, Writable):
     @abstractmethod
     def step(self) -> None:
         """A single step of the agent, must be overriden by subclass."""
-        pass
 
     @property
     def random(self) -> Random:
@@ -75,8 +74,7 @@ class Agent(MesaAgent, Viewable, Writable):
         positions = self.model.positions
         if positions.ndim > 1:
             return positions[self.unique_id, :]
-        else:
-            return positions[:]
+        return positions[:]
 
     @property
     def scale(self) -> float:
@@ -96,7 +94,7 @@ class Agent(MesaAgent, Viewable, Writable):
     def run_on_other_agents(
         self,
         expression: Callable[[Agent], None],
-        agent_type: Optional[Union[Agent, Tuple[Agent]]] = None,
+        agent_type: Agent | tuple[Agent] | None = None,
     ) -> None:
         """Runs ``expression``on all other agents of ``agent_type``.
 
@@ -124,7 +122,7 @@ class Agent(MesaAgent, Viewable, Writable):
     def run_on_specific_agents(
         self,
         expression: Callable[[Agent], None],
-        specific_agents: Union[Agent, Tuple[Agent], List[Agent]],
+        specific_agents: Agent | tuple[Agent] | list[Agent],
     ) -> None:
         """Runs ``expression``on all agents in ``specific_agents``.
 
@@ -143,7 +141,7 @@ class Agent(MesaAgent, Viewable, Writable):
             expression(agent)
 
     def get_other_agents(
-        self, agent_type: Optional[Union[Agent, Tuple[Agent]]] = None
+        self, agent_type: Agent | tuple[Agent] | None = None
     ) -> Generator[Agent, None, None]:
         """Gets all other agents in a :py:class:`AgentBasedModel`.
 
@@ -176,9 +174,7 @@ class Agent(MesaAgent, Viewable, Writable):
         item.setPos(*obj.pos)
         item.setScale(obj.scale)
 
-    def nearest_agent(
-        self, other_agents: list, agent: Optional[object] = None
-    ):
+    def nearest_agent(self, other_agents: list, agent: object | None = None):
         """Finds the closest agent from list to the specified ``agent``.
 
         Returns the nearest agent from the given array and
@@ -190,7 +186,6 @@ class Agent(MesaAgent, Viewable, Writable):
             other_agents: A :py:type:`list` of :py:class:`Agent`
                 instances.
         """
-
         agent = agent if agent else self
         agent_locations = np.array([obj.pos for obj in other_agents])
         distances = self.distance(agent.pos, agent_locations)
@@ -201,29 +196,25 @@ class Agent(MesaAgent, Viewable, Writable):
 
     @staticmethod
     @numba.njit
-    def distance(
-        pos_1: np.ndarray, pos_2: np.ndarray
-    ) -> Union[float, np.ndarray]:
+    def distance(pos_1: np.ndarray, pos_2: np.ndarray) -> float | np.ndarray:
         """Calculates distance between two positions in SI meter."""
-
         if pos_2.ndim == 1:
             x_1, y_1 = pos_1
             x_2, y_2 = pos_2
             d2 = (x_2 - x_1) ** 2 + (y_2 - y_1) ** 2
             return np.sqrt(d2)
-        else:
-            distances = []
-            for index in numba.prange(len(pos_2)):
-                x_1, y_1 = pos_1
-                x_2, y_2 = pos_2[index]
-                d2 = (x_2 - x_1) ** 2 + (y_2 - y_1) ** 2
-                distances.append(np.sqrt(d2))
-            return np.array(distances)
+        distances = []
+        for index in numba.prange(len(pos_2)):
+            x_1, y_1 = pos_1
+            x_2, y_2 = pos_2[index]
+            d2 = (x_2 - x_1) ** 2 + (y_2 - y_1) ** 2
+            distances.append(np.sqrt(d2))
+        return np.array(distances)
 
     @staticmethod
     def distance_gps(
         coord: np.ndarray, other_coordinates: np.ndarray
-    ) -> Union[float, np.ndarray]:
+    ) -> float | np.ndarray:
         """Calculates distance between one and multiple GPS Coordinates.
 
         Computes distance in SI meter.
@@ -233,7 +224,6 @@ class Agent(MesaAgent, Viewable, Writable):
             other_coordinates: An array with one or multiple GPS
                 Coordinates in the shape of (X,2)
         """
-
         coord = np.array(coord)
         other_coordinates = np.array(other_coordinates)
 
@@ -258,8 +248,8 @@ class Agent(MesaAgent, Viewable, Writable):
     def nearest_position(
         self,
         object_locations: np.ndarray,
-        pos: Optional[np.ndarray] = None,
-    ) -> Tuple[np.ndarray, np.ndarray]:
+        pos: np.ndarray | None = None,
+    ) -> tuple[np.ndarray, np.ndarray]:
         """Finds the closest position in array to the specified ``pos``.
 
         Returns the closest location to the ``pos`` and the
@@ -306,7 +296,6 @@ class AgentWithGPSMixin(metaclass=ABCMeta):
         Can be obtained from the "extent" of the Map in SI meters
         and uses the Web Mercator Projection `CRS 3857`
         """
-        pass
 
     @property
     def gps_coords(self):
@@ -326,14 +315,16 @@ class AgentWithGPSMixin(metaclass=ABCMeta):
         """If `gps_coords` is set, update `pos`.
 
         `pos` is treated as master coordinate system, by updating pos,
-        the `gps_coords` would also reflect this change."""
+        the `gps_coords` would also reflect this change.
+        """
         self.pos = gps_to_pos(value, self.top_left_bounds)
 
     def distance(self, pos_1: float, pos_2: float):
         """Override `distance` method to use GPS Coordinates.
 
         This is done to circumvent the warping of the Mercator
-        Projection."""
+        Projection.
+        """
         gps_1 = pos_to_gps(pos_1, self.top_left_bounds)
         gps_2 = pos_to_gps(pos_2, self.top_left_bounds)
         return self.distance_gps(gps_1, gps_2)
@@ -382,7 +373,6 @@ class MovingAgent(Agent):
     # TODO make the position ufunc castable
     def step(self):
         """A single step of the agent."""
-
         # Total distance travelled update
         pos = self.pos.copy()
         self.total_distance_covered += self.distance(pos, self.pos_prev)
@@ -402,15 +392,14 @@ class MovingAgent(Agent):
         ):
             self.pos = destination
             return TaskStatus.COMPLETE
-        else:
-            self.heading = direction_vector / distance
+        self.heading = direction_vector / distance
 
-            self.pos = (
-                self.heading
-                * velocity
-                * self.model.simulation.time_step.total_seconds()
-            ) + pos
-            return TaskStatus.IN_PROGRESS
+        self.pos = (
+            self.heading
+            * velocity
+            * self.model.simulation.time_step.total_seconds()
+        ) + pos
+        return TaskStatus.IN_PROGRESS
 
     @property
     def aspect(self):
@@ -426,19 +415,17 @@ class MovingAgent(Agent):
         if self.__idle_timer__.total_seconds() <= 0:
             self.__idle_timer__ = None  # Reset idle timer
             return TaskStatus.COMPLETE
-        else:
-            return TaskStatus.IN_PROGRESS
+        return TaskStatus.IN_PROGRESS
 
     @property
     def remaining_idle_time(self):
         """Return time left on __idle_timer__ when idling."""
         if self.__idle_timer__:
             return self.__idle_timer__.total_seconds()
-        else:
-            raise Exception(
-                "Incorrect use: Method `remaining_idle_time` is intended for",
-                "use only when agent is idling",
-            )
+        raise Exception(
+            "Incorrect use: Method `remaining_idle_time` is intended for",
+            "use only when agent is idling",
+        )
 
     def __gui_repr__(self):
         """Returns GUI representation."""
@@ -489,20 +476,19 @@ class MovingAgentWithGPS(AgentWithGPSMixin, MovingAgent):
         if self.distance_gps(self.gps_coords, destination_gps) <= distance:
             self.gps_coords = destination_gps
             return TaskStatus.COMPLETE
-        else:
-            # Get initial bearing (azimuth)
-            bearing = bearing_from_coords(self.gps_coords, destination_gps)
-            new_lng, new_lat, _ = GEODESIC.fwd(
-                self.gps_coords[1],
-                self.gps_coords[0],
-                bearing,
-                distance,
-                radians=False,
-            )
-            self.gps_coords = new_lat, new_lng
-            # Convert from north relative to east relative heading
-            self.aspect = bearing
-            return TaskStatus.IN_PROGRESS
+        # Get initial bearing (azimuth)
+        bearing = bearing_from_coords(self.gps_coords, destination_gps)
+        new_lng, new_lat, _ = GEODESIC.fwd(
+            self.gps_coords[1],
+            self.gps_coords[0],
+            bearing,
+            distance,
+            radians=False,
+        )
+        self.gps_coords = new_lat, new_lng
+        # Convert from north relative to east relative heading
+        self.aspect = bearing
+        return TaskStatus.IN_PROGRESS
 
     def navigate_to(self, pos: Position, velocity: float) -> TaskStatus:
         """Override `navigate_to` method to use GPS coordinates."""

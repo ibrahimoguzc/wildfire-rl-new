@@ -8,7 +8,6 @@
 """Common JIT-compiled functions of the wildfire model."""
 
 import math
-from typing import Optional, Tuple
 
 import numba
 
@@ -32,8 +31,8 @@ from sosid.model.ca.neighborhood import MOORE_OFFSETS
 
 @numba.jit(**BASE_JIT_KWARGS, fastmath=FAST_MATH_FLAGS)
 def preprocess(
-    fire_states: numba.uint8[:, :], position: Tuple[int, int]
-) -> Tuple[float, bool, bool]:
+    fire_states: numba.uint8[:, :], position: tuple[int, int]
+) -> tuple[float, bool, bool]:
     """Obtains fire propagation information from neighboring cells.
 
     Before calculating the spread-rate of the fire a necessary step is
@@ -160,8 +159,7 @@ def calc_spread_rate(
 
         # Computing the rate_array with calculated rate at current idx
         return r_0 * k_phi * k_theta * k_s * correction_coefficient
-    else:
-        return 0
+    return 0
 
 
 # TODO finish documentation add citation to Wang, 1992
@@ -260,7 +258,7 @@ def calc_slope_coefficient(
 def calc_ideal_time_step(
     maximum_spread_rate: float,
     cell_size: float,
-    step_size_factor: Optional[float] = 0.125,
+    step_size_factor: float | None = 0.125,
 ) -> float:
     """Calculates the ideal physical time-step in SI minutes.
 
@@ -326,7 +324,7 @@ def postprocess(
     if fire_state == COMBUSTIBLE and can_ignite:
         if EARLY_BURNING <= intermediate_state < FULL_BURNING:
             return EARLY_BURNING
-        elif intermediate_state >= FULL_BURNING:
+        if intermediate_state >= FULL_BURNING:
             return FULL_BURNING
 
     # Transition to Full Burning
@@ -347,7 +345,7 @@ def postprocess(
 # TODO consider moving this into factory function from arrayops
 @numba.jit(**BASE_JIT_KWARGS, fastmath=FAST_MATH_FLAGS)
 def sum_neighbors(
-    array: numba.float64[:, :], position: Tuple[int, int]
+    array: numba.float64[:, :], position: tuple[int, int]
 ) -> float:
     """Sums ``array`` values in neighborhood of the current thread.
 

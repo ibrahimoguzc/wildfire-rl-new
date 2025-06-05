@@ -55,7 +55,7 @@ def check_commit_msg(msg):
                     'Lines after "Summary of Changes" should be bullet points '
                     'start with "- ").'
                 )
-            elif len(line) > 0 and line.startswith("- "):
+            if len(line) > 0 and line.startswith("- "):
                 minimum_summary = True
 
         # Enforce length of each line in the body

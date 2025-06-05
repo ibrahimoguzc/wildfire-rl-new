@@ -12,7 +12,6 @@ Sphinx builds for testing purposes
 """
 
 from html.parser import HTMLParser
-from typing import List, Optional, Set, Tuple
 
 
 class HTMLElement:
@@ -25,7 +24,7 @@ class HTMLElement:
     """
 
     # Decreases memory consumption by making the class immutable
-    __slots__ = ["tag", "html_class", "as_attrs"]
+    __slots__ = ["as_attrs", "html_class", "tag"]
 
     def __init__(self, tag: str, html_class: str):
         self.tag = tag
@@ -33,7 +32,7 @@ class HTMLElement:
         self.as_attrs = [("class", html_class)]
 
     def match(
-        self, tag: str, attrs: Optional[List[Tuple[int, int]]] = None
+        self, tag: str, attrs: list[tuple[int, int]] | None = None
     ) -> bool:
         """Returns True if ``tag`` and ``attrs`` match object attrs.
 
@@ -45,8 +44,7 @@ class HTMLElement:
         """
         if attrs is not None:
             return tag == self.tag and self.as_attrs == attrs
-        else:
-            return tag == self.tag
+        return tag == self.tag
 
 
 #: HTML element that Sphinx creates for functions
@@ -87,7 +85,7 @@ class SphinxFunctionNameExtractor(HTMLParser):
         if self.inside_function and self.inside_name:
             self.extracted_data.add(data)
 
-    def find_functions(self, html_str: str) -> Set[str]:
+    def find_functions(self, html_str: str) -> set[str]:
         """Finds all functions within a Sphinx HTML file."""
         self.feed(html_str)
         return self.extracted_data

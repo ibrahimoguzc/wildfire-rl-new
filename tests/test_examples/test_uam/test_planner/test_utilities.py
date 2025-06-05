@@ -64,9 +64,8 @@ def test_distance_based_profile(
     )
     # Validate general properties.
     assert isinstance(profile, DistanceProfile)
-    assert (
-        profile.reaches_cruise ==
-        (max(profile.altitudes) == agent.cruise_altitude)
+    assert profile.reaches_cruise == (
+        max(profile.altitudes) == agent.cruise_altitude
     )
     assert len(profile.timestamps) == len(profile.distances)
     assert len(profile.timestamps) == len(profile.altitudes)
@@ -97,9 +96,7 @@ def test_distance_based_profile(
 
     # Validate cruise point.
     if profile.reaches_cruise:
-        cruise_distance = (
-            profile.distances[2] - profile.distances[1]
-        )
+        cruise_distance = profile.distances[2] - profile.distances[1]
         cruise_time = cruise_distance / agent.cruise_speeds[-1]
         np.testing.assert_almost_equal(d_timestamps[1], cruise_time)
         np.testing.assert_almost_equal(d_distance[1], cruise_distance)

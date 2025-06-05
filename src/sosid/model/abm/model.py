@@ -10,7 +10,7 @@
 import random
 import time
 from itertools import chain
-from typing import Any, Dict, List, Optional, Type, Union
+from typing import Any
 
 from mesa import Model as MesaModel
 from mesa.space import ContinuousSpace, Grid
@@ -29,7 +29,7 @@ __all__ = ["AgentBasedModel"]
 class AgentBasedModel(MesaModel, Model):
     """Modifies :py:class:`mesa.Model` to accept a ``simulation``."""
 
-    def __new__(cls, simulation: Optional[object] = None, *args, **kwargs):
+    def __new__(cls, simulation: object | None = None, *args, **kwargs):
         """Provides :py:class:`mesa.Model` the RNG of ``simulation``."""
         model = object.__new__(cls)  # This only works in Python 3.3 and above
         if simulation:
@@ -42,45 +42,40 @@ class AgentBasedModel(MesaModel, Model):
             model.random = random.Random(model._seed)
         return model
 
-    def __init__(self, simulation: Optional[object] = None):
+    def __init__(self, simulation: object | None = None):
         self.running = False
         self.simulation = simulation
 
     @abstractattribute
-    def agents(self) -> List[Agent]:
+    def agents(self) -> list[Agent]:
         """Enforces that at least one :py:class:`Agent` is created."""
-        ...
 
     @abstractattribute
-    def agents_by_type(self) -> Dict[Type[Agent], List[Agent]]:
+    def agents_by_type(self) -> dict[type[Agent], list[Agent]]:
         """Map of :py:class:`Agent` type to its instances."""
-        ...
 
     @abstractattribute
     def schedule(self) -> BaseScheduler:
         """Enforces that the user specifies an Activation type."""
-        ...
 
     @abstractattribute
-    def space(self) -> Union[Grid, ContinuousSpace]:
+    def space(self) -> Grid | ContinuousSpace:
         """Enforces that the user specifies an Space type."""
-        ...
 
     def __gui_repr__(self):
         """Optionally one can implement a GUI representation."""
         return [a.__gui_repr__() for a in chain(*self.agents_by_type.values())]
 
-    def add_agent(self, agent: Agent, pos: Optional[Position] = None) -> None:
+    def add_agent(self, agent: Agent, pos: Position | None = None) -> None:
         """Add :py:class:`Agent` to :py:class:`Simulation`."""
         if self.exists(agent):
             raise RuntimeError(f"{agent} has already been added to the Model")
-        else:
-            if pos is not None:
-                self.space.place_agent(agent, pos)
-            self.schedule.add(agent)
-            self.agents.append(agent)
-            self.agents_by_type[type(agent)].append(agent)
-            self.simulation.add_to_view(agent)
+        if pos is not None:
+            self.space.place_agent(agent, pos)
+        self.schedule.add(agent)
+        self.agents.append(agent)
+        self.agents_by_type[type(agent)].append(agent)
+        self.simulation.add_to_view(agent)
 
     def remove_agent(self, agent: Agent) -> None:
         """Remove :py:class:`Agent` from :py:class:`Simulation`."""
@@ -104,7 +99,7 @@ class AgentBasedModel(MesaModel, Model):
         """Check if ``agent`` already exists in the model."""
         return True if agent in self.agents else False
 
-    def output_collector(self) -> Dict[str, Any]:
+    def output_collector(self) -> dict[str, Any]:
         agents_by_type = {}
         for agent_type, agents in self.agents_by_type.items():
             agents_output = {}

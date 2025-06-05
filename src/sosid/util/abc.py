@@ -26,8 +26,8 @@ __all__ = [
     "ABC",
     "ABCMeta",
     "abstractattribute",
-    "abstractinterface",
     "abstractclassmethod",
+    "abstractinterface",
     "abstractmethod",
     "abstractstaticmethod",
 ]
@@ -38,19 +38,17 @@ if TYPE_CHECKING:  # Add support for static type checkers
     from builtins import property as abstractattribute
 else:
 
-    class abstractattribute(object):
+    class abstractattribute:
         """A decorator indicating abstract class or instance attributes.
 
         This can either be used as a decorator or assigned directly to a
         class attribute. Both usages are as follows::
 
             class C(metaclass=ABCMeta):
-
                 foo = abstractattribute()
 
                 @abstractattribute
-                def bar(self):
-                    ...
+                def bar(self): ...
 
         The second usage style is beneficial to add documentation and
         type annotation to the abstract attribute.
@@ -78,13 +76,11 @@ def abstractinterface(funcobj: CallableT) -> CallableT:
 
         class C(metaclass=ComponentMeta):
             @abstractinterface
-            def foo(self, bar):
-                ...
+            def foo(self, bar): ...
 
             @property
             @abstractinterface
-            def bar(self):
-                ...
+            def bar(self): ...
 
     Note: Component class must inherit from `ComponentMeta` for the
     interfaces to be enforced.
@@ -292,7 +288,7 @@ class ComponentMeta(ABCMeta):
                     for method in required_methods
                     if getattr(composite_prop, method) is not None
                 }
-                if (missing:= required_methods - available_methods):
+                if missing := required_methods - available_methods:
                     msg = (
                         f"{base_msg} {attr} in {composite_cls.__name__} with"
                         f" methods: {missing}."

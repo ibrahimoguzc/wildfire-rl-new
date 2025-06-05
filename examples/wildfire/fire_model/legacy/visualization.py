@@ -1,38 +1,37 @@
-from typing import Optional
-
 import numpy as np
 
 try:
-    from examples.wildfire.fire_model.legacy.states import full_burning, burnt
     from examples.wildfire.fire_model.legacy.inplace import (
         propagate as propagate_inplace,
     )
     from examples.wildfire.fire_model.legacy.padded import (
         propagate as propagate_padded,
     )
+    from examples.wildfire.fire_model.legacy.states import burnt, full_burning
 except ModuleNotFoundError:
-    import sys
     import os
+    import sys
 
     sys.path.insert(0, os.getcwd())
-    from examples.wildfire.fire_model.legacy.states import full_burning, burnt
     from examples.wildfire.fire_model.legacy.inplace import (
         propagate as propagate_inplace,
     )
     from examples.wildfire.fire_model.legacy.padded import (
         propagate as propagate_padded,
     )
+    from examples.wildfire.fire_model.legacy.states import burnt, full_burning
 
 """ Contains the functions required for preliminary visualization of the
 fire-propagation model """
 
 
 def animation_padded(
-    arrays, cell_size: int, correction_coeff: Optional[float] = 1
+    arrays, cell_size: int, correction_coeff: float | None = 1
 ) -> None:
-    from matplotlib.animation import FuncAnimation
-    from matplotlib import pyplot as plt
     from timeit import default_timer as time
+
+    from matplotlib import pyplot as plt
+    from matplotlib.animation import FuncAnimation
 
     fig, ax = plt.subplots()
 
@@ -56,7 +55,7 @@ def animation_padded(
 
     print(
         f"Fire-Spread simulation complete, performed {i} iterations in "
-        f"{stop-start} s"
+        f"{stop - start} s"
     )
 
     ax = plt.imshow(frames[0], vmin=0, vmax=burnt)
@@ -72,11 +71,12 @@ def animation_padded(
 
 
 def animation_inplace(
-    arrays, cell_size: int, correction_coeff: Optional[float] = 1
+    arrays, cell_size: int, correction_coeff: float | None = 1
 ) -> None:
-    from matplotlib.animation import FuncAnimation
-    from matplotlib import pyplot as plt
     from timeit import default_timer as time
+
+    from matplotlib import pyplot as plt
+    from matplotlib.animation import FuncAnimation
 
     fig, ax = plt.subplots()
 
@@ -100,7 +100,7 @@ def animation_inplace(
 
     print(
         f"Fire-Spread simulation complete, performed {i} iterations in "
-        f"{stop-start} s"
+        f"{stop - start} s"
     )
 
     ax = plt.imshow(frames[0], vmin=0, vmax=burnt)

@@ -25,7 +25,7 @@ from examples.wildfire.firefighter_model.tactic_pieces.track_poi import (
     TRACK_POI_TABLE,
 )
 from sosid.model.abm.task import Task, TaskStatus
-from sosid.model.transform import GEODESIC, bearing_from_coords
+from sosid.model.transform import bearing_from_coords
 
 if TYPE_CHECKING:
     from examples.wildfire.firefighter_model.agents import SuppressionUAV
@@ -38,7 +38,8 @@ class SuppresionTactic:
 
     VIPs are Very Important Points that are defined in Wildfire
     Simulation Parameters, can be different from residential areas, and
-    need to be protected against fire."""
+    need to be protected against fire.
+    """
 
     def __init__(self, suppression_tactic, change_task):
         self.select_poi = SELECT_POI_TABLE[suppression_tactic.select_poi]()
@@ -61,8 +62,7 @@ class SuppresionTactic:
         """Hold until conditions suit operation."""
         if not self.operational_clearance:
             return TaskStatus.IN_PROGRESS
-        else:
-            return TaskStatus.COMPLETE
+        return TaskStatus.COMPLETE
 
     @await_operational_clearance.on_complete
     def start_task_sequence(self):
@@ -74,8 +74,7 @@ class SuppresionTactic:
         """Hold until take off clearance."""
         if self.current_base.is_cleared_for_takeoff(self):
             return TaskStatus.COMPLETE
-        else:
-            return TaskStatus.IN_PROGRESS
+        return TaskStatus.IN_PROGRESS
 
     @await_takeoff_clearance.on_complete
     def trigger_takeoff_from_base(self) -> None:

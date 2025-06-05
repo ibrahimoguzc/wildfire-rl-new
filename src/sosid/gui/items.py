@@ -7,8 +7,9 @@
 
 """Contains drawable items for display in a :py:class:`ViewBox`."""
 
+from collections.abc import Sequence
 from pathlib import WindowsPath
-from typing import List, Optional, Sequence, Tuple, Union
+from typing import Union
 
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtSvg, QtWidgets
@@ -38,7 +39,7 @@ class IndexedImageItem(ImageItem):
     def __init__(
         self,
         image: np.ndarray,  # TODO consider replacing with numba.uint8[:, :]
-        colorTable: Union[Sequence[Tuple[int, int, int]], Sequence[int]],
+        colorTable: Sequence[tuple[int, int, int]] | Sequence[int],
         axisOrder: str = "row-major",
         **kwargs,
     ):
@@ -67,7 +68,7 @@ class IndexedImageItem(ImageItem):
             self._unrenderable = True
 
     def setColorTable(
-        self, colorTable: Union[Sequence[Tuple[int, int, int, int]], List[int]]
+        self, colorTable: Sequence[tuple[int, int, int, int]] | list[int]
     ) -> None:
         """Sets :py:attr:`colorTable` to ``colorTable`` in Qt format.
 
@@ -115,26 +116,22 @@ class IndexedImageItem(ImageItem):
     def setImage(self, image, **kwargs) -> None:
         if image is None and self.image is None:
             return
-        else:
-            gotNewData = True
-            shapeChanged = (
-                self.image is None or image.shape != self.image.shape
-            )
-            # Important to not modify original data!
-            self.image = image.view(np.ndarray)
-            # if self.image.shape[0] > 2**15-1 or self.image.shape[1] > 2**15-1:
-            #     if 'autoDownsample' not in kargs:
-            #         kargs['autoDownsample'] = True
-            if shapeChanged:
-                self.prepareGeometryChange()
-                self.informViewBoundsChanged()
+        gotNewData = True
+        shapeChanged = self.image is None or image.shape != self.image.shape
+        # Important to not modify original data!
+        self.image = image.view(np.ndarray)
+        # if self.image.shape[0] > 2**15-1 or self.image.shape[1] > 2**15-1:
+        #     if 'autoDownsample' not in kargs:
+        #         kargs['autoDownsample'] = True
+        if shapeChanged:
+            self.prepareGeometryChange()
+            self.informViewBoundsChanged()
 
         self.setOpts(update=False, **kwargs)
         self.update()
 
         if gotNewData:
             self.sigImageChanged.emit()
-        pass
 
     def setOpts(self, update=True, **kwargs) -> None:
         if "axisOrder" in kwargs:
@@ -181,11 +178,11 @@ class MarkerItem(QtSvg.QGraphicsSvgItem):
     def __init__(
         self,
         svg_file: WindowsPath = MARKER_ICON,
-        size: Tuple[float, float] = (10, 10),
-        pos: Tuple[float, float] = (0, 0),
+        size: tuple[float, float] = (10, 10),
+        pos: tuple[float, float] = (0, 0),
         aspect: float = 0.0,
         lockAspect: bool = True,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(str(svg_file), parent)
         self.renderer = self.renderer()
@@ -219,15 +216,14 @@ class MarkerItem(QtSvg.QGraphicsSvgItem):
 
             if default_ar == current_ar:  # No need to correct AR
                 pass
-            else:
-                if width <= height:  # Scale width & keep height constant
-                    width = default_ar * height
-                elif width > height:  # Scale height & keep width constant
-                    height = width / default_ar
+            elif width <= height:  # Scale width & keep height constant
+                width = default_ar * height
+            elif width > height:  # Scale height & keep width constant
+                height = width / default_ar
 
             self._size = (width, height)
 
-    def setColor(self, color: Tuple[int, int, int, int]) -> None:
+    def setColor(self, color: tuple[int, int, int, int]) -> None:
         """Sets the color of the marker."""
         if self._color_effect is None:
             self._color_effect = QtWidgets.QGraphicsColorizeEffect()
@@ -257,7 +253,7 @@ class MarkerItem(QtSvg.QGraphicsSvgItem):
 
     @staticmethod
     def calcAspectRatio(
-        size: Union[Tuple[float, float], QtCore.QSize]
+        size: tuple[float, float] | QtCore.QSize,
     ) -> float:
         """Calculates the aspect ratio (width / height) for a ``size``.
 
@@ -270,8 +266,7 @@ class MarkerItem(QtSvg.QGraphicsSvgItem):
         """
         if isinstance(size, QtCore.QSize):
             return size.width() / size.height()
-        else:
-            return size[0] / size[1]
+        return size[0] / size[1]
 
 
 # TODO Add methods to allow setting properties within Qt main-loop
@@ -305,7 +300,7 @@ class AxisItem(QtWidgets.QGraphicsPolygonItem):
 
     def __init__(
         self,
-        pos: Tuple[int, int] = (0, 0),
+        pos: tuple[int, int] = (0, 0),
         label: str = "x",
         angle: float = 0,
         color: Color = "r",
@@ -378,13 +373,13 @@ class AxisItem(QtWidgets.QGraphicsPolygonItem):
         return rotation.map(arrow)
 
     # TODO Chage to makeTextBox after painting text with QRectF
-    def getTextPos(self) -> Tuple[int, int]:
+    def getTextPos(self) -> tuple[int, int]:
         """Returns the position where the axis-label should be."""
         text_x = (self.tail_length + self.head_length) + 10  # pad value
         transform = QtGui.QTransform().rotate(self.angle).translate(text_x, 0)
         return transform.map(self.pos())
 
-    def dataBounds(self, ax: int, frac, orthoRange=None) -> List[float]:
+    def dataBounds(self, ax: int, frac, orthoRange=None) -> list[float]:
         """Required for auto-ranging :py:class:`ViewBox`."""
         br = self.boundingRect()
         return [br.left(), br.right()] if ax == 0 else [br.top(), br.bottom()]
@@ -405,7 +400,7 @@ class BorderItem(QtWidgets.QGraphicsRectItem):
         height: float = 5120,
         ax: float = 0,
         ay: float = 0,
-        thickness: Optional[int] = 3,
+        thickness: int | None = 3,
     ):
         QtWidgets.QGraphicsRectItem.__init__(self, parent)
         self.color = color
@@ -427,7 +422,6 @@ class BorderItem(QtWidgets.QGraphicsRectItem):
 
     def makeRect(self):
         """Constructs a simple rectangle at position (ax, ay)."""
-
         rectangle = QtCore.QRectF()
         rectangle.setBottomRight(
             QtCore.QPointF(self.ax + self.width, self.ay + self.height)

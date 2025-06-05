@@ -7,7 +7,6 @@
 
 """Contains commonly used paths within the sosid package."""
 
-
 from pathlib import Path
 
 import pkg_resources

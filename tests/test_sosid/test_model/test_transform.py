@@ -105,7 +105,7 @@ def test_index_to_pos(index, grid_description, expected_result):
 
 
 TEST_FILE = TERRAIN_DIR / "ZAL.meta"
-with open(TEST_FILE, "r") as file:
+with open(TEST_FILE) as file:
     data = json.load(file)
 BOUNDS = np.array(data["bbox"])
 ((TOP, LEFT), (BOTTOM, RIGHT)) = data["extent"]

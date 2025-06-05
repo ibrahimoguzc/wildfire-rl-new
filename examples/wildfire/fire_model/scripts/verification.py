@@ -20,7 +20,6 @@ from examples.wildfire.paths import FIGURE_DIR
 
 
 class PropagationVerification:
-
     STEP_SIZE_FACTORS = [0.01, 0.03, 0.1, 0.125, 0.3, 0.5, 1.0, 2.0]
     N_ITERS = [1600, 600, 230, 200, 130, 90, 47, 45]
     CELL_SIZE = 30
@@ -47,7 +46,6 @@ class PropagationVerification:
 
     def run_cpu(self):
         """Runs the CPU fire-model for each step size factor."""
-
         results, input_data = {}, self.INPUT_DATA
 
         for factor, n_iters in zip(self.STEP_SIZE_FACTORS, self.N_ITERS):
@@ -70,7 +68,6 @@ class PropagationVerification:
 
     def plot_cpu(self):
         """Plots the results of the CPU fire model."""
-
         fig = plt.figure("FireModelVerification")
         fig, axes = plt.subplots(
             nrows=2,

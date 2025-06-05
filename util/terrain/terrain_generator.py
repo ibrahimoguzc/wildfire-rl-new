@@ -31,13 +31,13 @@
 """Implements a Hydraulic Erosion Simulation based on Mei, 2011."""
 
 import os
-from typing import Tuple
 
 import numpy as np
 
 from util.terrain import helpers as util  # Original var name from the author
 
 __author__ = "dandrino: https://github.com/dandrino"
+
 
 # TODO optimizer expensive functions w/ Numba
 # Smooths out slopes of `terrain` that are too steep. Rough
@@ -52,7 +52,7 @@ def apply_slippage(terrain, repose_slope, cell_width):
 
 
 def simulated_terrain(
-    shape: Tuple[int, int] = (512, 512), cell_size: float = 10
+    shape: tuple[int, int] = (512, 512), cell_size: float = 10
 ) -> None:
     """Generates elevation terrain using a Hydraulic Erosion Simulation.
 
@@ -66,7 +66,7 @@ def simulated_terrain(
     # dim = 512
     shape = shape
     cell_width = cell_size
-    cell_area = cell_width ** 2
+    cell_area = cell_width**2
 
     # Snapshotting parameters. Only needed for generating the simulation
     # timelapse.
@@ -118,7 +118,7 @@ def simulated_terrain(
     velocity = np.zeros_like(terrain)
 
     # TODO improve with TQDM
-    for i in range(0, iterations):
+    for i in range(iterations):
         print("%d / %d" % (i + 1, iterations))
 
         # Add precipitation. This is done by via simple uniform random

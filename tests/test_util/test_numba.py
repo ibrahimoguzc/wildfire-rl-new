@@ -5,7 +5,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-from typing import List, Optional, Tuple
+from typing import Optional
 
 import numba
 import pytest
@@ -23,7 +23,7 @@ ANNOTATION_TEST_CASES = {
     "argnames": "annotations, expected_result,",
     "argvalues": [
         (
-            {"x": Tuple[int, int], "y": float, "return": float},
+            {"x": tuple[int, int], "y": float, "return": float},
             numba_float(
                 numba.types.Tuple([numba_int, numba_int]), numba_float
             ),
@@ -37,7 +37,7 @@ ANNOTATION_TEST_CASES = {
             numba.types.int64(numba.types.int64, numba.types.int8),
         ),
         (  # Testing None-type and List
-            {"x": List[int], "y": int, "return": None},
+            {"x": list[int], "y": int, "return": None},
             numba.types.void(numba.types.List(numba_int), numba_int),
         ),
     ],
@@ -89,10 +89,10 @@ GENERIC_ALIAS_CASES = {
     "argnames": "type_hint, expected_result, fail_case",
     "argvalues": [
         # Testing tuple w/ integers
-        (Tuple[int, int], numba.types.Tuple((numba_int, numba_int)), False),
+        (tuple[int, int], numba.types.Tuple((numba_int, numba_int)), False),
         # Testing nested tuple w/ floats
         (
-            Tuple[float, Tuple[float, float]],
+            tuple[float, tuple[float, float]],
             numba.types.Tuple(
                 [numba_float, numba.types.Tuple([numba_float, numba_float])]
             ),
@@ -102,14 +102,14 @@ GENERIC_ALIAS_CASES = {
         (Optional[int], numba.types.optional(numba_int), False),
         # Testing Optional w/ nested arguments
         (
-            Optional[Tuple[float, float]],
+            Optional[tuple[float, float]],
             numba.types.optional(
                 numba.types.Tuple([numba_float, numba_float])
             ),
             False,
         ),
         # Testing List w/ Numba types
-        (List[numba.int8], numba.types.List(numba.int8), False),
+        (list[numba.int8], numba.types.List(numba.int8), False),
     ],
 }
 

@@ -18,6 +18,7 @@ from sosid.util.validation import check_required_fields
 if TYPE_CHECKING:
     from sosid.simulation import PositionInput
 
+
 def find_k_nearest_airports(
     center_coords: np.ndarray,
     airports_data: list[dict[str, any]],

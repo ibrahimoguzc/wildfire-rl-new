@@ -16,7 +16,8 @@ module and let pytest discover that snippet automatically::
     from tests.snippets import test_jit_compile  # noqa: F401
 
 """
-from typing import Any, List, Tuple, Union
+
+from typing import Any
 
 import pytest
 
@@ -62,7 +63,7 @@ class Scenario:
     """
 
     # Reduces memory-usage of the Scenario object by avoiding dict
-    __slots__ = ["test_class", "label", "args", "kwargs", "__object__"]
+    __slots__ = ["__object__", "args", "kwargs", "label", "test_class"]
 
     def __init__(self, test_class: type, label: str, args, kwargs):
         self.test_class = test_class
@@ -76,8 +77,7 @@ class Scenario:
         """Returns the instantiated :py:attr:`test_class`."""
         if self.__object__:
             return self.__object__
-        else:
-            return self.test_class(*self.args, **self.kwargs)
+        return self.test_class(*self.args, **self.kwargs)
 
     def __repr__(self) -> str:
         """Override string representation method to return label.
@@ -99,7 +99,6 @@ class ScenarioTestSuite:
     ScenarioTestSuite as follows::
 
         class Foo:  # A class we want to parametrically instantiate
-
             def __init__(self, spam: int = 0, *, ham: int = 1.0):
                 self.spam = spam
                 self.ham = ham
@@ -109,13 +108,12 @@ class ScenarioTestSuite:
 
 
         class TestClass(ScenarioTestSuite):
-
             test_class = Foo
             scenarios = {
                 "argnames": "label, args, kwargs",
                 "argvalues": [
                     ("Foo1", (1,), {"ham": 1}),
-                    ("Foo2", (2,), {"ham": 2})
+                    ("Foo2", (2,), {"ham": 2}),
                 ],
             }
 
@@ -195,11 +193,11 @@ class ScenarioTestSuite:
         return scenario_object
 
     @property
-    def specified_argnames(self) -> List[str]:
+    def specified_argnames(self) -> list[str]:
         """Lists argnames specified by :py:attr:`scenarios`."""
         return self.scenarios["argnames"].replace(" ", "").split(",")
 
-    def get_completed_argvalues(self) -> List[Tuple[str, tuple, dict]]:
+    def get_completed_argvalues(self) -> list[tuple[str, tuple, dict]]:
         """Ensures Scenario specifications are complete.
 
         If a scenario specification has been provided that lacks
@@ -211,7 +209,7 @@ class ScenarioTestSuite:
 
             TESTCLASS_SCENARIOS = {
                 "argnames": "label, args",
-                "argvalues": [("s1", (170,)), ("s2", (2,))]
+                "argvalues": [("s1", (170,)), ("s2", (2,))],
             }
 
             completed_argvalues = [("s1", (170,), {}), ("s2", (2,), {})]
@@ -227,9 +225,9 @@ class ScenarioTestSuite:
         argnames = self.specified_argnames
         for argvalue in self.scenarios["argvalues"]:
             # Ensuring scenario has the correct number of arguments
-            assert len(argvalue) == len(
-                argnames
-            ), f"Scenario {argvalue} is missing an argvalue"
+            assert len(argvalue) == len(argnames), (
+                f"Scenario {argvalue} is missing an argvalue"
+            )
 
             specified_argdict = {}  # Dictionary of specified arguments
             for i, arg in enumerate(argvalue):
@@ -248,7 +246,7 @@ class ScenarioTestSuite:
 
         return completed_argvalues
 
-    def get_labels(self, argvalues) -> Union[List[str], None]:
+    def get_labels(self, argvalues) -> list[str] | None:
         """Retrieves label from validated_argvalues.
 
         Note:
@@ -260,8 +258,8 @@ class ScenarioTestSuite:
             return [argvalue[0] for argvalue in argvalues]
 
     def get_scenarios(
-        self, argvalues: List[Tuple[str, tuple, dict]]
-    ) -> List[Tuple[Scenario]]:
+        self, argvalues: list[tuple[str, tuple, dict]]
+    ) -> list[tuple[Scenario]]:
         """Instantiates :py:class:`Scenario` list from ``argvalues``."""
         scenarios = []
         for label, args, kwargs in argvalues:
@@ -274,7 +272,7 @@ class ScenarioTestSuite:
             scenarios.append(scenario)
         return scenarios
 
-    def is_valid_scenarios(self) -> Union[bool, None]:
+    def is_valid_scenarios(self) -> bool | None:
         """Checks if :py:attr:`scenarios` is valid."""
         assert hasattr(self, "scenarios"), "No scenarios definition provided"
         assert isinstance(self.scenarios, dict), "Scenarios must be a dict"

@@ -8,10 +8,9 @@
 """Contains Celullar Automata (CA) Neighborhood classes."""
 
 import itertools
-from typing import Optional, Tuple
 
 
-class Neighborhood(object):
+class Neighborhood:
     """Defines the base-class for Cellular Automata (CA) neighborhoods.
 
     Specializations of this base-class can override :py:meth:
@@ -32,12 +31,12 @@ class Neighborhood(object):
 
     __dim__ = 2
 
-    def __init__(self, radius: int, *, include_center: Optional[bool] = False):
+    def __init__(self, radius: int, *, include_center: bool | None = False):
         self.radius = radius
         self.include_center = include_center
 
     @property
-    def center(self) -> Tuple[int, ...]:
+    def center(self) -> tuple[int, ...]:
         """Defines the relative location of the centroid.
 
         This will always return a :py:obj:`tuple` with a length equal to
@@ -59,7 +58,7 @@ class Neighborhood(object):
         return tuple(0 for _ in range(self.__dim__))
 
     @property
-    def limits(self) -> Tuple[Tuple[int, int]]:
+    def limits(self) -> tuple[tuple[int, int]]:
         """Returns the offset limits for each dimension.
 
         The length of the outer :py:obj:`tuple` is equal to the
@@ -92,7 +91,7 @@ class Neighborhood(object):
         """Returns the number of cells within the neighborhood."""
         raise NotImplementedError
 
-    def as_tuple(self) -> Tuple[Tuple[int, ...]]:
+    def as_tuple(self) -> tuple[tuple[int, ...]]:
         """Returns a tuple of offsets defining the neighboring cells.
 
         The tuple of offsets is therefore a relative indexing pattern.
@@ -108,7 +107,7 @@ class Neighborhood(object):
             )
         )
 
-    def in_neighborhood(self, offset: Tuple[int, ...]) -> bool:
+    def in_neighborhood(self, offset: tuple[int, ...]) -> bool:
         """Checks if the current ``offset`` is within the neighborhood.
 
         Args:
@@ -154,8 +153,7 @@ class MooreNeighborhood(Neighborhood):
     def in_neighborhood(self, offset) -> bool:  # noqa D102
         if offset != self.center:
             return all(abs(o) <= self.radius for o in offset)
-        else:
-            return self.include_center
+        return self.include_center
 
 
 class NeumannNeighborhood(Neighborhood):
@@ -188,8 +186,7 @@ class NeumannNeighborhood(Neighborhood):
     def in_neighborhood(self, offset) -> bool:  # noqa D102
         if offset != self.center:
             return sum(abs(o) for o in offset) <= self.radius
-        else:
-            return self.include_center
+        return self.include_center
 
 
 # Defining default offsets for use in common CA models

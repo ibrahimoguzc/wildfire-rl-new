@@ -10,9 +10,9 @@
 import bisect
 import inspect
 from collections import deque
+from collections.abc import Callable, Iterable
 from contextlib import contextmanager
 from enum import Enum, unique
-from typing import Callable, Iterable, Optional, Union
 
 # TODO Create a logger detailing task calls per Agent
 # TODO Research how to make a PlantUML activity diagram from Agent tasks
@@ -58,7 +58,6 @@ class Task:
     high-priority task that executes before all other assigned tasks::
 
         class RescueHelicopter(Agent):
-
             @Task(priority=TaskPriority.HIGHEST)
             def find_survivors(self):
                 self.scan_area()
@@ -101,17 +100,17 @@ class Task:
     """
 
     __slots__ = [
-        "priority",
-        "task_method",
         "complete_method",
         "fail_method",
+        "priority",
+        "task_method",
     ]
 
     def __init__(
         self,
-        task_method: Optional[TaskMethod] = None,
+        task_method: TaskMethod | None = None,
         *,  # All arguments to the decorator must be positional
-        priority: Optional[TaskPriority] = TaskPriority.NORMAL,
+        priority: TaskPriority | None = TaskPriority.NORMAL,
     ):
         self.priority = priority
         self.task_method = task_method
@@ -119,8 +118,8 @@ class Task:
         self.fail_method = None
 
     def __call__(
-        self, method_or_agent: Union[TaskMethod, object]
-    ) -> Union[object, TaskStatus]:
+        self, method_or_agent: TaskMethod | object
+    ) -> object | TaskStatus:
         """Handles the decoration and later the task execution process.
 
         This method handles two scenarios of the :py:class:`Task`
@@ -177,7 +176,6 @@ class Task:
             only occur in this debugging purpose. In normal operation
             the :py:meth:`run` context manager should be used instead.
         """
-
         if self.task_method:  # Post decoration, being called as a task
             agent = method_or_agent
             with self.run(agent) as status:
@@ -270,7 +268,7 @@ class TaskQueue(deque):
 
     """
 
-    def __init__(self, iterable: Optional[Iterable] = None):
+    def __init__(self, iterable: Iterable | None = None):
         super().__init__(sorted(iterable) if iterable else ())
 
     def insort(self, task: Task) -> None:
@@ -299,7 +297,7 @@ class TaskScheduler:
             This option can be disabled to increase performance.
     """
 
-    __slots__ = ["agent", "__queue__", "autopopulate", "recursion_check"]
+    __slots__ = ["__queue__", "agent", "autopopulate", "recursion_check"]
 
     def __init__(
         self,
@@ -317,7 +315,8 @@ class TaskScheduler:
         """Populates queue with all tasks of :py:attr:`agent`.
 
         ``task_check``: Takes input lambda function to make additional
-            checks on `Task` prior to populating queue."""
+            checks on `Task` prior to populating queue.
+        """
         for cls in self.agent.__class__.mro():
             for obj in vars(cls).values():
                 if isinstance(obj, Task) and task_check(obj):
@@ -376,8 +375,7 @@ class TaskScheduler:
         """
         if isinstance(task, Task):
             return task
-        else:
-            raise ValueError("Cannot set non Task object as current.")
+        raise ValueError("Cannot set non Task object as current.")
 
     def _detect_task_recursion(self) -> None:
         """Iterates the call-stack to detect :py:class:`Task` recursion.

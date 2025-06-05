@@ -177,12 +177,12 @@ class SimulationTimer:
     """
 
     __slots__ = (
+        "__recorded_runtime__",
+        "__start__",
         "is_running",
         "is_stopped",
         "mission_start",
         "mission_time",
-        "__start__",
-        "__recorded_runtime__",
     )
 
     def __init__(
@@ -225,8 +225,7 @@ class SimulationTimer:
         """
         if self.is_running.is_set() and not self.is_stopped.is_set():
             return datetime.now() - self.__start__ + self.__recorded_runtime__
-        else:
-            return self.__recorded_runtime__
+        return self.__recorded_runtime__
 
     @property
     def mission_runtime(self) -> timedelta:
@@ -349,32 +348,24 @@ class Simulation(
         """
         if self.iterations < (max_iter := self.max_iter):
             if (
-                self.is_running.is_set()
-                and not self.is_stopped.is_set()
-                or force
-            ):
+                self.is_running.is_set() and not self.is_stopped.is_set()
+            ) or force:
                 self.step_all_models()
 
                 with self.lock:  # Ensure incrementing is atomic
                     self.iterations += 1
                     self.timer.step(self.time_step)
+        elif (
+            not self.is_running.is_set() and self.is_stopped.is_set()
+        ) or not force:
+            print(f"Simulation Terminated: Max iterations = {max_iter}reached")
+            self.stop()
+            self.output_collector()
         else:
-            if (
-                not self.is_running.is_set()
-                and self.is_stopped.is_set()
-                or not force
-            ):
-                print(
-                    f"Simulation Terminated: Max iterations = {max_iter}"
-                    f"reached"
-                )
-                self.stop()
-                self.output_collector()
-            else:
-                raise RuntimeError(
-                    f"Maximum number of iterations (max_iter = {max_iter}) "
-                    f"has been exceeded"
-                )
+            raise RuntimeError(
+                f"Maximum number of iterations (max_iter = {max_iter}) "
+                f"has been exceeded"
+            )
 
     def step_all_models(self) -> None:
         """Steps each model in the simulation."""
@@ -488,7 +479,8 @@ class Simulation(
         self, data: dict[str, Any], parent_key: str = "", sep: str = "_"
     ) -> dict[str, Any]:
         """Recursively flattens a nested dictionary, prefixing keys with
-        parent keys."""
+        parent keys.
+        """
         items = []
         for k, v in data.items():
             new_key = f"{parent_key}{sep}{k}" if parent_key else k

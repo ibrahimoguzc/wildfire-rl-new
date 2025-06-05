@@ -83,7 +83,6 @@ class IndirectSuppress(SuppressTask):
         Once a fire-front is suppressed, other agents are instructed
         to check if their fire-front is still active.
         """
-
         fire_idx = pos_to_index(
             agent.destination,
             grid_description=agent.terrain.grid_description,
@@ -121,7 +120,6 @@ class IndirectSuppress(SuppressTask):
         When the suppression patch does not connect the fire points
         adequately this is triggered.
         """
-
         failed_index = pos_to_index(
             agent.destination,
             grid_description=agent.terrain.grid_description,

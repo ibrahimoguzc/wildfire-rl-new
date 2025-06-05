@@ -14,14 +14,12 @@ make it easy to define an area of effect that a certain action has on
 the CA model.
 """
 
-from typing import Optional, Tuple
-
 import numpy as np
 from PIL import Image, ImageDraw
 
 from sosid.util.abc import ABCMeta, abstractmethod
 
-__all__ = ["Ellipse", "Rectangle", "LineSegment"]
+__all__ = ["Ellipse", "LineSegment", "Rectangle"]
 
 
 class RasterizedShape(metaclass=ABCMeta):
@@ -50,12 +48,11 @@ class RasterizedShape(metaclass=ABCMeta):
 
     """
 
-    __slots__ = ["idx", "size", "aspect", "canvas"]
+    __slots__ = ["aspect", "canvas", "idx", "size"]
 
     def __init__(
-        self, idx: Tuple[int, int], size: Tuple[int, int], aspect: float
+        self, idx: tuple[int, int], size: tuple[int, int], aspect: float
     ):
-
         # Ensure both values in size argument are larger than zero
         if 0 in size:
             _error_msg = (
@@ -83,7 +80,6 @@ class RasterizedShape(metaclass=ABCMeta):
             ImageDraw.Draw(self.canvas).ellipse
 
         """
-        ...
 
     @property
     def rotated(self) -> Image.Image:
@@ -111,7 +107,7 @@ class RasterizedShape(metaclass=ABCMeta):
         return self.rotated if self.aspect != 90 else self.canvas
 
     @property
-    def positioned_bbox(self) -> Tuple[int, int, int, int]:
+    def positioned_bbox(self) -> tuple[int, int, int, int]:
         """Returns a centered bounding-box at :py:attr:`idx`.
 
         Note:
@@ -119,7 +115,6 @@ class RasterizedShape(metaclass=ABCMeta):
             the Image Coordinate System.
 
         """
-
         # Localizing object vars to prevent repeating LOAD_FAST calls
         (y_p, x_p), shape = self.idx, self.shape
         width, height = shape.size  # Important to use resultant size!
@@ -131,7 +126,7 @@ class RasterizedShape(metaclass=ABCMeta):
 
     _bounds_msg = "Provided position {} lies outside of the desired mask."
 
-    def nonzero(self, shape: Tuple[int, int]) -> Tuple[np.ndarray, np.ndarray]:
+    def nonzero(self, shape: tuple[int, int]) -> tuple[np.ndarray, np.ndarray]:
         """Returns corrected indices of the :py:class:`RasterizedShape`.
 
         The returned indices can be used to directly modify an array
@@ -201,10 +196,9 @@ class RasterizedShape(metaclass=ABCMeta):
             np.clip(i_idx, a_min=0, a_max=i_max - 1, out=i_idx)
             np.clip(j_idx, a_min=0, a_max=j_max - 1, out=j_idx)
             return (i_idx, j_idx)
-        else:
-            raise ValueError(self._bounds_msg.format(self.idx))
+        raise ValueError(self._bounds_msg.format(self.idx))
 
-    def boolean_mask(self, mask_shape: Tuple[int, int]) -> np.ndarray:
+    def boolean_mask(self, mask_shape: tuple[int, int]) -> np.ndarray:
         """Creates a boolean mask to apply :py:attr:`shape` to an array.
 
         The returned boolean mask can then be used to modify the cells
@@ -255,7 +249,6 @@ class RasterizedShape(metaclass=ABCMeta):
         # Localizing object vars to prevent repeating LOAD_FAST calls
         idx, shape = self.idx, self.shape
         if all(0 < i < i_max for i, i_max in zip(idx, mask_shape)):
-
             # Creating and pasting shape into mask
             mask = Image.new(mode="1", size=mask_shape)
             mask.paste(shape, box=self.positioned_bbox, mask=shape)
@@ -264,8 +257,7 @@ class RasterizedShape(metaclass=ABCMeta):
             (mask_array := np.array(mask, dtype=bool))[self.idx] = True
 
             return mask_array
-        else:
-            raise ValueError(self._bounds_msg.format(idx))
+        raise ValueError(self._bounds_msg.format(idx))
 
 
 class Ellipse(RasterizedShape):
@@ -284,10 +276,10 @@ class Ellipse(RasterizedShape):
 
     def __init__(
         self,
-        idx: Tuple[int, int],
+        idx: tuple[int, int],
         major: int,
         minor: int,
-        aspect: Optional[float] = 90,
+        aspect: float | None = 90,
     ):
         super().__init__(idx, (major, minor), aspect)
 
@@ -314,10 +306,10 @@ class Rectangle(RasterizedShape):
 
     def __init__(
         self,
-        idx: Tuple[int, int],
+        idx: tuple[int, int],
         width: int,
         height: int,
-        aspect: Optional[float] = 90,
+        aspect: float | None = 90,
     ):
         super().__init__(idx, (width, height), aspect)
 
@@ -341,9 +333,9 @@ class LineSegment(Rectangle):
 
     def __init__(
         self,
-        idx: Tuple[int, int],
+        idx: tuple[int, int],
         length: int,
-        stroke: Optional[int] = 1,
-        aspect: Optional[float] = 90,
+        stroke: int | None = 1,
+        aspect: float | None = 90,
     ):
         super().__init__(idx, length, stroke, aspect)

@@ -41,7 +41,6 @@ class BaseDoEGenerator(metaclass=ABCMeta):
         'Temperature':[290, 320, 350],
         'Flow rate':[0.9,1.0]}
         """
-
         factor_lvl_count = []
         factor_lists = []
 
@@ -162,7 +161,7 @@ class BaseDoEGenerator(metaclass=ABCMeta):
 
             return [
                 {
-                    **{"file_name": agent},
+                    "file_name": agent,
                     **{
                         param: row[" ".join([agent, param])]
                         for param in agents_params[agent]

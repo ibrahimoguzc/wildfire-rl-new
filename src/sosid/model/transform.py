@@ -9,7 +9,6 @@
 
 import math
 from functools import lru_cache
-from typing import List, Union
 
 import numpy as np
 from haversine import inverse_haversine, inverse_haversine_vector
@@ -75,9 +74,9 @@ def pos_to_index(
         # Returning tuple of row-vectors corresponding to i, j indices
         return (indices[:, 0], indices[:, 1])
 
-    else:  # Tuple[int, int]
-        j, i = (pos[0] - origin[0], pos[1] - origin[1])
-        return (int(i / cell_size[1]), int(j / cell_size[0]))
+    # Tuple[int, int]
+    j, i = (pos[0] - origin[0], pos[1] - origin[1])
+    return (int(i / cell_size[1]), int(j / cell_size[0]))
 
 
 def index_to_pos(
@@ -163,8 +162,7 @@ def gps_to_mercator(coords: LatLon):
 
 
 def mercator_to_gps(extent: Tuple[float, ...]):
-    """
-    Converts the Mercator coordinates to geographic coordinates.
+    """Converts the Mercator coordinates to geographic coordinates.
 
     Parameters:
     extent (tuple): A tuple of four values (left, right, bottom, top ).
@@ -189,7 +187,6 @@ def gps_to_pos_calc(
     Considers edge case scenario where bounding box spans across +/- 180
     degrees longitude and +/- 90 degreeslatitude
     """
-
     top, left = top_left_bounds
 
     # Transform latitude longitude to (x, y) coordinates
@@ -242,7 +239,6 @@ def pos_to_gps_calc(
     Considers edge case scenario where bounding box spans across +/- 180
     degrees longitude and +/- 90 degreeslatitude
     """
-
     pos_array = pos_to_global_xy(pos, top_left_bounds)
 
     # Transform Global Position (x,y) into Latitude Longitude
@@ -252,7 +248,7 @@ def pos_to_gps_calc(
 
 
 def pos_to_gps(
-    pos: Union[Position, Tuple[float, float]],
+    pos: Position | Tuple[float, float],
     top_left_bounds: Tuple[float, float],
 ) -> LatLon:
     """Processes pos to output cached `pos_to_gps_calc`."""
@@ -312,7 +308,6 @@ def bounding_box_coordinates(
 
     Outputs BBOX coordinates: [top-left, bottom right].
     """
-
     coords_array = np.array(coords)
     if coords_array.ndim != 1:
         raise IndexError("Input coordinates must be of size 1.")
@@ -388,17 +383,16 @@ def pos_small_to_large_grid(
 
 
 def compute_larger_grid_coordinates(
-    smaller_grid_coords: List[LatLon],
+    smaller_grid_coords: list[LatLon],
     larger_grid_shape: Tuple[int, int],
     larger_grid_resolution: int,
-) -> List:
+) -> list:
     """Defines larger bbox coordinates from embedded bbox.
 
     Smaller grid is within larger grid and gps coordinates of smaller
     grid top left and bottom right are inputted to define larger grid
     coordinates based on distance between grid bounds.
     """
-
     larger_grid_y_km = larger_grid_shape[0] * larger_grid_resolution / 1000
     larger_grid_x_km = larger_grid_shape[1] * larger_grid_resolution / 1000
 
@@ -428,7 +422,6 @@ def scale_from_point(
     point: Index, point_ref: Index = (0, 0), scale_factor: float = 1.0
 ) -> Position:
     """Scales a point with respect to point_ref by a scale factor."""
-
     pX, pY = point
 
     is_array = isinstance(pX, np.ndarray) and isinstance(pY, np.ndarray)
@@ -465,6 +458,6 @@ def interpolate_gps(
     xyz = LLA_TO_ECEF.transform(
         gps_ref[:, 1], gps_ref[:, 0], np.zeros(len(gps_ref))
     )
-    return np.array(
-        ECEF_TO_LLA.transform(*interp1d(x_ref, xyz)(x))[:2]
-    )[::-1].T
+    return np.array(ECEF_TO_LLA.transform(*interp1d(x_ref, xyz)(x))[:2])[
+        ::-1
+    ].T

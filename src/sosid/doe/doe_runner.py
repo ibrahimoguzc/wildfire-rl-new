@@ -87,7 +87,6 @@ class DesignOfExperiments(metaclass=ABCMeta):
 
     def start(self) -> None:
         """Starting the DoE run."""
-
         # Extracting simulation input parameters from the input .csv
         self.doe_dicts = combine_parameters(
             self.defaults_file, self.input_file
@@ -104,7 +103,6 @@ class DesignOfExperiments(metaclass=ABCMeta):
 
     def _execute_doe(self) -> None:
         """Executes the Design of Experiments."""
-
         self._log_doe_start()
         if self.batch_size == 0:
             self.batch_size = len(
@@ -197,7 +195,8 @@ class DesignOfExperiments(metaclass=ABCMeta):
 
     def _write_and_clear_data(self):
         """Writes the current batch of data to disk with batch number
-        and clears the in-memory dictionary."""
+        and clears the in-memory dictionary.
+        """
         for data_type, result in self.data_dict.items():
             self.write_data(data_dict=result, data_type=data_type)
         self.data_dict.clear()  # Clear the data_dict to free memory
@@ -284,10 +283,9 @@ class DesignOfExperiments(metaclass=ABCMeta):
                 str(k): self._convert_keys_to_string(v)
                 for k, v in data.items()
             }
-        elif isinstance(data, list):
+        if isinstance(data, list):
             return [self._convert_keys_to_string(item) for item in data]
-        else:
-            return data
+        return data
 
     def _write_hdf5(self, data_dict: dict, output_path: Path) -> None:
         """Writes data in HDF5 format."""

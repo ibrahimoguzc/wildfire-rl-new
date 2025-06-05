@@ -131,38 +131,37 @@ def step(
             fire_indices,
         )
         return n_burning, ideal_step
-    else:
-        r_max = np.max(spread_rates)
-        if r_max == 0:
-            # Avoid ZeroDivisionError -> n_burning = 0
-            return 0, time_step
-        ideal_step = calc_ideal_time_step(
-            maximum_spread_rate=r_max,
-            cell_size=cell_size,
-            step_size_factor=step_size_factor,
-        )
-        # If ideal time step is smaller than that expected by Sim, use
-        # ideal
-        time_step = min(time_step, ideal_step)
+    r_max = np.max(spread_rates)
+    if r_max == 0:
+        # Avoid ZeroDivisionError -> n_burning = 0
+        return 0, time_step
+    ideal_step = calc_ideal_time_step(
+        maximum_spread_rate=r_max,
+        cell_size=cell_size,
+        step_size_factor=step_size_factor,
+    )
+    # If ideal time step is smaller than that expected by Sim, use
+    # ideal
+    time_step = min(time_step, ideal_step)
 
-        # set min time_step in case anomalous spread rate behavior
-        time_step = max(time_step, MIN_ACCEPTABLE_TIME_STEP)
+    # set min time_step in case anomalous spread rate behavior
+    time_step = max(time_step, MIN_ACCEPTABLE_TIME_STEP)
 
-        # Calculate the spread rates using the t_step selected
-        n_burning = compute_cells_burning(
-            n_cells,
-            to_process,
-            can_ignite,
-            intermediate_states,
-            spread_rates,
-            time_step,
-            cell_size,
-            fire_states,
-            can_extinguish,
-            fire_indices,
-        )
+    # Calculate the spread rates using the t_step selected
+    n_burning = compute_cells_burning(
+        n_cells,
+        to_process,
+        can_ignite,
+        intermediate_states,
+        spread_rates,
+        time_step,
+        cell_size,
+        fire_states,
+        can_extinguish,
+        fire_indices,
+    )
 
-        return (n_burning, time_step)
+    return (n_burning, time_step)
 
 
 @numba.jit(**BASE_JIT_KWARGS, fastmath=FAST_MATH_FLAGS, inline="always")

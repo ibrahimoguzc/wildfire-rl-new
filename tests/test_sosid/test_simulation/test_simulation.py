@@ -11,7 +11,6 @@ import time
 from datetime import timedelta
 from functools import cached_property
 from random import Random
-from typing import List
 
 import pytest
 from pydantic import ValidationError
@@ -49,7 +48,6 @@ class MockSimulation(Simulation):
         self.has_stepped.clear()
         super().step(*args, **kwargs)
         self.has_stepped.set()
-        pass
 
     def environment(self):
         pass
@@ -61,7 +59,6 @@ class MockSimulation(Simulation):
 
     def output_collector(self):  # noqa: ANN201
         """Dummy output method used to spy on."""
-        pass
 
 
 @pytest.fixture
@@ -127,7 +124,6 @@ class TestSimulationParameters:
 
     def test_evaluate_distributions(self, time_step, max_runtime):
         """Tests if distributions are correctly evaluated."""
-
         param = MockParameters(time_step=time_step, max_runtime=max_runtime)
         rng = Random(1)
         param.evaluate_distributions(rng=rng)
@@ -270,7 +266,6 @@ class TestSimulation:
 
     def test_output(self, simulation, mocker):
         """Tests if output is called at the end of a simulation."""
-
         output = mocker.spy(simulation, "output_collector")
         simulation.start()
         simulation.stop()

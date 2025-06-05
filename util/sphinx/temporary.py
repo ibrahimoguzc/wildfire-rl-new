@@ -10,7 +10,7 @@
 import os
 import shutil
 import sys
-from typing import IO, Dict, Union
+from typing import IO
 
 from docutils import nodes
 from docutils.parsers.rst import directives, roles
@@ -53,17 +53,16 @@ class TempSphinxApp(Sphinx):
 
     def __init__(
         self,
-        srcdir: Union[str, path],
-        builddir: Union[str, path] = None,
+        srcdir: str | path,
+        builddir: str | path = None,
         buildername: str = "html",
-        confoverrides: Dict = None,
+        confoverrides: dict = None,
         status: IO = None,
         warning: IO = None,
         warningiserror: bool = True,
         delete_output: bool = True,
         assert_empty: bool = True,
     ):
-
         # Ensuring srcdir is a path object
         self.srcdir = path(srcdir)
 

@@ -6,7 +6,6 @@ import os
 from collections import defaultdict
 from datetime import datetime
 from timeit import default_timer as time
-from typing import Tuple, Union
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -15,17 +14,17 @@ from tqdm import tqdm
 
 from examples.wildfire.fire_model import preallocate
 from examples.wildfire.fire_model.jit_funcs import cpu, gpu
-from examples.wildfire.fire_model.legacy.inplace import (  # noqa: I001
-    propagate as propagate_inplace,  # noqa: I001
-)  # noqa: I001
-from examples.wildfire.fire_model.legacy.padded import (  # noqa: I001
-    propagate as propagate_padded,  # noqa: I001
-)  # noqa: I001
-from examples.wildfire.paths import FIGURE_DIR, DATA_DIR  # noqa: I001
+from examples.wildfire.fire_model.legacy.inplace import (
+    propagate as propagate_inplace,
+)
+from examples.wildfire.fire_model.legacy.padded import (
+    propagate as propagate_padded,
+)
+from examples.wildfire.paths import DATA_DIR, FIGURE_DIR
 from sosid.util.abc import ABCMeta, abstractmethod
 
 
-class FireModelBenchmark(object, metaclass=ABCMeta):
+class FireModelBenchmark(metaclass=ABCMeta):
     """Abstract Base Class (ABC) of a single FireModel run."""
 
     ambient_temperature = 15
@@ -36,7 +35,7 @@ class FireModelBenchmark(object, metaclass=ABCMeta):
     correction_coefficient = 1
     time_step = 1 / 60
 
-    def __init__(self, shape: Tuple[int, int], n_iters: int = 1000):
+    def __init__(self, shape: tuple[int, int], n_iters: int = 1000):
         self.n_iters = n_iters
         self.shape = shape
         self.run_time = None  # SI second
@@ -51,13 +50,11 @@ class FireModelBenchmark(object, metaclass=ABCMeta):
     @abstractmethod
     def data(self):
         """Responsible for returning a dictionary of data."""
-        ...
 
     @property
     @abstractmethod
     def plot_name(self) -> str:
         """Provides a plot-friendly name for the fire-model."""
-        ...
 
     @abstractmethod
     def warmup(self):
@@ -90,7 +87,7 @@ class CPUFireModelBenchmark(FireModelBenchmark):
     def plot_name(self):  # noqa: D102
         return "CPU v2"
 
-    def warmup(self):  # noqa: D102
+    def warmup(self):
         """Gets compilation time out of the way."""
         data = self.data
         cell_size = self.cell_size
@@ -359,13 +356,12 @@ BENCHMARK_CLASSES = [
 
 
 # TODO refractor serialization (saving) into new function
-def benchmark(shapes=[(2 ** i, 2 ** i) for i in range(7, 12)], n_iters=1000):
+def benchmark(shapes=[(2**i, 2**i) for i in range(7, 12)], n_iters=1000):
     """Runs benchmarks defined by :py:const:`BENCHMARK_CLASSES`.
 
     The benchmark results dictionary is serialzied into .json and saved
     in the data directory specified by :py:const:`DATA_DIR`.
     """
-
     results = defaultdict(dict)
 
     for benchmark_cls in tqdm(BENCHMARK_CLASSES):
@@ -392,11 +388,10 @@ def benchmark(shapes=[(2 ** i, 2 ** i) for i in range(7, 12)], n_iters=1000):
     return results
 
 
-def plot_benchmark(results: Union[dict, str]):
+def plot_benchmark(results: dict | str):
     """Creates a time complexity plot based on benchmark ``results``."""
-
     if isinstance(results, str) and os.path.exists(results):
-        with open(results, "r") as fp:
+        with open(results) as fp:
             results = json.load(fp)
 
     fig = plt.figure("FireModelBenchmark")
@@ -424,7 +419,7 @@ def plot_benchmark(results: Union[dict, str]):
 
 
 if __name__ == "__main__":
-    results = benchmark(shapes=[(2 ** i, 2 ** i) for i in range(7, 12)])
+    results = benchmark(shapes=[(2**i, 2**i) for i in range(7, 12)])
     plot_benchmark(
         os.path.join(DATA_DIR, "benchmark", "benchmark_2019-11-05T18_18.json")
     )

@@ -8,7 +8,8 @@
 """Contains config options, and custom markers/fixtures for pytest."""
 
 import inspect
-from typing import Any, Callable, List
+from collections.abc import Callable
+from typing import Any
 
 import numba
 import pytest
@@ -20,12 +21,13 @@ JIT_COMPILABLE_TYPES = [numba.core.registry.CPUDispatcher]
 
 # -- Custom Options -----------------------------------------------------# noqa
 
+
 def pytest_addoption(parser):
     parser.addoption(
         "--runslow",
         action="store_true",
         default=False,
-        help="Run slow tests. Default: False"
+        help="Run slow tests. Default: False",
     )
 
 
@@ -36,6 +38,7 @@ def pytest_collection_modifyitems(config, items):
     for item in items:
         if "slow" in item.keywords:
             item.add_marker(skip_slow)
+
 
 # -- Custom Markers -----------------------------------------------------# noqa
 
@@ -58,6 +61,7 @@ def pytest_configure(config):
 
 # -- Custom Fixtures ----------------------------------------------------# noqa
 
+
 # TODO finish docstring
 @pytest.fixture(scope="session")
 def compile_jit() -> Callable:
@@ -73,9 +77,12 @@ def compile_jit() -> Callable:
     Sample usage is as follows::
 
         import numba
+
+
         @numba.jit(nopython=True)
         def add_two(a: int, b: int) -> int:
             return a + b
+
 
         def test_add_two(compile_jit):
             compile_jit(add_two)
@@ -100,6 +107,8 @@ def compile_jit() -> Callable:
                 postprocess,
             ],
         }
+
+
         @pytest.mark.parametrize(
             **JIT_TEST_CASES, ids=lambda f: f.py_func.__name__
         )
@@ -179,7 +188,7 @@ def is_jitfunc(obj: Any) -> bool:
     return type(obj) in JIT_COMPILABLE_TYPES
 
 
-def get_jit_funcs(module: object) -> List[object]:
+def get_jit_funcs(module: object) -> list[object]:
     """Gets :py:func:`numba.jit` decorated functions in a ``module``.
 
     Args:

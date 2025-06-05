@@ -10,7 +10,6 @@
 import dataclasses
 from dataclasses import dataclass
 from functools import cached_property
-from typing import Optional, Tuple
 
 import numpy as np
 
@@ -33,7 +32,7 @@ class GridData:
     """
 
     # TODO emit message to highlight the size of CA arrays
-    def preallocate(self, shape, order: Optional[str] = "C") -> None:
+    def preallocate(self, shape, order: str | None = "C") -> None:
         """Overwrites default scalar values with Numpy arrays.
 
         Args:
@@ -79,10 +78,8 @@ class CellularAutomataModel(Model):
     @abstractattribute
     def __data__(self) -> GridData:
         """Contains the data of a CA model as a bunch of arrays."""
-        ...
 
     @property
     @abstractmethod
-    def shape(self) -> Tuple[int, int]:
+    def shape(self) -> tuple[int, int]:
         """Defines the number of rows and columns of the CA grid."""
-        ...

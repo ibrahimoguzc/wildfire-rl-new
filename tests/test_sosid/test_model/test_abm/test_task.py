@@ -18,6 +18,7 @@ from sosid.model.abm.task import (
 )
 from tests.snippets import ScenarioTestSuite
 
+
 class MockAgent:
     """A mock agent to test task priority."""
 
@@ -47,14 +48,17 @@ class MockAgent:
     def lowest(self):
         return TaskStatus.COMPLETE
 
+
 @pytest.fixture(scope="function")
 def agent():
     """Provides an minimal Agent object as a fixture."""
     return MockAgent()
 
+
 @pytest.fixture(scope="function")
 def inheriting_agent_populate():
     """Minimal Agent object which inherits tasks with priorities."""
+
     class MockInheritingAgent(MockAgent):
         def __init__(self):
             super().__init__()
@@ -65,6 +69,7 @@ def inheriting_agent_populate():
 @pytest.fixture(scope="function")
 def inheriting_agent_set_active():
     """Minimal Agent object which inherits tasks without priorities."""
+
     class MockAgent:
         def __init__(self):
             self.tasks = TaskScheduler(self, autopopulate=False)
@@ -98,12 +103,12 @@ def inheriting_agent_set_active():
 
     return MockInheritingAgent()
 
+
 class TestTask:
     def test_on_complete(self):
         """Tests `on_complete` callback function."""
 
         class MockAgentFoo:
-
             completed = False
 
             @Task
@@ -122,7 +127,6 @@ class TestTask:
         """Tests `on_fail` callback function."""
 
         class MockAgentBar:
-
             failed = False
 
             @Task
@@ -141,7 +145,6 @@ class TestTask:
         """Tests if `run` method functions as a context manager."""
 
         class MockAgentSpam:
-
             failed = False
 
             @Task
@@ -190,7 +193,10 @@ class TestTaskScheduler:
 
     def test_inheritance_populate_queue(self, inheriting_agent_populate):
         """Tests if populated queue works with inheritance."""
-        result = [task.task_method.__name__ for task in inheriting_agent_populate.tasks.__queue__]
+        result = [
+            task.task_method.__name__
+            for task in inheriting_agent_populate.tasks.__queue__
+        ]
         assert result == ["lowest", "low", "normal", "high", "highest"]
 
     def test_inheritance_set_active(self, inheriting_agent_set_active):
@@ -295,7 +301,6 @@ class TestTaskScheduler:
     @pytest.mark.parametrize(**ADD_TEST_CASES)
     def test_add(self, priority, expected_index, agent):
         """Ensuring if task is added to the correct position."""
-
         mock_task = self.get_mock_task(priority)
         agent.tasks.add(mock_task)
         assert agent.tasks.__queue__[expected_index] is mock_task
@@ -475,7 +480,6 @@ TASK_QUEUE_SCENARIOS = {
 
 
 class TestTaskQueue(ScenarioTestSuite):
-
     test_class = TaskQueue
     scenarios = TASK_QUEUE_SCENARIOS
 
@@ -506,5 +510,3 @@ class TestTaskQueue(ScenarioTestSuite):
         queue = scenario.obj.copy()  # Copying to prevent changing scenario
         queue.append(test_int)
         assert queue[self.EXPECTED_APPEND_IDX[scenario.label]] is test_int
-
-

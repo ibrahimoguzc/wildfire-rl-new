@@ -103,7 +103,6 @@ class CPUFireModel(CellularAutomataModel):
     @cached_property
     def shape(self):
         """Returns number of rows and columns of the CA grid."""
-
         return self.terrain.grid_shape
 
     @property
@@ -116,16 +115,15 @@ class CPUFireModel(CellularAutomataModel):
         """
         cells_on_fire = self.burning_indices
         in_bounds = (
-            (MOORE_RADIUS < cells_on_fire[:, 0])
+            (cells_on_fire[:, 0] > MOORE_RADIUS)
             & (cells_on_fire[:, 0] < self.shape[0] - 1 - MOORE_RADIUS)
-            & (MOORE_RADIUS < cells_on_fire[:, 1])
+            & (cells_on_fire[:, 1] > MOORE_RADIUS)
             & (cells_on_fire[:, 1] < self.shape[1] - 1 - MOORE_RADIUS)
         )
         return (in_bounds).all()
 
     def ignite(self, ignition_centers: tuple[Position, ...]):
         """Ignites cells on fire at the specified ``positions``."""
-
         for center in ignition_centers:
             i, j = pos_to_index(
                 center.fire_map_pos,
@@ -146,8 +144,8 @@ class CPUFireModel(CellularAutomataModel):
         Suppressed indices are turned into NONFLAMMABLE and the stored
         data of the indices is updated to reflect this (spreadability,
         combustibility, etc.). Suppressed burn cells are updated based
-        on cells that were extinguished (burning, but not burnt)."""
-
+        on cells that were extinguished (burning, but not burnt).
+        """
         suppression_indices = suppression_area.nonzero(self.shape)
         cell_states = self.fire_states[suppression_indices]
         suppressed_burn_cells = np.count_nonzero(
@@ -201,8 +199,7 @@ class CPUFireModel(CellularAutomataModel):
             raise ValueError(
                 "Time step can not be changed when `adaptive_time_step` is disabled"
             )
-        else:
-            self._model_time_step = time_step
+        self._model_time_step = time_step
 
     # TODO see if using asdict property and unpacking it is faster!
     def step(self):  # noqa D102
@@ -268,7 +265,6 @@ class CPUFireModel(CellularAutomataModel):
         self, combustibility: COMBUSTIBILITY_TABLE
     ):
         """Return burnt area in SI meters^2 for terrain type."""
-
         burnt_mask = (self.fire_states >= FULL_BURNING) | (
             self.fire_states == SUPPRESSED
         )
@@ -364,9 +360,8 @@ class CPUFireModel(CellularAutomataModel):
         """Return spread rates."""
         if indices is None:
             return self.__data__.spread_rates
-        else:
-            indices = tuple(np.array(indices).T)
-            return self.__data__.spread_rates[indices]
+        indices = tuple(np.array(indices).T)
+        return self.__data__.spread_rates[indices]
 
     @property
     def internal_model_time(self) -> datetime:

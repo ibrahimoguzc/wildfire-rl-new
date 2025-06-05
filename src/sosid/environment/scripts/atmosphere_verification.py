@@ -8,12 +8,11 @@
 # Plot all weather params with time
 # For API and Mathematical
 
-from datetime import datetime
 from random import Random
 
 import matplotlib.pyplot as plt
 
-from examples.wildfire.paths import ATMOSPHERE_DIR, FIGURE_DIR
+from examples.wildfire.paths import FIGURE_DIR
 from examples.wildfire.simulation import AtmosphereParametersMathematical
 from src.sosid.environment.atmosphere import (
     AtmosphereMathematical,

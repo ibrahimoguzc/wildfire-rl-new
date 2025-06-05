@@ -15,25 +15,16 @@ import math
 import os
 import sys
 import time
+from collections.abc import Callable, Generator, Sequence
 from functools import cached_property
 from pathlib import Path
-from typing import (
-    Callable,
-    Dict,
-    Generator,
-    List,
-    Optional,
-    Sequence,
-    Tuple,
-    Union,
-)
 
 import qdarkstyle
 import qtawesome as qta
+from deprecated.sphinx import deprecated
 from IPython import get_ipython
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtWidgets import QMainWindow, QWidget
-from deprecated.sphinx import deprecated
 from pyqtgraph import GraphicsLayout, setConfigOptions
 from pyqtgraph.graphicsItems import ViewBox
 
@@ -67,7 +58,7 @@ __all__ = ["Viewer2D", "display"]
 class SimulationItem:
     """Initializes the GUI representation protocol into a Qt object."""
 
-    __slots__ = ["object", "painter", "on_update", "item"]
+    __slots__ = ["item", "object", "on_update", "painter"]
 
     def __init__(self, object, painter, on_init, on_update, z_order, scale):
         self.object = object
@@ -113,7 +104,7 @@ class WindowElement(cached_property):
 
     __slots__ = ()  # Removes the instance dictionary to increase performance
 
-    updateMethod: Optional[ElementUpdateMethod] = None
+    updateMethod: ElementUpdateMethod | None = None
 
     def onUpdate(self, method: ElementUpdateMethod) -> ElementUpdateMethod:
         """Registers ``method`` as the updator of the element.
@@ -166,7 +157,7 @@ class UIWindow(WindowTemplate):
         the :py:class:`Qt.QWidgets.QWidget`.
     """
 
-    updatableWindowElements: List[WindowElement] = []
+    updatableWindowElements: list[WindowElement] = []
 
     def __init__(self, viewer: Viewer2D):
         self.viewer = viewer
@@ -182,7 +173,7 @@ class UIWindow(WindowTemplate):
         return self.viewer.simulation
 
     @cached_property
-    def simulationControls(self) -> Tuple[QWidget, ...]:
+    def simulationControls(self) -> tuple[QWidget, ...]:
         return (
             self.startButton,
             self.pauseButton,
@@ -298,7 +289,9 @@ class UIWindow(WindowTemplate):
         button.clicked.connect(self.disable_start_button)
         button.setIcon(
             QtGui.QIcon(
-                qta.icon("mdi.play-circle-outline", options=self.inactive_options)
+                qta.icon(
+                    "mdi.play-circle-outline", options=self.inactive_options
+                )
             )
         )
         return button
@@ -317,7 +310,9 @@ class UIWindow(WindowTemplate):
             }
         ]
         button.setIcon(
-            QtGui.QIcon(qta.icon("mdi.step-forward", options=self.active_options))
+            QtGui.QIcon(
+                qta.icon("mdi.step-forward", options=self.active_options)
+            )
         )
         button.setEnabled(False)
         return button
@@ -330,7 +325,9 @@ class UIWindow(WindowTemplate):
         button.clicked.connect(self.simulation.pause)
         button.setIcon(
             QtGui.QIcon(
-                qta.icon("mdi.pause-circle-outline", options=self.active_options)
+                qta.icon(
+                    "mdi.pause-circle-outline", options=self.active_options
+                )
             )
         )
         button.setEnabled(False)
@@ -344,7 +341,9 @@ class UIWindow(WindowTemplate):
         button.clicked.connect(self.simulation.stop)
         button.setIcon(
             QtGui.QIcon(
-                qta.icon("mdi.stop-circle-outline", options=self.active_options)
+                qta.icon(
+                    "mdi.stop-circle-outline", options=self.active_options
+                )
             )
         )
         button.setEnabled(False)
@@ -360,9 +359,7 @@ class UIWindow(WindowTemplate):
         button.clicked.connect(self.disable_buttons)
 
         button.setIcon(
-            QtGui.QIcon(
-                qta.icon("mdi.restart", options=self.inactive_options)
-            )
+            QtGui.QIcon(qta.icon("mdi.restart", options=self.inactive_options))
         )
         button.setEnabled(False)
         return button
@@ -416,7 +413,7 @@ class UIWindow(WindowTemplate):
     def exportOptions(self) -> QtWidgets.QComboBox:
         """Determines export format of the :py:class:`Simulation`."""
         comboBox = QtWidgets.QComboBox()
-        for file_ext in EXPORTER_MAP.keys():
+        for file_ext in EXPORTER_MAP:
             comboBox.addItem(file_ext)
         self.statusbar.addWidget(comboBox)
         return comboBox
@@ -542,7 +539,7 @@ class UIWindow(WindowTemplate):
     @classmethod
     def getWindowElementsItems(
         cls,
-    ) -> Generator[Tuple[str, WindowElement], None, None]:
+    ) -> Generator[tuple[str, WindowElement], None, None]:
         """Gets :py:class:`WindowElement` attribute names/elements."""
         for name, item in vars(cls).items():
             if isinstance(item, WindowElement):
@@ -556,14 +553,12 @@ class ResolvedMeta(type(TemplateBaseClass), type(Viewer)):
     cannot be instantiated due to a metaclass conflict.
     """
 
-    pass
-
 
 class Viewer2D(TemplateBaseClass, Viewer, metaclass=ResolvedMeta):
     """Defines a 2D Qt :py:class:`Viewer` to visualize simulations."""
 
-    itemMap: Dict[Viewable, SimulationItem] = {}
-    updateableItemMap: Dict[Viewable, SimulationItem] = {}
+    itemMap: dict[Viewable, SimulationItem] = {}
+    updateableItemMap: dict[Viewable, SimulationItem] = {}
 
     def __init__(
         self, simulation: Simulation, parent=None, max_fps: int = 200, **kwargs
@@ -622,7 +617,7 @@ class Viewer2D(TemplateBaseClass, Viewer, metaclass=ResolvedMeta):
         if simItem:
             self.ui.viewBox.removeItem(simItem.item)
 
-    def getUpdatableItems(self) -> Dict[Viewable, SimulationItem]:
+    def getUpdatableItems(self) -> dict[Viewable, SimulationItem]:
         """Gets all :py:class:`Viewable` with :py:attr:`on_update`."""
         return {
             viewable: item
@@ -684,7 +679,6 @@ def display(simulation: Simulation):
         - [1] :py:class:`Viewer2D` window instance
 
     """
-
     # Creating a Qt application instance if one does not already exist
     app = QtWidgets.QApplication.instance()
     if app is None:
@@ -707,7 +701,7 @@ def display(simulation: Simulation):
     return app, window
 
 
-def get_instances() -> Union[Dict[Simulation, Dict[str, object]], None]:
+def get_instances() -> dict[Simulation, dict[str, object]] | None:
     """Gets all active instances of the SoSID Qt-based GUI.
 
     This function returns the module-level variable

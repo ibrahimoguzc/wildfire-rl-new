@@ -6,17 +6,14 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/
 
 """Responsible for computing fire states at the next time-step."""
-from typing import Optional, Tuple
-import math
 
-import numpy as np
 import numba
-from numba import cuda  # CUDA must be explicitely imported
-
 from core.model.ca.neighborhood import (
     MOORE_OFFSETS,
 )  # TODO this should be defined locally or in a config file
-from .common import preprocess, calc_spread_rate, postprocess
+from numba import cuda  # CUDA must be explicitely imported
+
+from .common import calc_spread_rate, postprocess, preprocess
 
 # IMPORTANT NOTE: THE Code can be further optimized bj utilizing some
 # fancy shared-memory trickery. However, due to the Moore neighborhood,
@@ -45,6 +42,7 @@ FAST_MATH_FLAGS = {
     "afn": True,
     "reassoc": True,
 }
+
 
 # TODO rename cuda accesses to x and y
 @cuda.jit(fastmath=FAST_MATH_FLAGS)
@@ -127,7 +125,6 @@ def step_kernel(
     can_ignite: numba.boolean[:, :],
     can_extinguish: numba.boolean[:, :],
 ) -> None:
-
     # Obtaining absolute index of current thread, and array shape
     (i, j), (n_rows, n_cols) = cuda.grid(2), fire_states.shape
 
@@ -255,7 +252,7 @@ def clamp2d(i, j, height, width):
 
 @numba.jit(nopython=True)
 def sum_neighbors(
-    array: numba.float64[:, :], position: Tuple[int, int]
+    array: numba.float64[:, :], position: tuple[int, int]
 ) -> float:
     """Sums ``array`` values in neighborhood of the current thread.
 

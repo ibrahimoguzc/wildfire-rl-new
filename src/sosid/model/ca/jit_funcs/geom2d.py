@@ -22,8 +22,8 @@ Note:
     https://github.com/numba/numba-examples/blob/master/examples/density_estimation/histogram/gpu.py
 
 """
+
 import math
-from typing import Tuple
 
 import numba
 import numpy as np
@@ -31,12 +31,12 @@ import numpy as np
 from sosid.jit_config import BASE_JIT_KWARGS, FAST_MATH_FLAGS
 
 __all__ = [
+    "angle_between",
+    "aspect_2d",
+    "dot_2d",
+    "gradient_2d",
     "magnitude_2d",
     "normalize_2d",
-    "dot_2d",
-    "aspect_2d",
-    "gradient_2d",
-    "angle_between",
 ]
 
 
@@ -60,7 +60,7 @@ def magnitude_2d(i: float, j: float) -> float:
 
 
 @numba.jit(**BASE_JIT_KWARGS, fastmath=FAST_MATH_FLAGS)
-def normalize_2d(i: float, j: float) -> Tuple[float, float]:
+def normalize_2d(i: float, j: float) -> tuple[float, float]:
     """Normalizes a 2D vector into a unit-vector with a magnitude of 1.
 
     Tip:
@@ -80,7 +80,7 @@ def normalize_2d(i: float, j: float) -> Tuple[float, float]:
 
 
 @numba.jit(**BASE_JIT_KWARGS, fastmath=FAST_MATH_FLAGS)
-def dot_2d(a: Tuple[float, float], b: Tuple[float, float]) -> float:
+def dot_2d(a: tuple[float, float], b: tuple[float, float]) -> float:
     """Dot product of two 2D vectors (1D arrays), ``a`` and ``b``.
 
     Args:
@@ -100,7 +100,7 @@ def dot_2d(a: Tuple[float, float], b: Tuple[float, float]) -> float:
 @numba.jit(**BASE_JIT_KWARGS, parallel=True)
 def gradient_2d(
     array: numba.float64[:, :], cell_size: float
-) -> Tuple[numba.float64[:, :], numba.float64[:, :]]:
+) -> tuple[numba.float64[:, :], numba.float64[:, :]]:
     r"""Calculates gradients of ``array`` using the `ArcGIS`_ approach.
 
     This approach uses a Moore neighborhood of radius = 1 to compute
@@ -120,7 +120,6 @@ def gradient_2d(
         The non-dimensional gradients of the terrain
         :math:`\frac{dz}{dx}` and :math:`\frac{dz}{dy}`.
     """
-
     n_rows, n_cols = array.shape
 
     # Pre-allocating gradients 3D array
@@ -188,8 +187,7 @@ def aspect_2d(i: int, j: int) -> float:
     # Handling edge-case for vector of magnitude = 0
     if i == 0 and j == 0:
         return math.nan
-    else:
-        return (math.pi - math.atan2(j, i)) * 180 / math.pi
+    return (math.pi - math.atan2(j, i)) * 180 / math.pi
 
 
 @numba.jit(**BASE_JIT_KWARGS, fastmath=FAST_MATH_FLAGS)
@@ -263,7 +261,6 @@ def calculate_confidence_area(center_x, center_y, width, length, orientation):
         Array (2D): [(x,y),(x,y),...], Coordinates of edge nodes of confidence
         area
     """
-
     half_width = width / 2
     half_distance = length / 2
     hypotenuse = math.sqrt(half_distance**2 + half_width**2)

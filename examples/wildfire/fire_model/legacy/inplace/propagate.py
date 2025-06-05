@@ -1,5 +1,4 @@
 import math
-from typing import Optional, Tuple
 
 import numba
 import numpy as np
@@ -53,13 +52,14 @@ MOORE = MooreNeighborhood(radius=1, include_center=False)
 MOORE_OFFSETS = MOORE.as_tuple()
 MOORE_RADIUS = MOORE.radius
 
+
 # Solve problem of constant pad/unpad
 # TODO remember that w/ integers the iteration is much faster
 # TODO if there is time, generalize this function using rethrow w/ decorator (a python decorator that will interpret the input and serialize it to a Numba understandable format)
 # TODO change this back to all_in_neighborhood w/ tuple argument or using Numpy binary_and
 @numba.jit(nopython=True, parallel=True)
 def find_extinguishables(
-    array: np.ndarray, out: Optional[np.ndarray] = None
+    array: np.ndarray, out: np.ndarray | None = None
 ) -> np.ndarray:
     """Parallelizes and JIT compiles the kernel defined by
     :py:func:`_any_kernel` which applies a Moore neighborhood search on
@@ -111,11 +111,11 @@ def _extinguishables_kernel(array: np.ndarray) -> np.ndarray:
 # TODO try re-writing function w/ the Numba stencil decorator
 @numba.jit(nopython=True, fastmath=True)
 def propagation_dir(
-    cell_idx: Tuple[int, int],
+    cell_idx: tuple[int, int],
     state_array: np.ndarray,
     n_rows: int,
     n_cols: int,
-) -> Tuple[int, int]:
+) -> tuple[int, int]:
     """Obtains the propagation direction of the local fire-spread, for
     an interrogation cell specified by ``cell_idx`` by constructing a
     vector based on the summation of the directions to adjacent
@@ -145,7 +145,6 @@ def propagation_dir(
         i_offset,
         j_offset,
     ) in MOORE_OFFSETS:  # Iterate through neighboring sides
-
         # Compute neighboring index
         i = cell_idx[0] + i_offset
         j = cell_idx[1] + j_offset
@@ -173,9 +172,8 @@ def spread_rate(
     slope_array: np.ndarray,
     combustibility_array: np.ndarray,
     calc_needed: np.ndarray,
-    correction_coeff: Optional[float] = 1,
-) -> Tuple[np.ndarray, float]:
-
+    correction_coeff: float | None = 1,
+) -> tuple[np.ndarray, float]:
     # Determining which cells require calculation (Lazifies computation)
     calc_needed = state_array == full_burning
     # any_in_neighbors(can_ignite, True, out=calc_needed)
@@ -237,9 +235,9 @@ def propagate(
     can_extinguish: np.ndarray,
     calc_needed: np.ndarray,
     cell_size: float,
-    correction_coeff: Optional[float] = 1,
-    time_step: Optional[float] = 1,
-) -> Tuple[np.ndarray, ...]:
+    correction_coeff: float | None = 1,
+    time_step: float | None = 1,
+) -> tuple[np.ndarray, ...]:
     """[summary]
 
     Note:
@@ -259,7 +257,6 @@ def propagate(
     Returns:
         Tuple[np.ndarray, ...]: [description]
     """
-
     # Pre-Processing Arrays # TODO better documentation
     n_rows, n_cols = state_array.shape
     any_in_neighbors(state_array, full_burning, out=can_ignite)
@@ -332,12 +329,16 @@ def update_states(state_array, transition_array, can_ignite, can_extinguish):
 def initial_spread_rate(
     temperature: float, wind_speed: float, humidity: float
 ) -> float:
+    """Note:
+    Wind-Force Integer is neglected (set equal to 1) as it is
+    arbitrarily defined
     """
-
-    Note:
-        Wind-Force Integer is neglected (set equal to 1) as it is
-        arbitrarily defined"""
-    a, b, c, d, = (
+    (
+        a,
+        b,
+        c,
+        d,
+    ) = (
         0.03,
         0.05,
         0.01,
@@ -356,7 +357,7 @@ def initial_spread_rate(
     nopython=True, parallel=False, fastmath=True
 )  # TODO test if parallel makes a difference!
 def wind_coefficient(
-    wind_speed: float, wind_dir: Tuple[float, float], prop_dir: Tuple[float]
+    wind_speed: float, wind_dir: tuple[float, float], prop_dir: tuple[float]
 ) -> float:
     """Computes the non-dimensional Wind Coefficient, K_phi, utilizing
     the relation
@@ -382,7 +383,7 @@ def slope_coefficient(direction: int, slope: float):
 def ideal_time_step(
     maximum_spread_rate: float,
     cell_size: float,
-    step_size_factor: Optional[float] = 0.125,
+    step_size_factor: float | None = 0.125,
 ) -> float:
     """Calculates the dynamic physical time-step in SI minutes. Since,
     it is based on the maximum spread-rate and cell-size, this quantity
@@ -411,17 +412,18 @@ def ideal_time_step(
 
 
 def initialize_arrays(
-    shape: Tuple[int, int],
+    shape: tuple[int, int],
     ambient_temperature: float,
     wind_speed: float,
-    wind_direction: Tuple[float],
+    wind_direction: tuple[float],
     relative_humidity: float,
     avg_combustibility: float,
-    stochastic: Optional[bool] = True,
+    stochastic: bool | None = True,
 ):
     #   Dict[str, np.ndarray]:
     """Simplifies the creation of the arrays required for the
-    forest-fire spread model of Rui et al. 2018"""
+    forest-fire spread model of Rui et al. 2018
+    """
     from functools import partial
 
     # State-Array Initialization (All cells are ignitable)
@@ -496,7 +498,6 @@ def add_noise(array: np.ndarray, std: float = 1.0) -> np.ndarray:
 
 
 if __name__ == "__main__":
-
     width = 1000
     height = 1000
     arrays = initialize_arrays(

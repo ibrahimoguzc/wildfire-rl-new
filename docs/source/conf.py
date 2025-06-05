@@ -139,7 +139,7 @@ napoleon_use_rtype = True
 # TODO try out using os.env('') to see if plantuml is in the path
 plantuml_path = os.path.join("..", "plantuml", "lib", "plantuml.jar")
 # IMPORTANT The double quotations around the path are necessary
-plantuml = 'java -jar "{}"'.format(os.path.abspath(plantuml_path))
+plantuml = f'java -jar "{os.path.abspath(plantuml_path)}"'
 plantuml_output_format = "svg_img"
 
 

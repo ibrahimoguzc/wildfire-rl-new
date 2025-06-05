@@ -15,19 +15,16 @@ class Foo:
 
 
 def test_output_class_level():
-
     assert isinstance(Foo.spam, Output)
     assert Foo.spam.name == "spam"
 
 
 def test_output_instance_level():
-
     foo = Foo()
     assert foo.spam == "I am spam"
 
 
 def test_output_is_settable():
-
     foo = Foo()
     foo.spam = "eggs"
     assert foo.spam == "eggs"

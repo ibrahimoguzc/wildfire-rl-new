@@ -8,7 +8,6 @@
 """Contains utility functions for pre-allocating fire-model arrays."""
 
 from functools import partial
-from typing import Dict, Optional, Tuple
 
 # import cupy as cp
 import numpy as np
@@ -24,7 +23,7 @@ from examples.wildfire.fire_model.states import COMBUSTIBLE
 # https://stackoverflow.com/questions/52079816/how-to-make-attrs-class-with-tuple-and-dict-unpacking-but-without-extra-methods
 # FIXME this will be much cleaner inside of a class
 def preallocate_gpu(
-    shape: Tuple[int, int],
+    shape: tuple[int, int],
     ambient_temperature: float,
     wind_speed: float,
     wind_aspect: float,
@@ -32,10 +31,10 @@ def preallocate_gpu(
     terrain_slope: float,
     terrain_aspect: float,
     avg_combustibility: float,
-    stochastic: Optional[bool] = True,
-    dtype: Optional[np.dtype] = np.float64,
-    order: Optional[str] = "C",
-) -> Tuple[Dict[str, np.ndarray], Dict[str, np.ndarray]]:
+    stochastic: bool | None = True,
+    dtype: np.dtype | None = np.float64,
+    order: str | None = "C",
+) -> tuple[dict[str, np.ndarray], dict[str, np.ndarray]]:
     """Pre-allocates fire-model arrays on the CPU (host) & GPU (device).
 
     Simplifies the creation of the arrays required for the forest-fire
@@ -118,7 +117,7 @@ def preallocate_gpu(
 
 
 def preallocate_cpu(
-    shape: Tuple[int, int],
+    shape: tuple[int, int],
     ambient_temperature: float,
     wind_speed: float,
     wind_aspect: float,
@@ -126,10 +125,10 @@ def preallocate_cpu(
     terrain_slope: float,
     terrain_aspect: float,
     avg_combustibility: float,
-    stochastic: Optional[bool] = True,
-    dtype: Optional[np.dtype] = np.float64,
-    order: Optional[str] = "C",
-) -> Tuple[Dict[str, np.ndarray], Dict[str, np.ndarray]]:
+    stochastic: bool | None = True,
+    dtype: np.dtype | None = np.float64,
+    order: str | None = "C",
+) -> tuple[dict[str, np.ndarray], dict[str, np.ndarray]]:
     """Pre-allocates fire-model arrays on the CPU (host).
 
     Simplifies the creation of the arrays required for the forest-fire

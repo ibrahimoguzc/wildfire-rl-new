@@ -3,7 +3,6 @@
 import math
 import os
 from timeit import default_timer as time
-from typing import Optional
 
 # import cupy as cp
 import numpy as np
@@ -29,7 +28,7 @@ def animation_gpu(
     device_arrays,
     time_step: float,
     cell_size: int,
-    correction_coeff: Optional[float] = 1,
+    correction_coeff: float | None = 1,
 ) -> FuncAnimation:
     """Run the fire model on the GPU and create an animation."""
     fig, ax = plt.subplots()
@@ -86,7 +85,7 @@ def animation_gpu(
 
     print(
         f"Fire-Spread simulation complete, performed {MAX_ITER} iterations in "
-        f"{stop-start} s"
+        f"{stop - start} s"
     )
 
     print(f"Avg. step-time = {step_time / MAX_ITER} ")
@@ -107,7 +106,7 @@ def animation_cpu(
     time_step: float,
     cell_size: int,
     n_burning: int = 1,
-    correction_coeff: Optional[float] = 1,
+    correction_coeff: float | None = 1,
 ) -> FuncAnimation:
     fig, ax = plt.subplots()
     frames = []
@@ -131,7 +130,7 @@ def animation_cpu(
 
     print(
         f"Fire-Spread simulation complete, performed {MAX_ITER} iterations in "
-        f"{stop-start} s"
+        f"{stop - start} s"
     )
 
     print(f"Avg. step-time = {step_time / MAX_ITER} ")
@@ -149,7 +148,6 @@ def animation_cpu(
 
 def plot_comparison(cpu_fire_states: np.ndarray, gpu_fire_states: np.ndarray):
     """Creates a time complexity plot based on benchmark ``results``."""
-
     plot_data = {
         "FireModelCPUResult": cpu_fire_states,
         "FireModelGPUResult": gpu_fire_states,
@@ -180,8 +178,8 @@ def plot_comparison(cpu_fire_states: np.ndarray, gpu_fire_states: np.ndarray):
 
 if __name__ == "__main__":
     from examples.wildfire.fire_model.preallocate import (
-        preallocate_gpu,
         preallocate_cpu,
+        preallocate_gpu,
     )
 
     width = 512

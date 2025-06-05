@@ -2,7 +2,7 @@
 
 import types
 from functools import lru_cache
-from typing import Any, Tuple
+from typing import Any
 
 from PyQt5 import QtGui
 from pyqtgraph import exporters
@@ -38,7 +38,7 @@ Refer to: https://www.w3.org/TR/compositing-1/#mix-blend-mode
 
 @lru_cache(maxsize=2)
 def patch_function_globals(
-    func: types.FunctionType, patched_globals: Tuple[Tuple[str, Any]]
+    func: types.FunctionType, patched_globals: tuple[tuple[str, Any]]
 ) -> types.FunctionType:
     """Patch `__globals__` of ``func`` with ``patched_globals``."""
     globals = func.__globals__.copy()
@@ -58,7 +58,6 @@ def _generateItemSvg(item, nodes=None, root=None, options={}):
     This patches the original implementation to add support for
     SVG blend-modes.
     """
-
     # Patch _genItemSVG to call new _generateItemSVG recursively
     patched_genItemSvg = patch_function_globals(_genItemSvg, PATCHED_GLOBAL)
     output = patched_genItemSvg(item, nodes, root, options)
@@ -69,8 +68,7 @@ def _generateItemSvg(item, nodes=None, root=None, options={}):
             svg_mode = COMPOSITION_MODE_TO_SVG_MODE.get(paintMode, "normal")
             g1.setAttribute("style", f"mix-blend-mode:{svg_mode}")
         return g1, defs
-    else:
-        return output
+    return output
 
 
 PATCHED_GLOBAL = (("_generateItemSvg", _generateItemSvg),)

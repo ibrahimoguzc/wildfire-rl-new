@@ -206,7 +206,7 @@ class UAMEnvironment(BaseEnvironment):
 
     def get_data_directory(self):  # noqa D102
         data_path = Path(inspect.getfile(self.simulation.__class__)).parent
-        if Path.exists(data_path / "data/terrain"):
-            return data_path
-        elif Path.exists(data_path := data_path.parent / "data/terrain"):
+        if Path.exists(data_path / "data/terrain") or Path.exists(
+            data_path := data_path.parent / "data/terrain"
+        ):
             return data_path

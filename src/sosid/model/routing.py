@@ -6,7 +6,7 @@
 import copy
 import math
 from collections import defaultdict
-from typing import Callable
+from collections.abc import Callable
 
 
 def find_best_route(
@@ -91,4 +91,3 @@ def evaluate_neighbours(nodes: list, function: Callable, criteria) -> dict:
             if node != other_node and function(node, other_node, criteria):
                 neighbours[node].append(other_node)
     return neighbours
-

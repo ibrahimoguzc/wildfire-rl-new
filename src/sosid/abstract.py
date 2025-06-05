@@ -8,16 +8,11 @@
 """Contains Highest-Level Abstract Class Definitions."""
 
 from __future__ import annotations
+
+from collections.abc import Sequence
 from typing import (
     Any,
     ClassVar,
-    Dict,
-    Optional,
-    Sequence,
-    Set,
-    Tuple,
-    Type,
-    Union,
 )
 
 from sosid.output import Output
@@ -34,16 +29,15 @@ class Viewable(metaclass=ABCMeta):
     """Defines an abstract entity that can be viewed in the GUI."""
 
     @abstractmethod
-    def __gui_repr__(self) -> Union[Sequence[Dict[str, Any]], Dict[str, Any]]:
+    def __gui_repr__(self) -> Sequence[dict[str, Any]] | dict[str, Any]:
         """Method that implements the GUI Representation Protocol."""
-        ...
 
 
 class WritableMeta(ABCMeta):  # noqa: D101
-    def __new__(cls, name: str, bases: Tuple[Type, ...], dct: Dict[str, Any]):
+    def __new__(cls, name: str, bases: tuple[type, ...], dct: dict[str, Any]):
         """Gathers :py:class:`Output` decorated methods."""
         if bases:  # Will skip on Writeable base-class
-            outputs: Set[str] = set()
+            outputs: set[str] = set()
             for base in reversed(bases):
                 outputs.update(base.__dict__.get("__outputs__", set()))
             for attr, value in dct.items():
@@ -58,9 +52,9 @@ class WritableMeta(ABCMeta):  # noqa: D101
 class Writable(metaclass=WritableMeta):
     """Base class for all writable simulation outputs."""
 
-    __outputs__: ClassVar[Set[str]] = set()
+    __outputs__: ClassVar[set[str]] = set()
 
-    def output_collector(self) -> Dict[str, Any]:
+    def output_collector(self) -> dict[str, Any]:
         """Retrieve outputs of current instance."""
         output_dict = {
             output: getattr(self, output) for output in self.__outputs__
@@ -74,12 +68,11 @@ class Model(Viewable, Writable):
     @abstractmethod
     def step(self) -> None:
         """Run the :py:class:`Model` for a single iteration."""
-        ...
 
     @abstractmethod
     def reset(self) -> None:
         """Resets the model to its initial state."""
-        ...
+
 
 class Viewer(metaclass=ABCMeta):
     """Defines the "view" (GUI) of the MVC architecture."""
@@ -87,17 +80,14 @@ class Viewer(metaclass=ABCMeta):
     @abstractmethod
     def compileSimulationItems(self) -> None:
         """Compiles :py:class:`Viewable` objects to a render mapping."""
-        ...
 
     @abstractmethod
     def addSimulationItem(self, viewable: Viewable) -> None:
         """Adds a ``viewable`` to the :py:class:`Viewer`."""
-        ...
 
     @abstractmethod
     def removeSimulationItem(self, viewable: Viewable) -> None:
         """Removes a ``viewable`` from the :py:class:`Viewer`."""
-        ...
 
 
 class Controller(metaclass=ABCMeta):
@@ -112,47 +102,39 @@ class Controller(metaclass=ABCMeta):
         __view__: An instance of :py:class:`Viewer`
     """
 
-    __view__: Optional[Viewer] = None
+    __view__: Viewer | None = None
 
     @abstractattribute
     def name(self) -> str:
         """Name used to label the `:py:class:`Viewer` window."""
-        ...
 
     @abstractmethod
     def step(self) -> None:
         """Run the program for a single iteration."""
-        ...
 
     @abstractmethod
     def step_for(self, n_steps: int) -> None:
         """Run the program for ``n_steps`` iterations."""
-        ...
 
     @abstractmethod
     def start(self) -> None:
         """Start the threaded program."""
-        ...
 
     @abstractmethod
     def run(self) -> None:
         """Runs the main-loop of the program."""
-        ...
 
     @abstractmethod
     def pause(self) -> None:
         """Pauses the execution of the program."""
-        ...
 
     @abstractmethod
     def play(self) -> None:
         """Resumes the execution of the program."""
-        ...
 
     @abstractmethod
     def stop(self) -> None:
         """Terminates the execution of the program."""
-        ...
 
     def refresh_view(self) -> None:
         """Forces the :py:class:`Viewer` to refresh all items."""
@@ -172,6 +154,7 @@ class ComponentWritableMeta(ComponentMeta, WritableMeta):
 
     Combined MetaClass to prevent metaclass conflicts.
     """
+
 
 class ComponentWritable(Component, Writable, metaclass=ComponentWritableMeta):
     """Base class for all writable simulation output components."""

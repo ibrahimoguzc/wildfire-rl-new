@@ -15,10 +15,10 @@ from .geom2d import (
 )
 
 __all__ = [
+    "angle_between",
+    "aspect_2d",
+    "dot_2d",
+    "gradient_2d",
     "magnitude_2d",
     "normalize_2d",
-    "dot_2d",
-    "aspect_2d",
-    "gradient_2d",
-    "angle_between",
 ]

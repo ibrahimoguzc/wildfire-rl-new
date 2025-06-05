@@ -44,10 +44,12 @@ See Also:
 .. _#2234: https://github.com/numba/numba/issues/2334
 
 """
+
 import inspect
 import sys
 import typing
-from typing import Any, Callable, Tuple, Type
+from collections.abc import Callable
+from typing import Any
 
 import numba
 
@@ -135,7 +137,7 @@ class TypeHintConverter(metaclass=RegisterConverter):
         return self.type_hint
 
     @classmethod
-    def get_converter(cls, type_hint: Any) -> Type:
+    def get_converter(cls, type_hint: Any) -> type:
         """Gets the converter required for ``type_hint``.
 
         Converters register which class they can convert, therefore use
@@ -150,7 +152,7 @@ class TypeHintConverter(metaclass=RegisterConverter):
             raise KeyError(f"No registered converter found for {type_hint}")
 
     @staticmethod
-    def ensure_class(type_hint: Any) -> Type:
+    def ensure_class(type_hint: Any) -> type:
         """Ensures that the ``type_hint`` is a type object (class)."""
         return type_hint if inspect.isclass(type_hint) else type_hint.__class__
 
@@ -161,7 +163,7 @@ class BuiltinConverter(TypeHintConverter):
     can_convert = list(BUILTIN_MAPPING.keys())
 
     # Adding None object into mapping (this returns a new dict)
-    mapping = {**BUILTIN_MAPPING, **{None: BUILTIN_MAPPING[type(None)]}}
+    mapping = {**BUILTIN_MAPPING, None: BUILTIN_MAPPING[type(None)]}
 
     # TODO Remove try except to simplify the code
     def get_signature(self) -> numba.types.abstract.Type:
@@ -224,12 +226,11 @@ class GenericAliasConverter(TypeHintConverter):
         origin = self.type_hint.__origin__
         if origin in self.origin_mapping:
             return self.origin_mapping[origin]
-        else:
-            converter = self.get_converter(origin)
-            return converter(origin).get_signature()
+        converter = self.get_converter(origin)
+        return converter(origin).get_signature()
 
     @property
-    def args_signature(self) -> Tuple[numba.types.abstract.Type]:
+    def args_signature(self) -> tuple[numba.types.abstract.Type]:
         """The arguments provided to :py:class:`_GenericAlias`.
 
         Caution:
@@ -252,5 +253,4 @@ class GenericAliasConverter(TypeHintConverter):
         """Gets the fully-formed Numba signature of the GenericAlias."""
         if self.origin_signature is numba.types.Optional:
             return self.origin_signature(self.args_signature[0])
-        else:
-            return self.origin_signature(self.args_signature)
+        return self.origin_signature(self.args_signature)

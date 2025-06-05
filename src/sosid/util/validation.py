@@ -43,17 +43,21 @@ class PolymorphicBaseModel(BaseModel):
         class Base(PolymorphicBaseModel, polymorphic=True):
             __identification_field__ = "type"
 
+
         class A(Base):
             type: str = "A"
             a: int
+
 
         class B(Base):
             type: str = "B"
             b: int
 
+
         assert Base.model_validate({"type": "A", "a": 1}) == A(a=1)
         assert Base.model_validate({"type": "B", "b": 2}) == B(b=2)
     """
+
     __polymorphic__: ClassVar[bool] = False
     __identification_field__: ClassVar[str]
 
@@ -64,7 +68,7 @@ class PolymorphicBaseModel(BaseModel):
         handler: Callable[[object], core_schema.CoreSchema],
     ) -> core_schema.CoreSchema:
         schema = handler(source)
-        og_schema_ref = schema["ref"]+ ":aux"
+        og_schema_ref = schema["ref"] + ":aux"
         return core_schema.no_info_before_validator_function(
             cls.__redirect_validation__, schema=schema, ref=og_schema_ref
         )
@@ -111,10 +115,9 @@ def check_field(
                 f"'{field}' could not be found, while checking for {context}"
                 f", check validators of class parsing values for `{field}`."
             )
-        else:
-            raise ValueError(
-                f"'{field}' could not be found, check validation errors"
-            )
+        raise ValueError(
+            f"'{field}' could not be found, check validation errors"
+        )
 
 
 def check_required_fields(
@@ -147,6 +150,7 @@ def check_required_fields(
 
 class Orderable(Protocol):
     """Protocol for orderable objects."""
+
     def __lt__(self, other: object) -> bool: ...
 
 

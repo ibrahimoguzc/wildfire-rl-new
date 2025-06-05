@@ -7,18 +7,18 @@
 
 """Contains type-hint definitions for use within the entire project."""
 
-from typing import Tuple, Union
+from typing import Union
 
 import numpy as np
 from recordclass import dataobject
 
-LatLon = Union[Tuple[float, float], np.ndarray]
+LatLon = Union[tuple[float, float], np.ndarray]
 """ A 2D point on the Geographic (lat = Northward, lon = Eastward)
 Coordinate System
 
 """
 
-Position = Union[Tuple[int, int], np.ndarray]
+Position = Union[tuple[int, int], np.ndarray]
 """A 2D point on the Global (x = Right, y = Down) coordinate system.
 
 If a Numpy array is used then a position must be a column vector.
@@ -29,7 +29,7 @@ accessing a single position can be done with the following indexing::
 
 """
 
-Index = Union[Tuple[int, int], Tuple[np.ndarray, np.ndarray]]
+Index = Union[tuple[int, int], tuple[np.ndarray, np.ndarray]]
 """An index within the CA coordinate system (i = Down, j = Right).
 
 If multiple indices are specified, the format to be adopted should
@@ -48,5 +48,5 @@ class GridDescriptor(dataobject):
     pos and index coordinate systems.
     """
 
-    shape: Tuple[int, int]
-    dimensions: Tuple[float, float]
+    shape: tuple[int, int]
+    dimensions: tuple[float, float]

@@ -1,6 +1,5 @@
-import numpy as np
 import numba
-from typing import Tuple, Union, Optional
+import numpy as np
 
 from sosid.model.ca.neighborhood import MooreNeighborhood
 
@@ -8,7 +7,7 @@ from sosid.model.ca.neighborhood import MooreNeighborhood
 neighborhood of 2D Cellular Automata (CA) spaces """
 
 __author__ = "San Kilkis"
-__all__ = ["sum_neighbors", "any_in_neighbors", "pad", "depad"]
+__all__ = ["any_in_neighbors", "depad", "pad", "sum_neighbors"]
 
 # Moore Neighborhood = 8 neighboring cells in a square cellular space
 moore_neighborhood = ((-1, 1), (-1, 1))  # ((i_limits), (j_limits))
@@ -18,7 +17,7 @@ MOORE_OFFSETS = MOORE.as_tuple()
 
 @numba.jit(nopython=True, parallel=True)
 def sum_neighbors(
-    array: np.ndarray, out: Optional[np.ndarray] = None
+    array: np.ndarray, out: np.ndarray | None = None
 ) -> np.ndarray:
     """Parallelizes and JIT compiles the kernel defined by
     :py:func:`_sum_kernel` which sums the values in the Moore
@@ -64,8 +63,8 @@ def _sum_kernel(array: np.ndarray) -> np.ndarray:
 @numba.jit(nopython=True, parallel=True)
 def any_in_neighbors(
     array: np.ndarray,
-    value: Union[int, float, bool],
-    out: Optional[np.ndarray] = None,
+    value: float | bool,
+    out: np.ndarray | None = None,
 ) -> np.ndarray:
     """Parallelizes and JIT compiles the kernel defined by
     :py:func:`_any_kernel` which applies a Moore neighborhood search on
@@ -89,9 +88,7 @@ def any_in_neighbors(
 
 
 @numba.stencil(neighborhood=MOORE.limits, cval=False)
-def _any_kernel(
-    array: np.ndarray, value: Union[int, float, bool, tuple]
-) -> np.ndarray:
+def _any_kernel(array: np.ndarray, value: float | bool | tuple) -> np.ndarray:
     """Defines the stencil kernel that applies a fixed pattern to
     search the Moore neighborhood of all cells in the the input
     ``array`` for a matching ``value``.
@@ -121,7 +118,7 @@ def _any_kernel(
 # TODO generalize into N-dimensions if possible
 # TODO add tests
 @numba.jit(nopython=True)
-def pad(array, width, pad_value: Optional[float] = 0):
+def pad(array, width, pad_value: float | None = 0):
     """Pads the edges of an input ``array`` with a constant
     ``pad_value``. The width determines the number of values padded to
     the edges of each axis.

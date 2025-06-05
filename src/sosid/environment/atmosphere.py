@@ -6,12 +6,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/
 """Contains classes for defining SOSID simulation atmospheres."""
 
-import json
 import math
 from datetime import datetime, time, timedelta
-from functools import cached_property, lru_cache
-
-import requests
+from functools import lru_cache
 
 from sosid.util.abc import abstractattribute
 
@@ -55,13 +52,11 @@ class AtmosphereDayNight(BaseAtmosphere):
 
     @abstractattribute
     def next_sunset(self) -> datetime:
-        "Return the next sunset time in datetime format."
-        pass
+        """Return the next sunset time in datetime format."""
 
     @abstractattribute
     def next_sunrise(self) -> datetime:
-        "Return the next sunrise time in datetime format."
-        pass
+        """Return the next sunrise time in datetime format."""
 
 
 # TODO Implement the necessary logic to ensure that the model accounts
@@ -135,7 +130,7 @@ class AtmosphereMathematical(AtmosphereDayNight):
         t_k = 15  # a calibration parameter (°C) valid for several locs
         day_length = sunset - sunrise  # day length (sunset-sunrise)
         night_length = 24 - day_length  # night length
-        time_max_solar = self.atmosphere_parameters.time_of_max_solar_height  #
+        time_max_solar = self.atmosphere_parameters.time_of_max_solar_height
         p = max_temp_time - time_max_solar
         tau = 4  # mean value from the viewed paper
         sinus = math.sin(
@@ -260,7 +255,7 @@ class AtmosphereMathematical(AtmosphereDayNight):
 
     @property
     def next_sunset(self) -> datetime:
-        "Return the next sunset time in datetime format."
+        """Return the next sunset time in datetime format."""
         sunset_hour = self.atmosphere_parameters.sun_times[1]
         date = self.mission_time.date()
         sunset_time = datetime.combine(date, time(hour=int(sunset_hour)))
@@ -272,7 +267,7 @@ class AtmosphereMathematical(AtmosphereDayNight):
 
     @property
     def next_sunrise(self) -> datetime:
-        "Return the next sunrise time in datetime format."
+        """Return the next sunrise time in datetime format."""
         sunrise_hour = self.atmosphere_parameters.sun_times[0]
         date = self.mission_time.date()
         sunrise_time = datetime.combine(date, time(hour=int(sunrise_hour)))

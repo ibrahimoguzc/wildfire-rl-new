@@ -23,7 +23,6 @@ class Bar(Foo):
 
 def test_writable():
     """Test that :py:class:`Writable` gathers outputs of superclases."""
-
     bar = Bar()
     assert bar.output_collector() == {  # noqa: S101
         "spam": "I am spam",

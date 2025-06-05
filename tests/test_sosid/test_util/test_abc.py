@@ -42,16 +42,13 @@ def test_std_library():
 
     class StdLibraryTester(metaclass=ABCMeta):
         @abstractclassmethod
-        def method(cls):
-            ...
+        def method(cls): ...
 
         @abstractmethod
-        def class_method(self):
-            ...
+        def class_method(self): ...
 
         @abstractstaticmethod
-        def static_method(self):
-            ...
+        def static_method(self): ...
 
     assert_type_error(StdLibraryTester, "class_method, method, static_method")
 
@@ -61,8 +58,7 @@ def test_ABC():
 
     class ABCTester(ABC):
         @abstractmethod
-        def method(self):
-            ...
+        def method(self): ...
 
     with pytest.raises(
         TypeError,
@@ -92,7 +88,6 @@ class DecoratorUsage(metaclass=ABCMeta):
     @abstractattribute
     def abstract_attribute(self) -> object:
         """Sample documentation."""
-        pass
 
 
 @pytest.mark.parametrize("usage", [SimpleUsage, DecoratorUsage])
@@ -112,7 +107,6 @@ def test_classattribute(usage, monkeypatch):
 @pytest.mark.parametrize("usage", [SimpleUsage, DecoratorUsage])
 def test_instanceattribute(usage, monkeypatch):
     """Checks if instance attributes function properly."""
-
     # Checking if abstract attribute replaced in __init__ raises
     # no errors
     obj = usage()
@@ -137,7 +131,6 @@ def test_call():
     """Tests if overridding :py:meth:`__call__` functions ."""
 
     class CustomCall(SimpleUsage):
-
         foo = None
 
         def __call__(self, foo_value):
@@ -167,7 +160,6 @@ def test_property():
     """
 
     class LazyProperty(SimpleUsage):
-
         property_called = False
 
         @property
@@ -187,7 +179,6 @@ def test_slots():
     """Tests proper function on a class that defines slots."""
 
     class SlotsDefinition(metaclass=ABCMeta):
-
         __slots__ = ["spam"]
 
         def __init__(self):
@@ -196,8 +187,7 @@ def test_slots():
         foo = abstractattribute()
 
         @abstractattribute
-        def bar(self):
-            ...
+        def bar(self): ...
 
     # Checking that abstract attribute retrieval works with __slots__
     assert all(
@@ -211,11 +201,9 @@ def test_inheritance():
     """Tests if abstract attributes of are inherited."""
 
     class Base(metaclass=ABCMeta):
-
         foo = abstractattribute()
 
     class Specialization(Base):
-
         bar = abstractattribute()
 
     # Testing that derived class inherits abstract attrs from base-class
@@ -229,6 +217,7 @@ def test_inheritance():
 
 class DecoratorComponent(Component):
     """Class used in composition and defines an abstract interface."""
+
     @abstractinterface
     def abstract_interface(self):
         pass
@@ -236,10 +225,12 @@ class DecoratorComponent(Component):
 
 class PropertyComponent(Component):
     """Class used in composition and defines an abstract interface."""
+
     @property
     @abstractinterface
     def abstract_interface(self):
         pass
+
 
 class PropertyComponentWithSetDel(Component):
     @property
@@ -255,6 +246,7 @@ class PropertyComponentWithSetDel(Component):
     def abstract_interface(self):
         pass
 
+
 class CompatibleComposite:
     """Composite class which implements an interface."""
 
@@ -268,6 +260,7 @@ class IncompatibleComposite:
 
 class MutableCompatibleComposite:
     """Composite class which implements a mutable interface."""
+
     def __init__(self, value):
         self.value = value
 
@@ -277,8 +270,10 @@ class MutableCompatibleComposite:
     def abstract_interface(self):
         return self.value
 
+
 class CompositeWithMinorPropertyInterface:
     """Composite class which implements an property as interface."""
+
     def __init__(self, value):
         self.value = value
 
@@ -289,6 +284,7 @@ class CompositeWithMinorPropertyInterface:
 
 class CompositeWithFullPropertyInterface:
     """Composite class which implements an property as interface."""
+
     def __init__(self, value):
         self.value = value
 
@@ -330,7 +326,7 @@ def test_interface_mutability():
     ("component_cls", "has_setter", "has_deleter"),
     [
         (PropertyComponent, False, False),
-        (PropertyComponentWithSetDel, True, True)
+        (PropertyComponentWithSetDel, True, True),
     ],
 )
 def test_interface_property(component_cls, has_setter, has_deleter):

@@ -28,8 +28,8 @@ if TYPE_CHECKING:
 
 __all__ = [
     "AircraftProfileParameters",
-    "FlightState",
     "BaseTrajectory",
+    "FlightState",
     "StraightTrajectory",
     "WaypointTrajectory",
     "generate_straight_trajectory",

@@ -34,7 +34,7 @@ __author__ = "dandrino: https://github.com/dandrino"
 
 # Open CSV file as a dict.
 def read_csv(csv_path):
-    with open(csv_path, "r") as csv_file:
+    with open(csv_path) as csv_file:
         return list(csv.DictReader(csv_file))
 
 
@@ -106,7 +106,7 @@ def displace(a, delta):
 # Returns the gradient of the gaussian blur of `a` encoded as a complex number.
 def gaussian_gradient(a, sigma=1.0):
     [fy, fx] = np.meshgrid(*(np.fft.fftfreq(n, 1.0 / n) for n in a.shape))
-    sigma2 = sigma ** 2
+    sigma2 = sigma**2
     g = lambda x: ((2 * np.pi * sigma2) ** -0.5) * np.exp(
         -0.5 * (x / sigma) ** 2
     )
@@ -132,8 +132,7 @@ def load_from_file(path):
     result = np.load(path)
     if type(result) == np.lib.npyio.NpzFile:
         return (result["height"], result["land_mask"])
-    else:
-        return (result, None)
+    return (result, None)
 
 
 # Saves the array as a PNG image. Assumes all input values are [0, 1]
@@ -257,17 +256,14 @@ def poisson_disc_sampling(shape, radius, retries=16):
 # Returns an array in which all True values of `mask` contain the distance to
 # the nearest False value.
 def dist_to_mask(mask):
-    border_mask = (
-        np.maximum.reduce(
-            [
-                np.roll(mask, 1, axis=0),
-                np.roll(mask, -1, axis=0),
-                np.roll(mask, -1, axis=1),
-                np.roll(mask, 1, axis=1),
-            ]
-        )
-        * (1 - mask)
-    )
+    border_mask = np.maximum.reduce(
+        [
+            np.roll(mask, 1, axis=0),
+            np.roll(mask, -1, axis=0),
+            np.roll(mask, -1, axis=1),
+            np.roll(mask, 1, axis=1),
+        ]
+    ) * (1 - mask)
     border_points = np.column_stack(np.where(border_mask > 0))
 
     kdtree = sp.spatial.cKDTree(border_points)
@@ -289,7 +285,7 @@ def worley(shape, spacing):
 def gaussian_blur(a, sigma=1.0):
     freqs = tuple(np.fft.fftfreq(n, d=1.0 / n) for n in a.shape)
     freq_radial = np.hypot(*np.meshgrid(*freqs))
-    sigma2 = sigma ** 2
+    sigma2 = sigma**2
     g = lambda x: ((2 * np.pi * sigma2) ** -0.5) * np.exp(
         -0.5 * (x / sigma) ** 2
     )

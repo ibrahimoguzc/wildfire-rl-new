@@ -1,12 +1,12 @@
 import json
 from pathlib import Path
-from typing import Any, Dict, Union
+from typing import Any
 
 
 def combine_parameters(
-    defaults: Dict[str, Any] | str | Path,
-    overwrites: Dict[str, Any] | str | Path,
-) -> Union[Dict[str, Any], Dict[str, Dict[str, Any]]]:
+    defaults: dict[str, Any] | str | Path,
+    overwrites: dict[str, Any] | str | Path,
+) -> dict[str, Any] | dict[str, dict[str, Any]]:
     """Creates an updated dict based on defaults and overwrites.
 
     `defaults` are the total set of values for the initial dictionary
@@ -18,7 +18,7 @@ def combine_parameters(
     """
 
     def load_params(params: str | Path) -> dict[str, Any]:
-        with open(params, "r") as f:
+        with open(params) as f:
             param_dict = json.load(f)
         return param_dict
 

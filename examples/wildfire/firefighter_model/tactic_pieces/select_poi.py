@@ -181,14 +181,16 @@ class VIPSelectPOI(SelectPOITask):
 
 class VegetationSelectPOI(SelectPOITask):
     """Class that adds a the direct attack for prioritizing the
-    vegetation type."""
+    vegetation type.
+    """
 
     def __init__(self):
         self.task_method.__func__.__name__ = "vegetation_select_poi"
 
     def task_method(self, agent):
         """Selecting a firefront (point of interest) to track and
-        suppress."""
+        suppress.
+        """
         fire_positions = agent.model.wildfire.fire_positions
         burning_indices = agent.model.wildfire.burning_indices
         if not fire_positions.size:
@@ -300,8 +302,8 @@ class IndirectSelectPOI(SelectPOITask):
 
     def task_method(self, agent):
         """Selecting a fire block position (point of interest) to track
-        and suppress."""
-
+        and suppress.
+        """
         fire_block_indices = agent.model.fire_block_indices
 
         if agent.model.fire_encircled:

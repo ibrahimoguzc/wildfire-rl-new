@@ -6,6 +6,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/
 
 """Contains modified scheduler classes of the MESA ABM library."""
+
 from collections import defaultdict
 
 from mesa.model import Model
@@ -84,17 +85,16 @@ class RandomActivationByBreed(RandomActivation):
 
     def add(self, agent):
         """Add an Agent object to the schedule.
+
         Args:
             agent: An Agent to be added to the schedule.
         """
-
         self._agents[agent.unique_id] = agent
         agent_class = type(agent)
         self.agents_by_breed[agent_class][agent.unique_id] = agent
 
     def remove(self, agent):
         """Remove all instances of a given agent from the schedule."""
-
         del self._agents[agent.unique_id]
 
         agent_class = type(agent)

@@ -46,10 +46,10 @@ See Also:
 import inspect
 import sys
 from functools import lru_cache
-from typing import Any, Dict, List, NewType, Tuple, Type
+from typing import Any, NewType
 
 import numba
-import sphinx  # noqa I001
+import sphinx
 from numba import cuda
 from sphinx import __display_version__ as __version__
 from sphinx.application import Sphinx
@@ -57,7 +57,7 @@ from sphinx.ext.autodoc import Documenter, FunctionDocumenter, ModuleDocumenter
 
 
 @lru_cache(maxsize=1)
-def numba_types() -> Tuple[Type]:
+def numba_types() -> tuple[type]:
     """Numba types that are incompatible w/ Sphinx."""
     return (
         cuda.dispatcher.CUDADispatcher,
@@ -69,7 +69,7 @@ LOGGER = sphinx.util.logging.getLogger(__name__)
 """SphinxLoggerAdapter: Active Sphinx debug-logger of module. Methods of
 this object are used to print messages to the terminal"""
 
-MemberList = NewType("MemberList", List[Tuple[str, object]])
+MemberList = NewType("MemberList", list[tuple[str, object]])
 
 
 class PatchedModuleDocumenter(ModuleDocumenter):
@@ -80,7 +80,7 @@ class PatchedModuleDocumenter(ModuleDocumenter):
     documentation from the Numba objects within a module.
     """
 
-    def get_object_members(self, want_all: bool) -> Tuple[bool, MemberList]:
+    def get_object_members(self, want_all: bool) -> tuple[bool, MemberList]:
         r"""Gets the module-members utilizing the super-class method.
 
         Once the members are retrieved, the underlying Python objects
@@ -142,7 +142,7 @@ def isdocumenter(obj: Any) -> bool:
     return issubclass(obj, Documenter) if inspect.isclass(obj) else False
 
 
-def get_documenters(module: str = __name__) -> Tuple[Type[Documenter]]:
+def get_documenters(module: str = __name__) -> tuple[type[Documenter]]:
     """Gets all :py:class:`Documenter` definitions within ``module``.
 
     Args:
@@ -153,7 +153,6 @@ def get_documenters(module: str = __name__) -> Tuple[Type[Documenter]]:
         ``module``
 
     """
-
     documenters = inspect.getmembers(sys.modules[module], isdocumenter)
     return [
         documenter
@@ -163,7 +162,7 @@ def get_documenters(module: str = __name__) -> Tuple[Type[Documenter]]:
     ]
 
 
-def setup(app: Sphinx) -> Dict[str, Any]:
+def setup(app: Sphinx) -> dict[str, Any]:
     """Sphinx extension setup function.
 
     When the extension is loaded, Sphinx imports this module and

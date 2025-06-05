@@ -11,7 +11,6 @@ import math
 from collections.abc import Iterable
 from datetime import datetime, timedelta
 from functools import cached_property
-from typing import List, Tuple
 
 import numpy as np
 import shapely.geometry as geom
@@ -187,7 +186,8 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         """Checks whether it is night time.
 
         Compares time of next sunrise and sunset to find out which is
-        closer."""
+        closer.
+        """
         atmosphere = self.model.simulation.environment.atmosphere
         next_sunset, next_sunrise = (
             atmosphere.next_sunset,
@@ -195,8 +195,7 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         )
         if next_sunset < next_sunrise:
             return False
-        else:
-            return True
+        return True
 
     @property
     def can_operate_at_night(self) -> bool:
@@ -208,11 +207,9 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         """Indicates whether agent can operate at current time."""
         if self.can_operate_at_night:
             return True
-        else:
-            if self.is_night:
-                return False
-            else:
-                return True
+        if self.is_night:
+            return False
+        return True
 
     @property
     def effective_mission_time(self) -> float:
@@ -518,7 +515,7 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         )
         return max_priority
 
-    def normalize_priorities(self, priorities: List[float]) -> List[float]:
+    def normalize_priorities(self, priorities: list[float]) -> list[float]:
         """Normalize the priority values."""
         min_priority, max_priority = min(priorities), max(priorities)
         if min_priority != max_priority:
@@ -529,14 +526,13 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         return [1 if min_priority >= 1 else 0 for _ in priorities]
 
     def priority_cost_vegetation(
-        self, burning_indices: List[Tuple[int, int]]
+        self, burning_indices: list[tuple[int, int]]
     ) -> np.ndarray:
         """Return priority values at burning indices based on vegetation.
 
         Calculates and normalizes priorities for all fire indices
         depending on the vegetation type (combustibility).
         """
-
         priority_positions = [
             self.calculate_priority_vegetation(i, j)
             for i, j in burning_indices
@@ -588,7 +584,6 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         Returns:
             Maximum priority of the surrounding cells on fire.
         """
-
         current_elevation = elevation_data[i][j]
 
         width = self.terrain.width_in_cells
@@ -819,7 +814,7 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
 
     def suppression_patch(
         self, payload: float, suppressant_flow_rate: float
-    ) -> Tuple[int, int]:
+    ) -> tuple[int, int]:
         """Calculates the dimensions of the suppressant drop area.
 
         Returns a py:type:`tuple` with `length` and `width` of the
@@ -847,7 +842,6 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         w = 21.07 * Q ** 0.428 (R^2 = 0.90)
 
         """
-
         area_idx = 1.028 * payload / (self.parameters.cell_size**2)
         width = (
             21.07 * suppressant_flow_rate**0.428
@@ -913,8 +907,7 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
     def suppressions_to_reenergizations(self) -> float:  # noqa D102
         if self.n_propellant_refills != 0:
             return self.total_suppressions / self.n_propellant_refills
-        else:
-            return math.inf
+        return math.inf
 
     @Output(target_key=TargetKey.AGENTS)
     def total_energy_consumed(self) -> float:
@@ -1011,7 +1004,6 @@ class WaterSourceManager(StaticAgent):
 
     def step(self):
         """."""
-        pass
 
     def _create_water_polygon(self):
         """Creates the water polygon using the edges and holes."""

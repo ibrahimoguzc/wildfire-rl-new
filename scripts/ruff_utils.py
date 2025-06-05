@@ -226,7 +226,7 @@ def _call_ruff(
 ) -> str:
     """Run ruff check or format."""
     command = [RUFF_BIN, command, *(" ".join((*files, *args)).split())]
-    out = subprocess.run(  # noqa: S603
+    out = subprocess.run(
         command, capture_output=True, text=True, check=False, shell=False
     )
     return out.stdout

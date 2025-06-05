@@ -8,12 +8,14 @@
 """Contains output data related classes."""
 
 from __future__ import annotations
+
 import datetime
-from enum import Enum
 import json
-from pathlib import Path
-from typing import Any, Callable, Generic, Optional, TypeVar, Union, overload
 import warnings
+from collections.abc import Callable
+from enum import Enum
+from pathlib import Path
+from typing import Any, Generic, TypeVar, overload
 
 import msgpack
 import numpy as np
@@ -52,7 +54,7 @@ class Output(Generic[T]):
 
     def __init__(
         self,
-        method: Optional[Callable[[Any], T]] = None,
+        method: Callable[[Any], T] | None = None,
         target_key: TargetKey = TargetKey.SIMULATION,
     ):
         self.method = method
@@ -84,9 +86,7 @@ class Output(Generic[T]):
     @overload
     def __get__(self, obj: Any, owner: Any) -> T: ...
 
-    def __get__(
-        self, obj: Union[None, Any], owner: Any
-    ) -> Union[Output[T], T]:
+    def __get__(self, obj: None | Any, owner: Any) -> Output[T] | T:
         """Retrieves the output value.
 
         Args:
@@ -230,20 +230,17 @@ class Output(Generic[T]):
                 return (
                     value.item()
                 )  # Direct conversion to native Python int/float
-            elif isinstance(value, np.ndarray):
+            if isinstance(value, np.ndarray):
                 return value.tolist()  # Convert numpy array to list
-            elif isinstance(value, datetime.datetime):
+            if isinstance(value, datetime.datetime):
                 return value.isoformat()  # Convert datetime to string
-            elif isinstance(value, list):
+            if isinstance(value, list):
                 # Recursively convert all items in the list
                 return [convert_value(v) for v in value]
-            elif isinstance(value, dict):
+            if isinstance(value, dict):
                 # Recursively convert all key-value pairs in the dictionary
                 return {k: convert_value(v) for k, v in value.items()}
-            else:
-                return (
-                    value  # Return the value as is if no conversion is needed
-                )
+            return value  # Return the value as is if no conversion is needed
 
         # Convert the dictionary only if necessary
         converted_data = {k: convert_value(v) for k, v in data.items()}
@@ -303,20 +300,18 @@ def pd_to_csv(  # noqa 103
             break
 
 
-def mean_with_default(array, default: Optional[float] = 0):
+def mean_with_default(array, default: float | None = 0):
     """Compute mean and return default if `array` is empty."""
     if len(array) > 0:
         return float(np.mean(array))
-    else:
-        return default
+    return default
 
 
-def sum_with_default(array, default: Optional[float] = 0):
+def sum_with_default(array, default: float | None = 0):
     """Compute Sum and return default if `array` is empty."""
     if len(array) > 0:
         return float(sum(array))
-    else:
-        return default
+    return default
 
 
 FORMAT_TO_FUNCTION = {

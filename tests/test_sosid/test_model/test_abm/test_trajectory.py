@@ -43,8 +43,10 @@ STRAIGHT_AIRSPACE_DATA["gps"] = np.array(
     )[:2][::-1]
 ).T
 
+
 class BaseTrajectoryTester(metaclass=ABCMeta):
     """Base class for testing trajectory classes."""
+
     supports_concatenation_with_time_gap: ClassVar[bool] = True
     immutable_arrays: ClassVar[str] = (
         "timestamps",
@@ -134,7 +136,7 @@ class BaseTrajectoryTester(metaclass=ABCMeta):
 
     def validate_required_shapes(self, trajectory: BaseTrajectory) -> None:
         n = len(trajectory.timestamps)
-        assert trajectory.flight_states.shape == (max(n -1, 0),)
+        assert trajectory.flight_states.shape == (max(n - 1, 0),)
         for attr, shape in self.get_required_shapes(n).items():
             assert getattr(trajectory, attr).shape == shape
 
@@ -157,7 +159,8 @@ class BaseTrajectoryTester(metaclass=ABCMeta):
         assert len(traj) == 7
         assert all(traj.state_start_indices == [0, 3, 5])
         assert all(
-            traj.flight_states[traj.state_start_indices] == [
+            traj.flight_states[traj.state_start_indices]
+            == [
                 FlightState.CRUISE_CLIMB,
                 FlightState.CRUISE,
                 FlightState.CRUISE_DESCENT,
@@ -298,10 +301,10 @@ class BaseTrajectoryTester(metaclass=ABCMeta):
         airspace_traj = self.get_airspace_trajectory()
         segments = list(airspace_traj.get_state_duration_segements())
         assert segments == [
-                (FlightState.CRUISE_CLIMB, 115.0),
-                (FlightState.CRUISE, 180.0),
-                (FlightState.CRUISE_DESCENT, 50.0),
-            ]
+            (FlightState.CRUISE_CLIMB, 115.0),
+            (FlightState.CRUISE, 180.0),
+            (FlightState.CRUISE_DESCENT, 50.0),
+        ]
 
     def test_state_start_end_indices(self) -> None:
         traj = self.get_full_trajectory()
@@ -343,6 +346,7 @@ class BaseTrajectoryTester(metaclass=ABCMeta):
 
 class TestStraightTrajectory(BaseTrajectoryTester):
     """Test the StraightTrajectory class."""
+
     supports_concatenation_with_time_gap = False
     immutable_arrays = (
         "altitudes",
@@ -376,6 +380,7 @@ class TestStraightTrajectory(BaseTrajectoryTester):
 
 class TestWaypointTrajectory(BaseTrajectoryTester):
     """Test the WaypointTrajectory class."""
+
     immutable_arrays = (
         "altitudes",
         "flight_states",
@@ -425,6 +430,7 @@ BASE_PROFILE = AircraftProfileParameters.model_validate(
     }
 )
 
+
 def test_aircraft_profile_parameters() -> None:
     """Test the AircraftProfileParameters class."""
     profile = BASE_PROFILE
@@ -439,7 +445,7 @@ def test_aircraft_profile_parameters() -> None:
     np.testing.assert_almost_equal(profile.cruise_descent_slope, 203 / 1160)
     assert profile.landing_duration == 6.0
     assert profile.landing_ground_distance == 90.0
-    np.testing.assert_almost_equal(profile.landing_slope, 12/90)
+    np.testing.assert_almost_equal(profile.landing_slope, 12 / 90)
     assert profile.segment_horizontal_speed(FlightState.CRUISE_CLIMB) == 30.0
     assert profile.segment_horizontal_speed(FlightState.CRUISE_DESCENT) == 40.0
     assert profile.segment_vertical_speed(FlightState.CRUISE_CLIMB) == 5.0
@@ -485,7 +491,8 @@ def test_aircraft_profile_parameters() -> None:
                 "timestamps": [0.0, 20.0, 30.0],
                 "horizontal_distances": [600.0, 400.0],
                 "flight_states": [
-                    FlightState.CRUISE_CLIMB, FlightState.CRUISE_DESCENT
+                    FlightState.CRUISE_CLIMB,
+                    FlightState.CRUISE_DESCENT,
                 ],
                 "altitudes": [65.0, 165.0, 95.0],
             },
@@ -589,7 +596,15 @@ def test_aircraft_profile_parameters() -> None:
             {
                 "timestamps": [0, 30, 45, 55, 95, 243, 272, 282, 288, 318],
                 "horizontal_distances": [
-                    0, 150, 0, 1200, 7400, 1160, 0, 90, 0
+                    0,
+                    150,
+                    0,
+                    1200,
+                    7400,
+                    1160,
+                    0,
+                    90,
+                    0,
                 ],
                 "flight_states": [
                     FlightState.TAXI_OUT,
@@ -606,7 +621,7 @@ def test_aircraft_profile_parameters() -> None:
             },
         ),
         (  # End above cruise altitude with takeoff and landing
-           # and exclude transitions.
+            # and exclude transitions.
             3020.0,  # Distance
             30.0,  # Altitude start
             288.0,  # Altitude end

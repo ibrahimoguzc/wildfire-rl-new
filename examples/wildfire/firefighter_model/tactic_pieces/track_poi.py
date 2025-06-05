@@ -39,8 +39,8 @@ class IndirectTrackPOI(TrackPOITask):
 
     def task_method(self, agent):
         """Tracking of the selected fire block position (point of
-        interest)."""
-
+        interest).
+        """
         # Check if fire block index has already been suppressed by other
         # agents
         destination_idx = pos_to_index(
@@ -79,8 +79,8 @@ class FollowFirefrontTrackPOI(TrackPOITask):
         moore_range = np.array((-2, -1, 0, 1, 2))
         i_range, j_range = moore_range + i, moore_range + j
         i_neighborhood, j_neighborhood = np.meshgrid(
-            i_range[(0 <= i_range) & (i_range < height)],
-            j_range[(0 <= j_range) & (j_range < width)],
+            i_range[(i_range >= 0) & (i_range < height)],
+            j_range[(j_range >= 0) & (j_range < width)],
             copy=False,
             sparse=True,
             indexing="ij",

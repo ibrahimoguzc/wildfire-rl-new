@@ -22,7 +22,7 @@ or C-structs defined with Numpy were used instead of accesing a
 fire-state by its variable name, at minimum retrieving the fire-states
 would require a syntax such as the following::
 
-    if state == states['nonflammable']:
+    if state == states["nonflammable"]:
         pass
 
 This clearly requires more effort than simply calling the module-level
@@ -45,13 +45,13 @@ Note:
 from matplotlib import colors
 
 __all__ = [
-    "SUPPRESSED",
-    "NONFLAMMABLE",
+    "BURNT",
     "COMBUSTIBLE",
     "EARLY_BURNING",
-    "FULL_BURNING",
     "EXTINGUISHING",
-    "BURNT",
+    "FULL_BURNING",
+    "NONFLAMMABLE",
+    "SUPPRESSED",
 ]
 # TODO consider using https://docs.python.org/3/library/enum.html
 
