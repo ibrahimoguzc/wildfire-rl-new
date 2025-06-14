@@ -14,7 +14,7 @@ import numpy as np
 from haversine import inverse_haversine, inverse_haversine_vector
 from scipy.interpolate import interp1d
 
-from sosid.typedef import GridDescriptor, Index, LatLon, Position, Tuple
+from sosid.typedef import GridDescriptor, Index, LatLon, Position#, tuple
 from sosid.util.imports import PostponedImportError
 
 try:
@@ -30,7 +30,7 @@ except ImportError:
 def pos_to_index(
     pos: Position,
     grid_description: GridDescriptor,
-    origin: Tuple[float, float] = (0, 0),
+    origin: tuple[float, float] = (0, 0),
 ) -> Index:
     # TODO update the below text
     """GCS positions (x, y) to CCS (i, j) indices.
@@ -74,7 +74,7 @@ def pos_to_index(
         # Returning tuple of row-vectors corresponding to i, j indices
         return (indices[:, 0], indices[:, 1])
 
-    # Tuple[int, int]
+    # tuple[int, int]
     j, i = (pos[0] - origin[0], pos[1] - origin[1])
     return (int(i / cell_size[1]), int(j / cell_size[0]))
 
@@ -82,7 +82,7 @@ def pos_to_index(
 def index_to_pos(
     index: Index,
     grid_description: GridDescriptor,
-    origin: Tuple[float, float] = (0, 0),
+    origin: tuple[float, float] = (0, 0),
 ) -> Position:
     """CCS indices (i, j) to GCS positions (x, y).
 
@@ -161,7 +161,7 @@ def gps_to_mercator(coords: LatLon):
     return pos_array
 
 
-def mercator_to_gps(extent: Tuple[float, ...]):
+def mercator_to_gps(extent: tuple[float, ...]):
     """Converts the Mercator coordinates to geographic coordinates.
 
     Parameters:
@@ -180,7 +180,7 @@ def mercator_to_gps(extent: Tuple[float, ...]):
 
 @lru_cache(maxsize=100)
 def gps_to_pos_calc(
-    coords: LatLon, top_left_bounds: Tuple[float, float]
+    coords: LatLon, top_left_bounds: tuple[float, float]
 ) -> Position:
     """Global Coordinate System (lat, lon) to Position (x,y).
 
@@ -221,7 +221,7 @@ def gps_to_pos_calc(
 
 
 def gps_to_pos(
-    coords: LatLon, top_left_bounds: Tuple[float, float]
+    coords: LatLon, top_left_bounds: tuple[float, float]
 ) -> Position:
     """Processes gps to output cached `gps_to_pos_calc`."""
     coords = tuple(coords)
@@ -232,7 +232,7 @@ def gps_to_pos(
 
 @lru_cache(maxsize=100)
 def pos_to_gps_calc(
-    pos: Position, top_left_bounds: Tuple[float, float]
+    pos: Position, top_left_bounds: tuple[float, float]
 ) -> LatLon:
     """Position (x,y)  to Global Coordinate System (lat, lon).
 
@@ -248,8 +248,8 @@ def pos_to_gps_calc(
 
 
 def pos_to_gps(
-    pos: Position | Tuple[float, float],
-    top_left_bounds: Tuple[float, float],
+    pos: Position | tuple[float, float],
+    top_left_bounds: tuple[float, float],
 ) -> LatLon:
     """Processes pos to output cached `pos_to_gps_calc`."""
     pos = tuple(pos)
@@ -277,7 +277,7 @@ def pos_to_global_xy(
 
 def filter_out_of_bounds_pos(
     pos: Position, max_dimensions: Position
-) -> Tuple[Position, ...]:
+) -> tuple[Position, ...]:
     """Filters out elements of ``pos`` that are out of bounds."""
     return tuple(
         (x, y)
@@ -347,9 +347,9 @@ def bounding_box_coordinates(
 # TODO Account for non-concentric grid maps by using relative position.
 def pos_small_to_large_grid(
     pos: Position,
-    small_grid_dimensions: Tuple[float, float],
-    large_grid_dimensions: Tuple[float, float],
-) -> Tuple[float, float]:
+    small_grid_dimensions: tuple[float, float],
+    large_grid_dimensions: tuple[float, float],
+) -> tuple[float, float]:
     """Converts positions on smaller grids to larger grid frames.
 
     Args:
@@ -384,7 +384,7 @@ def pos_small_to_large_grid(
 
 def compute_larger_grid_coordinates(
     smaller_grid_coords: list[LatLon],
-    larger_grid_shape: Tuple[int, int],
+    larger_grid_shape: tuple[int, int],
     larger_grid_resolution: int,
 ) -> list:
     """Defines larger bbox coordinates from embedded bbox.

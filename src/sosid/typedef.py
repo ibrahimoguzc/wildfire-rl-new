@@ -8,9 +8,11 @@
 """Contains type-hint definitions for use within the entire project."""
 
 from typing import Union
+#from collections import namedtuple
 
 import numpy as np
 from recordclass import dataobject
+
 
 LatLon = Union[tuple[float, float], np.ndarray]
 """ A 2D point on the Geographic (lat = Northward, lon = Eastward)
