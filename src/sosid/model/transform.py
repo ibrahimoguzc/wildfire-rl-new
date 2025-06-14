@@ -14,7 +14,7 @@ import numpy as np
 from haversine import inverse_haversine, inverse_haversine_vector
 from scipy.interpolate import interp1d
 
-from sosid.typedef import GridDescriptor, Index, LatLon, Position#, tuple
+from sosid.typedef import GridDescriptor, Index, LatLon, Position
 from sosid.util.imports import PostponedImportError
 
 try:
