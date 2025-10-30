@@ -85,6 +85,7 @@ class AgentInput(BaseModel):
     flow_rate: PositiveFloat
     can_scoop: bool
     autonomous: bool
+    
     mtom: PositiveFloat
     empty_mass: PositiveFloat
     takeoff_landing_type: TakeoffLandingType

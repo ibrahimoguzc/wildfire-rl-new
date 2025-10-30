@@ -4,10 +4,10 @@
     "enable_adaptive_time_step": false,
     "mission_start": "2023-08-17T06:15:00",
     "max_runtime": 43200,
-    "run_headless": false,
+    "run_headless": true,
     "output_sampling_time": 300,
     "map_in_map": true,
-    "export_img": false,
+    "export_img": true,
     "import_features_osm": true,
     "deploy_osm_airport_locations": true,
     "k_nearest_airports": -1,
@@ -103,12 +103,12 @@
     "enable_nighttime_operations": true,
     "agents": [
         {
-            "file_name": "example_aircraft_1.json",
+            "file_name": "dhc_515.json",
             "agents_per_base": [
-                2,
-                0,
-                0,
-                0
+                1,
+                1,
+                1,
+                1
             ],
             "suppression_tactic": {
                 "main": {
@@ -119,9 +119,35 @@
                         17,
                         4
                     ],
-                    "change_condition": "no_change",
+                    "threshold": 100,
+                    "change_condition": "residential",
                     "alternative_tactic": {
-                        "select_poi": "vip"
+                        "select_poi": "water"
+                    }
+                }
+            }
+        },
+        {
+            "file_name": "example_seaplane_hybrid_1.json",
+            "agents_per_base": [
+                2,
+                2,
+                1,
+                2
+            ],
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "water"
+                },
+                "alternative": {
+                    "threshold": [
+                        17,
+                        4
+                    ],
+                    "threshold": 100,
+                    "change_condition": "residential",
+                    "alternative_tactic": {
+                        "select_poi": "water"
                     }
                 }
             }

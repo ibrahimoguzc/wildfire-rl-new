@@ -245,21 +245,14 @@
     "enable_nighttime_operations": true,
     "agents": [
         {
-            "file_name": "Config_P-Med_R-Med_S-Med.json",
+            "file_name": "dhc_515.json",
             "agents_per_base": [
                 2,
-                3
+                0
             ],
             "suppression_tactic": {
                 "main": {
                     "select_poi": "water"
-                },
-                "alternative": {
-                    "threshold": 100,
-                    "change_condition": "residential",
-                    "alternative_tactic": {
-                        "select_poi": "water"
-                    }
                 }
             }
         }

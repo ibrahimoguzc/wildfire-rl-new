@@ -1,43 +1,23 @@
 {
-    "default_params_file": "Pyrenees.json",
+    "default_params_file": "Salamis.json",
     "agents": [
         [
             {
                 "file_name": "example_aircraft_1.json",
                 "agents_per_base": [
-                    1,
-                    1,
-                    1,
-                    1
-                ]
-            },
-            {
-                "file_name": "example_aircraft_2.json",
-                "agents_per_base": [
-                    1,
-                    1,
-                    1,
-                    1
-                ]
-            }
-        ],
-        [
-            {
-                "file_name": "example_aircraft_1.json",
-                "agents_per_base": [
                     2,
-                    1,
-                    1,
-                    1
+                    2,
+                    2,
+                    2
                 ]
             },
             {
                 "file_name": "example_aircraft_2.json",
                 "agents_per_base": [
                     2,
-                    1,
-                    1,
-                    1
+                    2,
+                    2,
+                    2
                 ]
             }
         ],
@@ -47,8 +27,8 @@
                 "agents_per_base": [
                     2,
                     2,
-                    1,
-                    1
+                    2,
+                    2
                 ]
             },
             {
@@ -56,8 +36,28 @@
                 "agents_per_base": [
                     2,
                     2,
-                    1,
-                    1
+                    2,
+                    2
+                ]
+            }
+        ],
+        [
+            {
+                "file_name": "example_aircraft_1.json",
+                "agents_per_base": [
+                    2,
+                    2,
+                    2,
+                    2
+                ]
+            },
+            {
+                "file_name": "example_aircraft_2.json",
+                "agents_per_base": [
+                    2,
+                    2,
+                    2,
+                    2
                 ]
             }
         ]

@@ -1,0 +1,57 @@
+{
+  "icon": "plane.svg",
+  "takeoff_landing_type": "land",
+  "autonomous": false,
+  "mtom": 20321.96362589065,
+  "empty_mass": 11420.153256235899,
+  "payload": 6200,
+  "flow_rate": 510.25,
+  "can_scoop": true,
+  "scooping_distance": 410,
+  "span": 29.010630386388939,
+  "propulsion_input": {
+    "architecture": "conventional",
+    "total_propellant": 2701.8181579626048,
+    "reserve_propellant": 127.44425273408513,
+    "propellant_unit": "kg",
+    "refueling_rate": 15.14,
+    "taxi_out_fc": 0.034145495610882884,
+    "taxi_in_fc": 0.034145495610882884,
+    "takeoff_fc": 0.40974594733059461,
+    "landing_fc": 0.11381831870294294,
+    "loiter_fc": 0.18210930992470872,
+    "transition_fc": 0,
+    "retransition_fc": 0,
+    "cruise_fc": {
+      "11420": 0.12792293765339735,
+      "20322": 0.22763663740588588
+    },
+    "cruise_climb_fc": {
+      "11420": 0.19188440648009603,
+      "20322": 0.34145495610882881
+    },
+    "cruise_descent_fc": {
+      "11420": 0.038376881296019204,
+      "20322": 0.068290991221765768
+    }
+  },
+  "profile_parameters": {
+    "taxi_out_duration": 120,
+    "taxi_in_duration": 120,
+    "transition_duration": 0,
+    "retransition_duration": 0,
+    "takeoff_altitude": 457.2,
+    "takeoff_climb_rate": 6.99,
+    "takeoff_ground_speed": 41.15552,
+    "cruise_altitude": 3000,
+    "cruise_speed": 74.59438,
+    "cruise_climb_rate": 6.99,
+    "cruise_climb_ground_speed": 74.59438,
+    "cruise_descent_rate": 6.96,
+    "cruise_descent_ground_speed": 74.59438,
+    "landing_altitude": 457.2,
+    "landing_descent_rate": 3.495,
+    "landing_ground_speed": 41.15552,
+    "loiter_speed": 63.405223
+  }
+}

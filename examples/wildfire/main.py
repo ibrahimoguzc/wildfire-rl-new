@@ -17,9 +17,11 @@ from sosid.gui.main import display
 from sosid.output import OutputFormat
 from sosid.util.general_funcs import combine_parameters
 
-INPUT_FILE = "Salamis.json"
+INPUT_FILE = "Palisades copy.json"
+print(INPUT_FILE)
 OVERWRITES = None
 RUN_PROFILER = False
+SEED = 1
 
 OUTPUT_DIR = SCENARIOS_DIR / "outputs"
 input_filepath = SCENARIOS_DIR / "inputs" / INPUT_FILE
@@ -33,7 +35,7 @@ else:
 
 sim = WildfireSimulation(
     parameters=parameters,
-    seed=0,
+    seed=SEED,
     context=Profiler(interval=0.001) if RUN_PROFILER else None,
 )
 
