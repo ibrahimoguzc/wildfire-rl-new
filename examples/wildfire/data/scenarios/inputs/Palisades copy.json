@@ -79,8 +79,250 @@
             ]
         }
     ],
-    "protection_locations": [],
-    "urban_locations": [],
+    "protection_locations": [{
+            "gps_coords": [
+                34.04429372626382,
+                -118.56621911552908
+            ],
+            "radius": [
+                1508.75,
+                605.23
+            ],
+            "angle": 0.016066
+        },
+        {
+            "gps_coords": [
+                34.07811307078696,
+                -118.50119781959336
+            ],
+            "radius": [
+                1338.84,
+                973.33
+            ],
+            "angle": 3.934697
+        },
+        {
+            "gps_coords": [
+                34.106330614951496,
+                -118.59125231446436
+            ],
+            "radius": [
+                2113.53,
+                1145.02
+            ],
+            "angle": 5.033609
+        },
+        {
+            "gps_coords": [
+                34.04402311709734,
+                -118.52417201082397
+            ],
+            "radius": [
+                1585.18,
+                1170.07
+            ],
+            "angle": 5.042082
+        },
+        {
+            "gps_coords": [
+                34.07441614626235,
+                -118.55825400677696
+            ],
+            "radius": [
+                1697.67,
+                794.01
+            ],
+            "angle": 0.405129
+        },
+        {
+            "gps_coords": [
+                34.06503785789029,
+                -118.49480405882635
+            ],
+            "radius": [
+                1506.66,
+                793.77
+            ],
+            "angle": 4.496484
+        },
+        {
+            "gps_coords": [
+                34.10578979199358,
+                -118.49951810278169
+            ],
+            "radius": [
+                1025.4,
+                679.7
+            ],
+            "angle": 5.140142
+        },
+        {
+            "gps_coords": [
+                34.03166437842159,
+                -118.50179384813943
+            ],
+            "radius": [
+                1520.98,
+                1066.37
+            ],
+            "angle": 6.184999
+        },
+        {
+            "gps_coords": [
+                34.04569185986756,
+                -118.49821767686298
+            ],
+            "radius": [
+                1200.39,
+                1163.71
+            ],
+            "angle": 5.092937
+        },
+        {
+            "gps_coords": [
+                34.08794069513061,
+                -118.59509940780723
+            ],
+            "radius": [
+                1512.86,
+                610.62
+            ],
+            "angle": 4.874354
+        },
+        {
+            "gps_coords": [
+                34.050742989182325,
+                -118.54286563340551
+            ],
+            "radius": [
+                1549.15,
+                1101.3
+            ],
+            "angle": 4.554105
+        }],
+    "urban_locations": [
+        {
+            "gps_coords": [
+                34.04429372626382,
+                -118.56621911552908
+            ],
+            "radius": [
+                1508.75,
+                605.23
+            ],
+            "angle": 0.016066
+        },
+        {
+            "gps_coords": [
+                34.07811307078696,
+                -118.50119781959336
+            ],
+            "radius": [
+                1338.84,
+                973.33
+            ],
+            "angle": 3.934697
+        },
+        {
+            "gps_coords": [
+                34.106330614951496,
+                -118.59125231446436
+            ],
+            "radius": [
+                2113.53,
+                1145.02
+            ],
+            "angle": 5.033609
+        },
+        {
+            "gps_coords": [
+                34.04402311709734,
+                -118.52417201082397
+            ],
+            "radius": [
+                1585.18,
+                1170.07
+            ],
+            "angle": 5.042082
+        },
+        {
+            "gps_coords": [
+                34.07441614626235,
+                -118.55825400677696
+            ],
+            "radius": [
+                1697.67,
+                794.01
+            ],
+            "angle": 0.405129
+        },
+        {
+            "gps_coords": [
+                34.06503785789029,
+                -118.49480405882635
+            ],
+            "radius": [
+                1506.66,
+                793.77
+            ],
+            "angle": 4.496484
+        },
+        {
+            "gps_coords": [
+                34.10578979199358,
+                -118.49951810278169
+            ],
+            "radius": [
+                1025.4,
+                679.7
+            ],
+            "angle": 5.140142
+        },
+        {
+            "gps_coords": [
+                34.03166437842159,
+                -118.50179384813943
+            ],
+            "radius": [
+                1520.98,
+                1066.37
+            ],
+            "angle": 6.184999
+        },
+        {
+            "gps_coords": [
+                34.04569185986756,
+                -118.49821767686298
+            ],
+            "radius": [
+                1200.39,
+                1163.71
+            ],
+            "angle": 5.092937
+        },
+        {
+            "gps_coords": [
+                34.08794069513061,
+                -118.59509940780723
+            ],
+            "radius": [
+                1512.86,
+                610.62
+            ],
+            "angle": 4.874354
+        },
+        {
+            "gps_coords": [
+                34.050742989182325,
+                -118.54286563340551
+            ],
+            "radius": [
+                1549.15,
+                1101.3
+            ],
+            "angle": 4.554105
+        }
+    ],
     "response_time": 3600,
     "takeoff_interval": 300,
     "turnaround_time": 100,
@@ -88,26 +330,81 @@
     "resupply_altitude": 15,
     "enable_nighttime_operations": true,
     "agents": [
-        
         {
             "file_name": "example_seaplane_1.json",
             "agents_per_base": [
                 1,
                 0
             ],
-            
+
             "suppression_tactic": {
                 "main": {
                     "select_poi": "water",
                     "track_poi": "follow_firefront",
+                    "suppress": "direct"
+                }
+            }
+        }
+        ,{
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                0,
+                1
+            ],
+
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "indirect",
+                    "track_poi": "indirect",
+                    "suppress": "indirect"
+                }
+            }
+        },{
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                0,
+                1
+            ],
+
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "vip",
+                    "track_poi": "indirect",
+                    "suppress": "indirect"
+                }
+            }
+        },{
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                1,
+                0
+            ],
+
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "water",
+                    "track_poi": "follow_firefront",
+                    "suppress": "direct"
+                }
+            }
+        }
+        ,{
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                0,
+                1
+            ],
+
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "indirect",
+                    "track_poi": "indirect",
                     "suppress": "indirect"
                 }
             }
         }
-
-        
     ],
-    
+
 
     "scoop_time": 30,
     "distance_cost_weight": 1.0,

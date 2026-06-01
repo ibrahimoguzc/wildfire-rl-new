@@ -27,34 +27,11 @@ import time
 from typing import Any, Sequence
 from datetime import timedelta
 
-try:
-    import psutil as _psutil
-except ImportError:
-    _psutil = None
-
-
-def _process_rss_bytes() -> int:
-    """Return current process RSS in bytes; 0 if unavailable."""
-    if _psutil is not None:
-        try:
-            return int(_psutil.Process().memory_info().rss)
-        except Exception:
-            return 0
-    try:
-        with open("/proc/self/status") as handle:
-            for line in handle:
-                if line.startswith("VmRSS:"):
-                    return int(line.split()[1]) * 1024
-    except Exception:
-        pass
-    return 0
-
 import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
 from scipy import ndimage
 from scipy.spatial import cKDTree
-from scipy.spatial.distance import cdist
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import (
     BaseCallback,
@@ -63,7 +40,14 @@ from stable_baselines3.common.callbacks import (
 )
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 from sosid.environment.terrain import FEATURES_COLOR_TABLE, TerrainTypes
-from sosid.model.transform import gps_to_mercator, gps_to_pos, index_to_pos, pos_to_gps
+from sosid.model.transform import (
+    gps_to_mercator,
+    gps_to_pos,
+    index_to_pos,
+    pos_to_gps,
+    pos_to_index,
+)
+from sosid.typedef import GridDescriptor
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -84,6 +68,7 @@ from examples.wildfire.firefighter_model.tactic_pieces.track_poi import (
     TRACK_POI_TABLE,
     TrackPOIType,
 )
+from examples.wildfire.fire_model.states import COMBUSTIBLE
 from examples.wildfire.paths import SCENARIOS_DIR
 from examples.wildfire.simulation import (
     IgnitionCenterInput,
@@ -125,9 +110,23 @@ MAX_SPREAD_RATE_NORM_MPM = 30.0
 CONTROLLED_AGENT_COUNT = 5
 AGENT_FEATURE_COUNT = 2
 DEFAULT_DECISION_INTERVAL_MINUTES = 10
+# Max number of fastest active fire cells inspected for front-derived state.
+# This is an upper bound: if fewer cells are burning, we use what exists.
+DEFAULT_STATE_FIRE_FRONTS = 5
+# Require a meaningful uphill spread multiplier before a front votes for
+# topography_flag. This keeps flat/noisy terrain from looking topographic.
+TOPOGRAPHY_SLOPE_FACTOR_THRESHOLD = 1.05
+# Vegetation threat rule: inspect a radius-3 Moore neighborhood around each
+# selected front and count fuel-bearing cells. The front votes positive when
+# the count is strictly greater than this threshold.
+VEGETATION_NEIGHBOR_RADIUS = 3
+VEGETATION_MIN_COMBUSTIBLE_NEIGHBORS = 5
+# A front votes for indirect_flag when it is close enough to the current
+# indirect/fire-line plan to make line-following tactics relevant.
+INDIRECT_FRONT_DISTANCE_THRESHOLD_M = 250.0
 IGNITION_BOUNDARY_MARGIN_RATIO = 0.3
 IGNITION_BOX_HALF_SIZE = 50  # half-side of 100×100 candidate box in grid cells
-IGNITION_URBAN_BUFFER_M = 500.0  # min distance from any urban cell, meters
+IGNITION_URBAN_BUFFER_M = 350.0  # min distance from any urban cell, meters
 # --switch-ignition-2: center map box whose edges sit `IGNITION_V2_MARGIN_RATIO`
 # of the map edge length away from each map boundary. Default 0.25 → box edge
 # = (1 − 2·0.25) · map_edge = half the map.
@@ -142,9 +141,7 @@ if NUM_MINIBATCH <= 0:
     raise ValueError("NUM_MINIBATCH must be positive.")
 LOG_INTERVAL_SUMMARY_EPISODES = 100
 LOG_INTERVAL_STEPS_EPISODES = 1000
-LR_DECAY_EXPONENT = 0.70
-POI_CANDIDATE_QUANTILE = 0.95
-MAX_POI_CANDIDATES = 4000
+LR_DECAY_EXPONENT = 0.60
 SWITCH_SCENARIO_NAMES = (
     "Palisades copy.json",
     "Pyrenees.json",
@@ -180,9 +177,9 @@ def _make_env_factory(
     switch_ignition_mode: int,
     seed: int,
     ts_budget_per_scenario: float | None = None,
-    profile_timings: bool = False,
     gc_collect_on_reset: bool = False,
     include_scenario_features: bool | None = None,
+    state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
 ):
     def _init() -> WildfireHourlyEnv:
         env = WildfireHourlyEnv(
@@ -194,9 +191,9 @@ def _make_env_factory(
             aircraft_source_scenario_path=aircraft_source_scenario_path,
             switch_ignition_mode=switch_ignition_mode,
             ts_budget_per_scenario=ts_budget_per_scenario,
-            profile_timings=profile_timings,
             gc_collect_on_reset=gc_collect_on_reset,
             include_scenario_features=include_scenario_features,
+            state_fire_fronts=state_fire_fronts,
         )
         env.reset(seed=seed)
         return env
@@ -215,8 +212,8 @@ def _build_vector_env(
     switch_ignition_mode: int,
     vec_start_method: str | None = None,
     ts_budget_per_scenario: float | None = None,
-    profile_timings: bool = False,
     gc_collect_on_reset: bool = False,
+    state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
 ) -> DummyVecEnv | SubprocVecEnv:
     num_envs = max(1, num_envs)
     base_seed = int(np.random.randint(0, 1_000_000))
@@ -234,9 +231,9 @@ def _build_vector_env(
                 switch_ignition_mode=switch_ignition_mode,
                 seed=base_seed + idx,
                 ts_budget_per_scenario=None,
-                profile_timings=profile_timings,
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=True,
+                state_fire_fronts=state_fire_fronts,
             )
             for idx in range(num_envs)
         ]
@@ -252,9 +249,9 @@ def _build_vector_env(
                 switch_ignition_mode,
                 seed=base_seed + idx,
                 ts_budget_per_scenario=ts_budget_per_scenario,
-                profile_timings=profile_timings,
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=switch_scenario,
+                state_fire_fronts=state_fire_fronts,
             )
             for idx in range(num_envs)
         ]
@@ -276,18 +273,9 @@ SCENARIO_FEATURES: tuple[str, ...] = (
 
 STATE_FEATURES = [
     "time_since_detection_min",
-    "temperature_c",
-    "humidity_pct",
     "wind_speed_ms",
     "wind_direction_deg",
-    "time_to_sunset_min",
     "distance_to_fire_line_m",
-    "distance_to_water_m",
-    "distance_fire_boundary_to_water",
-    "distance_fire_boundary_to_vip",
-    "distance_fire_boundary_to_vegetation",
-    "distance_fire_boundary_to_topography",
-    "distance_fire_boundary_to_indirect",
     "fire_center_x",
     "fire_center_y",
     "leftmost_x",
@@ -302,6 +290,11 @@ STATE_FEATURES = [
     "spread_ray_hit_x",
     "spread_ray_hit_y",
     "max_spread_rate_norm",
+    "topography_flag",
+    "vegetation_flag",
+    "indirect_flag",
+    "urban_flag",
+    "water_flag",
     "distance_left_boundary",
     "distance_right_boundary",
     "distance_bottom_boundary",
@@ -449,6 +442,30 @@ class Metrics:
     emissions: float
 
 
+@dataclass(frozen=True)
+class FireFrontDiagnostic:
+    """Per-front facts used for topography_flag and future front state."""
+
+    source_i: int
+    source_j: int
+    projected_i: int | None
+    projected_j: int | None
+    objective_i: int
+    objective_j: int
+    spread_rate: float
+    topography_priority: float
+    slope_factor: float
+    forward_combustible_uphill: bool
+    has_topography_growth: bool
+    vegetation_combustible_neighbor_count: int
+    has_vegetation_threat: bool
+    distance_to_indirect_line_m: float
+    near_indirect_line: bool
+    distance_to_urban: float
+    distance_to_water: float
+    objective_vote: str | None
+
+
 def metrics_to_dict(metrics: Metrics) -> dict[str, float]:
     return {
         "burnt_area_m2": metrics.burnt_area,
@@ -589,18 +606,13 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         aircraft_source_scenario_path: Path | None = None,
         switch_ignition_mode: int = 0,
         ts_budget_per_scenario: float | None = None,
-        profile_timings: bool = False,
         gc_collect_on_reset: bool = False,
         include_scenario_features: bool | None = None,
+        state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
     ):
         super().__init__()
         self.scenario_path = scenario_path
-        self.profile_timings = bool(profile_timings)
         self.gc_collect_on_reset = bool(gc_collect_on_reset)
-        self._last_reset_wall_seconds: float | None = None
-        self._last_reset_free_burn_wall_seconds: float | None = None
-        self._last_rss_before_reset_bytes: int | None = None
-        self._last_rss_after_reset_bytes: int | None = None
         self.switch_scenario = switch_scenario
         self.switch_scenario_paths = (
             tuple(switch_scenario_paths) if switch_scenario_paths else tuple()
@@ -624,6 +636,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.fire_detection_delay_minutes = 0.0
         self.fire_detection_delay_seconds = 0.0
         self.max_steps_override = max_steps
+        self.state_fire_fronts = int(state_fire_fronts)
+        if self.state_fire_fronts <= 0:
+            raise ValueError("state_fire_fronts must be > 0")
 
         if self.switch_scenario:
             if not self.switch_scenario_paths:
@@ -642,6 +657,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 for path, template in self._scenario_templates
             }
             self._scenario_ignition_candidates: dict[Path, np.ndarray] = {}
+            self._scenario_ignitable_mask: dict[Path, np.ndarray | None] = {}
             if self.switch_ignition:
                 for path, template in self._scenario_templates:
                     self._scenario_ignition_candidates[path] = (
@@ -658,6 +674,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self._scenario_agents = {}
             self.parameters = self._load_parameters(scenario_path)
             self._scenario_ignition_candidates = {}
+            self._scenario_ignitable_mask = {}
             if self.switch_ignition:
                 self._scenario_ignition_candidates[self.scenario_path] = (
                     self._build_ignition_candidate_positions(self.parameters)
@@ -696,9 +713,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.np_random, _ = gym.utils.seeding.np_random()
         self.sim: WildfireSimulation | None = None
         self.water_positions: np.ndarray = np.empty((0, 2), dtype=float)
+        self.urban_positions: np.ndarray = np.empty((0, 2), dtype=float)
         self.vip_positions: np.ndarray = np.empty((0, 2), dtype=float)
-        self.vegetation_poi_positions: np.ndarray = np.empty((0, 2), dtype=float)
-        self.topography_poi_positions: np.ndarray = np.empty((0, 2), dtype=float)
         self.fire_grid_area: float = 0.0
         self.current_step: int = 0
         self.prev_metrics: Metrics | None = None
@@ -707,6 +723,25 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.cumulative_reward: float = 0.0
         self.done: bool = False
         self.last_info: dict[str, Any] = {}
+        self.last_front_diagnostics: list[FireFrontDiagnostic] = []
+        self.last_front_summary: dict[str, float | int] = {
+            "state_fire_fronts": self.state_fire_fronts,
+            "state_fire_front_count": 0,
+            "topography_front_positive_count": 0,
+            "topography_front_required_count": 0,
+            "topography_flag": 0.0,
+            "vegetation_front_positive_count": 0,
+            "vegetation_front_required_count": 0,
+            "vegetation_flag": 0.0,
+            "indirect_front_positive_count": 0,
+            "indirect_front_required_count": 0,
+            "indirect_flag": 0.0,
+            "urban_front_count": 0,
+            "water_front_count": 0,
+            "objective_front_count": 0,
+            "urban_flag": 0.0,
+            "water_flag": 0.0,
+        }
         self.current_sim_seed: int | None = None
         self.current_scenario_path: Path = self.scenario_path
         self.current_scenario_name: str = self.scenario_path.name
@@ -985,37 +1020,89 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         if candidates.size == 0:
             return selected_parameters.ignition_centers
 
-        idx = int(self.np_random.integers(0, len(candidates)))
-        row, col = (int(candidates[idx, 0]), int(candidates[idx, 1]))
+        # The fire-map grid cell is NOT exactly ``cell_size`` metres: the sim
+        # builds its grid_description from (mercator_dimensions / grid_shape).
+        # Encode the candidate cell-centre with that SAME grid so the GPS we
+        # emit round-trips back to the intended cell when the sim re-indexes it
+        # (gps_to_pos -> pos_to_index). Using cell_size here instead shifts the
+        # ignited cell by ~1 km, dropping fires onto unvalidated water/urban.
+        terrain_inputs = selected_parameters.terrain_inputs
         cell_size = float(selected_parameters.cell_size)
-        # Convert fire-map index (row, col) -> fire-map position (x, y).
-        x = (float(col) + 0.5) * cell_size
-        y = (float(row) + 0.5) * cell_size
-
-        fire_top_left_merc = gps_to_mercator(
-            selected_parameters.terrain_inputs.fire_map_coordinates[0]
+        grid_shape = terrain_inputs.grid_shape
+        # dimensions = (width, height) in mercator metres; matches the sim's
+        # terrain.grid_description so index<->pos is identical on both sides.
+        mercator_dimensions = terrain_inputs.meta_data["mercator_dimensions"]
+        grid_description = GridDescriptor(
+            shape=(int(grid_shape[0]), int(grid_shape[1])),
+            dimensions=(
+                float(mercator_dimensions[0]),
+                float(mercator_dimensions[1]),
+            ),
         )
-        fire_top_left_bounds = (float(fire_top_left_merc[1]), float(fire_top_left_merc[0]))
-        lat, lon = pos_to_gps((x, y), fire_top_left_bounds)
-        sampled = IgnitionCenterInput(gps_coords=(float(lat), float(lon)))
+        fire_top_left_merc = gps_to_mercator(
+            terrain_inputs.fire_map_coordinates[0]
+        )
+        fire_top_left_bounds = (
+            float(fire_top_left_merc[1]),
+            float(fire_top_left_merc[0]),
+        )
+        bbox_pos = (
+            (0.0, 0.0),
+            (float(grid_shape[0]) * cell_size, float(grid_shape[1]) * cell_size),
+        )
 
-        # Safety net: if conversion drifts out of fire-map bounds, fallback.
-        try:
-            grid_shape = selected_parameters.terrain_inputs.grid_shape
-            sampled.check_in_bbox(
-                bbox_pos=(
-                    (0.0, 0.0),
-                    (
-                        float(grid_shape[0]) * cell_size,
-                        float(grid_shape[1]) * cell_size,
-                    ),
-                ),
-                bbox_gps=selected_parameters.terrain_inputs.fire_map_coordinates,
+        # Reusable ignitable mask for the final logic check (drop water / urban
+        # / rock and enforce the IGNITION_URBAN_BUFFER_M urban keep-out). Cached
+        # per scenario so we build it at most once.
+        ignitable_mask = self._scenario_ignitable_mask.get(selected_path)
+        if ignitable_mask is None:
+            feature_data = np.asarray(
+                np.load(terrain_inputs.features_file, allow_pickle=False)
             )
-        except AssertionError:
-            return selected_parameters.ignition_centers
+            ignitable_mask = (
+                self._build_ignitable_mask(feature_data, cell_size)
+                if feature_data.ndim >= 2
+                else None
+            )
+            self._scenario_ignitable_mask[selected_path] = ignitable_mask
+        mask_rows, mask_cols = (
+            ignitable_mask.shape if ignitable_mask is not None else (0, 0)
+        )
 
-        return (sampled,)
+        # Draw candidates without replacement and accept the first whose FINAL
+        # ignited cell (after the GPS round-trip the sim performs) still passes
+        # the ignitable rule. This guarantees no fire is seeded in water, on an
+        # incombustible cell, or within IGNITION_URBAN_BUFFER_M of an urban
+        # area; if a draw fails the check, we simply pick another.
+        order = self.np_random.permutation(len(candidates))
+        for idx in order:
+            row, col = int(candidates[idx, 0]), int(candidates[idx, 1])
+            x, y = index_to_pos((row, col), grid_description)
+            lat, lon = pos_to_gps((float(x), float(y)), fire_top_left_bounds)
+            sampled = IgnitionCenterInput(gps_coords=(float(lat), float(lon)))
+
+            # Must stay inside the fire map after the round-trip.
+            try:
+                sampled.check_in_bbox(
+                    bbox_pos=bbox_pos,
+                    bbox_gps=terrain_inputs.fire_map_coordinates,
+                )
+            except AssertionError:
+                continue
+
+            # Logic check on the cell the sim will ACTUALLY ignite.
+            if ignitable_mask is not None:
+                px, py = gps_to_pos((float(lat), float(lon)), fire_top_left_bounds)
+                fr, fc = pos_to_index((float(px), float(py)), grid_description)
+                if not (0 <= fr < mask_rows and 0 <= fc < mask_cols):
+                    continue
+                if not bool(ignitable_mask[fr, fc]):
+                    continue
+
+            return (sampled,)
+
+        # No candidate survived the check: fall back to the scenario default.
+        return selected_parameters.ignition_centers
 
     def _normalize_agents_for_airports(
         self,
@@ -1160,14 +1247,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             * (self.sim.parameters.cell_size**2)
         )
         self.done = False
-        if self.profile_timings:
-            free_burn_start = time.perf_counter()
-            self._advance_to_decision_start()
-            self._last_reset_free_burn_wall_seconds = (
-                time.perf_counter() - free_burn_start
-            )
-        else:
-            self._advance_to_decision_start()
+        self._advance_to_decision_start()
         self.prev_metrics = self._compute_metrics()
         self.initial_metrics = self.prev_metrics
         self.prev_total_moe = None
@@ -1183,16 +1263,6 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         casualties = float(self.sim.total_casualties)
         emissions = float(self.sim.total_fire_emissions)
         return Metrics(burnt, cost, casualties, emissions)
-
-    def _select_candidate_indices(
-        self, indices: np.ndarray, max_points: int
-    ) -> np.ndarray:
-        if indices.shape[0] <= max_points:
-            return indices
-        selected = np.linspace(
-            0, indices.shape[0] - 1, num=max_points, dtype=np.int64
-        )
-        return indices[selected]
 
     def _coerce_grid_indices(self, indices: np.ndarray) -> np.ndarray:
         """Coerce index arrays to (N, 2) grid pairs [y, x]."""
@@ -1293,20 +1363,32 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
     def _distance_to_fire_line_m(self, burning_indices: np.ndarray) -> float:
         """Compute minimum burning-cell distance to active fire line segment in meters."""
         assert self.sim is not None
+        burning = self._coerce_grid_indices(np.asarray(burning_indices))
+        if burning.size == 0:
+            return math.nan
+
+        distances = self._distances_to_fire_line_m(burning)
+        if distances.size == 0:
+            return math.nan
+        return float(np.min(np.asarray(distances, dtype=float)))
+
+    def _distances_to_fire_line_m(self, indices: np.ndarray) -> np.ndarray:
+        """Compute per-cell distances to the active fire line segment in meters."""
+        assert self.sim is not None
         fire_block_indices = self.sim.firefighters.fire_block_indices
         if (
             fire_block_indices is None
             or fire_block_indices.size == 0
             or self.sim.firefighters.current_block_index <= 0
         ):
-            return math.nan
+            return np.empty(0, dtype=float)
 
         current_block_index = int(self.sim.firefighters.current_block_index)
         segment_raw = np.asarray(fire_block_indices[:current_block_index])
         segment = self._coerce_grid_indices(segment_raw)
-        burning = self._coerce_grid_indices(np.asarray(burning_indices))
-        if segment.size == 0 or burning.size == 0:
-            return math.nan
+        points = self._coerce_grid_indices(np.asarray(indices))
+        if segment.size == 0 or points.size == 0:
+            return np.empty(0, dtype=float)
 
         if (
             self._fire_line_tree is None
@@ -1316,75 +1398,436 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self._fire_line_tree_block_index = current_block_index
 
         distances, _ = self._fire_line_tree.query(
-            np.asarray(burning, dtype=float), k=1
+            np.asarray(points, dtype=float), k=1
         )
-        min_grid_dist = float(np.min(np.asarray(distances, dtype=float)))
-        return float(self.sim.parameters.cell_size) * min_grid_dist
+        return np.asarray(distances, dtype=float) * float(self.sim.parameters.cell_size)
+
+    def _front_distance_to_fire_line_m(self, source_i: int, source_j: int) -> float:
+        distances = self._distances_to_fire_line_m(
+            np.array([[source_i, source_j]], dtype=np.int64)
+        )
+        if distances.size == 0:
+            return math.inf
+        return float(distances[0])
 
     def _build_static_poi_positions(self) -> None:
         assert self.sim is not None
         firefighters = self.sim.firefighters
 
-        self.vip_positions = np.array(
+        self.urban_positions = np.array(
             [location.pos for location in firefighters.protection_locations],
             dtype=float,
         )
-        if self.vip_positions.size == 0:
-            self.vip_positions = np.empty((0, 2), dtype=float)
+        if self.urban_positions.size == 0:
+            self.urban_positions = np.empty((0, 2), dtype=float)
+        # In this runner, protection locations are the urban objectives.
+        self.vip_positions = self.urban_positions
 
-        priority_map = np.asarray(
-            self.sim.environment.terrain.features.priority_map, dtype=float
+    @staticmethod
+    def _angle_between_degrees(first: float, second: float) -> float:
+        if not math.isfinite(first) or not math.isfinite(second):
+            return math.nan
+        return float(abs((first - second + 180.0) % 360.0 - 180.0))
+
+    @staticmethod
+    def _grid_offset_aspect(di: int, dj: int) -> float:
+        return float((math.degrees(math.atan2(dj, -di)) + 360.0) % 360.0)
+
+    def _forward_neighbor_indices(
+        self,
+        source_i: int,
+        source_j: int,
+        prop_aspect: float,
+    ) -> list[tuple[int, int]]:
+        """Return one-step forward cone cells for a propagation aspect."""
+        assert self.sim is not None
+        if not math.isfinite(prop_aspect):
+            return []
+        height, width = self.sim.wildfire.fire_states.shape
+        neighbors: list[tuple[float, int, int]] = []
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                if di == 0 and dj == 0:
+                    continue
+                offset_aspect = self._grid_offset_aspect(di, dj)
+                angle = self._angle_between_degrees(offset_aspect, prop_aspect)
+                if math.isnan(angle) or angle > 45.0:
+                    continue
+                ni = source_i + di
+                nj = source_j + dj
+                if 0 <= ni < height and 0 <= nj < width:
+                    neighbors.append((angle, int(ni), int(nj)))
+        # The closest-angle cell is our best one-step estimate of where this
+        # front is trying to move next; the rest keep future front features open.
+        neighbors.sort(key=lambda item: item[0])
+        return [(ni, nj) for _, ni, nj in neighbors]
+
+    def _topography_wind_alignment(
+        self,
+        source_i: int,
+        source_j: int,
+        neighbor_i: int,
+        neighbor_j: int,
+        wind_direction: float,
+    ) -> float:
+        # Mirror the topography SelectPOI heuristic: uphill targets count more
+        # when they also sit in the wind-favored direction from the fire cell.
+        neighbor_angle = math.degrees(
+            math.atan2(source_i - neighbor_i, source_j - neighbor_j)
         )
-        valid_priority = np.isfinite(priority_map) & (priority_map > 0.0)
-        if np.any(valid_priority):
-            veg_threshold = float(
-                np.quantile(priority_map[valid_priority], POI_CANDIDATE_QUANTILE)
-            )
-            vegetation_indices = np.argwhere(priority_map >= veg_threshold)
-            vegetation_indices = self._select_candidate_indices(
-                vegetation_indices, MAX_POI_CANDIDATES
-            )
-            self.vegetation_poi_positions = self._indices_to_positions(
-                vegetation_indices
-            )
-        else:
-            self.vegetation_poi_positions = np.empty((0, 2), dtype=float)
+        angle_difference = abs(180.0 - neighbor_angle - wind_direction)
+        return _clip01(1.0 - min(angle_difference, 360.0 - angle_difference) / 180.0)
 
+    def _front_topography_priority_raw(
+        self,
+        source_i: int,
+        source_j: int,
+    ) -> float:
+        """Match the topography tactic's local uphill-combustible heuristic."""
+        assert self.sim is not None
         elevation = np.asarray(
             self.sim.environment.terrain.elevation.elevation_data, dtype=float
         )
-        valid_elevation = np.isfinite(elevation)
-        if np.any(valid_elevation):
-            topo_threshold = float(
-                np.quantile(elevation[valid_elevation], POI_CANDIDATE_QUANTILE)
-            )
-            topography_indices = np.argwhere(elevation >= topo_threshold)
-            topography_indices = self._select_candidate_indices(
-                topography_indices, MAX_POI_CANDIDATES
-            )
-            self.topography_poi_positions = self._indices_to_positions(
-                topography_indices
-            )
-        else:
-            self.topography_poi_positions = np.empty((0, 2), dtype=float)
+        fire_states = self.sim.wildfire.fire_states
+        height, width = fire_states.shape
+        if not (0 <= source_i < height and 0 <= source_j < width):
+            return 0.0
 
-    def _current_indirect_poi_positions(self) -> np.ndarray:
-        assert self.sim is not None
-        fire_block_indices = self.sim.firefighters.fire_block_indices
-        if fire_block_indices is None or fire_block_indices.size == 0:
-            return np.empty((0, 2), dtype=float)
-        return self._indices_to_positions(np.asarray(fire_block_indices))
+        current_elevation = float(elevation[source_i, source_j])
+        if not math.isfinite(current_elevation):
+            return 0.0
+        wind_direction = float(self.sim.atmosphere.wind_aspect)
+        priority = 0.0
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                if di == 0 and dj == 0:
+                    continue
+                ni = source_i + di
+                nj = source_j + dj
+                if not (0 <= ni < height and 0 <= nj < width):
+                    continue
+                if fire_states[ni, nj] != COMBUSTIBLE:
+                    continue
+                neighbor_elevation = float(elevation[ni, nj])
+                if not math.isfinite(neighbor_elevation):
+                    continue
+                elevation_gain = neighbor_elevation - current_elevation
+                if elevation_gain <= 0.0:
+                    continue
+                alignment = self._topography_wind_alignment(
+                    source_i,
+                    source_j,
+                    int(ni),
+                    int(nj),
+                    wind_direction,
+                )
+                # Keep this value raw instead of normalized. The flag asks
+                # whether a real opportunity exists, not how this cell ranks
+                # relative to other fronts in the current step.
+                priority = max(priority, alignment * elevation_gain)
+        return float(max(priority, 0.0))
 
-    def _distance_boundary_to_poi(
+    def _front_slope_factor(
         self,
-        boundary_points: np.ndarray,
-        poi_points: np.ndarray,
-        map_diagonal: float,
+        source_i: int,
+        source_j: int,
+        prop_aspect: float,
     ) -> float:
-        if boundary_points.size == 0 or poi_points.size == 0 or map_diagonal <= 0.0:
+        """Return the fire model's slope multiplier at a front source cell."""
+        assert self.sim is not None
+        if not math.isfinite(prop_aspect):
             return 1.0
-        min_dist = float(cdist(boundary_points, poi_points).min())
-        return float(min(max(min_dist / map_diagonal, 0.0), 1.0))
+        slopes = np.asarray(self.sim.environment.terrain.slopes, dtype=float)
+        aspects = np.asarray(self.sim.environment.terrain.aspects, dtype=float)
+        height, width = slopes.shape
+        if not (0 <= source_i < height and 0 <= source_j < width):
+            return 1.0
+        terrain_slope = float(slopes[source_i, source_j])
+        terrain_aspect = float(aspects[source_i, source_j])
+        if not math.isfinite(terrain_slope) or not math.isfinite(terrain_aspect):
+            return 1.0
+        angle = self._angle_between_degrees(terrain_aspect, prop_aspect)
+        if math.isnan(angle):
+            return 1.0
+        # This is the same multiplier used by the spread model. Values above 1
+        # mean slope is accelerating spread; values below 1 mean slope resists it.
+        hill_dir = -1.0 if angle < 90.0 else 1.0
+        return float(
+            math.exp(
+                3.553
+                * hill_dir
+                * math.tan(1.2 * terrain_slope * math.pi / 180.0)
+            )
+        )
+
+    def _has_forward_combustible_uphill(
+        self,
+        source_i: int,
+        source_j: int,
+        prop_aspect: float,
+    ) -> bool:
+        # A front only votes for topography if its likely next cells are both
+        # burnable and higher than the current cell.
+        assert self.sim is not None
+        elevation = np.asarray(
+            self.sim.environment.terrain.elevation.elevation_data, dtype=float
+        )
+        fire_states = self.sim.wildfire.fire_states
+        current_elevation = float(elevation[source_i, source_j])
+        if not math.isfinite(current_elevation):
+            return False
+        for ni, nj in self._forward_neighbor_indices(source_i, source_j, prop_aspect):
+            if fire_states[ni, nj] != COMBUSTIBLE:
+                continue
+            neighbor_elevation = float(elevation[ni, nj])
+            if math.isfinite(neighbor_elevation) and neighbor_elevation > current_elevation:
+                return True
+        return False
+
+    def _front_vegetation_neighbor_count(
+        self,
+        source_i: int,
+        source_j: int,
+        radius: int = VEGETATION_NEIGHBOR_RADIUS,
+    ) -> int:
+        # Vegetation flag uses the fuel map directly: count cells with
+        # combustibility > 0 in the front's radius-r Moore neighborhood.
+        assert self.sim is not None
+        combustibilities = np.asarray(
+            self.sim.environment.terrain.features.combustibilities,
+            dtype=float,
+        )
+        height, width = combustibilities.shape
+        if not (0 <= source_i < height and 0 <= source_j < width):
+            return 0
+
+        i_start = max(source_i - radius, 0)
+        i_stop = min(source_i + radius + 1, height)
+        j_start = max(source_j - radius, 0)
+        j_stop = min(source_j + radius + 1, width)
+
+        neighborhood = combustibilities[i_start:i_stop, j_start:j_stop]
+        fuel_mask = np.isfinite(neighborhood) & (neighborhood > 0.0)
+        center_i = source_i - i_start
+        center_j = source_j - j_start
+        if 0 <= center_i < fuel_mask.shape[0] and 0 <= center_j < fuel_mask.shape[1]:
+            fuel_mask[center_i, center_j] = False
+        return int(np.count_nonzero(fuel_mask))
+
+    @staticmethod
+    def _nearest_position_distance(
+        source_position: np.ndarray,
+        target_positions: np.ndarray,
+    ) -> float:
+        targets = np.asarray(target_positions, dtype=float).reshape(-1, 2)
+        source = np.asarray(source_position, dtype=float).reshape(-1)
+        if targets.size == 0 or source.size < 2 or not np.all(np.isfinite(source[:2])):
+            return math.inf
+        distances = np.linalg.norm(targets - source[:2], axis=1)
+        if distances.size == 0:
+            return math.inf
+        return float(np.min(distances))
+
+    def _front_objective_vote(
+        self,
+        objective_i: int,
+        objective_j: int,
+    ) -> tuple[float, float, str | None]:
+        # The front votes for whichever objective class is closer to where the
+        # front is expected to move. Ties intentionally go to urban.
+        front_positions = self._indices_to_positions(
+            np.array([[objective_i, objective_j]], dtype=np.int64)
+        )
+        if front_positions.size == 0:
+            return math.inf, math.inf, None
+        front_position = front_positions[0]
+        urban_distance = self._nearest_position_distance(
+            front_position,
+            self.urban_positions,
+        )
+        water_distance = self._nearest_position_distance(
+            front_position,
+            self.water_positions,
+        )
+        if not math.isfinite(urban_distance) and not math.isfinite(water_distance):
+            vote = None
+        elif not math.isfinite(urban_distance):
+            vote = "water"
+        elif not math.isfinite(water_distance):
+            vote = "urban"
+        elif urban_distance <= water_distance:
+            vote = "urban"
+        else:
+            vote = "water"
+        return urban_distance, water_distance, vote
+
+    def _select_fire_front_diagnostics(
+        self,
+        burning_indices: np.ndarray,
+    ) -> list[FireFrontDiagnostic]:
+        """Analyze up to `state_fire_fronts` fastest burning cells."""
+        assert self.sim is not None
+        burning = self._coerce_grid_indices(np.asarray(burning_indices))
+        if burning.size == 0:
+            return []
+
+        spread_rates = np.asarray(self.sim.wildfire.get_spread_rates(burning), dtype=float)
+        finite = np.isfinite(spread_rates)
+        if not np.any(finite):
+            return []
+
+        valid_indices = burning[finite]
+        valid_rates = spread_rates[finite]
+        order = np.argsort(valid_rates)[::-1]
+        # `state_fire_fronts` is a maximum. Early or small fires may have fewer
+        # usable burning cells, so we analyze whatever valid fronts exist.
+        selected = order[: min(self.state_fire_fronts, order.size)]
+        diagnostics: list[FireFrontDiagnostic] = []
+        prop_aspects = self.sim.wildfire.prop_aspect
+        for order_idx in selected:
+            source_i, source_j = map(int, valid_indices[order_idx])
+            spread_rate = float(valid_rates[order_idx])
+            prop_aspect = float(prop_aspects[source_i, source_j])
+            forward_cells = self._forward_neighbor_indices(
+                source_i,
+                source_j,
+                prop_aspect,
+            )
+            projected_i: int | None = None
+            projected_j: int | None = None
+            if forward_cells:
+                projected_i, projected_j = forward_cells[0]
+            objective_i = projected_i if projected_i is not None else source_i
+            objective_j = projected_j if projected_j is not None else source_j
+
+            topography_priority = self._front_topography_priority_raw(
+                source_i,
+                source_j,
+            )
+            slope_factor = self._front_slope_factor(
+                source_i,
+                source_j,
+                prop_aspect,
+            )
+            forward_combustible_uphill = self._has_forward_combustible_uphill(
+                source_i,
+                source_j,
+                prop_aspect,
+            )
+            vegetation_neighbor_count = self._front_vegetation_neighbor_count(
+                source_i,
+                source_j,
+            )
+            has_vegetation_threat = (
+                vegetation_neighbor_count > VEGETATION_MIN_COMBUSTIBLE_NEIGHBORS
+            )
+            distance_to_indirect_line = self._front_distance_to_fire_line_m(
+                source_i,
+                source_j,
+            )
+            near_indirect_line = (
+                math.isfinite(distance_to_indirect_line)
+                and distance_to_indirect_line <= INDIRECT_FRONT_DISTANCE_THRESHOLD_M
+            )
+            urban_distance, water_distance, objective_vote = (
+                self._front_objective_vote(objective_i, objective_j)
+            )
+            # A positive front needs all pieces at once: it must be spreading,
+            # have an uphill combustible opportunity, and have slope helping
+            # propagation enough to matter.
+            has_growth = (
+                spread_rate > 0.0
+                and topography_priority > 0.0
+                and slope_factor >= TOPOGRAPHY_SLOPE_FACTOR_THRESHOLD
+                and forward_combustible_uphill
+            )
+            diagnostics.append(
+                FireFrontDiagnostic(
+                    source_i=source_i,
+                    source_j=source_j,
+                    projected_i=projected_i,
+                    projected_j=projected_j,
+                    objective_i=objective_i,
+                    objective_j=objective_j,
+                    spread_rate=spread_rate,
+                    topography_priority=topography_priority,
+                    slope_factor=slope_factor,
+                    forward_combustible_uphill=forward_combustible_uphill,
+                    has_topography_growth=has_growth,
+                    vegetation_combustible_neighbor_count=vegetation_neighbor_count,
+                    has_vegetation_threat=has_vegetation_threat,
+                    distance_to_indirect_line_m=distance_to_indirect_line,
+                    near_indirect_line=near_indirect_line,
+                    distance_to_urban=urban_distance,
+                    distance_to_water=water_distance,
+                    objective_vote=objective_vote,
+                )
+            )
+        return diagnostics
+
+    def _compute_fire_front_summary(
+        self,
+        burning_indices: np.ndarray,
+    ) -> dict[str, float | int]:
+        # Convert per-front diagnostics into compact binary state features.
+        diagnostics = self._select_fire_front_diagnostics(burning_indices)
+        self.last_front_diagnostics = diagnostics
+        front_count = len(diagnostics)
+        positive_count = sum(
+            1 for front in diagnostics if front.has_topography_growth
+        )
+        required_count = int(math.ceil(front_count / 2.0)) if front_count else 0
+        vegetation_positive_count = sum(
+            1 for front in diagnostics if front.has_vegetation_threat
+        )
+        vegetation_required_count = required_count
+        indirect_positive_count = sum(
+            1 for front in diagnostics if front.near_indirect_line
+        )
+        indirect_required_count = (front_count // 2) + 1 if front_count else 0
+        urban_count = sum(1 for front in diagnostics if front.objective_vote == "urban")
+        water_count = sum(1 for front in diagnostics if front.objective_vote == "water")
+        objective_count = urban_count + water_count
+        topography_flag = (
+            1.0
+            if front_count > 0 and positive_count >= required_count
+            else 0.0
+        )
+        vegetation_flag = (
+            1.0
+            if (
+                front_count > 0
+                and vegetation_positive_count >= vegetation_required_count
+            )
+            else 0.0
+        )
+        indirect_flag = (
+            1.0
+            if front_count > 0 and indirect_positive_count >= indirect_required_count
+            else 0.0
+        )
+        urban_flag = 1.0 if objective_count > 0 and urban_count >= water_count else 0.0
+        water_flag = 1.0 if objective_count > 0 and water_count > urban_count else 0.0
+        summary: dict[str, float | int] = {
+            "state_fire_fronts": self.state_fire_fronts,
+            "state_fire_front_count": front_count,
+            "topography_front_positive_count": positive_count,
+            "topography_front_required_count": required_count,
+            "topography_flag": topography_flag,
+            "vegetation_front_positive_count": vegetation_positive_count,
+            "vegetation_front_required_count": vegetation_required_count,
+            "vegetation_flag": vegetation_flag,
+            "indirect_front_positive_count": indirect_positive_count,
+            "indirect_front_required_count": indirect_required_count,
+            "indirect_flag": indirect_flag,
+            "urban_front_count": urban_count,
+            "water_front_count": water_count,
+            "objective_front_count": objective_count,
+            "urban_flag": urban_flag,
+            "water_flag": water_flag,
+        }
+        self.last_front_summary = summary
+        return summary
 
     def _mission_time(self) -> float:
         assert self.sim is not None
@@ -1475,14 +1918,21 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         spread_ray_hit_y = math.nan
         max_spread_rate = math.nan
         distance_fire_line = math.nan
-        distance_water = math.nan
-        distance_boundary_to_water = 1.0
-        distance_boundary_to_vip = 1.0
-        distance_boundary_to_vegetation = 1.0
-        distance_boundary_to_topography = 1.0
-        distance_boundary_to_indirect = 1.0
+        topography_flag = 0.0
+        vegetation_flag = 0.0
+        indirect_flag = 0.0
+        urban_flag = 0.0
+        water_flag = 0.0
 
         if burning_count:
+            # Front-derived state is computed first so the observation and the
+            # diagnostic `info` dict describe the same simulation instant.
+            front_summary = self._compute_fire_front_summary(burning_indices)
+            topography_flag = float(front_summary["topography_flag"])
+            vegetation_flag = float(front_summary["vegetation_flag"])
+            indirect_flag = float(front_summary["indirect_flag"])
+            urban_flag = float(front_summary["urban_flag"])
+            water_flag = float(front_summary["water_flag"])
             fire_positions = self.sim.wildfire.fire_positions
             centroid = fire_positions.mean(axis=0)
             fire_center_x = float(centroid[0])
@@ -1509,22 +1959,32 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             )
             spread_angle = float((angle + 360.0) % 360.0)
 
-            if self.water_positions.size:
-                distance_water = float(
-                    np.linalg.norm(self.water_positions - centroid, axis=1).min()
-                )
-
             fire_block_indices = self.sim.firefighters.fire_block_indices
             if (
                 fire_block_indices is not None
                 and self.sim.firefighters.current_block_index > 0
             ):
                 distance_fire_line = self._distance_to_fire_line_m(burning_indices)
-
-        time_to_sunset = max(
-            (self.sim.atmosphere.next_sunset - mission_time).total_seconds() / 60.0,
-            0.0,
-        )
+        else:
+            self.last_front_diagnostics = []
+            self.last_front_summary = {
+                "state_fire_fronts": self.state_fire_fronts,
+                "state_fire_front_count": 0,
+                "topography_front_positive_count": 0,
+                "topography_front_required_count": 0,
+                "topography_flag": 0.0,
+                "vegetation_front_positive_count": 0,
+                "vegetation_front_required_count": 0,
+                "vegetation_flag": 0.0,
+                "indirect_front_positive_count": 0,
+                "indirect_front_required_count": 0,
+                "indirect_flag": 0.0,
+                "urban_front_count": 0,
+                "water_front_count": 0,
+                "objective_front_count": 0,
+                "urban_flag": 0.0,
+                "water_flag": 0.0,
+            }
 
         x_min = self._coord_x_min
         x_max = self._coord_x_max
@@ -1589,48 +2049,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 spread_ray_hit_x = fire_center_x + t_hit * dir_x
                 spread_ray_hit_y = fire_center_y + t_hit * dir_y
 
-        if burning_count:
-            boundary_points = np.array(
-                [
-                    [leftmost_x, leftmost_y],
-                    [rightmost_x, rightmost_y],
-                    [uppermost_x, uppermost_y],
-                    [lowermost_x, lowermost_y],
-                ],
-                dtype=float,
-            )
-            distance_boundary_to_water = self._distance_boundary_to_poi(
-                boundary_points, self.water_positions, map_diagonal
-            )
-            distance_boundary_to_vip = self._distance_boundary_to_poi(
-                boundary_points, self.vip_positions, map_diagonal
-            )
-            distance_boundary_to_vegetation = self._distance_boundary_to_poi(
-                boundary_points, self.vegetation_poi_positions, map_diagonal
-            )
-            distance_boundary_to_topography = self._distance_boundary_to_poi(
-                boundary_points, self.topography_poi_positions, map_diagonal
-            )
-            indirect_positions = self._current_indirect_poi_positions()
-            distance_boundary_to_indirect = self._distance_boundary_to_poi(
-                boundary_points, indirect_positions, map_diagonal
-            )
-
         atmosphere_inputs = self.parameters.atmosphere_inputs
-        temp_min, temp_max = -20.0, 50.0
-        if hasattr(atmosphere_inputs, "temperature_range"):
-            try:
-                temperature_values = tuple(
-                    float(value) for value in atmosphere_inputs.temperature_range
-                )
-                if temperature_values:
-                    temp_min = min(temperature_values)
-                    temp_max = max(temperature_values)
-            except Exception:
-                pass
-        if temp_max <= temp_min:
-            temp_max = temp_min + 1.0
-
         wind_speed_upper = max(20.0, float(atmosphere.wind_speed), 1.0)
         if (
             hasattr(atmosphere_inputs, "wind_run")
@@ -1663,28 +2082,17 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         time_since_detection_norm = _scale_to_unit(
             float(time_since_detection_min), 0.0, day_minutes
         )
-        temperature_norm = _scale_to_unit(
-            float(atmosphere.temperature), temp_min, temp_max
-        )
-        humidity_norm = _scale_to_unit(float(atmosphere.relative_humidity), 0.0, 100.0)
         wind_speed_norm = _scale_to_unit(
             float(atmosphere.wind_speed), 0.0, wind_speed_upper
         )
         wind_direction_norm = _scale_to_unit(
             float((atmosphere.wind_aspect + 360.0) % 360.0), 0.0, 360.0
         )
-        time_to_sunset_norm = _scale_to_unit(float(time_to_sunset), 0.0, day_minutes)
         distance_fire_line_norm = (
             _scale_to_unit(float(distance_fire_line), 0.0, map_diagonal)
             if not math.isnan(distance_fire_line)
             else 0.0
         )
-        distance_water_norm = (
-            _scale_to_unit(float(distance_water), 0.0, map_diagonal)
-            if not math.isnan(distance_water)
-            else 0.0
-        )
-
         fire_center_x_norm = (
             _scale_to_unit(float(fire_center_x), x_min, x_max)
             if not math.isnan(fire_center_x)
@@ -1769,18 +2177,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         state_features.extend(
             [
                 time_since_detection_norm,
-                temperature_norm,
-                humidity_norm,
                 wind_speed_norm,
                 wind_direction_norm,
-                time_to_sunset_norm,
                 distance_fire_line_norm,
-                distance_water_norm,
-                _clip01(distance_boundary_to_water),
-                _clip01(distance_boundary_to_vip),
-                _clip01(distance_boundary_to_vegetation),
-                _clip01(distance_boundary_to_topography),
-                _clip01(distance_boundary_to_indirect),
                 fire_center_x_norm,
                 fire_center_y_norm,
                 leftmost_x_norm,
@@ -1795,6 +2194,19 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 spread_ray_hit_x_norm,
                 spread_ray_hit_y_norm,
                 max_spread_rate_norm,
+                # Binary [0, 1]: 1 when at least half of the inspected fastest
+                # fronts show likely upslope combustible growth.
+                _clip01(topography_flag),
+                # Binary [0, 1]: 1 when at least half of the inspected fastest
+                # fronts have >5 fuel-bearing cells in a radius-3 Moore window.
+                _clip01(vegetation_flag),
+                # Binary [0, 1]: 1 when at least half of the inspected fastest
+                # fronts are within 250 m of the current indirect/fire line.
+                _clip01(indirect_flag),
+                # Objective flags are mutually exclusive when any inspected
+                # front can compare urban/protection targets with water.
+                _clip01(urban_flag),
+                _clip01(water_flag),
                 boundary_left_norm,
                 boundary_right_norm,
                 boundary_bottom_norm,
@@ -1911,8 +2323,6 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         if sim_seed is None:
             sim_seed = int(self.np_random.integers(0, 1_000_000))
 
-        if self.profile_timings:
-            self._last_rss_before_reset_bytes = _process_rss_bytes()
         if self.gc_collect_on_reset:
             # Drop the prior simulation reference and force cycle collection
             # before allocating the new one. Tests whether retained sim
@@ -1920,11 +2330,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self.sim = None
             gc.collect()
 
-        reset_start = time.perf_counter() if self.profile_timings else 0.0
         self._init_simulation(int(sim_seed))
-        if self.profile_timings:
-            self._last_reset_wall_seconds = time.perf_counter() - reset_start
-            self._last_rss_after_reset_bytes = _process_rss_bytes()
         observation = self._compute_state()
         propagation_factor = self._propagation_factor()
         moe_norms = self._current_moe_norms()
@@ -1969,18 +2375,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             "scenario_path": str(self.current_scenario_path),
             "ignition_pos": self.current_ignition_pos,
         }
-        if self.profile_timings:
-            self.last_info["reset_wall_seconds"] = self._last_reset_wall_seconds
-            self.last_info["reset_free_burn_wall_seconds"] = (
-                self._last_reset_free_burn_wall_seconds
-            )
-            self.last_info["step_wall_seconds"] = 0.0
-            self.last_info["rss_before_reset_bytes"] = (
-                self._last_rss_before_reset_bytes
-            )
-            self.last_info["rss_after_reset_bytes"] = (
-                self._last_rss_after_reset_bytes
-            )
+        self.last_info.update(self.last_front_summary)
         return observation, self.last_info
 
     def step(
@@ -1991,7 +2386,6 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         if self.done:
             raise RuntimeError("step called on terminated environment.")
 
-        step_start = time.perf_counter() if self.profile_timings else 0.0
         self._apply_actions(action)
         self._advance_time_window()
         metrics = self._compute_metrics()
@@ -2005,6 +2399,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         )
         truncated = False
         observation = self._compute_state()
+        info.update(self.last_front_summary)
 
         if terminated:
             propagation_factor = float(info.get("propagation_factor", 0.0))
@@ -2030,16 +2425,32 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 "scenario_name": self.current_scenario_name,
                 "scenario_path": str(self.current_scenario_path),
                 "ignition_pos": self.current_ignition_pos,
+                "topography_flag": info.get("topography_flag"),
+                "state_fire_front_count": info.get("state_fire_front_count"),
+                "topography_front_positive_count": info.get(
+                    "topography_front_positive_count"
+                ),
+                "vegetation_flag": info.get("vegetation_flag"),
+                "vegetation_front_positive_count": info.get(
+                    "vegetation_front_positive_count"
+                ),
+                "vegetation_front_required_count": info.get(
+                    "vegetation_front_required_count"
+                ),
+                "indirect_flag": info.get("indirect_flag"),
+                "indirect_front_positive_count": info.get(
+                    "indirect_front_positive_count"
+                ),
+                "indirect_front_required_count": info.get(
+                    "indirect_front_required_count"
+                ),
+                "urban_flag": info.get("urban_flag"),
+                "water_flag": info.get("water_flag"),
+                "urban_front_count": info.get("urban_front_count"),
+                "water_front_count": info.get("water_front_count"),
+                "objective_front_count": info.get("objective_front_count"),
             }
 
-        if self.profile_timings:
-            info["step_wall_seconds"] = time.perf_counter() - step_start
-            info["reset_wall_seconds"] = self._last_reset_wall_seconds
-            info["reset_free_burn_wall_seconds"] = (
-                self._last_reset_free_burn_wall_seconds
-            )
-            info["rss_before_reset_bytes"] = self._last_rss_before_reset_bytes
-            info["rss_after_reset_bytes"] = self._last_rss_after_reset_bytes
         self.last_info = info
         return observation, reward, terminated, truncated, info
 
@@ -2053,7 +2464,6 @@ class TrainingLogger(BaseCallback):
         decision_interval_minutes: int = DEFAULT_DECISION_INTERVAL_MINUTES,
         progress_file_tag: str = "run",
         output_dir: Path = SCENARIOS_DIR / "outputs",
-        profile_timings: bool = False,
     ):
         super().__init__()
         self.training_step_records: list[dict[str, Any]] = []
@@ -2064,116 +2474,6 @@ class TrainingLogger(BaseCallback):
         self.progress_file_tag = progress_file_tag
         self.output_dir = Path(output_dir)
         self._global_scenario_ts_counts: dict[str, int] = {}
-        self.profile_timings = bool(profile_timings)
-        # Rolling per-scenario timing accumulators reset each rollout.
-        self._timing_step: dict[str, list[float]] = {}
-        self._timing_reset_totals: dict[str, list[float]] = {}
-        self._timing_reset_free_burn: dict[str, list[float]] = {}
-        self._seen_reset_keys: set[tuple[int, str, int | None]] = set()
-        # Latest observed RSS per worker (env_idx -> bytes); persists
-        # across rollouts so we can detect monotonic growth.
-        self._worker_latest_rss: dict[int, int] = {}
-        # Per-rollout reset RSS samples per scenario (bytes after reset).
-        self._rss_after_resets: dict[str, list[int]] = {}
-        self._worker_scenario: dict[int, str] = {}
-        self._rollout_index: int = 0
-
-    def _reset_timing_accumulators(self) -> None:
-        self._timing_step = {}
-        self._timing_reset_totals = {}
-        self._timing_reset_free_burn = {}
-        self._seen_reset_keys = set()
-        self._rss_after_resets = {}
-
-    def _print_timing_summary(self) -> None:
-        scenarios = sorted(
-            set(self._timing_step)
-            | set(self._timing_reset_totals)
-            | set(self._timing_reset_free_burn)
-            | set(self._rss_after_resets)
-        )
-        if not scenarios:
-            return
-        rollout_idx = self._rollout_index
-        print(f"[profile-timings] rollout {rollout_idx} summary:")
-        header = (
-            f"  {'scenario':<24} "
-            f"{'step_n':>7} {'step_mean':>10} {'step_p95':>9} "
-            f"{'reset_n':>8} {'reset_mean':>11} {'free_burn_mean':>15} "
-            f"{'rss_mean_MB':>12} {'rss_max_MB':>11} {'wkr_max_MB':>11}"
-        )
-        print(header)
-        # Latest RSS per worker grouped by scenario.
-        worker_rss_by_scenario: dict[str, list[int]] = {}
-        for env_idx, rss in self._worker_latest_rss.items():
-            scen = self._worker_scenario.get(env_idx, "unknown")
-            worker_rss_by_scenario.setdefault(scen, []).append(rss)
-        for scenario in scenarios:
-            steps = np.asarray(self._timing_step.get(scenario, []), dtype=float)
-            resets = np.asarray(self._timing_reset_totals.get(scenario, []), dtype=float)
-            frees = np.asarray(
-                self._timing_reset_free_burn.get(scenario, []), dtype=float
-            )
-            rss_samples = np.asarray(
-                self._rss_after_resets.get(scenario, []), dtype=float
-            )
-            worker_rss = np.asarray(
-                worker_rss_by_scenario.get(scenario, []), dtype=float
-            )
-            step_mean = float(steps.mean()) if steps.size else float("nan")
-            step_p95 = float(np.quantile(steps, 0.95)) if steps.size else float("nan")
-            reset_mean = float(resets.mean()) if resets.size else float("nan")
-            free_mean = float(frees.mean()) if frees.size else float("nan")
-            rss_mean_mb = (
-                float(rss_samples.mean()) / (1024 * 1024)
-                if rss_samples.size
-                else float("nan")
-            )
-            rss_max_mb = (
-                float(rss_samples.max()) / (1024 * 1024)
-                if rss_samples.size
-                else float("nan")
-            )
-            worker_max_mb = (
-                float(worker_rss.max()) / (1024 * 1024)
-                if worker_rss.size
-                else float("nan")
-            )
-            print(
-                f"  {scenario:<24} "
-                f"{steps.size:>7d} {step_mean:>10.4f} {step_p95:>9.4f} "
-                f"{resets.size:>8d} {reset_mean:>11.4f} {free_mean:>15.4f} "
-                f"{rss_mean_mb:>12.1f} {rss_max_mb:>11.1f} {worker_max_mb:>11.1f}"
-            )
-
-    def _record_timings(self, env_idx: int, info: dict[str, Any]) -> None:
-        scenario = info.get("scenario_name") or info.get("scenario") or "unknown"
-        self._worker_scenario[env_idx] = scenario
-        step_wall = info.get("step_wall_seconds")
-        if step_wall is not None and step_wall > 0.0:
-            self._timing_step.setdefault(scenario, []).append(float(step_wall))
-        rss_after = info.get("rss_after_reset_bytes")
-        if rss_after is not None and rss_after > 0:
-            self._worker_latest_rss[env_idx] = int(rss_after)
-        reset_total = info.get("reset_wall_seconds")
-        if reset_total is not None:
-            # Deduplicate: each reset is reported on every step of the episode;
-            # key on (env_idx, scenario_name, sim_seed) so we count it once.
-            key = (env_idx, scenario, info.get("sim_seed"))
-            if key not in self._seen_reset_keys:
-                self._seen_reset_keys.add(key)
-                self._timing_reset_totals.setdefault(scenario, []).append(
-                    float(reset_total)
-                )
-                free_burn = info.get("reset_free_burn_wall_seconds")
-                if free_burn is not None:
-                    self._timing_reset_free_burn.setdefault(scenario, []).append(
-                        float(free_burn)
-                    )
-                if rss_after is not None and rss_after > 0:
-                    self._rss_after_resets.setdefault(scenario, []).append(
-                        int(rss_after)
-                    )
 
     def _on_rollout_end(self) -> None:
         if self._global_scenario_ts_counts:
@@ -2181,10 +2481,6 @@ class TrainingLogger(BaseCallback):
                 "set_global_scenario_counts",
                 self._global_scenario_ts_counts,
             )
-        if self.profile_timings:
-            self._rollout_index += 1
-            self._print_timing_summary()
-            self._reset_timing_accumulators()
 
     def _on_step(self) -> bool:
         infos = self.locals["infos"]
@@ -2222,6 +2518,34 @@ class TrainingLogger(BaseCallback):
                 "propagation_factor": info.get("propagation_factor"),
                 "propagation_penalty": info.get("propagation_penalty"),
                 "last_interval": 1 if "episode_summary" in info else 0,
+                "topography_flag": info.get("topography_flag"),
+                "state_fire_fronts": info.get("state_fire_fronts"),
+                "state_fire_front_count": info.get("state_fire_front_count"),
+                "topography_front_positive_count": info.get(
+                    "topography_front_positive_count"
+                ),
+                "topography_front_required_count": info.get(
+                    "topography_front_required_count"
+                ),
+                "vegetation_flag": info.get("vegetation_flag"),
+                "vegetation_front_positive_count": info.get(
+                    "vegetation_front_positive_count"
+                ),
+                "vegetation_front_required_count": info.get(
+                    "vegetation_front_required_count"
+                ),
+                "indirect_flag": info.get("indirect_flag"),
+                "indirect_front_positive_count": info.get(
+                    "indirect_front_positive_count"
+                ),
+                "indirect_front_required_count": info.get(
+                    "indirect_front_required_count"
+                ),
+                "urban_flag": info.get("urban_flag"),
+                "water_flag": info.get("water_flag"),
+                "urban_front_count": info.get("urban_front_count"),
+                "water_front_count": info.get("water_front_count"),
+                "objective_front_count": info.get("objective_front_count"),
                 "delta_moe": info.get("delta_moe"),
             }
             for idx, combo in enumerate(action_labels[: self.controlled_agent_count]):
@@ -2233,13 +2557,6 @@ class TrainingLogger(BaseCallback):
             record.update(
                 {f"{key}_cumulative_delta": value for key, value in cumulative_dict.items()}
             )
-            if self.profile_timings:
-                record["step_wall_seconds"] = info.get("step_wall_seconds")
-                record["reset_wall_seconds"] = info.get("reset_wall_seconds")
-                record["reset_free_burn_wall_seconds"] = info.get(
-                    "reset_free_burn_wall_seconds"
-                )
-                self._record_timings(env_idx, info)
             self.training_step_records.append(record)
 
             if "episode_summary" in info:
@@ -2257,6 +2574,37 @@ class TrainingLogger(BaseCallback):
                 summary_record["scenario"] = info.get("scenario")
                 summary_record["scenario_name"] = info.get("scenario_name")
                 summary_record["scenario_path"] = info.get("scenario_path")
+                summary_record["topography_flag"] = info.get("topography_flag")
+                summary_record["state_fire_front_count"] = info.get(
+                    "state_fire_front_count"
+                )
+                summary_record["topography_front_positive_count"] = info.get(
+                    "topography_front_positive_count"
+                )
+                summary_record["topography_front_required_count"] = info.get(
+                    "topography_front_required_count"
+                )
+                summary_record["vegetation_flag"] = info.get("vegetation_flag")
+                summary_record["vegetation_front_positive_count"] = info.get(
+                    "vegetation_front_positive_count"
+                )
+                summary_record["vegetation_front_required_count"] = info.get(
+                    "vegetation_front_required_count"
+                )
+                summary_record["indirect_flag"] = info.get("indirect_flag")
+                summary_record["indirect_front_positive_count"] = info.get(
+                    "indirect_front_positive_count"
+                )
+                summary_record["indirect_front_required_count"] = info.get(
+                    "indirect_front_required_count"
+                )
+                summary_record["urban_flag"] = info.get("urban_flag")
+                summary_record["water_flag"] = info.get("water_flag")
+                summary_record["urban_front_count"] = info.get("urban_front_count")
+                summary_record["water_front_count"] = info.get("water_front_count")
+                summary_record["objective_front_count"] = info.get(
+                    "objective_front_count"
+                )
                 self.episode_summaries.append(summary_record)
                 if (
                     self.completed_episodes % LOG_INTERVAL_SUMMARY_EPISODES
@@ -2336,6 +2684,16 @@ def main() -> None:
         type=int,
         default=DEFAULT_DECISION_INTERVAL_MINUTES,
         help="Simulation minutes between agent decisions (default: 10).",
+    )
+    parser.add_argument(
+        "--state-fire-fronts",
+        type=int,
+        default=DEFAULT_STATE_FIRE_FRONTS,
+        help=(
+            "Maximum number of fastest burning cells to inspect for "
+            "front-derived state features such as topography_flag, "
+            "vegetation_flag, indirect_flag, urban_flag, and water_flag."
+        ),
     )
     parser.add_argument(
         "--fire-detection-delay-minutes",
@@ -2463,15 +2821,6 @@ def main() -> None:
         type=int,
         default=1,
         help="Number of parallel wildfire environments to run (>=1).",
-    )
-    parser.add_argument(
-        "--profile-timings",
-        action="store_true",
-        help=(
-            "Measure per-step and per-reset wall time and RSS in each env, "
-            "log them in the step CSV, and print a per-scenario summary at "
-            "the end of every PPO rollout."
-        ),
     )
     parser.add_argument(
         "--gc-collect-on-reset",
@@ -2606,6 +2955,8 @@ def main() -> None:
         raise ValueError("--num-envs must be >= 1")
     if args.decision_interval_minutes <= 0:
         raise ValueError("--decision-interval-minutes must be > 0")
+    if args.state_fire_fronts <= 0:
+        raise ValueError("--state-fire-fronts must be > 0")
     if args.n_epochs < 1:
         raise ValueError("--n-epochs must be >= 1")
     if args.learning_rate <= 0.0:
@@ -2666,9 +3017,9 @@ def main() -> None:
             aircraft_source_scenario_path=aircraft_source_scenario_path,
             switch_ignition_mode=switch_ignition_mode,
             ts_budget_per_scenario=ts_budget_per_scenario,
-            profile_timings=args.profile_timings,
             gc_collect_on_reset=args.gc_collect_on_reset,
             include_scenario_features=use_switch_scenario,
+            state_fire_fronts=args.state_fire_fronts,
         )
     else:
         train_env = _build_vector_env(
@@ -2682,8 +3033,8 @@ def main() -> None:
             switch_ignition_mode,
             vec_start_method,
             ts_budget_per_scenario=ts_budget_per_scenario,
-            profile_timings=args.profile_timings,
             gc_collect_on_reset=args.gc_collect_on_reset,
+            state_fire_fronts=args.state_fire_fronts,
         )
     max_steps_allowed = max(1, total_timesteps // args.num_envs)
     rollout_steps = int(min(ROLLOUT_STEPS_PER_ENV, max_steps_allowed))
@@ -2695,6 +3046,10 @@ def main() -> None:
         f"num_envs={args.num_envs}, n_steps={rollout_steps}, "
         f"effective_batch={effective_batch}, minibatches={dynamic_minibatches}, "
         f"batch_size={batch_size}"
+    )
+    print(
+        "State fire fronts inspected for front-derived flags "
+        f"(topography/vegetation/indirect/urban/water): {args.state_fire_fronts}"
     )
     if args.fire_detection_delay_minutes is None:
         if use_switch_scenario:
@@ -2723,8 +3078,6 @@ def main() -> None:
             f"Decision start delay override: {args.fire_detection_delay_minutes} minutes"
         )
     print(f"Allowed tactic combinations: {len(TACTIC_COMBINATIONS)}")
-    if args.profile_timings:
-        print("Profiling: per-step/reset wall time and RSS enabled.")
     if args.gc_collect_on_reset:
         print("Diagnostic: gc.collect() and prior-sim drop at reset start enabled.")
     if args.num_envs > 1:
@@ -2739,7 +3092,6 @@ def main() -> None:
         decision_interval_minutes=args.decision_interval_minutes,
         progress_file_tag=progress_file_tag,
         output_dir=output_dir,
-        profile_timings=args.profile_timings,
     )
     device = args.device
     if device != "auto":

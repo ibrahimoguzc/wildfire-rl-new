@@ -9,10 +9,10 @@
 
 from pathlib import Path
 
-import pkg_resources
+import sosid
 
 # https://stackoverflow.com/questions/1270951/how-to-refer-to-relative-paths-of-resources-when-working-with-a-code-repository
 
-INSTALL_PATH = Path(pkg_resources.resource_filename("sosid", ""))
+INSTALL_PATH = Path(sosid.__file__).resolve().parent
 ICONS_PATH = INSTALL_PATH / "static" / "icons"
 TEMPLATES_PATH = INSTALL_PATH / "gui" / "templates"

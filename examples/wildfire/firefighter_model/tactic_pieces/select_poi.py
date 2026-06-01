@@ -74,6 +74,35 @@ class SelectPOITask(ABC, Task):
             agent.tasks.set_active(agent.tactic.return_to_base)
 
 
+def _positions_from_agents(agents) -> np.ndarray:
+    """Return static agent positions as a two-column array."""
+    positions = [
+        np.asarray(obj.pos, dtype=float)
+        for obj in agents
+        if getattr(obj, "pos", None) is not None
+    ]
+    if not positions:
+        return np.empty((0, 2), dtype=float)
+    return np.vstack(positions)
+
+
+def _nearest_position_cost(
+    fire_positions: np.ndarray,
+    objective_positions: np.ndarray,
+    map_diagonal: float,
+) -> np.ndarray:
+    """Score firefronts by closeness to point objectives."""
+    if objective_positions.size == 0:
+        return np.zeros(len(fire_positions), dtype=float)
+
+    distances = np.linalg.norm(
+        fire_positions[:, None, :] - objective_positions[None, :, :],
+        axis=2,
+    )
+    nearest_distances = np.min(distances, axis=1)
+    return np.clip((map_diagonal - nearest_distances) / map_diagonal, 0, 1)
+
+
 class WaterSelectPOI(SelectPOITask):
     def __init__(self):
         self.task_method.__func__.__name__ = "water_select_poi"
@@ -81,7 +110,6 @@ class WaterSelectPOI(SelectPOITask):
     def task_method(self, agent):
         """Selecting a firefront (point of interest) to track and suppress."""
         fire_positions = agent.model.wildfire.fire_positions
-        burning_indices = agent.model.wildfire.burning_indices
         if not fire_positions.size:
             return TaskStatus.FAILED
 
@@ -90,12 +118,10 @@ class WaterSelectPOI(SelectPOITask):
             if obj.destination is not None:
                 untracked_pos = (fire_positions != obj.destination).any(axis=1)
                 fire_positions = fire_positions[untracked_pos]
-                burning_indices = burning_indices[untracked_pos]
 
                 # Choose any firefront if all are already taken
                 if not np.size(fire_positions):
                     fire_positions = agent.model.wildfire.fire_positions
-                    burning_indices = agent.model.wildfire.burning_indices
 
         # Computing the map diagonal to normalise the cost factors
         map_shape = np.array(agent.model.simulation.environment.dimensions)
@@ -105,27 +131,20 @@ class WaterSelectPOI(SelectPOITask):
         fire_distances = agent.distance(agent.pos, fire_positions)
         distance_cost = (map_diagonal - fire_distances) / map_diagonal
 
-        # Very important points (vip) protection cost factor
-        vip_cost = agent.exponential_cone_func(
-            pos=fire_positions,
-            vip=(
-                location.pos for location in agent.model.protection_locations
+        # Water objective cost factor. This makes the water tactic select
+        # burning cells that are threatening water resources.
+        water_cost = _nearest_position_cost(
+            fire_positions=fire_positions,
+            objective_positions=_positions_from_agents(
+                agent.model.water_sources
             ),
             map_diagonal=map_diagonal,
-        )
-
-        # Protection area cost
-
-        priority_cost = agent.generate_priority_cost(
-            burning_indices=burning_indices,
-            priority_map=agent.model.simulation.environment.terrain.features.priority_map,
         )
 
         # Fire-front selection based on total cost function
         selection_cost = (
             agent.parameters.distance_cost_weight * distance_cost
-            + agent.parameters.vip_cost_weight * vip_cost
-            + agent.parameters.priority_cost_weight * priority_cost
+            + agent.parameters.vip_cost_weight * water_cost
         )
         min_idx = np.argmax(selection_cost)
         agent.set_destination(fire_positions[min_idx, :], DestinationType.FIRE)
@@ -160,11 +179,12 @@ class VIPSelectPOI(SelectPOITask):
         fire_distances = agent.distance(agent.pos, fire_positions)
         distance_cost = (map_diagonal - fire_distances) / map_diagonal
 
-        # Very important points (vip) protection cost factor
-        vip_cost = agent.exponential_cone_func(
-            pos=fire_positions,
-            vip=(
-                location.pos for location in agent.model.protection_locations
+        # Urban objective cost factor. Protection locations are the point
+        # objectives used by the VIP tactic.
+        urban_cost = _nearest_position_cost(
+            fire_positions=fire_positions,
+            objective_positions=_positions_from_agents(
+                agent.model.protection_locations
             ),
             map_diagonal=map_diagonal,
         )
@@ -172,7 +192,7 @@ class VIPSelectPOI(SelectPOITask):
         # Fire-front selection based on total cost function
         selection_cost = (
             agent.parameters.distance_cost_weight * distance_cost
-            + agent.parameters.vip_cost_weight * vip_cost
+            + agent.parameters.vip_cost_weight * urban_cost
         )
         min_idx = np.argmax(selection_cost)
         agent.set_destination(fire_positions[min_idx, :], DestinationType.FIRE)

@@ -1,9 +1,9 @@
 {
     "name": "Salamis",
     "time_step": 1.0,
-    "enable_adaptive_time_step": true,
+    "enable_adaptive_time_step": false,
     "mission_start": "2023-07-17T15:39:00",
-    "max_runtime": 43200,
+    "max_runtime": 86400,
     "run_headless": true,
     "output_sampling_time": 300,
     "map_in_map": true,
@@ -184,60 +184,61 @@
     "urban_locations": [
         {
             "gps_coords": [
-                37.92137,
-                23.45427
+                37.90603092779706,
+                23.412440931476382
             ],
             "radius": [
-                1100,
-                500
-            ]
+                536.69,
+                276.28
+            ],
+            "angle": 5.93586
         },
         {
             "gps_coords": [
-                37.915066,
-                23.48511
+                37.938490274657696,
+                23.483601223614855
             ],
             "radius": [
-                400,
-                1000
+                993.27,
+                590.28
             ],
-            "angle": 45
+            "angle": 5.198342
         },
         {
             "gps_coords": [
-                37.88381,
-                23.46251
+                37.89360164422624,
+                23.412781683074808
             ],
             "radius": [
-                400,
-                250
+                106.6,
+                57.61
             ],
-            "angle": 30
+            "angle": 0.003256
         },
         {
             "gps_coords": [
-                37.87954,
-                23.44628
+                37.94938187846455,
+                23.495868281158277
             ],
             "radius": [
-                300,
-                250
+                655.77,
+                183.87
             ],
-            "angle": 70
+            "angle": 0.118405
         },
         {
             "gps_coords": [
-                37.89147,
-                23.47787
+                37.908237356557706,
+                23.417438621586665
             ],
             "radius": [
-                400,
-                200
+                405.12,
+                248.66
             ],
-            "angle": 0
+            "angle": 4.839842
         }
     ],
-    "response_time": 7200,
+    "response_time": 5400,
     "takeoff_interval": 300,
     "turnaround_time": 100,
     "suppression_altitude": 50,
@@ -245,21 +246,48 @@
     "enable_nighttime_operations": true,
     "agents": [
         {
-            "file_name": "Config_P-Med_R-Med_S-Med.json",
+            "file_name": "example_seaplane_1.json",
             "agents_per_base": [
-                2,
-                3
+                1,
+                0
             ],
+
             "suppression_tactic": {
                 "main": {
-                    "select_poi": "water"
-                },
-                "alternative": {
-                    "threshold": 100,
-                    "change_condition": "residential",
-                    "alternative_tactic": {
-                        "select_poi": "water"
-                    }
+                    "select_poi": "water",
+                    "track_poi": "follow_firefront",
+                    "suppress": "direct"
+                }
+            }
+        }
+        ,
+        {
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                1,
+                0
+            ],
+
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "water",
+                    "track_poi": "follow_firefront",
+                    "suppress": "direct"
+                }
+            }
+        }
+        ,{
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                0,
+                1
+            ],
+
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "vip",
+                    "track_poi": "follow_firefront",
+                    "suppress": "indirect"
                 }
             }
         }

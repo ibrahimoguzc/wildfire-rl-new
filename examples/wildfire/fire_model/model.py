@@ -244,13 +244,16 @@ class CPUFireModel(CellularAutomataModel):
         self.__cache__.clear()
 
         # Halt the simulation if fire is fully extinguished
+        scenario_label = sim.parameters.terrain_inputs.file_namespace.split(
+            "_", 1
+        )[0]
         if not (self.fire_positions).size:
-            print("\nMission Completed")
+            print(f"\nMission Completed ({scenario_label})")
             sim.stop()
 
         # Halt the simulation if fire reaches the endge of the map
         if not self.fire_in_bounds:
-            print("\nMission Failed")
+            print(f"\nMission Failed ({scenario_label})")
             sim.stop()
 
     OUTPUT_SAMPLE_TIMER = 0
