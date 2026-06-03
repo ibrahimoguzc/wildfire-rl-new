@@ -231,6 +231,7 @@ class CPUFireModel(CellularAutomataModel):
                 cell_size=sim.parameters.cell_size,
                 correction_coefficient=sim.parameters.correction_coefficient,
                 enable_adaptive_time_step=sim.parameters.enable_adaptive_time_step,
+                step_size_factor=sim.parameters.adaptive_step_size_factor,
             )
             self.internal_model_time += self.model_time_step
             self.model_time_step = timedelta(seconds=ideal_time_step_min * 60)

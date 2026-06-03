@@ -573,6 +573,9 @@ class WildfireParameters(SimulationParameters):
 
     # Fire-Model Variables:
     enable_adaptive_time_step: bool = True
+    # Controls the adaptive internal fire-model timestep:
+    # ideal_dt = adaptive_step_size_factor * cell_size / max_spread_rate.
+    adaptive_step_size_factor: PositiveFloat = 0.125
     correction_coefficient: float
     # IMP: Ignition center is defined in fire map coordinate system (relative
     # to origin fire map, not operational map)

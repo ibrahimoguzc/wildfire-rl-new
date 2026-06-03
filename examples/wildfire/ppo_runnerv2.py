@@ -5,9 +5,10 @@ bismillahirrahmanirrahim, elhamdulillah, esselatu vesselamu ala rasulillah
 Train a PPO agent to select hourly suppression tactics on the Palisades scenario.
 
 The environment exposes the same set of state variables logged by
-``hourly_metrics.py`` and expects a discrete tactic selection for the first two
-aircraft. Each environment step advances the simulation by one simulated hour;
-the reward is the mission-effectiveness score (MoE) accumulated over that hour.
+``hourly_metrics.py`` and expects discrete tactic selections for controlled
+aircraft. Each environment step advances the simulation by one decision
+interval; the reward is the mission-effectiveness score (MoE) accumulated over
+that interval.
 
 Requirements:
     pip install gymnasium stable-baselines3 torch
@@ -107,8 +108,15 @@ MOE_WEIGHT = 0.25
 # wildfire spread is 5-15 m/min; extreme crown-fire conditions reach
 # 30-50 m/min. Values above this cap clip to 1.0 in the state vector.
 MAX_SPREAD_RATE_NORM_MPM = 30.0
-CONTROLLED_AGENT_COUNT = 5
+CONTROLLED_AGENT_COUNT = 6
 AGENT_FEATURE_COUNT = 2
+AIRCRAFT_GROUP_SIZE = 2
+TACTIC_DISTRIBUTION_INDIVIDUAL = "individual"
+TACTIC_DISTRIBUTION_GROUP = "group"
+SUPPORTED_TACTIC_DISTRIBUTIONS: tuple[str, ...] = (
+    TACTIC_DISTRIBUTION_INDIVIDUAL,
+    TACTIC_DISTRIBUTION_GROUP,
+)
 DEFAULT_DECISION_INTERVAL_MINUTES = 10
 # Max number of fastest active fire cells inspected for front-derived state.
 # This is an upper bound: if fewer cells are burning, we use what exists.
@@ -180,6 +188,11 @@ def _make_env_factory(
     gc_collect_on_reset: bool = False,
     include_scenario_features: bool | None = None,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
+    state_space: str = "large",
+    tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
+    aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+    enable_adaptive_time_step: bool | None = None,
+    adaptive_step_size_factor: float | None = None,
 ):
     def _init() -> WildfireHourlyEnv:
         env = WildfireHourlyEnv(
@@ -194,6 +207,11 @@ def _make_env_factory(
             gc_collect_on_reset=gc_collect_on_reset,
             include_scenario_features=include_scenario_features,
             state_fire_fronts=state_fire_fronts,
+            state_space=state_space,
+            tactic_distribution=tactic_distribution,
+            aircraft_group_size=aircraft_group_size,
+            enable_adaptive_time_step=enable_adaptive_time_step,
+            adaptive_step_size_factor=adaptive_step_size_factor,
         )
         env.reset(seed=seed)
         return env
@@ -214,6 +232,11 @@ def _build_vector_env(
     ts_budget_per_scenario: float | None = None,
     gc_collect_on_reset: bool = False,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
+    state_space: str = "large",
+    tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
+    aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+    enable_adaptive_time_step: bool | None = None,
+    adaptive_step_size_factor: float | None = None,
 ) -> DummyVecEnv | SubprocVecEnv:
     num_envs = max(1, num_envs)
     base_seed = int(np.random.randint(0, 1_000_000))
@@ -234,6 +257,11 @@ def _build_vector_env(
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=True,
                 state_fire_fronts=state_fire_fronts,
+                state_space=state_space,
+                tactic_distribution=tactic_distribution,
+                aircraft_group_size=aircraft_group_size,
+                enable_adaptive_time_step=enable_adaptive_time_step,
+                adaptive_step_size_factor=adaptive_step_size_factor,
             )
             for idx in range(num_envs)
         ]
@@ -252,6 +280,11 @@ def _build_vector_env(
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=switch_scenario,
                 state_fire_fronts=state_fire_fronts,
+                state_space=state_space,
+                tactic_distribution=tactic_distribution,
+                aircraft_group_size=aircraft_group_size,
+                enable_adaptive_time_step=enable_adaptive_time_step,
+                adaptive_step_size_factor=adaptive_step_size_factor,
             )
             for idx in range(num_envs)
         ]
@@ -271,7 +304,16 @@ SCENARIO_FEATURES: tuple[str, ...] = (
     "scenario_is_salamis",
 )
 
-STATE_FEATURES = [
+STATE_SPACE_LARGE = "large"
+STATE_SPACE_SMALL = "small"
+STATE_SPACE_MIXED = "mixed"
+SUPPORTED_STATE_SPACES: tuple[str, ...] = (
+    STATE_SPACE_LARGE,
+    STATE_SPACE_SMALL,
+    STATE_SPACE_MIXED,
+)
+
+LARGE_STATE_FEATURES = [
     "time_since_detection_min",
     "wind_speed_ms",
     "wind_direction_deg",
@@ -301,6 +343,57 @@ STATE_FEATURES = [
     "distance_top_boundary",
 ]
 
+MIXED_STATE_FEATURES: tuple[str, ...] = (
+    "distance_left_boundary",
+    "distance_right_boundary",
+    "distance_bottom_boundary",
+    "distance_top_boundary",
+    "distance_to_fire_line_m",
+    "spread_angle_deg",
+    "spread_ray_hit_x",
+    "spread_ray_hit_y",
+)
+
+AGGREGATE_FRONT_FLAG_FEATURES: tuple[str, ...] = (
+    "topography_flag",
+    "vegetation_flag",
+    "indirect_flag",
+    "urban_flag",
+    "water_flag",
+)
+
+
+def _normalize_state_space(state_space: str) -> str:
+    normalized = str(state_space).strip().lower()
+    if normalized not in SUPPORTED_STATE_SPACES:
+        supported = ", ".join(SUPPORTED_STATE_SPACES)
+        raise ValueError(
+            f"Unsupported state space {state_space!r}. Supported choices: {supported}."
+        )
+    return normalized
+
+
+def _per_front_flag_feature_names(state_fire_fronts: int) -> tuple[str, ...]:
+    names: list[str] = []
+    for front_idx in range(state_fire_fronts):
+        for flag_name in AGGREGATE_FRONT_FLAG_FEATURES:
+            names.append(f"{flag_name}_{front_idx}")
+    return tuple(names)
+
+
+def _state_core_feature_names(
+    state_space: str,
+    state_fire_fronts: int,
+) -> tuple[str, ...]:
+    normalized = _normalize_state_space(state_space)
+    if normalized == STATE_SPACE_LARGE:
+        return tuple(LARGE_STATE_FEATURES)
+    if normalized == STATE_SPACE_SMALL:
+        return _per_front_flag_feature_names(state_fire_fronts)
+    if normalized == STATE_SPACE_MIXED:
+        return _per_front_flag_feature_names(state_fire_fronts) + MIXED_STATE_FEATURES
+    raise RuntimeError(f"Unhandled state space: {state_space!r}")
+
 
 def _agent_feature_names(controlled_agent_count: int) -> tuple[str, ...]:
     names: list[str] = []
@@ -317,11 +410,19 @@ def _agent_feature_names(controlled_agent_count: int) -> tuple[str, ...]:
 def _state_feature_names(
     include_scenario_flag: bool,
     controlled_agent_count: int,
+    state_space: str = STATE_SPACE_LARGE,
+    state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
 ) -> tuple[str, ...]:
+    if _normalize_state_space(state_space) in {
+        STATE_SPACE_SMALL,
+        STATE_SPACE_MIXED,
+    }:
+        return _state_core_feature_names(state_space, state_fire_fronts)
+
     feature_names: list[str] = []
     if include_scenario_flag:
         feature_names.extend(SCENARIO_FEATURES)
-    feature_names.extend(STATE_FEATURES)
+    feature_names.extend(_state_core_feature_names(state_space, state_fire_fronts))
     feature_names.extend(_agent_feature_names(controlled_agent_count))
     return tuple(feature_names)
 
@@ -373,6 +474,58 @@ TACTIC_COMBINATIONS = tuple(
     for combo in TACTIC_COMBINATIONS
     if _is_allowed_tactic_combination(*combo)
 )
+
+
+def _normalize_tactic_distribution(tactic_distribution: str) -> str:
+    normalized = str(tactic_distribution).strip().lower()
+    if normalized not in SUPPORTED_TACTIC_DISTRIBUTIONS:
+        supported = ", ".join(SUPPORTED_TACTIC_DISTRIBUTIONS)
+        raise ValueError(
+            f"Unsupported tactic distribution {tactic_distribution!r}. "
+            f"Supported choices: {supported}."
+        )
+    return normalized
+
+
+def _action_decision_count(
+    tactic_distribution: str,
+    controlled_agent_count: int,
+    aircraft_group_size: int,
+) -> int:
+    if controlled_agent_count <= 0:
+        raise ValueError("controlled_agent_count must be > 0")
+    if aircraft_group_size <= 0:
+        raise ValueError("aircraft_group_size must be > 0")
+    if _normalize_tactic_distribution(tactic_distribution) == (
+        TACTIC_DISTRIBUTION_INDIVIDUAL
+    ):
+        return controlled_agent_count
+    return int(math.ceil(controlled_agent_count / aircraft_group_size))
+
+
+def _tactic_combinations_from_action(
+    action: Sequence[int],
+) -> list[tuple[SelectPOIType, TrackPOIType, SuppressType]]:
+    action_indices = np.asarray(action, dtype=np.int64).reshape(-1)
+    return [TACTIC_COMBINATIONS[int(idx)] for idx in action_indices]
+
+
+def _expand_tactic_combinations(
+    action: Sequence[int],
+    tactic_distribution: str,
+    controlled_agent_count: int,
+    aircraft_group_size: int,
+) -> list[tuple[SelectPOIType, TrackPOIType, SuppressType]]:
+    combinations = _tactic_combinations_from_action(action)
+    if _normalize_tactic_distribution(tactic_distribution) == (
+        TACTIC_DISTRIBUTION_INDIVIDUAL
+    ):
+        return combinations[:controlled_agent_count]
+
+    expanded: list[tuple[SelectPOIType, TrackPOIType, SuppressType]] = []
+    for combination in combinations:
+        expanded.extend([combination] * aircraft_group_size)
+    return expanded[:controlled_agent_count]
 
 
 def _resolve_scenario(path_or_name: str) -> Path:
@@ -609,10 +762,31 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         gc_collect_on_reset: bool = False,
         include_scenario_features: bool | None = None,
         state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
+        state_space: str = STATE_SPACE_LARGE,
+        tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
+        aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+        enable_adaptive_time_step: bool | None = None,
+        adaptive_step_size_factor: float | None = None,
     ):
         super().__init__()
         self.scenario_path = scenario_path
         self.gc_collect_on_reset = bool(gc_collect_on_reset)
+        self.state_space = _normalize_state_space(state_space)
+        if (
+            adaptive_step_size_factor is not None
+            and adaptive_step_size_factor <= 0.0
+        ):
+            raise ValueError("adaptive_step_size_factor must be > 0")
+        self.adaptive_step_size_factor = (
+            None
+            if adaptive_step_size_factor is None
+            else float(adaptive_step_size_factor)
+        )
+        self.enable_adaptive_time_step_override = (
+            None
+            if enable_adaptive_time_step is None
+            else bool(enable_adaptive_time_step)
+        )
         self.switch_scenario = switch_scenario
         self.switch_scenario_paths = (
             tuple(switch_scenario_paths) if switch_scenario_paths else tuple()
@@ -690,6 +864,17 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
         self.controlled_agent_count = CONTROLLED_AGENT_COUNT
         self.agent_feature_count = AGENT_FEATURE_COUNT
+        self.tactic_distribution = _normalize_tactic_distribution(
+            tactic_distribution
+        )
+        self.aircraft_group_size = int(aircraft_group_size)
+        if self.aircraft_group_size <= 0:
+            raise ValueError("aircraft_group_size must be > 0")
+        self.action_decision_count = _action_decision_count(
+            self.tactic_distribution,
+            self.controlled_agent_count,
+            self.aircraft_group_size,
+        )
         self.include_scenario_flag = (
             bool(self.switch_scenario)
             if include_scenario_features is None
@@ -698,6 +883,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.state_feature_names = _state_feature_names(
             self.include_scenario_flag,
             self.controlled_agent_count,
+            self.state_space,
+            self.state_fire_fronts,
         )
         obs_dim = len(self.state_feature_names)
         self.observation_space = spaces.Box(
@@ -707,7 +894,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             dtype=np.float32,
         )
         self.action_space = spaces.MultiDiscrete(
-            [len(TACTIC_COMBINATIONS)] * self.controlled_agent_count
+            [len(TACTIC_COMBINATIONS)] * self.action_decision_count
         )
 
         self.np_random, _ = gym.utils.seeding.np_random()
@@ -1163,12 +1350,21 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             selected_path,
             selected_parameters,
         )
+        parameter_updates: dict[str, Any] = {
+            "protection_locations": merged_protection,
+            "ignition_centers": ignition_centers,
+        }
+        if self.enable_adaptive_time_step_override is not None:
+            parameter_updates["enable_adaptive_time_step"] = (
+                self.enable_adaptive_time_step_override
+            )
+        if self.adaptive_step_size_factor is not None:
+            parameter_updates["adaptive_step_size_factor"] = (
+                self.adaptive_step_size_factor
+            )
         selected_parameters = selected_parameters.model_copy(
             deep=True,
-            update={
-                "protection_locations": merged_protection,
-                "ignition_centers": ignition_centers,
-            },
+            update=parameter_updates,
         )
         return selected_path, selected_parameters
 
@@ -1678,10 +1874,21 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
         valid_indices = burning[finite]
         valid_rates = spread_rates[finite]
-        order = np.argsort(valid_rates)[::-1]
         # `state_fire_fronts` is a maximum. Early or small fires may have fewer
         # usable burning cells, so we analyze whatever valid fronts exist.
-        selected = order[: min(self.state_fire_fronts, order.size)]
+        front_limit = min(self.state_fire_fronts, valid_rates.size)
+        if front_limit < valid_rates.size:
+            # Avoid sorting every burning cell when only the top N fronts are
+            # needed. Include every cell tied at the threshold so exact-rate
+            # ties are deterministic; this only expands to a full sort when
+            # many cells truly share the same spread rate.
+            threshold = np.partition(valid_rates, -front_limit)[-front_limit]
+            candidates = np.flatnonzero(valid_rates >= threshold)
+            selected = candidates[np.argsort(valid_rates[candidates])[::-1]][
+                :front_limit
+            ]
+        else:
+            selected = np.argsort(valid_rates)[::-1]
         diagnostics: list[FireFrontDiagnostic] = []
         prop_aspects = self.sim.wildfire.prop_aspect
         for order_idx in selected:
@@ -1853,7 +2060,12 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         action: Sequence[int],
     ) -> None:
         assert self.sim is not None
-        combinations = [TACTIC_COMBINATIONS[idx] for idx in action]
+        combinations = _expand_tactic_combinations(
+            action,
+            self.tactic_distribution,
+            self.controlled_agent_count,
+            self.aircraft_group_size,
+        )
         agents = self.sim.firefighters.firefighters[: self.controlled_agent_count]
         for agent, (select, track, suppress) in zip(
             agents, combinations[: len(agents)], strict=False
@@ -1889,6 +2101,203 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self.done = True
 
     def _compute_state(self) -> np.ndarray:
+        if self.state_space == STATE_SPACE_LARGE:
+            return self._compute_large_state()
+        if self.state_space == STATE_SPACE_SMALL:
+            return self._compute_small_state()
+        if self.state_space == STATE_SPACE_MIXED:
+            return self._compute_mixed_state()
+        raise RuntimeError(f"Unhandled state space: {self.state_space!r}")
+
+    def _clear_fire_front_summary(self) -> None:
+        self.last_front_diagnostics = []
+        self.last_front_summary = {
+            "state_fire_fronts": self.state_fire_fronts,
+            "state_fire_front_count": 0,
+            "topography_front_positive_count": 0,
+            "topography_front_required_count": 0,
+            "topography_flag": 0.0,
+            "vegetation_front_positive_count": 0,
+            "vegetation_front_required_count": 0,
+            "vegetation_flag": 0.0,
+            "indirect_front_positive_count": 0,
+            "indirect_front_required_count": 0,
+            "indirect_flag": 0.0,
+            "urban_front_count": 0,
+            "water_front_count": 0,
+            "objective_front_count": 0,
+            "urban_flag": 0.0,
+            "water_flag": 0.0,
+        }
+
+    def _per_front_flag_values(self) -> list[float]:
+        values: list[float] = []
+        diagnostics = self.last_front_diagnostics
+        for front_idx in range(self.state_fire_fronts):
+            if front_idx >= len(diagnostics):
+                values.extend([0.0] * len(AGGREGATE_FRONT_FLAG_FEATURES))
+                continue
+
+            front = diagnostics[front_idx]
+            is_urban = front.objective_vote == "urban"
+            is_water = front.objective_vote == "water"
+            values.extend(
+                [
+                    1.0 if front.has_topography_growth else 0.0,
+                    1.0 if front.has_vegetation_threat else 0.0,
+                    1.0 if front.near_indirect_line else 0.0,
+                    1.0 if is_urban else 0.0,
+                    1.0 if is_water else 0.0,
+                ]
+            )
+        return values
+
+    def _compute_small_state(self) -> np.ndarray:
+        assert self.sim is not None
+        burning_indices = self.sim.wildfire.burning_indices
+        if int(burning_indices.shape[0]):
+            self._compute_fire_front_summary(burning_indices)
+        else:
+            self._clear_fire_front_summary()
+
+        obs = np.array(self._per_front_flag_values(), dtype=np.float32)
+        obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
+        np.clip(obs, 0.0, 1.0, out=obs)
+        return obs
+
+    def _compute_mixed_state(self) -> np.ndarray:
+        assert self.sim is not None
+        burning_indices = self.sim.wildfire.burning_indices
+        burning_count = int(burning_indices.shape[0])
+        if not burning_count:
+            self._clear_fire_front_summary()
+            return np.zeros(len(self.state_feature_names), dtype=np.float32)
+
+        # Mixed keeps the per-front tactical flags from the small state, but
+        # still avoids the unrelated work from the large state.
+        self._compute_fire_front_summary(burning_indices)
+        front_values = self._per_front_flag_values()
+
+        x_min = self._coord_x_min
+        x_max = self._coord_x_max
+        y_min = self._coord_y_min
+        y_max = self._coord_y_max
+        coord_width = self._coord_width
+        coord_height = self._coord_height
+        map_diagonal = self._map_diagonal
+
+        fire_positions = np.asarray(self.sim.wildfire.fire_positions, dtype=float)
+        if fire_positions.size == 0:
+            obs = np.array(
+                front_values + ([0.0] * len(MIXED_STATE_FEATURES)),
+                dtype=np.float32,
+            )
+            obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
+            np.clip(obs, 0.0, 1.0, out=obs)
+            return obs
+
+        min_x = float(fire_positions[:, 0].min())
+        max_x = float(fire_positions[:, 0].max())
+        min_y = float(fire_positions[:, 1].min())
+        max_y = float(fire_positions[:, 1].max())
+        boundary_left = float(max(min_x - x_min, 0.0))
+        boundary_right = float(max(x_max - max_x, 0.0))
+        boundary_bottom = float(max(min_y - y_min, 0.0))
+        boundary_top = float(max(y_max - max_y, 0.0))
+
+        distance_fire_line = math.nan
+        fire_block_indices = self.sim.firefighters.fire_block_indices
+        if (
+            fire_block_indices is not None
+            and self.sim.firefighters.current_block_index > 0
+        ):
+            distance_fire_line = self._distance_to_fire_line_m(burning_indices)
+
+        spread_angle = math.nan
+        spread_ray_hit_x = math.nan
+        spread_ray_hit_y = math.nan
+        spread_rates = self.sim.wildfire.get_spread_rates(burning_indices)
+        if spread_rates.size:
+            centroid_idx = burning_indices.mean(axis=0)
+            fastest_idx = burning_indices[int(np.argmax(spread_rates))]
+            angle = math.degrees(
+                math.atan2(
+                    fastest_idx[0] - centroid_idx[0],
+                    fastest_idx[1] - centroid_idx[1],
+                )
+            )
+            spread_angle = float((angle + 360.0) % 360.0)
+
+        fire_center_x, fire_center_y = map(float, fire_positions.mean(axis=0))
+        if not math.isnan(spread_angle):
+            theta = math.radians(spread_angle)
+            dir_x = math.cos(theta)
+            dir_y = math.sin(theta)
+            eps = 1e-9
+            candidates: list[float] = []
+
+            if abs(dir_x) > eps:
+                t_left = (x_min - fire_center_x) / dir_x
+                y_left = fire_center_y + t_left * dir_y
+                if t_left >= 0.0 and y_min <= y_left <= y_max:
+                    candidates.append(t_left)
+
+                t_right = (x_max - fire_center_x) / dir_x
+                y_right = fire_center_y + t_right * dir_y
+                if t_right >= 0.0 and y_min <= y_right <= y_max:
+                    candidates.append(t_right)
+
+            if abs(dir_y) > eps:
+                t_bottom = (y_min - fire_center_y) / dir_y
+                x_bottom = fire_center_x + t_bottom * dir_x
+                if t_bottom >= 0.0 and x_min <= x_bottom <= x_max:
+                    candidates.append(t_bottom)
+
+                t_top = (y_max - fire_center_y) / dir_y
+                x_top = fire_center_x + t_top * dir_x
+                if t_top >= 0.0 and x_min <= x_top <= x_max:
+                    candidates.append(t_top)
+
+            if candidates:
+                t_hit = min(candidates)
+                spread_ray_hit_x = fire_center_x + t_hit * dir_x
+                spread_ray_hit_y = fire_center_y + t_hit * dir_y
+
+        mixed_values = [
+            _scale_to_unit(float(boundary_left), 0.0, coord_width),
+            _scale_to_unit(float(boundary_right), 0.0, coord_width),
+            _scale_to_unit(float(boundary_bottom), 0.0, coord_height),
+            _scale_to_unit(float(boundary_top), 0.0, coord_height),
+            (
+                _scale_to_unit(float(distance_fire_line), 0.0, map_diagonal)
+                if not math.isnan(distance_fire_line)
+                else 0.0
+            ),
+            (
+                _scale_to_unit(float(spread_angle), 0.0, 360.0)
+                if not math.isnan(spread_angle)
+                else 0.0
+            ),
+            (
+                _scale_to_unit(float(spread_ray_hit_x), x_min, x_max)
+                if not math.isnan(spread_ray_hit_x)
+                else 0.0
+            ),
+            (
+                _scale_to_unit(float(spread_ray_hit_y), y_min, y_max)
+                if not math.isnan(spread_ray_hit_y)
+                else 0.0
+            ),
+        ]
+        obs = np.array(
+            front_values + mixed_values,
+            dtype=np.float32,
+        )
+        obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
+        np.clip(obs, 0.0, 1.0, out=obs)
+        return obs
+
+    def _compute_large_state(self) -> np.ndarray:
         assert self.sim is not None
         atmosphere = self.sim.atmosphere
         mission_time = self.sim.timer.mission_time
@@ -1966,25 +2375,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             ):
                 distance_fire_line = self._distance_to_fire_line_m(burning_indices)
         else:
-            self.last_front_diagnostics = []
-            self.last_front_summary = {
-                "state_fire_fronts": self.state_fire_fronts,
-                "state_fire_front_count": 0,
-                "topography_front_positive_count": 0,
-                "topography_front_required_count": 0,
-                "topography_flag": 0.0,
-                "vegetation_front_positive_count": 0,
-                "vegetation_front_required_count": 0,
-                "vegetation_flag": 0.0,
-                "indirect_front_positive_count": 0,
-                "indirect_front_required_count": 0,
-                "indirect_flag": 0.0,
-                "urban_front_count": 0,
-                "water_front_count": 0,
-                "objective_front_count": 0,
-                "urban_flag": 0.0,
-                "water_flag": 0.0,
-            }
+            self._clear_fire_front_summary()
 
         x_min = self._coord_x_min
         x_max = self._coord_x_max
@@ -2301,6 +2692,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             "scenario_name": self.current_scenario_name,
             "scenario_path": str(self.current_scenario_path),
             "ignition_pos": self.current_ignition_pos,
+            "tactic_distribution": self.tactic_distribution,
+            "aircraft_group_size": self.aircraft_group_size,
+            "controlled_agent_count": self.controlled_agent_count,
+            "action_decision_count": self.action_decision_count,
         }
         self.prev_metrics = new_metrics
         self.cumulative_reward += reward
@@ -2374,6 +2769,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             "scenario_name": self.current_scenario_name,
             "scenario_path": str(self.current_scenario_path),
             "ignition_pos": self.current_ignition_pos,
+            "tactic_distribution": self.tactic_distribution,
+            "aircraft_group_size": self.aircraft_group_size,
+            "controlled_agent_count": self.controlled_agent_count,
+            "action_decision_count": self.action_decision_count,
         }
         self.last_info.update(self.last_front_summary)
         return observation, self.last_info
@@ -2425,30 +2824,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 "scenario_name": self.current_scenario_name,
                 "scenario_path": str(self.current_scenario_path),
                 "ignition_pos": self.current_ignition_pos,
-                "topography_flag": info.get("topography_flag"),
-                "state_fire_front_count": info.get("state_fire_front_count"),
-                "topography_front_positive_count": info.get(
-                    "topography_front_positive_count"
-                ),
-                "vegetation_flag": info.get("vegetation_flag"),
-                "vegetation_front_positive_count": info.get(
-                    "vegetation_front_positive_count"
-                ),
-                "vegetation_front_required_count": info.get(
-                    "vegetation_front_required_count"
-                ),
-                "indirect_flag": info.get("indirect_flag"),
-                "indirect_front_positive_count": info.get(
-                    "indirect_front_positive_count"
-                ),
-                "indirect_front_required_count": info.get(
-                    "indirect_front_required_count"
-                ),
-                "urban_flag": info.get("urban_flag"),
-                "water_flag": info.get("water_flag"),
-                "urban_front_count": info.get("urban_front_count"),
-                "water_front_count": info.get("water_front_count"),
-                "objective_front_count": info.get("objective_front_count"),
+                "tactic_distribution": self.tactic_distribution,
+                "aircraft_group_size": self.aircraft_group_size,
+                "controlled_agent_count": self.controlled_agent_count,
+                "action_decision_count": self.action_decision_count,
             }
 
         self.last_info = info
@@ -2462,14 +2841,31 @@ class TrainingLogger(BaseCallback):
     def __init__(
         self,
         decision_interval_minutes: int = DEFAULT_DECISION_INTERVAL_MINUTES,
+        tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
+        aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
         progress_file_tag: str = "run",
         output_dir: Path = SCENARIOS_DIR / "outputs",
     ):
         super().__init__()
         self.training_step_records: list[dict[str, Any]] = []
+        self.decision_step_records: list[dict[str, Any]] = []
+        # Per-env buffers let us export decision rows only after their
+        # simulation episode has completed and received a simulation index.
+        self._episode_decision_buffers: dict[int, list[dict[str, Any]]] = {}
         self.episode_summaries: list[dict[str, Any]] = []
         self.completed_episodes = 0
         self.controlled_agent_count = CONTROLLED_AGENT_COUNT
+        self.tactic_distribution = _normalize_tactic_distribution(
+            tactic_distribution
+        )
+        self.aircraft_group_size = int(aircraft_group_size)
+        if self.aircraft_group_size <= 0:
+            raise ValueError("aircraft_group_size must be > 0")
+        self.action_decision_count = _action_decision_count(
+            self.tactic_distribution,
+            self.controlled_agent_count,
+            self.aircraft_group_size,
+        )
         self.decision_interval_minutes = decision_interval_minutes
         self.progress_file_tag = progress_file_tag
         self.output_dir = Path(output_dir)
@@ -2490,9 +2886,13 @@ class TrainingLogger(BaseCallback):
             zip(infos, actions, rewards, strict=False)
         ):
             action = np.asarray(action)
-            action_labels = [
-                TACTIC_COMBINATIONS[int(idx)] for idx in action
-            ]
+            action_labels = _tactic_combinations_from_action(action)
+            agent_action_labels = _expand_tactic_combinations(
+                action,
+                self.tactic_distribution,
+                self.controlled_agent_count,
+                self.aircraft_group_size,
+            )
             metrics_dict = _ensure_metrics_dict(info.get("metrics"))
             deltas_dict = _ensure_metrics_dict(info.get("deltas"))
             cumulative_dict = _ensure_metrics_dict(info.get("cumulative_deltas"))
@@ -2503,6 +2903,18 @@ class TrainingLogger(BaseCallback):
                 "scenario": info.get("scenario"),
                 "scenario_name": info.get("scenario_name"),
                 "scenario_path": info.get("scenario_path"),
+                "tactic_distribution": info.get(
+                    "tactic_distribution", self.tactic_distribution
+                ),
+                "aircraft_group_size": info.get(
+                    "aircraft_group_size", self.aircraft_group_size
+                ),
+                "controlled_agent_count": info.get(
+                    "controlled_agent_count", self.controlled_agent_count
+                ),
+                "action_decision_count": info.get(
+                    "action_decision_count", self.action_decision_count
+                ),
                 "decision_step": info.get("decision_step"),
                 "elapsed_minutes": info.get("elapsed_minutes"),
                 "decision_interval_minutes": info.get(
@@ -2515,6 +2927,7 @@ class TrainingLogger(BaseCallback):
                 "reward_moe": info.get("reward_moe"),
                 "base_moe": info.get("base_moe"),
                 "step_reward": reward,
+                "cumulative_reward": info.get("cumulative_reward"),
                 "propagation_factor": info.get("propagation_factor"),
                 "propagation_penalty": info.get("propagation_penalty"),
                 "last_interval": 1 if "episode_summary" in info else 0,
@@ -2548,7 +2961,12 @@ class TrainingLogger(BaseCallback):
                 "objective_front_count": info.get("objective_front_count"),
                 "delta_moe": info.get("delta_moe"),
             }
-            for idx, combo in enumerate(action_labels[: self.controlled_agent_count]):
+            if self.tactic_distribution == TACTIC_DISTRIBUTION_GROUP:
+                for idx, combo in enumerate(action_labels):
+                    record[f"group_{idx}_select_poi"] = combo[0].value
+                    record[f"group_{idx}_track_poi"] = combo[1].value
+                    record[f"group_{idx}_suppress"] = combo[2].value
+            for idx, combo in enumerate(agent_action_labels):
                 record[f"agent_{idx}_select_poi"] = combo[0].value
                 record[f"agent_{idx}_track_poi"] = combo[1].value
                 record[f"agent_{idx}_suppress"] = combo[2].value
@@ -2558,10 +2976,23 @@ class TrainingLogger(BaseCallback):
                 {f"{key}_cumulative_delta": value for key, value in cumulative_dict.items()}
             )
             self.training_step_records.append(record)
+            self._episode_decision_buffers.setdefault(env_idx, []).append(
+                dict(record)
+            )
 
             if "episode_summary" in info:
                 self.completed_episodes += 1
                 summary_record = dict(info["episode_summary"])
+                episode_decisions = self._episode_decision_buffers.pop(env_idx, [])
+                for decision_record in episode_decisions:
+                    decision_record["simulation_index"] = self.completed_episodes
+                    decision_record["episode_total_decision_steps"] = (
+                        summary_record.get("total_decision_steps")
+                    )
+                    decision_record["episode_total_minutes"] = summary_record.get(
+                        "total_minutes"
+                    )
+                self.decision_step_records.extend(episode_decisions)
                 summary_record["sim_seed"] = info.get("sim_seed")
                 summary_record["propagation_factor"] = info.get("propagation_factor")
                 summary_record["delta_moe_total"] = info.get("cumulative_reward")
@@ -2574,37 +3005,6 @@ class TrainingLogger(BaseCallback):
                 summary_record["scenario"] = info.get("scenario")
                 summary_record["scenario_name"] = info.get("scenario_name")
                 summary_record["scenario_path"] = info.get("scenario_path")
-                summary_record["topography_flag"] = info.get("topography_flag")
-                summary_record["state_fire_front_count"] = info.get(
-                    "state_fire_front_count"
-                )
-                summary_record["topography_front_positive_count"] = info.get(
-                    "topography_front_positive_count"
-                )
-                summary_record["topography_front_required_count"] = info.get(
-                    "topography_front_required_count"
-                )
-                summary_record["vegetation_flag"] = info.get("vegetation_flag")
-                summary_record["vegetation_front_positive_count"] = info.get(
-                    "vegetation_front_positive_count"
-                )
-                summary_record["vegetation_front_required_count"] = info.get(
-                    "vegetation_front_required_count"
-                )
-                summary_record["indirect_flag"] = info.get("indirect_flag")
-                summary_record["indirect_front_positive_count"] = info.get(
-                    "indirect_front_positive_count"
-                )
-                summary_record["indirect_front_required_count"] = info.get(
-                    "indirect_front_required_count"
-                )
-                summary_record["urban_flag"] = info.get("urban_flag")
-                summary_record["water_flag"] = info.get("water_flag")
-                summary_record["urban_front_count"] = info.get("urban_front_count")
-                summary_record["water_front_count"] = info.get("water_front_count")
-                summary_record["objective_front_count"] = info.get(
-                    "objective_front_count"
-                )
                 self.episode_summaries.append(summary_record)
                 if (
                     self.completed_episodes % LOG_INTERVAL_SUMMARY_EPISODES
@@ -2613,6 +3013,11 @@ class TrainingLogger(BaseCallback):
                     self._export_progress(
                         self.completed_episodes,
                         export_steps=(
+                            self.completed_episodes
+                            % LOG_INTERVAL_STEPS_EPISODES
+                            == 0
+                        ),
+                        export_decision_steps=(
                             self.completed_episodes
                             % LOG_INTERVAL_STEPS_EPISODES
                             == 0
@@ -2632,6 +3037,14 @@ class TrainingLogger(BaseCallback):
             self._export_progress(
                 self.completed_episodes,
                 export_steps=True,
+                export_decision_steps=bool(self.decision_step_records),
+                export_summary=False,
+            )
+        elif self.decision_step_records:
+            self._export_progress(
+                self.completed_episodes,
+                export_steps=False,
+                export_decision_steps=True,
                 export_summary=False,
             )
 
@@ -2640,6 +3053,7 @@ class TrainingLogger(BaseCallback):
         episode_count: int,
         *,
         export_steps: bool,
+        export_decision_steps: bool,
         export_summary: bool,
     ) -> None:
         output_dir = self.output_dir
@@ -2657,6 +3071,18 @@ class TrainingLogger(BaseCallback):
             print(f"Per-step log written to {step_path}")
             # Prevent unbounded in-memory growth of per-step records.
             self.training_step_records.clear()
+        if export_decision_steps and self.decision_step_records:
+            decision_step_path = output_dir / (
+                f"results_{self.progress_file_tag}_{episode_count}_decision_steps.csv"
+            )
+            batch_index = (
+                max(episode_count - 1, 0) // LOG_INTERVAL_STEPS_EPISODES + 1
+            )
+            for record in self.decision_step_records:
+                record["batch"] = batch_index
+            _write_records(self.decision_step_records, decision_step_path)
+            print(f"Decision-step log written to {decision_step_path}")
+            self.decision_step_records.clear()
         if export_summary and self.episode_summaries:
             summary_path = output_dir / (
                 f"results_{self.progress_file_tag}_{episode_count}_summary.csv"
@@ -2686,6 +3112,54 @@ def main() -> None:
         help="Simulation minutes between agent decisions (default: 10).",
     )
     parser.add_argument(
+        "--tactic-distribution",
+        choices=SUPPORTED_TACTIC_DISTRIBUTIONS,
+        default=TACTIC_DISTRIBUTION_INDIVIDUAL,
+        help=(
+            "How PPO tactic choices are assigned. 'individual' uses one "
+            "decision per controlled aircraft; 'group' uses one decision per "
+            "--aircraft-group-size sequential aircraft."
+        ),
+    )
+    parser.add_argument(
+        "--aircraft-group-size",
+        type=int,
+        default=AIRCRAFT_GROUP_SIZE,
+        help=(
+            "Number of sequential aircraft sharing one tactic decision when "
+            "--tactic-distribution group is used. Default 2."
+        ),
+    )
+    parser.add_argument(
+        "--adaptive-step-size-factor",
+        type=float,
+        default=None,
+        help=(
+            "Override the adaptive fire-model timestep factor. Larger values "
+            "allow bigger internal fire-model steps and can speed simulation, "
+            "but may change numerical fire propagation. Only affects scenarios "
+            "with enable_adaptive_time_step=true. Default uses the scenario "
+            "value, normally 0.125."
+        ),
+    )
+    adaptive_time_step_group = parser.add_mutually_exclusive_group()
+    adaptive_time_step_group.add_argument(
+        "--enable-adaptive-time-step",
+        action="store_true",
+        help=(
+            "Override the scenario and enable adaptive internal fire-model "
+            "timesteps."
+        ),
+    )
+    adaptive_time_step_group.add_argument(
+        "--disable-adaptive-time-step",
+        action="store_true",
+        help=(
+            "Override the scenario and disable adaptive internal fire-model "
+            "timesteps."
+        ),
+    )
+    parser.add_argument(
         "--state-fire-fronts",
         type=int,
         default=DEFAULT_STATE_FIRE_FRONTS,
@@ -2693,6 +3167,17 @@ def main() -> None:
             "Maximum number of fastest burning cells to inspect for "
             "front-derived state features such as topography_flag, "
             "vegetation_flag, indirect_flag, urban_flag, and water_flag."
+        ),
+    )
+    parser.add_argument(
+        "--state-space",
+        choices=SUPPORTED_STATE_SPACES,
+        default=STATE_SPACE_LARGE,
+        help=(
+            "Observation/state-space definition to use. 'large' is the "
+            "current full state vector; 'small' uses only per-front flag sets; "
+            "'mixed' uses per-front flags plus boundary, fire-line, and "
+            "spread-ray features."
         ),
     )
     parser.add_argument(
@@ -2709,6 +3194,15 @@ def main() -> None:
         type=float,
         default=0.0005,
         help="PPO learning rate.",
+    )
+    parser.add_argument(
+        "--ent-coef",
+        type=float,
+        default=0.0,
+        help=(
+            "PPO entropy coefficient. Use a small positive value such as "
+            "0.001 to encourage exploration when the policy collapses early."
+        ),
     )
     parser.add_argument(
         "--policy-arch",
@@ -2920,6 +3414,12 @@ def main() -> None:
             "--ignition-inputs are currently parsed but ignored by "
             "the automatic ignition sampler."
         )
+    if args.enable_adaptive_time_step:
+        adaptive_time_step_override = True
+    elif args.disable_adaptive_time_step:
+        adaptive_time_step_override = False
+    else:
+        adaptive_time_step_override = None
 
     use_switch_scenario = bool(args.switch_scenario or args.switch_scenarios)
     if use_switch_scenario:
@@ -2955,12 +3455,21 @@ def main() -> None:
         raise ValueError("--num-envs must be >= 1")
     if args.decision_interval_minutes <= 0:
         raise ValueError("--decision-interval-minutes must be > 0")
+    if args.aircraft_group_size <= 0:
+        raise ValueError("--aircraft-group-size must be > 0")
+    if (
+        args.adaptive_step_size_factor is not None
+        and args.adaptive_step_size_factor <= 0.0
+    ):
+        raise ValueError("--adaptive-step-size-factor must be > 0")
     if args.state_fire_fronts <= 0:
         raise ValueError("--state-fire-fronts must be > 0")
     if args.n_epochs < 1:
         raise ValueError("--n-epochs must be >= 1")
     if args.learning_rate <= 0.0:
         raise ValueError("--learning-rate must be > 0")
+    if args.ent_coef < 0.0:
+        raise ValueError("--ent-coef must be >= 0")
     if not (0.0 < args.gamma <= 1.0):
         raise ValueError("--gamma must be in the interval (0, 1]")
     if (
@@ -3020,6 +3529,11 @@ def main() -> None:
             gc_collect_on_reset=args.gc_collect_on_reset,
             include_scenario_features=use_switch_scenario,
             state_fire_fronts=args.state_fire_fronts,
+            state_space=args.state_space,
+            tactic_distribution=args.tactic_distribution,
+            aircraft_group_size=args.aircraft_group_size,
+            enable_adaptive_time_step=adaptive_time_step_override,
+            adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
     else:
         train_env = _build_vector_env(
@@ -3035,6 +3549,11 @@ def main() -> None:
             ts_budget_per_scenario=ts_budget_per_scenario,
             gc_collect_on_reset=args.gc_collect_on_reset,
             state_fire_fronts=args.state_fire_fronts,
+            state_space=args.state_space,
+            tactic_distribution=args.tactic_distribution,
+            aircraft_group_size=args.aircraft_group_size,
+            enable_adaptive_time_step=adaptive_time_step_override,
+            adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
     max_steps_allowed = max(1, total_timesteps // args.num_envs)
     rollout_steps = int(min(ROLLOUT_STEPS_PER_ENV, max_steps_allowed))
@@ -3077,9 +3596,35 @@ def main() -> None:
         print(
             f"Decision start delay override: {args.fire_detection_delay_minutes} minutes"
         )
+    if adaptive_time_step_override is None:
+        print("Adaptive fire timestep: scenario value.")
+    else:
+        state = "enabled" if adaptive_time_step_override else "disabled"
+        print(f"Adaptive fire timestep override: {state}.")
+    if args.adaptive_step_size_factor is None:
+        print(
+            "Adaptive fire step-size factor: scenario/default value "
+            "(active only when enable_adaptive_time_step=true)."
+        )
+    else:
+        print(
+            "Adaptive fire step-size factor override: "
+            f"{args.adaptive_step_size_factor} "
+            "(active only when enable_adaptive_time_step=true)."
+        )
     print(f"Allowed tactic combinations: {len(TACTIC_COMBINATIONS)}")
     if args.gc_collect_on_reset:
         print("Diagnostic: gc.collect() and prior-sim drop at reset start enabled.")
+    print(
+        f"State space: {args.state_space} "
+        f"({len(train_env.observation_space.low)} observation features)"
+    )
+    print(
+        f"Tactic distribution: {args.tactic_distribution}; "
+        f"controlled_aircraft={CONTROLLED_AGENT_COUNT}; "
+        f"aircraft_group_size={args.aircraft_group_size}; "
+        f"action_decisions={len(train_env.action_space.nvec)}"
+    )
     if args.num_envs > 1:
         effective_vec_method = (
             vec_start_method
@@ -3090,6 +3635,8 @@ def main() -> None:
 
     step_logger = TrainingLogger(
         decision_interval_minutes=args.decision_interval_minutes,
+        tactic_distribution=args.tactic_distribution,
+        aircraft_group_size=args.aircraft_group_size,
         progress_file_tag=progress_file_tag,
         output_dir=output_dir,
     )
@@ -3126,6 +3673,7 @@ def main() -> None:
         model.n_epochs = args.n_epochs
         model.target_kl = args.target_kl
         model.gamma = args.gamma
+        model.ent_coef = args.ent_coef
         model._setup_lr_schedule()
         model._setup_rollout_buffer()
         print(f"Loaded PPO policy from {load_path}")
@@ -3147,13 +3695,15 @@ def main() -> None:
             batch_size=batch_size,
             n_epochs=args.n_epochs,
             gamma=args.gamma,
+            ent_coef=args.ent_coef,
             target_kl=args.target_kl,
             device=device,
             policy_kwargs=policy_kwargs,
         )
         print(
             f"PPO hyperparams: lr={args.learning_rate} (decay^{args.lr_decay_exponent}), "
-            f"n_epochs={args.n_epochs}, gamma={args.gamma}, target_kl={args.target_kl}"
+            f"n_epochs={args.n_epochs}, gamma={args.gamma}, "
+            f"ent_coef={args.ent_coef}, target_kl={args.target_kl}"
         )
     if args.checkpoint_interval > 0:
         checkpoint_dir = output_dir / "checkpoints"
