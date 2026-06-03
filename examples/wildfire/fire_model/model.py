@@ -88,6 +88,7 @@ class CPUFireModel(CellularAutomataModel):
         self.total_suppressed_burn_cells = 0
         self.burnt_area_samples = []
         self.sampled_times = []
+        self.fire_state_version = 0
         self.set_fire_states()
         self.n_burning = 0
         self.initial_combustibilities = (
@@ -137,6 +138,8 @@ class CPUFireModel(CellularAutomataModel):
                 self.__data__.fire_states[i_fire, j_fire] = FULL_BURNING
                 self.fire_indices[n + self.n_burning] = i_fire, j_fire
             self.n_burning += neighborhood.cell_count
+        if ignition_centers:
+            self.fire_state_version += 1
 
     def suppress(self, suppression_area: RasterizedShape):
         """Updates fire model based on suppression area.
@@ -161,6 +164,7 @@ class CPUFireModel(CellularAutomataModel):
         self.__data__.spread_rates[suppression_indices] = 0
         if suppressed_burn_cells > 0:
             self.update_fire_area(suppression_indices)
+        self.fire_state_version += 1
 
     def update_fire_area(self, suppression_indices):
         """Updates the fire position array to exclude suppressed areas."""
@@ -235,6 +239,7 @@ class CPUFireModel(CellularAutomataModel):
             )
             self.internal_model_time += self.model_time_step
             self.model_time_step = timedelta(seconds=ideal_time_step_min * 60)
+            self.fire_state_version += 1
 
         except IndexError as e:
             print("Index error:", e.args[0])

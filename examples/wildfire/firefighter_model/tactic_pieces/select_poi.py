@@ -103,51 +103,267 @@ def _nearest_position_cost(
     return np.clip((map_diagonal - nearest_distances) / map_diagonal, 0, 1)
 
 
+def _select_poi_cache(agent) -> dict:
+    """Return a lazy cache scoped to the current fire-state version."""
+    model_cache = agent.model.__cache__
+    fire_version = getattr(agent.model.wildfire, "fire_state_version", 0)
+    cache = model_cache.get("select_poi")
+    if cache is None or cache.get("fire_state_version") != fire_version:
+        cache = {"fire_state_version": fire_version}
+        model_cache["select_poi"] = cache
+    return cache
+
+
+def _cached_fire_positions(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "fire_positions" not in cache:
+        cache["fire_positions"] = agent.model.wildfire.fire_positions
+    return cache["fire_positions"]
+
+
+def _cached_burning_indices(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "burning_indices" not in cache:
+        cache["burning_indices"] = agent.model.wildfire.burning_indices
+    return cache["burning_indices"]
+
+
+def _cached_map_diagonal(agent) -> float:
+    cache = _select_poi_cache(agent)
+    if "map_diagonal" not in cache:
+        map_shape = np.array(agent.model.simulation.environment.dimensions)
+        cache["map_diagonal"] = np.linalg.norm(map_shape)
+    return cache["map_diagonal"]
+
+
+def _cached_objective_positions(agent, cache_key: str, agents) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if cache_key not in cache:
+        cache[cache_key] = _positions_from_agents(agents)
+    return cache[cache_key]
+
+
+def _candidate_firefronts(
+    agent,
+    include_burning_indices: bool = False,
+) -> tuple[np.ndarray, np.ndarray | None, np.ndarray]:
+    """Return currently untracked firefront candidates.
+
+    This mirrors the original selection behavior exactly: destinations already
+    assigned to other firefighters are removed one by one, and if that removes
+    every candidate the full firefront set is restored.
+    """
+    full_positions = _cached_fire_positions(agent)
+    selected_indices = np.arange(len(full_positions))
+    fire_positions = full_positions
+
+    full_burning_indices = None
+    burning_indices = None
+    if include_burning_indices:
+        full_burning_indices = _cached_burning_indices(agent)
+        burning_indices = full_burning_indices
+
+    for obj in agent.model.firefighters:
+        if obj.destination is not None:
+            untracked_pos = (fire_positions != obj.destination).any(axis=1)
+            fire_positions = fire_positions[untracked_pos]
+            selected_indices = selected_indices[untracked_pos]
+            if include_burning_indices:
+                burning_indices = burning_indices[untracked_pos]
+
+            # Choose any firefront if all are already taken.
+            if not np.size(fire_positions):
+                fire_positions = full_positions
+                selected_indices = np.arange(len(full_positions))
+                if include_burning_indices:
+                    burning_indices = full_burning_indices
+
+    return fire_positions, burning_indices, selected_indices
+
+
+def _cached_water_cost(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "water_cost" not in cache:
+        cache["water_cost"] = _nearest_position_cost(
+            fire_positions=_cached_fire_positions(agent),
+            objective_positions=_cached_objective_positions(
+                agent,
+                "water_positions",
+                agent.model.water_sources,
+            ),
+            map_diagonal=_cached_map_diagonal(agent),
+        )
+    return cache["water_cost"]
+
+
+def _cached_urban_cost(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "urban_cost" not in cache:
+        cache["urban_cost"] = _nearest_position_cost(
+            fire_positions=_cached_fire_positions(agent),
+            objective_positions=_cached_objective_positions(
+                agent,
+                "urban_positions",
+                agent.model.protection_locations,
+            ),
+            map_diagonal=_cached_map_diagonal(agent),
+        )
+    return cache["urban_cost"]
+
+
+def _cached_vip_cone_cost(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "vip_cone_cost" not in cache:
+        fire_positions = _cached_fire_positions(agent)
+        vip_cost = agent.exponential_cone_func(
+            pos=fire_positions,
+            vip=(location.pos for location in agent.model.protection_locations),
+            map_diagonal=_cached_map_diagonal(agent),
+        )
+        vip_cost = np.asarray(vip_cost, dtype=float)
+        if vip_cost.ndim == 0:
+            vip_cost = np.full(len(fire_positions), float(vip_cost), dtype=float)
+        cache["vip_cone_cost"] = vip_cost
+    return cache["vip_cone_cost"]
+
+
+def _cached_raw_vegetation_priority(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "raw_vegetation_priority" not in cache:
+        cache["raw_vegetation_priority"] = np.array(
+            [
+                agent.calculate_priority_vegetation(i, j)
+                for i, j in _cached_burning_indices(agent)
+            ],
+            dtype=float,
+        )
+    return cache["raw_vegetation_priority"]
+
+
+def _cached_raw_topography_priority(agent) -> np.ndarray:
+    cache = _select_poi_cache(agent)
+    if "raw_topography_priority" not in cache:
+        elevation_data = agent.terrain.elevation.elevation_data
+        wind_direction = agent.model.simulation.environment.atmosphere.wind_aspect
+        cache["raw_topography_priority"] = np.array(
+            [
+                agent.calculate_priority_topography(
+                    i,
+                    j,
+                    elevation_data,
+                    wind_direction,
+                )
+                for i, j in _cached_burning_indices(agent)
+            ],
+            dtype=float,
+        )
+    return cache["raw_topography_priority"]
+
+
+def _normalize_priority_slice(agent, raw_priorities: np.ndarray) -> np.ndarray:
+    return np.array(agent.normalize_priorities(list(raw_priorities)), dtype=float)
+
+
+def _distance_cost(agent, fire_positions: np.ndarray, map_diagonal: float) -> np.ndarray:
+    fire_distances = agent.distance(agent.pos, fire_positions)
+    return (map_diagonal - fire_distances) / map_diagonal
+
+
+def _destination_from_costs(
+    fire_positions: np.ndarray,
+    selection_cost: np.ndarray,
+) -> np.ndarray:
+    min_idx = int(np.argmax(selection_cost))
+    return fire_positions[min_idx, :]
+
+
+def _select_water_destination(agent) -> np.ndarray | None:
+    fire_positions, _, selected_indices = _candidate_firefronts(agent)
+    if not fire_positions.size:
+        return None
+
+    map_diagonal = _cached_map_diagonal(agent)
+    distance_cost = _distance_cost(agent, fire_positions, map_diagonal)
+    water_cost = _cached_water_cost(agent)[selected_indices]
+    selection_cost = (
+        agent.parameters.distance_cost_weight * distance_cost
+        + agent.parameters.vip_cost_weight * water_cost
+    )
+    return _destination_from_costs(fire_positions, selection_cost)
+
+
+def _select_vip_destination(agent) -> np.ndarray | None:
+    fire_positions, _, selected_indices = _candidate_firefronts(agent)
+    if not fire_positions.size:
+        return None
+
+    map_diagonal = _cached_map_diagonal(agent)
+    distance_cost = _distance_cost(agent, fire_positions, map_diagonal)
+    urban_cost = _cached_urban_cost(agent)[selected_indices]
+    selection_cost = (
+        agent.parameters.distance_cost_weight * distance_cost
+        + agent.parameters.vip_cost_weight * urban_cost
+    )
+    return _destination_from_costs(fire_positions, selection_cost)
+
+
+def _select_vegetation_destination(agent) -> np.ndarray | None:
+    fire_positions, _burning_indices, selected_indices = _candidate_firefronts(
+        agent,
+        include_burning_indices=True,
+    )
+    if not fire_positions.size:
+        return None
+
+    map_diagonal = _cached_map_diagonal(agent)
+    distance_cost = _distance_cost(agent, fire_positions, map_diagonal)
+    vip_cost = _cached_vip_cone_cost(agent)[selected_indices]
+    vegetation_cost = _normalize_priority_slice(
+        agent,
+        _cached_raw_vegetation_priority(agent)[selected_indices],
+    )
+    selection_cost = (
+        agent.parameters.distance_cost_weight * distance_cost
+        + agent.parameters.vip_cost_weight * vip_cost
+        + agent.parameters.vegetation_cost_weight * vegetation_cost
+    )
+    return _destination_from_costs(fire_positions, selection_cost)
+
+
+def _select_topography_destination(agent) -> np.ndarray | None:
+    fire_positions, _burning_indices, selected_indices = _candidate_firefronts(
+        agent,
+        include_burning_indices=True,
+    )
+    if not fire_positions.size:
+        return None
+
+    map_diagonal = _cached_map_diagonal(agent)
+    distance_cost = _distance_cost(agent, fire_positions, map_diagonal)
+    vip_cost = _cached_vip_cone_cost(agent)[selected_indices]
+    topography_cost = _normalize_priority_slice(
+        agent,
+        _cached_raw_topography_priority(agent)[selected_indices],
+    )
+    selection_cost = (
+        agent.parameters.distance_cost_weight * distance_cost
+        + agent.parameters.vip_cost_weight * vip_cost
+        + agent.parameters.topography_cost_weight * topography_cost
+    )
+    return _destination_from_costs(fire_positions, selection_cost)
+
+
 class WaterSelectPOI(SelectPOITask):
     def __init__(self):
         self.task_method.__func__.__name__ = "water_select_poi"
 
     def task_method(self, agent):
         """Selecting a firefront (point of interest) to track and suppress."""
-        fire_positions = agent.model.wildfire.fire_positions
-        if not fire_positions.size:
+        destination = _select_water_destination(agent)
+        if destination is None:
             return TaskStatus.FAILED
 
-        # Selecting only firefronts not tracked by other agents
-        for obj in agent.model.firefighters:
-            if obj.destination is not None:
-                untracked_pos = (fire_positions != obj.destination).any(axis=1)
-                fire_positions = fire_positions[untracked_pos]
-
-                # Choose any firefront if all are already taken
-                if not np.size(fire_positions):
-                    fire_positions = agent.model.wildfire.fire_positions
-
-        # Computing the map diagonal to normalise the cost factors
-        map_shape = np.array(agent.model.simulation.environment.dimensions)
-        map_diagonal = np.linalg.norm(map_shape)
-
-        # Distance cost factor
-        fire_distances = agent.distance(agent.pos, fire_positions)
-        distance_cost = (map_diagonal - fire_distances) / map_diagonal
-
-        # Water objective cost factor. This makes the water tactic select
-        # burning cells that are threatening water resources.
-        water_cost = _nearest_position_cost(
-            fire_positions=fire_positions,
-            objective_positions=_positions_from_agents(
-                agent.model.water_sources
-            ),
-            map_diagonal=map_diagonal,
-        )
-
-        # Fire-front selection based on total cost function
-        selection_cost = (
-            agent.parameters.distance_cost_weight * distance_cost
-            + agent.parameters.vip_cost_weight * water_cost
-        )
-        min_idx = np.argmax(selection_cost)
-        agent.set_destination(fire_positions[min_idx, :], DestinationType.FIRE)
+        agent.set_destination(destination, DestinationType.FIRE)
         return TaskStatus.COMPLETE
 
 
@@ -157,45 +373,11 @@ class VIPSelectPOI(SelectPOITask):
 
     def task_method(self, agent):
         """Selecting a firefront (point of interest) to track and suppress."""
-        fire_positions = agent.model.wildfire.fire_positions
-        if not fire_positions.size:
+        destination = _select_vip_destination(agent)
+        if destination is None:
             return TaskStatus.FAILED
 
-        # Selecting only firefronts not tracked by other agents
-        for obj in agent.model.firefighters:
-            if obj.destination is not None:
-                untracked_pos = (fire_positions != obj.destination).any(axis=1)
-                fire_positions = fire_positions[untracked_pos]
-
-                # Choose any firefront if all are already taken
-                if not np.size(fire_positions):
-                    fire_positions = agent.model.wildfire.fire_positions
-
-        # Computing the map diagonal to normalise the cost factors
-        map_shape = np.array(agent.model.simulation.environment.dimensions)
-        map_diagonal = np.linalg.norm(map_shape)
-
-        # Distance cost factor
-        fire_distances = agent.distance(agent.pos, fire_positions)
-        distance_cost = (map_diagonal - fire_distances) / map_diagonal
-
-        # Urban objective cost factor. Protection locations are the point
-        # objectives used by the VIP tactic.
-        urban_cost = _nearest_position_cost(
-            fire_positions=fire_positions,
-            objective_positions=_positions_from_agents(
-                agent.model.protection_locations
-            ),
-            map_diagonal=map_diagonal,
-        )
-
-        # Fire-front selection based on total cost function
-        selection_cost = (
-            agent.parameters.distance_cost_weight * distance_cost
-            + agent.parameters.vip_cost_weight * urban_cost
-        )
-        min_idx = np.argmax(selection_cost)
-        agent.set_destination(fire_positions[min_idx, :], DestinationType.FIRE)
+        agent.set_destination(destination, DestinationType.FIRE)
         return TaskStatus.COMPLETE
 
 
@@ -211,51 +393,11 @@ class VegetationSelectPOI(SelectPOITask):
         """Selecting a firefront (point of interest) to track and
         suppress.
         """
-        fire_positions = agent.model.wildfire.fire_positions
-        burning_indices = agent.model.wildfire.burning_indices
-        if not fire_positions.size:
+        destination = _select_vegetation_destination(agent)
+        if destination is None:
             return TaskStatus.FAILED
 
-        # Selecting only firefronts not tracked by other agents
-        for obj in agent.model.firefighters:
-            if obj.destination is not None:
-                untracked_pos = (fire_positions != obj.destination).any(axis=1)
-                fire_positions = fire_positions[untracked_pos]
-                burning_indices = burning_indices[untracked_pos]
-
-                # Choose any firefront if all are already taken
-                if not np.size(fire_positions):
-                    fire_positions = agent.model.wildfire.fire_positions
-                    burning_indices = agent.model.wildfire.burning_indices
-
-        # Computing the map diagonal to normalise the cost factors
-        map_shape = np.array(agent.model.simulation.environment.dimensions)
-        map_diagonal = np.linalg.norm(map_shape)
-
-        # Distance cost factor
-        fire_distances = agent.distance(agent.pos, fire_positions)
-        distance_cost = (map_diagonal - fire_distances) / map_diagonal
-
-        # Very important points (vip) protection cost factor
-        vip_cost = agent.exponential_cone_func(
-            pos=fire_positions,
-            vip=(
-                location.pos for location in agent.model.protection_locations
-            ),
-            map_diagonal=map_diagonal,
-        )
-
-        # Vegetation cost
-        vegetation_cost = agent.priority_cost_vegetation(burning_indices)
-
-        # Fire-front selection based on total cost function
-        selection_cost = (
-            agent.parameters.distance_cost_weight * distance_cost
-            + agent.parameters.vip_cost_weight * vip_cost
-            + agent.parameters.vegetation_cost_weight * vegetation_cost
-        )
-        min_idx = np.argmax(selection_cost)
-        agent.set_destination(fire_positions[min_idx, :], DestinationType.FIRE)
+        agent.set_destination(destination, DestinationType.FIRE)
         return TaskStatus.COMPLETE
 
 
@@ -265,52 +407,11 @@ class TopographySelectPOI(SelectPOITask):
 
     def task_method(self, agent):
         """Selecting a firefront (point of interest) to track and suppress."""
-        fire_positions = agent.model.wildfire.fire_positions
-        burning_indices = agent.model.wildfire.burning_indices
-
-        if not fire_positions.size:
+        destination = _select_topography_destination(agent)
+        if destination is None:
             return TaskStatus.FAILED
 
-        # Selecting only firefronts not tracked by other agents
-        for obj in agent.model.firefighters:
-            if obj.destination is not None:
-                untracked_pos = (fire_positions != obj.destination).any(axis=1)
-                fire_positions = fire_positions[untracked_pos]
-                burning_indices = burning_indices[untracked_pos]
-
-                # Choose any firefront if all are already taken
-                if not np.size(fire_positions):
-                    fire_positions = agent.model.wildfire.fire_positions
-                    burning_indices = agent.model.wildfire.burning_indices
-
-        # Computing the map diagonal to normalise the cost factors
-        map_shape = np.array(agent.model.simulation.environment.dimensions)
-        map_diagonal = np.linalg.norm(map_shape)
-
-        # Distance cost factor
-        fire_distances = agent.distance(agent.pos, fire_positions)
-        distance_cost = (map_diagonal - fire_distances) / map_diagonal
-
-        # Very important points (vip) protection cost factor
-        vip_cost = agent.exponential_cone_func(
-            pos=fire_positions,
-            vip=(
-                location.pos for location in agent.model.protection_locations
-            ),
-            map_diagonal=map_diagonal,
-        )
-
-        # Topography cost
-        topography_cost = agent.priority_cost_topography(burning_indices)
-
-        # Fire-front selection based on total cost function
-        selection_cost = (
-            agent.parameters.distance_cost_weight * distance_cost
-            + agent.parameters.vip_cost_weight * vip_cost
-            + agent.parameters.topography_cost_weight * topography_cost
-        )
-        min_idx = np.argmax(selection_cost)
-        agent.set_destination(fire_positions[min_idx, :], DestinationType.FIRE)
+        agent.set_destination(destination, DestinationType.FIRE)
         return TaskStatus.COMPLETE
 
 
