@@ -248,7 +248,7 @@ class CPUFireModel(CellularAutomataModel):
         scenario_label = sim.parameters.terrain_inputs.file_namespace.split(
             "_", 1
         )[0]
-        if not (self.fire_positions).size:
+        if self.burning_indices.shape[0] == 0:
             print(f"\nMission Completed ({scenario_label})")
             sim.stop()
 

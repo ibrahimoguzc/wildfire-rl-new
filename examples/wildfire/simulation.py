@@ -955,7 +955,7 @@ class WildfireSimulation(Simulation[WildfireParameters, SimContext]):
 
     @Output(target_key=TargetKey.SIMULATION)
     def mission_success(self):  # noqa D102
-        return False if (self.wildfire.fire_positions.any()) else True
+        return self.wildfire.burning_indices.shape[0] == 0
 
     @Output(target_key=TargetKey.SIMULATION)
     def burnt_area(self):  # noqa D102

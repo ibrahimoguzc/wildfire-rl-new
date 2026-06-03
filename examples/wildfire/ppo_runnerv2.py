@@ -40,7 +40,14 @@ from stable_baselines3.common.callbacks import (
     CheckpointCallback,
 )
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
-from sosid.environment.terrain import FEATURES_COLOR_TABLE, TerrainTypes
+from sosid.environment.terrain import (
+    CASUALTIES_TABLE,
+    COMBUSTIBILITY_TABLE,
+    COSTS_TABLE,
+    EMISSIONS_TABLE,
+    FEATURES_COLOR_TABLE,
+    TerrainTypes,
+)
 from sosid.model.transform import (
     gps_to_mercator,
     gps_to_pos,
@@ -69,10 +76,18 @@ from examples.wildfire.firefighter_model.tactic_pieces.track_poi import (
     TRACK_POI_TABLE,
     TrackPOIType,
 )
-from examples.wildfire.fire_model.states import COMBUSTIBLE
+from examples.wildfire.fire_model.states import (
+    BURNT,
+    COMBUSTIBLE,
+    EXTINGUISHING,
+    FULL_BURNING,
+    SUPPRESSED,
+)
 from examples.wildfire.paths import SCENARIOS_DIR
 from examples.wildfire.simulation import (
     IgnitionCenterInput,
+    M2_TO_HECTARS,
+    PEOPLE_PER_HOUSEHOLD,
     ProtectionLocationInput,
     WildfireParameters,
     WildfireSimulation,
@@ -132,6 +147,19 @@ VEGETATION_MIN_COMBUSTIBLE_NEIGHBORS = 5
 # A front votes for indirect_flag when it is close enough to the current
 # indirect/fire-line plan to make line-following tactics relevant.
 INDIRECT_FRONT_DISTANCE_THRESHOLD_M = 250.0
+# These are the terrain types currently counted by
+# WildfireSimulation.area_burnt_by_type(). Keep this tuple aligned with that
+# method so the fast PPO reward metrics preserve the existing reward semantics.
+DAMAGE_TERRAIN_TYPES: tuple[TerrainTypes, ...] = (
+    TerrainTypes.NEEDLE_LITTER,
+    TerrainTypes.FALLEN_LEAVES,
+    TerrainTypes.GRASSES_WEEDS,
+    TerrainTypes.CAREX_FORBS,
+    TerrainTypes.PASTURE,
+    TerrainTypes.PINUS,
+    TerrainTypes.FIELD,
+    TerrainTypes.RESIDENTIAL,
+)
 IGNITION_BOUNDARY_MARGIN_RATIO = 0.3
 IGNITION_BOX_HALF_SIZE = 50  # half-side of 100×100 candidate box in grid cells
 IGNITION_URBAN_BUFFER_M = 350.0  # min distance from any urban cell, meters
@@ -191,6 +219,7 @@ def _make_env_factory(
     state_space: str = "large",
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+    controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     enable_adaptive_time_step: bool | None = None,
     adaptive_step_size_factor: float | None = None,
 ):
@@ -210,6 +239,7 @@ def _make_env_factory(
             state_space=state_space,
             tactic_distribution=tactic_distribution,
             aircraft_group_size=aircraft_group_size,
+            controlled_agent_count=controlled_agent_count,
             enable_adaptive_time_step=enable_adaptive_time_step,
             adaptive_step_size_factor=adaptive_step_size_factor,
         )
@@ -235,6 +265,7 @@ def _build_vector_env(
     state_space: str = "large",
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+    controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     enable_adaptive_time_step: bool | None = None,
     adaptive_step_size_factor: float | None = None,
 ) -> DummyVecEnv | SubprocVecEnv:
@@ -260,6 +291,7 @@ def _build_vector_env(
                 state_space=state_space,
                 tactic_distribution=tactic_distribution,
                 aircraft_group_size=aircraft_group_size,
+                controlled_agent_count=controlled_agent_count,
                 enable_adaptive_time_step=enable_adaptive_time_step,
                 adaptive_step_size_factor=adaptive_step_size_factor,
             )
@@ -283,6 +315,7 @@ def _build_vector_env(
                 state_space=state_space,
                 tactic_distribution=tactic_distribution,
                 aircraft_group_size=aircraft_group_size,
+                controlled_agent_count=controlled_agent_count,
                 enable_adaptive_time_step=enable_adaptive_time_step,
                 adaptive_step_size_factor=adaptive_step_size_factor,
             )
@@ -765,6 +798,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         state_space: str = STATE_SPACE_LARGE,
         tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
         aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+        controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
         enable_adaptive_time_step: bool | None = None,
         adaptive_step_size_factor: float | None = None,
     ):
@@ -862,7 +896,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         )
         self.max_steps = self._resolve_max_steps(self.parameters)
 
-        self.controlled_agent_count = CONTROLLED_AGENT_COUNT
+        self.controlled_agent_count = int(controlled_agent_count)
+        if self.controlled_agent_count <= 0:
+            raise ValueError("controlled_agent_count must be > 0")
         self.agent_feature_count = AGENT_FEATURE_COUNT
         self.tactic_distribution = _normalize_tactic_distribution(
             tactic_distribution
@@ -1453,6 +1489,72 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.current_sim_seed = seed
 
     def _compute_metrics(self) -> Metrics:
+        """Compute PPO reward metrics without repeated full-grid property scans."""
+        assert self.sim is not None
+        wildfire = self.sim.wildfire
+        fire_states = wildfire.fire_states
+        cell_area = float(self.sim.parameters.cell_size**2)
+
+        # Match CPUFireModel.burnt_area exactly: total burnt area counts final
+        # burnt states plus cells that burned during suppression.
+        state_counts = np.bincount(fire_states.ravel(), minlength=BURNT + 1)
+        burnt_cells = (
+            int(state_counts[BURNT])
+            + int(state_counts[EXTINGUISHING])
+            + int(state_counts[FULL_BURNING])
+            + int(wildfire.total_suppressed_burn_cells)
+        )
+        burnt = float(burnt_cells * cell_area)
+
+        # Match burnt_area_for_combustibility: cost/emissions/casualties use a
+        # damage mask of full-burning-or-later cells plus currently suppressed
+        # cells, then group by initial combustibility.
+        damage_mask = (fire_states >= FULL_BURNING) | (fire_states == SUPPRESSED)
+        combust = wildfire.initial_combustibilities
+        area_by_combustibility: dict[float, float] = {}
+        if np.any(damage_mask):
+            damaged_combustibilities, counts = np.unique(
+                combust[damage_mask],
+                return_counts=True,
+            )
+            area_by_combustibility = {
+                np.asarray(value, dtype=combust.dtype).item(): (
+                    float(count) * cell_area
+                )
+                for value, count in zip(damaged_combustibilities, counts)
+            }
+
+        total_cost = 0.0
+        total_emissions = 0.0
+        total_casualties = 0.0
+        for terrain_type in DAMAGE_TERRAIN_TYPES:
+            # Cast the table value to the combustibility array dtype before
+            # lookup. This preserves numpy's current equality behavior for
+            # float32 terrain rasters and Python float table values.
+            combustibility_key = np.asarray(
+                COMBUSTIBILITY_TABLE[terrain_type],
+                dtype=combust.dtype,
+            ).item()
+            terrain_area = area_by_combustibility.get(combustibility_key, 0.0)
+            area_ha = terrain_area * M2_TO_HECTARS
+            total_cost += COSTS_TABLE[terrain_type] * area_ha
+            total_emissions += EMISSIONS_TABLE[terrain_type] * area_ha
+            total_casualties += (
+                CASUALTIES_TABLE[terrain_type]
+                * terrain_area
+                * PEOPLE_PER_HOUSEHOLD
+                * M2_TO_HECTARS
+            )
+
+        return Metrics(
+            burnt,
+            float(round(total_cost, 2)),
+            float(int(total_casualties)),
+            float(round(total_emissions, 2)),
+        )
+
+    def _compute_metrics_reference(self) -> Metrics:
+        """Reference version using the simulation properties used before."""
         assert self.sim is not None
         burnt = float(self.sim.wildfire.burnt_area)
         cost = float(self.sim.total_fire_cost)
@@ -2042,7 +2144,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
     def _mission_complete(self) -> bool:
         assert self.sim is not None
-        fire_remaining = bool(self.sim.wildfire.fire_positions.size)
+        fire_remaining = bool(self.sim.wildfire.burning_indices.shape[0])
         return (not fire_remaining) or self.sim.is_stopped.is_set()
 
     def _propagation_factor(self) -> float:
@@ -2843,6 +2945,7 @@ class TrainingLogger(BaseCallback):
         decision_interval_minutes: int = DEFAULT_DECISION_INTERVAL_MINUTES,
         tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
         aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+        controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
         progress_file_tag: str = "run",
         output_dir: Path = SCENARIOS_DIR / "outputs",
     ):
@@ -2854,7 +2957,9 @@ class TrainingLogger(BaseCallback):
         self._episode_decision_buffers: dict[int, list[dict[str, Any]]] = {}
         self.episode_summaries: list[dict[str, Any]] = []
         self.completed_episodes = 0
-        self.controlled_agent_count = CONTROLLED_AGENT_COUNT
+        self.controlled_agent_count = int(controlled_agent_count)
+        if self.controlled_agent_count <= 0:
+            raise ValueError("controlled_agent_count must be > 0")
         self.tactic_distribution = _normalize_tactic_distribution(
             tactic_distribution
         )
@@ -3128,6 +3233,17 @@ def main() -> None:
         help=(
             "Number of sequential aircraft sharing one tactic decision when "
             "--tactic-distribution group is used. Default 2."
+        ),
+    )
+    parser.add_argument(
+        "--controlled-agent-count",
+        type=int,
+        default=CONTROLLED_AGENT_COUNT,
+        help=(
+            "Number of aircraft the policy controls (firefighters[:N]). "
+            f"Default {CONTROLLED_AGENT_COUNT}. The scenario must define at "
+            "least this many aircraft. With --tactic-distribution group the "
+            "group count is ceil(controlled_agent_count / aircraft_group_size)."
         ),
     )
     parser.add_argument(
@@ -3457,6 +3573,21 @@ def main() -> None:
         raise ValueError("--decision-interval-minutes must be > 0")
     if args.aircraft_group_size <= 0:
         raise ValueError("--aircraft-group-size must be > 0")
+    if args.controlled_agent_count <= 0:
+        raise ValueError("--controlled-agent-count must be > 0")
+    # The policy commands firefighters[:controlled_agent_count]; the scenario
+    # fleet must be large enough or we would silently control fewer aircraft.
+    _fleet_paths = (
+        switch_scenario_paths if use_switch_scenario and switch_scenario_paths
+        else (scenario_path,)
+    )
+    for _fleet_path in _fleet_paths:
+        _fleet_size = _scenario_agent_count(_fleet_path)
+        if _fleet_size < args.controlled_agent_count:
+            raise ValueError(
+                f"--controlled-agent-count={args.controlled_agent_count} exceeds "
+                f"the {_fleet_size} aircraft defined in {Path(_fleet_path).name}."
+            )
     if (
         args.adaptive_step_size_factor is not None
         and args.adaptive_step_size_factor <= 0.0
@@ -3532,6 +3663,7 @@ def main() -> None:
             state_space=args.state_space,
             tactic_distribution=args.tactic_distribution,
             aircraft_group_size=args.aircraft_group_size,
+            controlled_agent_count=args.controlled_agent_count,
             enable_adaptive_time_step=adaptive_time_step_override,
             adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
@@ -3552,6 +3684,7 @@ def main() -> None:
             state_space=args.state_space,
             tactic_distribution=args.tactic_distribution,
             aircraft_group_size=args.aircraft_group_size,
+            controlled_agent_count=args.controlled_agent_count,
             enable_adaptive_time_step=adaptive_time_step_override,
             adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
@@ -3637,6 +3770,7 @@ def main() -> None:
         decision_interval_minutes=args.decision_interval_minutes,
         tactic_distribution=args.tactic_distribution,
         aircraft_group_size=args.aircraft_group_size,
+        controlled_agent_count=args.controlled_agent_count,
         progress_file_tag=progress_file_tag,
         output_dir=output_dir,
     )
