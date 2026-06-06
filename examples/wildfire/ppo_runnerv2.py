@@ -33,6 +33,7 @@ import numpy as np
 from gymnasium import spaces
 from scipy import ndimage
 from scipy.spatial import cKDTree
+from scipy.spatial.distance import cdist
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import (
     BaseCallback,
@@ -84,6 +85,7 @@ from examples.wildfire.fire_model.states import (
     SUPPRESSED,
 )
 from examples.wildfire.paths import SCENARIOS_DIR
+from examples.wildfire.paths import TERRAIN_DIR
 from examples.wildfire.simulation import (
     IgnitionCenterInput,
     M2_TO_HECTARS,
@@ -123,9 +125,13 @@ MOE_WEIGHT = 0.25
 # wildfire spread is 5-15 m/min; extreme crown-fire conditions reach
 # 30-50 m/min. Values above this cap clip to 1.0 in the state vector.
 MAX_SPREAD_RATE_NORM_MPM = 30.0
-CONTROLLED_AGENT_COUNT = 6
-AGENT_FEATURE_COUNT = 2
-AIRCRAFT_GROUP_SIZE = 2
+CONTROLLED_AGENT_COUNT = 3
+AGENT_FEATURE_COUNT = 3  # per controlled aircraft: x, y, altitude
+# Normalization bound for aircraft altitude (m). cruise_altitude in the
+# aircraft profile is 3000 m; altitudes range [0, cruise], so 3000 covers the
+# full flight envelope.
+ALTITUDE_NORM_M = 3000.0
+AIRCRAFT_GROUP_SIZE = 3
 TACTIC_DISTRIBUTION_INDIVIDUAL = "individual"
 TACTIC_DISTRIBUTION_GROUP = "group"
 SUPPORTED_TACTIC_DISTRIBUTIONS: tuple[str, ...] = (
@@ -147,6 +153,8 @@ VEGETATION_MIN_COMBUSTIBLE_NEIGHBORS = 5
 # A front votes for indirect_flag when it is close enough to the current
 # indirect/fire-line plan to make line-following tactics relevant.
 INDIRECT_FRONT_DISTANCE_THRESHOLD_M = 250.0
+POI_CANDIDATE_QUANTILE = 0.95
+MAX_POI_CANDIDATES = 4000
 # These are the terrain types currently counted by
 # WildfireSimulation.area_burnt_by_type(). Keep this tuple aligned with that
 # method so the fast PPO reward metrics preserve the existing reward semantics.
@@ -169,7 +177,7 @@ IGNITION_URBAN_BUFFER_M = 350.0  # min distance from any urban cell, meters
 IGNITION_V2_MARGIN_RATIO = 0.25
 
 ROLLOUT_STEPS_PER_ENV = 144
-NUM_MINIBATCH = 12
+NUM_MINIBATCH = 24
 
 if ROLLOUT_STEPS_PER_ENV <= 0:
     raise ValueError("ROLLOUT_STEPS_PER_ENV must be positive.")
@@ -177,7 +185,7 @@ if NUM_MINIBATCH <= 0:
     raise ValueError("NUM_MINIBATCH must be positive.")
 LOG_INTERVAL_SUMMARY_EPISODES = 100
 LOG_INTERVAL_STEPS_EPISODES = 1000
-LR_DECAY_EXPONENT = 0.60
+LR_DECAY_EXPONENT = 0.70
 SWITCH_SCENARIO_NAMES = (
     "Palisades copy.json",
     "Pyrenees.json",
@@ -220,6 +228,7 @@ def _make_env_factory(
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
     controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
+    water_set: int | None = None,
     enable_adaptive_time_step: bool | None = None,
     adaptive_step_size_factor: float | None = None,
 ):
@@ -240,6 +249,7 @@ def _make_env_factory(
             tactic_distribution=tactic_distribution,
             aircraft_group_size=aircraft_group_size,
             controlled_agent_count=controlled_agent_count,
+            water_set=water_set,
             enable_adaptive_time_step=enable_adaptive_time_step,
             adaptive_step_size_factor=adaptive_step_size_factor,
         )
@@ -266,6 +276,7 @@ def _build_vector_env(
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
     controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
+    water_set: int | None = None,
     enable_adaptive_time_step: bool | None = None,
     adaptive_step_size_factor: float | None = None,
 ) -> DummyVecEnv | SubprocVecEnv:
@@ -292,6 +303,7 @@ def _build_vector_env(
                 tactic_distribution=tactic_distribution,
                 aircraft_group_size=aircraft_group_size,
                 controlled_agent_count=controlled_agent_count,
+                water_set=water_set,
                 enable_adaptive_time_step=enable_adaptive_time_step,
                 adaptive_step_size_factor=adaptive_step_size_factor,
             )
@@ -316,6 +328,7 @@ def _build_vector_env(
                 tactic_distribution=tactic_distribution,
                 aircraft_group_size=aircraft_group_size,
                 controlled_agent_count=controlled_agent_count,
+                water_set=water_set,
                 enable_adaptive_time_step=enable_adaptive_time_step,
                 adaptive_step_size_factor=adaptive_step_size_factor,
             )
@@ -340,10 +353,12 @@ SCENARIO_FEATURES: tuple[str, ...] = (
 STATE_SPACE_LARGE = "large"
 STATE_SPACE_SMALL = "small"
 STATE_SPACE_MIXED = "mixed"
+STATE_SPACE_OLD = "old"
 SUPPORTED_STATE_SPACES: tuple[str, ...] = (
     STATE_SPACE_LARGE,
     STATE_SPACE_SMALL,
     STATE_SPACE_MIXED,
+    STATE_SPACE_OLD,
 )
 
 LARGE_STATE_FEATURES = [
@@ -370,6 +385,42 @@ LARGE_STATE_FEATURES = [
     "indirect_flag",
     "urban_flag",
     "water_flag",
+    "distance_left_boundary",
+    "distance_right_boundary",
+    "distance_bottom_boundary",
+    "distance_top_boundary",
+]
+
+# Legacy ppo_runner state used by the older fixed/switch runs. It intentionally
+# excludes newer fields such as max_spread_rate_norm so 3 aircraft produce
+# 30 + 2*3 = 36 observation features.
+OLD_STATE_FEATURES = [
+    "time_since_detection_min",
+    "temperature_c",
+    "humidity_pct",
+    "wind_speed_ms",
+    "wind_direction_deg",
+    "time_to_sunset_min",
+    "distance_to_fire_line_m",
+    "distance_to_water_m",
+    "distance_fire_boundary_to_water",
+    "distance_fire_boundary_to_vip",
+    "distance_fire_boundary_to_vegetation",
+    "distance_fire_boundary_to_topography",
+    "distance_fire_boundary_to_indirect",
+    "fire_center_x",
+    "fire_center_y",
+    "leftmost_x",
+    "leftmost_y",
+    "rightmost_x",
+    "rightmost_y",
+    "uppermost_x",
+    "uppermost_y",
+    "lowermost_x",
+    "lowermost_y",
+    "spread_angle_deg",
+    "spread_ray_hit_x",
+    "spread_ray_hit_y",
     "distance_left_boundary",
     "distance_right_boundary",
     "distance_bottom_boundary",
@@ -425,11 +476,23 @@ def _state_core_feature_names(
         return _per_front_flag_feature_names(state_fire_fronts)
     if normalized == STATE_SPACE_MIXED:
         return _per_front_flag_feature_names(state_fire_fronts) + MIXED_STATE_FEATURES
+    if normalized == STATE_SPACE_OLD:
+        return tuple(OLD_STATE_FEATURES)
     raise RuntimeError(f"Unhandled state space: {state_space!r}")
 
 
-def _agent_feature_names(controlled_agent_count: int) -> tuple[str, ...]:
+def _agent_feature_count(state_space: str) -> int:
+    if _normalize_state_space(state_space) == STATE_SPACE_OLD:
+        return 2
+    return AGENT_FEATURE_COUNT
+
+
+def _agent_feature_names(
+    controlled_agent_count: int,
+    state_space: str = STATE_SPACE_LARGE,
+) -> tuple[str, ...]:
     names: list[str] = []
+    include_altitude = _normalize_state_space(state_space) != STATE_SPACE_OLD
     for idx in range(controlled_agent_count):
         names.extend(
             [
@@ -437,6 +500,8 @@ def _agent_feature_names(controlled_agent_count: int) -> tuple[str, ...]:
                 f"agent_{idx}_y",
             ]
         )
+        if include_altitude:
+            names.append(f"agent_{idx}_altitude")
     return tuple(names)
 
 
@@ -456,7 +521,7 @@ def _state_feature_names(
     if include_scenario_flag:
         feature_names.extend(SCENARIO_FEATURES)
     feature_names.extend(_state_core_feature_names(state_space, state_fire_fronts))
-    feature_names.extend(_agent_feature_names(controlled_agent_count))
+    feature_names.extend(_agent_feature_names(controlled_agent_count, state_space))
     return tuple(feature_names)
 
 
@@ -799,11 +864,13 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
         aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
         controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
+        water_set: int | None = None,
         enable_adaptive_time_step: bool | None = None,
         adaptive_step_size_factor: float | None = None,
     ):
         super().__init__()
         self.scenario_path = scenario_path
+        self.water_set = water_set
         self.gc_collect_on_reset = bool(gc_collect_on_reset)
         self.state_space = _normalize_state_space(state_space)
         if (
@@ -899,7 +966,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.controlled_agent_count = int(controlled_agent_count)
         if self.controlled_agent_count <= 0:
             raise ValueError("controlled_agent_count must be > 0")
-        self.agent_feature_count = AGENT_FEATURE_COUNT
+        self.agent_feature_count = _agent_feature_count(self.state_space)
         self.tactic_distribution = _normalize_tactic_distribution(
             tactic_distribution
         )
@@ -938,6 +1005,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.water_positions: np.ndarray = np.empty((0, 2), dtype=float)
         self.urban_positions: np.ndarray = np.empty((0, 2), dtype=float)
         self.vip_positions: np.ndarray = np.empty((0, 2), dtype=float)
+        self.vegetation_poi_positions: np.ndarray = np.empty((0, 2), dtype=float)
+        self.topography_poi_positions: np.ndarray = np.empty((0, 2), dtype=float)
         self.fire_grid_area: float = 0.0
         self.current_step: int = 0
         self.prev_metrics: Metrics | None = None
@@ -1033,7 +1102,18 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         # Clear it before loading each scenario so map bounds are scenario-specific.
         _TerrainParametersCache.metadata = {}
         with scenario_path.open() as handle:
-            return WildfireParameters.model_validate_json(handle.read())
+            params = WildfireParameters.model_validate_json(handle.read())
+        # Apply the CLI water-set selector so water_sources_file resolves to the
+        # pre-generated subset ({namespace}_water_sources_set{N}.pkl).
+        if self.water_set is not None:
+            params = params.model_copy(
+                update={
+                    "terrain_inputs": params.terrain_inputs.model_copy(
+                        update={"water_set": int(self.water_set)}
+                    )
+                }
+            )
+        return params
 
     def _resolve_max_steps(self, parameters: WildfireParameters) -> int:
         if self.max_steps_override is not None:
@@ -1562,6 +1642,16 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         emissions = float(self.sim.total_fire_emissions)
         return Metrics(burnt, cost, casualties, emissions)
 
+    def _select_candidate_indices(
+        self, indices: np.ndarray, max_points: int
+    ) -> np.ndarray:
+        if indices.shape[0] <= max_points:
+            return indices
+        selected = np.linspace(
+            0, indices.shape[0] - 1, num=max_points, dtype=np.int64
+        )
+        return indices[selected]
+
     def _coerce_grid_indices(self, indices: np.ndarray) -> np.ndarray:
         """Coerce index arrays to (N, 2) grid pairs [y, x]."""
         assert self.sim is not None
@@ -1720,6 +1810,61 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self.urban_positions = np.empty((0, 2), dtype=float)
         # In this runner, protection locations are the urban objectives.
         self.vip_positions = self.urban_positions
+
+        self.vegetation_poi_positions = np.empty((0, 2), dtype=float)
+        self.topography_poi_positions = np.empty((0, 2), dtype=float)
+        if self.state_space != STATE_SPACE_OLD:
+            return
+
+        priority_map = np.asarray(
+            self.sim.environment.terrain.features.priority_map, dtype=float
+        )
+        valid_priority = np.isfinite(priority_map) & (priority_map > 0.0)
+        if np.any(valid_priority):
+            veg_threshold = float(
+                np.quantile(priority_map[valid_priority], POI_CANDIDATE_QUANTILE)
+            )
+            vegetation_indices = np.argwhere(priority_map >= veg_threshold)
+            vegetation_indices = self._select_candidate_indices(
+                vegetation_indices, MAX_POI_CANDIDATES
+            )
+            self.vegetation_poi_positions = self._indices_to_positions(
+                vegetation_indices
+            )
+
+        elevation = np.asarray(
+            self.sim.environment.terrain.elevation.elevation_data, dtype=float
+        )
+        valid_elevation = np.isfinite(elevation)
+        if np.any(valid_elevation):
+            topo_threshold = float(
+                np.quantile(elevation[valid_elevation], POI_CANDIDATE_QUANTILE)
+            )
+            topography_indices = np.argwhere(elevation >= topo_threshold)
+            topography_indices = self._select_candidate_indices(
+                topography_indices, MAX_POI_CANDIDATES
+            )
+            self.topography_poi_positions = self._indices_to_positions(
+                topography_indices
+            )
+
+    def _current_indirect_poi_positions(self) -> np.ndarray:
+        assert self.sim is not None
+        fire_block_indices = self.sim.firefighters.fire_block_indices
+        if fire_block_indices is None or fire_block_indices.size == 0:
+            return np.empty((0, 2), dtype=float)
+        return self._indices_to_positions(np.asarray(fire_block_indices))
+
+    def _distance_boundary_to_poi(
+        self,
+        boundary_points: np.ndarray,
+        poi_points: np.ndarray,
+        map_diagonal: float,
+    ) -> float:
+        if boundary_points.size == 0 or poi_points.size == 0 or map_diagonal <= 0.0:
+            return 1.0
+        min_dist = float(cdist(boundary_points, poi_points).min())
+        return float(min(max(min_dist / map_diagonal, 0.0), 1.0))
 
     @staticmethod
     def _angle_between_degrees(first: float, second: float) -> float:
@@ -2209,6 +2354,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             return self._compute_small_state()
         if self.state_space == STATE_SPACE_MIXED:
             return self._compute_mixed_state()
+        if self.state_space == STATE_SPACE_OLD:
+            return self._compute_old_state()
         raise RuntimeError(f"Unhandled state space: {self.state_space!r}")
 
     def _clear_fire_front_summary(self) -> None:
@@ -2267,19 +2414,11 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         np.clip(obs, 0.0, 1.0, out=obs)
         return obs
 
-    def _compute_mixed_state(self) -> np.ndarray:
+    def _compute_mixed_feature_values(
+        self,
+        burning_indices: np.ndarray,
+    ) -> list[float]:
         assert self.sim is not None
-        burning_indices = self.sim.wildfire.burning_indices
-        burning_count = int(burning_indices.shape[0])
-        if not burning_count:
-            self._clear_fire_front_summary()
-            return np.zeros(len(self.state_feature_names), dtype=np.float32)
-
-        # Mixed keeps the per-front tactical flags from the small state, but
-        # still avoids the unrelated work from the large state.
-        self._compute_fire_front_summary(burning_indices)
-        front_values = self._per_front_flag_values()
-
         x_min = self._coord_x_min
         x_max = self._coord_x_max
         y_min = self._coord_y_min
@@ -2290,13 +2429,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
         fire_positions = np.asarray(self.sim.wildfire.fire_positions, dtype=float)
         if fire_positions.size == 0:
-            obs = np.array(
-                front_values + ([0.0] * len(MIXED_STATE_FEATURES)),
-                dtype=np.float32,
-            )
-            obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
-            np.clip(obs, 0.0, 1.0, out=obs)
-            return obs
+            return [0.0] * len(MIXED_STATE_FEATURES)
 
         min_x = float(fire_positions[:, 0].min())
         max_x = float(fire_positions[:, 0].max())
@@ -2391,10 +2524,395 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 else 0.0
             ),
         ]
+        return mixed_values
+
+    def _compute_mixed_state(self) -> np.ndarray:
+        assert self.sim is not None
+        burning_indices = self.sim.wildfire.burning_indices
+        burning_count = int(burning_indices.shape[0])
+        if not burning_count:
+            self._clear_fire_front_summary()
+            return np.zeros(len(self.state_feature_names), dtype=np.float32)
+
+        # Mixed keeps the per-front tactical flags from the small state, but
+        # still avoids the unrelated work from the large state.
+        self._compute_fire_front_summary(burning_indices)
         obs = np.array(
-            front_values + mixed_values,
+            self._per_front_flag_values()
+            + self._compute_mixed_feature_values(burning_indices),
             dtype=np.float32,
         )
+        obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
+        np.clip(obs, 0.0, 1.0, out=obs)
+        return obs
+
+    def _compute_old_state(self) -> np.ndarray:
+        assert self.sim is not None
+        self._clear_fire_front_summary()
+        atmosphere = self.sim.atmosphere
+        mission_time = self.sim.timer.mission_time
+        time_since_detection_min = (
+            max(
+                0.0,
+                self.sim.timer.mission_runtime.total_seconds()
+                - self.fire_detection_delay_seconds,
+            )
+            / 60.0
+        )
+        burning_indices = self.sim.wildfire.burning_indices
+        burning_count = int(burning_indices.shape[0])
+
+        fire_center_x = math.nan
+        fire_center_y = math.nan
+        leftmost_x = math.nan
+        leftmost_y = math.nan
+        rightmost_x = math.nan
+        rightmost_y = math.nan
+        uppermost_x = math.nan
+        uppermost_y = math.nan
+        lowermost_x = math.nan
+        lowermost_y = math.nan
+        spread_angle = math.nan
+        spread_ray_hit_x = math.nan
+        spread_ray_hit_y = math.nan
+        distance_fire_line = math.nan
+        distance_water = math.nan
+        distance_boundary_to_water = 1.0
+        distance_boundary_to_vip = 1.0
+        distance_boundary_to_vegetation = 1.0
+        distance_boundary_to_topography = 1.0
+        distance_boundary_to_indirect = 1.0
+
+        if burning_count:
+            fire_positions = self.sim.wildfire.fire_positions
+            centroid = fire_positions.mean(axis=0)
+            fire_center_x = float(centroid[0])
+            fire_center_y = float(centroid[1])
+
+            leftmost_idx = int(np.argmin(fire_positions[:, 0]))
+            rightmost_idx = int(np.argmax(fire_positions[:, 0]))
+            uppermost_idx = int(np.argmax(fire_positions[:, 1]))
+            lowermost_idx = int(np.argmin(fire_positions[:, 1]))
+            leftmost_x, leftmost_y = map(float, fire_positions[leftmost_idx])
+            rightmost_x, rightmost_y = map(float, fire_positions[rightmost_idx])
+            uppermost_x, uppermost_y = map(float, fire_positions[uppermost_idx])
+            lowermost_x, lowermost_y = map(float, fire_positions[lowermost_idx])
+
+            centroid_idx = burning_indices.mean(axis=0)
+            spread_rates = self.sim.wildfire.get_spread_rates(burning_indices)
+            fastest_idx = burning_indices[int(np.argmax(spread_rates))]
+            angle = math.degrees(
+                math.atan2(
+                    fastest_idx[0] - centroid_idx[0],
+                    fastest_idx[1] - centroid_idx[1],
+                )
+            )
+            spread_angle = float((angle + 360.0) % 360.0)
+
+            if self.water_positions.size:
+                distance_water = float(
+                    np.linalg.norm(self.water_positions - centroid, axis=1).min()
+                )
+
+            fire_block_indices = self.sim.firefighters.fire_block_indices
+            if (
+                fire_block_indices is not None
+                and self.sim.firefighters.current_block_index > 0
+            ):
+                distance_fire_line = self._distance_to_fire_line_m(burning_indices)
+
+        time_to_sunset = max(
+            (self.sim.atmosphere.next_sunset - mission_time).total_seconds() / 60.0,
+            0.0,
+        )
+
+        x_min = self._coord_x_min
+        x_max = self._coord_x_max
+        y_min = self._coord_y_min
+        y_max = self._coord_y_max
+        coord_width = self._coord_width
+        coord_height = self._coord_height
+        map_diagonal = self._map_diagonal
+
+        boundary_left = 0.0
+        boundary_right = 0.0
+        boundary_bottom = 0.0
+        boundary_top = 0.0
+
+        if burning_count:
+            fire_positions = self.sim.wildfire.fire_positions
+            min_x = float(fire_positions[:, 0].min())
+            max_x = float(fire_positions[:, 0].max())
+            min_y = float(fire_positions[:, 1].min())
+            max_y = float(fire_positions[:, 1].max())
+            boundary_left = float(max(min_x - x_min, 0.0))
+            boundary_right = float(max(x_max - max_x, 0.0))
+            boundary_bottom = float(max(min_y - y_min, 0.0))
+            boundary_top = float(max(y_max - max_y, 0.0))
+
+        # Ray cast from fire center in spread direction to first map boundary hit.
+        if (
+            not math.isnan(fire_center_x)
+            and not math.isnan(fire_center_y)
+            and not math.isnan(spread_angle)
+        ):
+            theta = math.radians(spread_angle)
+            dir_x = math.cos(theta)
+            dir_y = math.sin(theta)
+            eps = 1e-9
+            candidates: list[float] = []
+
+            if abs(dir_x) > eps:
+                t_left = (x_min - fire_center_x) / dir_x
+                y_left = fire_center_y + t_left * dir_y
+                if t_left >= 0.0 and y_min <= y_left <= y_max:
+                    candidates.append(t_left)
+
+                t_right = (x_max - fire_center_x) / dir_x
+                y_right = fire_center_y + t_right * dir_y
+                if t_right >= 0.0 and y_min <= y_right <= y_max:
+                    candidates.append(t_right)
+
+            if abs(dir_y) > eps:
+                t_bottom = (y_min - fire_center_y) / dir_y
+                x_bottom = fire_center_x + t_bottom * dir_x
+                if t_bottom >= 0.0 and x_min <= x_bottom <= x_max:
+                    candidates.append(t_bottom)
+
+                t_top = (y_max - fire_center_y) / dir_y
+                x_top = fire_center_x + t_top * dir_x
+                if t_top >= 0.0 and x_min <= x_top <= x_max:
+                    candidates.append(t_top)
+
+            if candidates:
+                t_hit = min(candidates)
+                spread_ray_hit_x = fire_center_x + t_hit * dir_x
+                spread_ray_hit_y = fire_center_y + t_hit * dir_y
+
+        if burning_count:
+            boundary_points = np.array(
+                [
+                    [leftmost_x, leftmost_y],
+                    [rightmost_x, rightmost_y],
+                    [uppermost_x, uppermost_y],
+                    [lowermost_x, lowermost_y],
+                ],
+                dtype=float,
+            )
+            distance_boundary_to_water = self._distance_boundary_to_poi(
+                boundary_points, self.water_positions, map_diagonal
+            )
+            distance_boundary_to_vip = self._distance_boundary_to_poi(
+                boundary_points, self.vip_positions, map_diagonal
+            )
+            distance_boundary_to_vegetation = self._distance_boundary_to_poi(
+                boundary_points, self.vegetation_poi_positions, map_diagonal
+            )
+            distance_boundary_to_topography = self._distance_boundary_to_poi(
+                boundary_points, self.topography_poi_positions, map_diagonal
+            )
+            indirect_positions = self._current_indirect_poi_positions()
+            distance_boundary_to_indirect = self._distance_boundary_to_poi(
+                boundary_points, indirect_positions, map_diagonal
+            )
+
+        atmosphere_inputs = self.parameters.atmosphere_inputs
+        temp_min, temp_max = -20.0, 50.0
+        if hasattr(atmosphere_inputs, "temperature_range"):
+            try:
+                temperature_values = tuple(
+                    float(value) for value in atmosphere_inputs.temperature_range
+                )
+                if temperature_values:
+                    temp_min = min(temperature_values)
+                    temp_max = max(temperature_values)
+            except Exception:
+                pass
+        if temp_max <= temp_min:
+            temp_max = temp_min + 1.0
+
+        wind_speed_upper = max(20.0, float(atmosphere.wind_speed), 1.0)
+        if (
+            hasattr(atmosphere_inputs, "wind_run")
+            and hasattr(atmosphere_inputs, "sun_times")
+        ):
+            try:
+                wind_run = float(atmosphere_inputs.wind_run)
+                sun_rise, sunset = atmosphere_inputs.sun_times
+                t1 = float(sun_rise) + 1.0
+                t2 = 15.0
+                t3 = float(sunset) + 2.0
+                sf1 = 4.0 * (t2 - t1)
+                sf2 = 4.0 * (t3 - t2)
+                wind_min = wind_run * 0.0080
+                denom = 3600.0 * (sf1 + sf2)
+                wind_amp = 0.0
+                if denom > 0.0:
+                    wind_amp = (
+                        (wind_run - wind_min * 24.0 * 3.6)
+                        * 2.0
+                        * math.pi
+                        * 1000.0
+                    ) / denom
+                wind_speed_upper = max(1.0, wind_min + abs(wind_amp))
+            except Exception:
+                wind_speed_upper = max(20.0, float(atmosphere.wind_speed), 1.0)
+
+        day_minutes = 24.0 * 60.0
+
+        time_since_detection_norm = _scale_to_unit(
+            float(time_since_detection_min), 0.0, day_minutes
+        )
+        temperature_norm = _scale_to_unit(
+            float(atmosphere.temperature), temp_min, temp_max
+        )
+        humidity_norm = _scale_to_unit(float(atmosphere.relative_humidity), 0.0, 100.0)
+        wind_speed_norm = _scale_to_unit(
+            float(atmosphere.wind_speed), 0.0, wind_speed_upper
+        )
+        wind_direction_norm = _scale_to_unit(
+            float((atmosphere.wind_aspect + 360.0) % 360.0), 0.0, 360.0
+        )
+        time_to_sunset_norm = _scale_to_unit(float(time_to_sunset), 0.0, day_minutes)
+        distance_fire_line_norm = (
+            _scale_to_unit(float(distance_fire_line), 0.0, map_diagonal)
+            if not math.isnan(distance_fire_line)
+            else 0.0
+        )
+        distance_water_norm = (
+            _scale_to_unit(float(distance_water), 0.0, map_diagonal)
+            if not math.isnan(distance_water)
+            else 0.0
+        )
+
+        fire_center_x_norm = (
+            _scale_to_unit(float(fire_center_x), x_min, x_max)
+            if not math.isnan(fire_center_x)
+            else 0.0
+        )
+        fire_center_y_norm = (
+            _scale_to_unit(float(fire_center_y), y_min, y_max)
+            if not math.isnan(fire_center_y)
+            else 0.0
+        )
+        leftmost_x_norm = (
+            _scale_to_unit(float(leftmost_x), x_min, x_max)
+            if not math.isnan(leftmost_x)
+            else 0.0
+        )
+        leftmost_y_norm = (
+            _scale_to_unit(float(leftmost_y), y_min, y_max)
+            if not math.isnan(leftmost_y)
+            else 0.0
+        )
+        rightmost_x_norm = (
+            _scale_to_unit(float(rightmost_x), x_min, x_max)
+            if not math.isnan(rightmost_x)
+            else 0.0
+        )
+        rightmost_y_norm = (
+            _scale_to_unit(float(rightmost_y), y_min, y_max)
+            if not math.isnan(rightmost_y)
+            else 0.0
+        )
+        uppermost_x_norm = (
+            _scale_to_unit(float(uppermost_x), x_min, x_max)
+            if not math.isnan(uppermost_x)
+            else 0.0
+        )
+        uppermost_y_norm = (
+            _scale_to_unit(float(uppermost_y), y_min, y_max)
+            if not math.isnan(uppermost_y)
+            else 0.0
+        )
+        lowermost_x_norm = (
+            _scale_to_unit(float(lowermost_x), x_min, x_max)
+            if not math.isnan(lowermost_x)
+            else 0.0
+        )
+        lowermost_y_norm = (
+            _scale_to_unit(float(lowermost_y), y_min, y_max)
+            if not math.isnan(lowermost_y)
+            else 0.0
+        )
+        spread_angle_norm = (
+            _scale_to_unit(float(spread_angle), 0.0, 360.0)
+            if not math.isnan(spread_angle)
+            else 0.0
+        )
+        spread_ray_hit_x_norm = (
+            _scale_to_unit(float(spread_ray_hit_x), x_min, x_max)
+            if not math.isnan(spread_ray_hit_x)
+            else 0.0
+        )
+        spread_ray_hit_y_norm = (
+            _scale_to_unit(float(spread_ray_hit_y), y_min, y_max)
+            if not math.isnan(spread_ray_hit_y)
+            else 0.0
+        )
+        boundary_left_norm = _scale_to_unit(float(boundary_left), 0.0, coord_width)
+        boundary_right_norm = _scale_to_unit(float(boundary_right), 0.0, coord_width)
+        boundary_bottom_norm = _scale_to_unit(float(boundary_bottom), 0.0, coord_height)
+        boundary_top_norm = _scale_to_unit(float(boundary_top), 0.0, coord_height)
+
+        agents = self.sim.firefighters.firefighters
+        state_features: list[float] = []
+        if self.include_scenario_flag:
+            state_features.extend(
+                _clip01(value) for value in self._current_scenario_one_hot()
+            )
+        state_features.extend(
+            [
+                time_since_detection_norm,
+                temperature_norm,
+                humidity_norm,
+                wind_speed_norm,
+                wind_direction_norm,
+                time_to_sunset_norm,
+                distance_fire_line_norm,
+                distance_water_norm,
+                _clip01(distance_boundary_to_water),
+                _clip01(distance_boundary_to_vip),
+                _clip01(distance_boundary_to_vegetation),
+                _clip01(distance_boundary_to_topography),
+                _clip01(distance_boundary_to_indirect),
+                fire_center_x_norm,
+                fire_center_y_norm,
+                leftmost_x_norm,
+                leftmost_y_norm,
+                rightmost_x_norm,
+                rightmost_y_norm,
+                uppermost_x_norm,
+                uppermost_y_norm,
+                lowermost_x_norm,
+                lowermost_y_norm,
+                spread_angle_norm,
+                spread_ray_hit_x_norm,
+                spread_ray_hit_y_norm,
+                boundary_left_norm,
+                boundary_right_norm,
+                boundary_bottom_norm,
+                boundary_top_norm,
+            ]
+        )
+
+        for idx in range(self.controlled_agent_count):
+            if idx < len(agents):
+                agent = agents[idx]
+                pos_x, pos_y = agent.pos
+                norm_x = _scale_to_unit(float(pos_x), x_min, x_max)
+                norm_y = _scale_to_unit(float(pos_y), y_min, y_max)
+
+                state_features.extend(
+                    [
+                        norm_x,
+                        norm_y,
+                    ]
+                )
+            else:
+                state_features.extend([0.0] * self.agent_feature_count)
+
+        obs = np.array(state_features, dtype=np.float32)
         obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
         np.clip(obs, 0.0, 1.0, out=obs)
         return obs
@@ -2713,11 +3231,15 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 pos_x, pos_y = agent.pos
                 norm_x = _scale_to_unit(float(pos_x), x_min, x_max)
                 norm_y = _scale_to_unit(float(pos_y), y_min, y_max)
+                norm_alt = _scale_to_unit(
+                    float(agent.altitude), 0.0, ALTITUDE_NORM_M
+                )
 
                 state_features.extend(
                     [
                         norm_x,
                         norm_y,
+                        norm_alt,
                     ]
                 )
             else:
@@ -3247,6 +3769,19 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--water-set",
+        choices=["1", "2", "off"],
+        default="off",
+        help=(
+            "Select a pre-generated water-source subset (see "
+            "examples/wildfire/generate_water_sets.py). "
+            "'1' = bodies the current fleet can scoop (smaller set); "
+            "'2' = bodies example_aircraft_1 (6x6) can scoop (larger set); "
+            "'off' (default) = the full {namespace}_water_sources.pkl. "
+            "Resolves to {namespace}_water_sources_set{N}.pkl, which must exist."
+        ),
+    )
+    parser.add_argument(
         "--adaptive-step-size-factor",
         type=float,
         default=None,
@@ -3293,7 +3828,8 @@ def main() -> None:
             "Observation/state-space definition to use. 'large' is the "
             "current full state vector; 'small' uses only per-front flag sets; "
             "'mixed' uses per-front flags plus boundary, fire-line, and "
-            "spread-ray features."
+            "spread-ray features; 'old' matches ppo_runner.py's original "
+            "state vector."
         ),
     )
     parser.add_argument(
@@ -3322,12 +3858,6 @@ def main() -> None:
     )
     parser.add_argument(
         "--policy-arch",
-        help=argparse.SUPPRESS,
-    )
-    parser.add_argument(
-        "--propagation-mode",
-        choices=("binary",),
-        default="binary",
         help=argparse.SUPPRESS,
     )
     parser.add_argument(
@@ -3426,6 +3956,7 @@ def main() -> None:
             "(lower memory), spawn otherwise."
         ),
     )
+    #thread
     parser.add_argument(
         "--num-envs",
         type=int,
@@ -3547,7 +4078,6 @@ def main() -> None:
         switch_scenario_paths = tuple(_resolve_scenario(name) for name in switch_names)
         if not switch_scenario_paths:
             raise ValueError("--switch-scenarios must contain at least one scenario.")
-        _validate_switch_scenario_agent_counts(switch_scenario_paths)
         aircraft_source_scenario_path = None
         scenario_path = switch_scenario_paths[0]
         switch_names_pretty = ", ".join(path.name for path in switch_scenario_paths)
@@ -3588,6 +4118,22 @@ def main() -> None:
                 f"--controlled-agent-count={args.controlled_agent_count} exceeds "
                 f"the {_fleet_size} aircraft defined in {Path(_fleet_path).name}."
             )
+    # Normalize --water-set ("off" -> None, "1"/"2" -> int) and verify the
+    # corresponding pre-generated pkl exists for every scenario in use.
+    args.water_set = None if args.water_set == "off" else int(args.water_set)
+    if args.water_set is not None:
+        for _fleet_path in _fleet_paths:
+            _ns = json.loads(Path(_fleet_path).read_text())["terrain_inputs"][
+                "file_namespace"
+            ]
+            _wf = TERRAIN_DIR / f"{_ns}_water_sources_set{args.water_set}.pkl"
+            if not _wf.exists():
+                raise FileNotFoundError(
+                    f"--water-set {args.water_set} requires {_wf}, which is "
+                    "missing. Generate it first:\n  python -m "
+                    "examples.wildfire.generate_water_sets --scenario "
+                    f"\"{Path(_fleet_path).name}\""
+                )
     if (
         args.adaptive_step_size_factor is not None
         and args.adaptive_step_size_factor <= 0.0
@@ -3664,6 +4210,7 @@ def main() -> None:
             tactic_distribution=args.tactic_distribution,
             aircraft_group_size=args.aircraft_group_size,
             controlled_agent_count=args.controlled_agent_count,
+            water_set=args.water_set,
             enable_adaptive_time_step=adaptive_time_step_override,
             adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
@@ -3685,6 +4232,7 @@ def main() -> None:
             tactic_distribution=args.tactic_distribution,
             aircraft_group_size=args.aircraft_group_size,
             controlled_agent_count=args.controlled_agent_count,
+            water_set=args.water_set,
             enable_adaptive_time_step=adaptive_time_step_override,
             adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
@@ -3754,7 +4302,7 @@ def main() -> None:
     )
     print(
         f"Tactic distribution: {args.tactic_distribution}; "
-        f"controlled_aircraft={CONTROLLED_AGENT_COUNT}; "
+        f"controlled_aircraft={args.controlled_agent_count}; "
         f"aircraft_group_size={args.aircraft_group_size}; "
         f"action_decisions={len(train_env.action_space.nvec)}"
     )
