@@ -354,11 +354,21 @@ STATE_SPACE_LARGE = "large"
 STATE_SPACE_SMALL = "small"
 STATE_SPACE_MIXED = "mixed"
 STATE_SPACE_OLD = "old"
+STATE_SPACE_UPDATED = "updated"
 SUPPORTED_STATE_SPACES: tuple[str, ...] = (
     STATE_SPACE_LARGE,
     STATE_SPACE_SMALL,
     STATE_SPACE_MIXED,
     STATE_SPACE_OLD,
+    STATE_SPACE_UPDATED,
+)
+
+AGGREGATE_FRONT_FLAG_FEATURES: tuple[str, ...] = (
+    "topography_flag",
+    "vegetation_flag",
+    "indirect_flag",
+    "urban_flag",
+    "water_flag",
 )
 
 LARGE_STATE_FEATURES = [
@@ -380,21 +390,18 @@ LARGE_STATE_FEATURES = [
     "spread_ray_hit_x",
     "spread_ray_hit_y",
     "max_spread_rate_norm",
-    "topography_flag",
-    "vegetation_flag",
-    "indirect_flag",
-    "urban_flag",
-    "water_flag",
+    *AGGREGATE_FRONT_FLAG_FEATURES,
     "distance_left_boundary",
     "distance_right_boundary",
     "distance_bottom_boundary",
     "distance_top_boundary",
 ]
 
-# Legacy ppo_runner state used by the older fixed/switch runs. It intentionally
-# excludes newer fields such as max_spread_rate_norm so 3 aircraft produce
-# 30 + 2*3 = 36 observation features.
-OLD_STATE_FEATURES = [
+# The "updated" state is the per-aircraft-altitude variant: it excludes the
+# fire->water distance, keeps each aircraft's altitude channel, and includes the
+# aggregate front flags computed from up to `state_fire_fronts` inspected fronts.
+# With 3 aircraft this is 34 + 3*3 = 43 observation features.
+UPDATED_STATE_FEATURES = [
     "time_since_detection_min",
     "temperature_c",
     "humidity_pct",
@@ -402,7 +409,6 @@ OLD_STATE_FEATURES = [
     "wind_direction_deg",
     "time_to_sunset_min",
     "distance_to_fire_line_m",
-    "distance_to_water_m",
     "distance_fire_boundary_to_water",
     "distance_fire_boundary_to_vip",
     "distance_fire_boundary_to_vegetation",
@@ -421,11 +427,26 @@ OLD_STATE_FEATURES = [
     "spread_angle_deg",
     "spread_ray_hit_x",
     "spread_ray_hit_y",
+    *AGGREGATE_FRONT_FLAG_FEATURES,
     "distance_left_boundary",
     "distance_right_boundary",
     "distance_bottom_boundary",
     "distance_top_boundary",
 ]
+
+# The "old" state mirrors ppo_runner.py (v1)'s original vector: it adds the
+# fire-centroid -> nearest-water distance (after distance_to_fire_line_m) and
+# drops the per-aircraft altitude channel, so 3 aircraft produce 30 + 2*3 = 36
+# features.
+OLD_STATE_FEATURES = (
+    UPDATED_STATE_FEATURES[:7]
+    + ["distance_to_water_m"]
+    + [
+        feature
+        for feature in UPDATED_STATE_FEATURES[7:]
+        if feature not in AGGREGATE_FRONT_FLAG_FEATURES
+    ]
+)
 
 MIXED_STATE_FEATURES: tuple[str, ...] = (
     "distance_left_boundary",
@@ -437,15 +458,6 @@ MIXED_STATE_FEATURES: tuple[str, ...] = (
     "spread_ray_hit_x",
     "spread_ray_hit_y",
 )
-
-AGGREGATE_FRONT_FLAG_FEATURES: tuple[str, ...] = (
-    "topography_flag",
-    "vegetation_flag",
-    "indirect_flag",
-    "urban_flag",
-    "water_flag",
-)
-
 
 def _normalize_state_space(state_space: str) -> str:
     normalized = str(state_space).strip().lower()
@@ -478,10 +490,14 @@ def _state_core_feature_names(
         return _per_front_flag_feature_names(state_fire_fronts) + MIXED_STATE_FEATURES
     if normalized == STATE_SPACE_OLD:
         return tuple(OLD_STATE_FEATURES)
+    if normalized == STATE_SPACE_UPDATED:
+        return tuple(UPDATED_STATE_FEATURES)
     raise RuntimeError(f"Unhandled state space: {state_space!r}")
 
 
 def _agent_feature_count(state_space: str) -> int:
+    # "old" drops per-aircraft altitude (x, y only); every other state
+    # space keeps the altitude channel.
     if _normalize_state_space(state_space) == STATE_SPACE_OLD:
         return 2
     return AGENT_FEATURE_COUNT
@@ -1813,7 +1829,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
         self.vegetation_poi_positions = np.empty((0, 2), dtype=float)
         self.topography_poi_positions = np.empty((0, 2), dtype=float)
-        if self.state_space != STATE_SPACE_OLD:
+        if self.state_space not in (STATE_SPACE_OLD, STATE_SPACE_UPDATED):
             return
 
         priority_map = np.asarray(
@@ -2354,7 +2370,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             return self._compute_small_state()
         if self.state_space == STATE_SPACE_MIXED:
             return self._compute_mixed_state()
-        if self.state_space == STATE_SPACE_OLD:
+        if self.state_space in (STATE_SPACE_OLD, STATE_SPACE_UPDATED):
             return self._compute_old_state()
         raise RuntimeError(f"Unhandled state space: {self.state_space!r}")
 
@@ -2548,7 +2564,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
     def _compute_old_state(self) -> np.ndarray:
         assert self.sim is not None
-        self._clear_fire_front_summary()
+        if self.state_space == STATE_SPACE_OLD:
+            self._clear_fire_front_summary()
         atmosphere = self.sim.atmosphere
         mission_time = self.sim.timer.mission_time
         time_since_detection_min = (
@@ -2582,8 +2599,20 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         distance_boundary_to_vegetation = 1.0
         distance_boundary_to_topography = 1.0
         distance_boundary_to_indirect = 1.0
+        topography_flag = 0.0
+        vegetation_flag = 0.0
+        indirect_flag = 0.0
+        urban_flag = 0.0
+        water_flag = 0.0
 
         if burning_count:
+            if self.state_space == STATE_SPACE_UPDATED:
+                front_summary = self._compute_fire_front_summary(burning_indices)
+                topography_flag = float(front_summary["topography_flag"])
+                vegetation_flag = float(front_summary["vegetation_flag"])
+                indirect_flag = float(front_summary["indirect_flag"])
+                urban_flag = float(front_summary["urban_flag"])
+                water_flag = float(front_summary["water_flag"])
             fire_positions = self.sim.wildfire.fire_positions
             centroid = fire_positions.mean(axis=0)
             fire_center_x = float(centroid[0])
@@ -2620,6 +2649,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 and self.sim.firefighters.current_block_index > 0
             ):
                 distance_fire_line = self._distance_to_fire_line_m(burning_indices)
+        else:
+            self._clear_fire_front_summary()
 
         time_to_sunset = max(
             (self.sim.atmosphere.next_sunset - mission_time).total_seconds() / 60.0,
@@ -2861,16 +2892,21 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             state_features.extend(
                 _clip01(value) for value in self._current_scenario_one_hot()
             )
-        state_features.extend(
+        core_values = [
+            time_since_detection_norm,
+            temperature_norm,
+            humidity_norm,
+            wind_speed_norm,
+            wind_direction_norm,
+            time_to_sunset_norm,
+            distance_fire_line_norm,
+        ]
+        # "old" adds the fire->water distance right after the fire-line
+        # distance; "updated" omits that distance.
+        if self.state_space == STATE_SPACE_OLD:
+            core_values.append(distance_water_norm)
+        core_values.extend(
             [
-                time_since_detection_norm,
-                temperature_norm,
-                humidity_norm,
-                wind_speed_norm,
-                wind_direction_norm,
-                time_to_sunset_norm,
-                distance_fire_line_norm,
-                distance_water_norm,
                 _clip01(distance_boundary_to_water),
                 _clip01(distance_boundary_to_vip),
                 _clip01(distance_boundary_to_vegetation),
@@ -2889,26 +2925,43 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 spread_angle_norm,
                 spread_ray_hit_x_norm,
                 spread_ray_hit_y_norm,
+            ]
+        )
+        if self.state_space == STATE_SPACE_UPDATED:
+            core_values.extend(
+                [
+                    _clip01(topography_flag),
+                    _clip01(vegetation_flag),
+                    _clip01(indirect_flag),
+                    _clip01(urban_flag),
+                    _clip01(water_flag),
+                ]
+            )
+        core_values.extend(
+            [
                 boundary_left_norm,
                 boundary_right_norm,
                 boundary_bottom_norm,
                 boundary_top_norm,
             ]
         )
+        state_features.extend(core_values)
 
         for idx in range(self.controlled_agent_count):
             if idx < len(agents):
                 agent = agents[idx]
                 pos_x, pos_y = agent.pos
-                norm_x = _scale_to_unit(float(pos_x), x_min, x_max)
-                norm_y = _scale_to_unit(float(pos_y), y_min, y_max)
-
-                state_features.extend(
-                    [
-                        norm_x,
-                        norm_y,
-                    ]
-                )
+                agent_values = [
+                    _scale_to_unit(float(pos_x), x_min, x_max),
+                    _scale_to_unit(float(pos_y), y_min, y_max),
+                ]
+                # "updated" keeps the per-aircraft altitude channel and adds
+                # aggregate front flags; "old" drops both.
+                if self.state_space == STATE_SPACE_UPDATED:
+                    agent_values.append(
+                        _scale_to_unit(float(agent.altitude), 0.0, ALTITUDE_NORM_M)
+                    )
+                state_features.extend(agent_values)
             else:
                 state_features.extend([0.0] * self.agent_feature_count)
 
@@ -3829,7 +3882,10 @@ def main() -> None:
             "current full state vector; 'small' uses only per-front flag sets; "
             "'mixed' uses per-front flags plus boundary, fire-line, and "
             "spread-ray features; 'old' matches ppo_runner.py's original "
-            "state vector."
+            "state vector (36 features: includes fire->water distance, no "
+            "per-aircraft altitude); 'updated' is the altitude/front-flag "
+            "variant (43 features: adds per-aircraft altitude and aggregate "
+            "front flags, drops fire->water distance)."
         ),
     )
     parser.add_argument(
@@ -4300,6 +4356,14 @@ def main() -> None:
         f"State space: {args.state_space} "
         f"({len(train_env.observation_space.low)} observation features)"
     )
+    fleet_desc = "; ".join(
+        f"{_fleet_path.name}={_scenario_agent_count(_fleet_path)}"
+        for _fleet_path in _fleet_paths
+    )
+    print(
+        f"Fleet size (scenario agents): {fleet_desc}; "
+        f"policy-controlled: {args.controlled_agent_count}"
+    )
     print(
         f"Tactic distribution: {args.tactic_distribution}; "
         f"controlled_aircraft={args.controlled_agent_count}; "
@@ -4357,7 +4421,29 @@ def main() -> None:
         model.gamma = args.gamma
         model.ent_coef = args.ent_coef
         model._setup_lr_schedule()
-        model._setup_rollout_buffer()
+        # SB3 2.x exposes no public buffer-rebuild hook (_setup_model would
+        # reinitialize the loaded policy weights). Recreate the rollout buffer
+        # directly so the updated n_steps/gamma/gae_lambda take effect while the
+        # loaded policy is preserved.
+        from stable_baselines3.common.buffers import (
+            DictRolloutBuffer,
+            RolloutBuffer,
+        )
+
+        buffer_cls = (
+            DictRolloutBuffer
+            if isinstance(model.observation_space, spaces.Dict)
+            else RolloutBuffer
+        )
+        model.rollout_buffer = buffer_cls(
+            model.n_steps,
+            model.observation_space,
+            model.action_space,
+            device=model.device,
+            gamma=model.gamma,
+            gae_lambda=model.gae_lambda,
+            n_envs=model.n_envs,
+        )
         print(f"Loaded PPO policy from {load_path}")
     else:
         policy_kwargs = dict(

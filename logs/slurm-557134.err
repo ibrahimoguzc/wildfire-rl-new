@@ -1,0 +1,26 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+/home/ibrahimoguz/FirefightingSoS/rl-5-30/SoSID_X-Challenge-git/src/sosid/paths.py:13: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+	Command being timed: "python -u -m examples.wildfire.ppo_runnerv2 --scenario Palisades copy.json --num-envs 128 --timesteps 1008000 --device cpu --output-dir examples/wildfire/data/scenarios/outputs/palisades_lr00075_557134 --save-model palisades_lr00075.zip --progress-file-tag palisades_lr00075 --vec-start-method fork --state-fire-fronts 5 --gc-collect-on-reset --n-epochs 5 --learning-rate 0.00075 --gamma 0.99 --tactic-distribution individual --controlled-agent-count 3 --state-space old"
+	User time (seconds): 2255515.38
+	System time (seconds): 10094.82
+	Percent of CPU this job got: 5263%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 11:57:21
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1986872
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1762
+	Minor (reclaiming a frame) page faults: 6374594772
+	Voluntary context switches: 24021769
+	Involuntary context switches: 33765369
+	Swaps: 0
+	File system inputs: 462584
+	File system outputs: 2821304
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -1,0 +1,9 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Pyrenees_12p.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Policy arch: variant_a (shared 512->256 trunk, pi/vf heads of 128, ReLU)
+Using cpu device

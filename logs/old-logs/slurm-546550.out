@@ -1,0 +1,897 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-2 enabled: ignition randomized each episode in a map-centered box (margin 25% of map edge from each boundary).
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+State fire fronts inspected for front-derived flags (topography/vegetation/indirect/urban/water): 5
+Decision start delay override: 30.0 minutes
+Adaptive fire timestep: scenario value.
+Adaptive fire step-size factor: scenario/default value (active only when enable_adaptive_time_step=true).
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+State space: small (25 observation features)
+Vector env start method: fork
+Policy arch: independent pi=[512,256,128] / vf=[512,256,128], Tanh
+Using cpu device
+PPO hyperparams: lr=0.00035 (decay^0.6), n_epochs=5, gamma=0.99, ent_coef=0.0, target_kl=None
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Completed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+-----------------------------
+| time/              |      |
+|    fps             | 9    |
+|    iterations      | 1    |
+|    time_elapsed    | 526  |
+|    total_timesteps | 5184 |
+-----------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/palisades_v2_546550/results_palisades_v2_switchign_100_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 9          |
+|    iterations           | 2          |
+|    time_elapsed         | 1113       |
+|    total_timesteps      | 10368      |
+| train/                  |            |
+|    approx_kl            | 0.01199754 |
+|    clip_fraction        | 0.117      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -14.2      |
+|    explained_variance   | -0.0544    |
+|    learning_rate        | 0.000349   |
+|    loss                 | 0.011      |
+|    n_updates            | 5          |
+|    policy_gradient_loss | -0.018     |
+|    value_loss           | 0.0891     |
+----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Completed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/palisades_v2_546550/results_palisades_v2_switchign_200_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 9           |
+|    iterations           | 3           |
+|    time_elapsed         | 1696        |
+|    total_timesteps      | 15552       |
+| train/                  |             |
+|    approx_kl            | 0.013272677 |
+|    clip_fraction        | 0.119       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -14.1       |
+|    explained_variance   | 0.233       |
+|    learning_rate        | 0.000348    |
+|    loss                 | -0.000706   |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0186     |
+|    value_loss           | 0.0495      |
+-----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/palisades_v2_546550/results_palisades_v2_switchign_300_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 9           |
+|    iterations           | 4           |
+|    time_elapsed         | 2291        |
+|    total_timesteps      | 20736       |
+| train/                  |             |
+|    approx_kl            | 0.014914759 |
+|    clip_fraction        | 0.125       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -14.1       |
+|    explained_variance   | 0.252       |
+|    learning_rate        | 0.000347    |
+|    loss                 | -0.0251     |
+|    n_updates            | 15          |
+|    policy_gradient_loss | -0.0186     |
+|    value_loss           | 0.0355      |
+-----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/palisades_v2_546550/results_palisades_v2_switchign_400_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 9           |
+|    iterations           | 5           |
+|    time_elapsed         | 2878        |
+|    total_timesteps      | 25920       |
+| train/                  |             |
+|    approx_kl            | 0.014139409 |
+|    clip_fraction        | 0.142       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -14.1       |
+|    explained_variance   | 0.168       |
+|    learning_rate        | 0.000346    |
+|    loss                 | -0.00845    |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0193     |
+|    value_loss           | 0.0306      |
+-----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)

@@ -1,0 +1,2 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition enabled: ignition will be randomized each episode in non-water/non-urban interior cells.

@@ -1,0 +1,54 @@
+Resetting modules to system default. Reseting $MODULEPATH back to system default. All extra directories will be removed from $MODULEPATH.
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 2753, in <module>
+    main()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 2691, in main
+    model = PPO(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/ppo/ppo.py", line 171, in __init__
+    self._setup_model()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/ppo/ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/policies.py", line 592, in _build
+    self._build_mlp_extractor()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/policies.py", line 578, in _build_mlp_extractor
+    self.mlp_extractor = MlpExtractor(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/torch_layers.py", line 234, in __init__
+    policy_net.append(nn.Linear(last_layer_dim_pi, curr_layer_dim))
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 109, in __init__
+    torch.empty((out_features, in_features), **factory_kwargs)
+TypeError: empty() received an invalid combination of arguments - got (tuple, dtype=NoneType, device=NoneType), but expected one of:
+ * (tuple of ints size, *, tuple of names names, torch.memory_format memory_format = None, torch.dtype dtype = None, torch.layout layout = None, torch.device device = None, bool pin_memory = False, bool requires_grad = False)
+ * (tuple of ints size, *, torch.memory_format memory_format = None, Tensor out = None, torch.dtype dtype = None, torch.layout layout = None, torch.device device = None, bool pin_memory = False, bool requires_grad = False)
+
+Command exited with non-zero status 1
+	Command being timed: "python -u -m examples.wildfire.ppo_runner --scenario Pyrenees_12p.json --switch-ignition-1 --num-envs 36 --timesteps 1008000 --device cpu --policy-arch variant_a --output-dir examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507097 --save-model pyrenees12p_variant_a_1m.zip --progress-file-tag pyrenees12p_variant_a_1m --vec-start-method auto --gc-collect-on-reset"
+	User time (seconds): 181.63
+	System time (seconds): 13.84
+	Percent of CPU this job got: 754%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:25.92
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1167792
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1832
+	Minor (reclaiming a frame) page faults: 2275996
+	Voluntary context switches: 42448
+	Involuntary context switches: 325208
+	Swaps: 0
+	File system inputs: 372384
+	File system outputs: 168
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

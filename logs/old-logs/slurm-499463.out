@@ -1,0 +1,10 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-2 enabled: ignition randomized each episode in a map-centered box (margin 25% of map edge from each boundary).
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Pyrenees.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Pyrenees)

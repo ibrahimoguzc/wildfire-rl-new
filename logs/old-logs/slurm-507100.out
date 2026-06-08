@@ -1,0 +1,8269 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Pyrenees_12p.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Policy arch: variant_a (shared 512->256 ReLU trunk via SharedTrunkExtractor, pi/vf heads of 128, ReLU)
+Using cpu device
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------
+| time/              |      |
+|    fps             | 2    |
+|    iterations      | 1    |
+|    time_elapsed    | 2258 |
+|    total_timesteps | 5184 |
+-----------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 2           |
+|    time_elapsed         | 4762        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.013119009 |
+|    clip_fraction        | 0.154       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | -0.0426     |
+|    learning_rate        | 0.000498    |
+|    loss                 | -0.0201     |
+|    n_updates            | 7           |
+|    policy_gradient_loss | -0.0258     |
+|    value_loss           | 0.0463      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_1900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 3           |
+|    time_elapsed         | 7567        |
+|    total_timesteps      | 15552       |
+| train/                  |             |
+|    approx_kl            | 0.019127592 |
+|    clip_fraction        | 0.191       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.631       |
+|    learning_rate        | 0.000497    |
+|    loss                 | -0.00563    |
+|    n_updates            | 14          |
+|    policy_gradient_loss | -0.0265     |
+|    value_loss           | 0.0668      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_2900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 4           |
+|    time_elapsed         | 9894        |
+|    total_timesteps      | 20736       |
+| train/                  |             |
+|    approx_kl            | 0.020498049 |
+|    clip_fraction        | 0.208       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.646       |
+|    learning_rate        | 0.000495    |
+|    loss                 | -0.00788    |
+|    n_updates            | 21          |
+|    policy_gradient_loss | -0.0289     |
+|    value_loss           | 0.0786      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 5          |
+|    time_elapsed         | 12517      |
+|    total_timesteps      | 25920      |
+| train/                  |            |
+|    approx_kl            | 0.02258675 |
+|    clip_fraction        | 0.225      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.8      |
+|    explained_variance   | 0.638      |
+|    learning_rate        | 0.000493   |
+|    loss                 | -0.00552   |
+|    n_updates            | 28         |
+|    policy_gradient_loss | -0.0308    |
+|    value_loss           | 0.077      |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_3900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 6           |
+|    time_elapsed         | 15041       |
+|    total_timesteps      | 31104       |
+| train/                  |             |
+|    approx_kl            | 0.024959594 |
+|    clip_fraction        | 0.257       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.643       |
+|    learning_rate        | 0.000492    |
+|    loss                 | -0.000992   |
+|    n_updates            | 35          |
+|    policy_gradient_loss | -0.0366     |
+|    value_loss           | 0.0811      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_4900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 7           |
+|    time_elapsed         | 17577       |
+|    total_timesteps      | 36288       |
+| train/                  |             |
+|    approx_kl            | 0.024684241 |
+|    clip_fraction        | 0.255       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.655       |
+|    learning_rate        | 0.00049     |
+|    loss                 | -0.00766    |
+|    n_updates            | 42          |
+|    policy_gradient_loss | -0.0333     |
+|    value_loss           | 0.0745      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_5900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 8           |
+|    time_elapsed         | 20006       |
+|    total_timesteps      | 41472       |
+| train/                  |             |
+|    approx_kl            | 0.027325815 |
+|    clip_fraction        | 0.282       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.624       |
+|    learning_rate        | 0.000488    |
+|    loss                 | -0.00542    |
+|    n_updates            | 49          |
+|    policy_gradient_loss | -0.0349     |
+|    value_loss           | 0.0864      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 9           |
+|    time_elapsed         | 22694       |
+|    total_timesteps      | 46656       |
+| train/                  |             |
+|    approx_kl            | 0.031001626 |
+|    clip_fraction        | 0.307       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.612       |
+|    learning_rate        | 0.000487    |
+|    loss                 | -0.0169     |
+|    n_updates            | 56          |
+|    policy_gradient_loss | -0.0367     |
+|    value_loss           | 0.0728      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_6900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7400_summary.csv
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 10          |
+|    time_elapsed         | 25265       |
+|    total_timesteps      | 51840       |
+| train/                  |             |
+|    approx_kl            | 0.030688204 |
+|    clip_fraction        | 0.303       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.663       |
+|    learning_rate        | 0.000485    |
+|    loss                 | -0.00852    |
+|    n_updates            | 63          |
+|    policy_gradient_loss | -0.0376     |
+|    value_loss           | 0.0753      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_7900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 11          |
+|    time_elapsed         | 27747       |
+|    total_timesteps      | 57024       |
+| train/                  |             |
+|    approx_kl            | 0.030021215 |
+|    clip_fraction        | 0.295       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.5       |
+|    explained_variance   | 0.628       |
+|    learning_rate        | 0.000483    |
+|    loss                 | 0.00179     |
+|    n_updates            | 70          |
+|    policy_gradient_loss | -0.0378     |
+|    value_loss           | 0.0835      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_8900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 12          |
+|    time_elapsed         | 30200       |
+|    total_timesteps      | 62208       |
+| train/                  |             |
+|    approx_kl            | 0.032298166 |
+|    clip_fraction        | 0.313       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.5       |
+|    explained_variance   | 0.641       |
+|    learning_rate        | 0.000481    |
+|    loss                 | -0.0132     |
+|    n_updates            | 77          |
+|    policy_gradient_loss | -0.0393     |
+|    value_loss           | 0.0821      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9700_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 13          |
+|    time_elapsed         | 32619       |
+|    total_timesteps      | 67392       |
+| train/                  |             |
+|    approx_kl            | 0.030452514 |
+|    clip_fraction        | 0.29        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.5       |
+|    explained_variance   | 0.655       |
+|    learning_rate        | 0.00048     |
+|    loss                 | -0.00968    |
+|    n_updates            | 84          |
+|    policy_gradient_loss | -0.0355     |
+|    value_loss           | 0.0743      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_9900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 14         |
+|    time_elapsed         | 35087      |
+|    total_timesteps      | 72576      |
+| train/                  |            |
+|    approx_kl            | 0.03172299 |
+|    clip_fraction        | 0.297      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.5      |
+|    explained_variance   | 0.675      |
+|    learning_rate        | 0.000478   |
+|    loss                 | -0.0243    |
+|    n_updates            | 91         |
+|    policy_gradient_loss | -0.039     |
+|    value_loss           | 0.0687     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_10900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11300_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 15          |
+|    time_elapsed         | 37486       |
+|    total_timesteps      | 77760       |
+| train/                  |             |
+|    approx_kl            | 0.032733772 |
+|    clip_fraction        | 0.32        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.4       |
+|    explained_variance   | 0.65        |
+|    learning_rate        | 0.000476    |
+|    loss                 | -0.0181     |
+|    n_updates            | 98          |
+|    policy_gradient_loss | -0.0404     |
+|    value_loss           | 0.0752      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_11900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 16          |
+|    time_elapsed         | 39907       |
+|    total_timesteps      | 82944       |
+| train/                  |             |
+|    approx_kl            | 0.037683316 |
+|    clip_fraction        | 0.319       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.3       |
+|    explained_variance   | 0.653       |
+|    learning_rate        | 0.000475    |
+|    loss                 | -0.0183     |
+|    n_updates            | 105         |
+|    policy_gradient_loss | -0.0406     |
+|    value_loss           | 0.0733      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 17         |
+|    time_elapsed         | 42326      |
+|    total_timesteps      | 88128      |
+| train/                  |            |
+|    approx_kl            | 0.03534213 |
+|    clip_fraction        | 0.321      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.3      |
+|    explained_variance   | 0.66       |
+|    learning_rate        | 0.000473   |
+|    loss                 | -0.0124    |
+|    n_updates            | 112        |
+|    policy_gradient_loss | -0.0391    |
+|    value_loss           | 0.0665     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_12900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 18         |
+|    time_elapsed         | 44729      |
+|    total_timesteps      | 93312      |
+| train/                  |            |
+|    approx_kl            | 0.03484689 |
+|    clip_fraction        | 0.335      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.3      |
+|    explained_variance   | 0.688      |
+|    learning_rate        | 0.000471   |
+|    loss                 | -0.025     |
+|    n_updates            | 119        |
+|    policy_gradient_loss | -0.0392    |
+|    value_loss           | 0.0652     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_13900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 19          |
+|    time_elapsed         | 47054       |
+|    total_timesteps      | 98496       |
+| train/                  |             |
+|    approx_kl            | 0.039218124 |
+|    clip_fraction        | 0.341       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.2       |
+|    explained_variance   | 0.673       |
+|    learning_rate        | 0.000469    |
+|    loss                 | -0.02       |
+|    n_updates            | 126         |
+|    policy_gradient_loss | -0.0411     |
+|    value_loss           | 0.0684      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_14900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 20         |
+|    time_elapsed         | 49462      |
+|    total_timesteps      | 103680     |
+| train/                  |            |
+|    approx_kl            | 0.03469639 |
+|    clip_fraction        | 0.325      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.2      |
+|    explained_variance   | 0.662      |
+|    learning_rate        | 0.000468   |
+|    loss                 | -0.0263    |
+|    n_updates            | 133        |
+|    policy_gradient_loss | -0.039     |
+|    value_loss           | 0.0746     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_15900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 21          |
+|    time_elapsed         | 51748       |
+|    total_timesteps      | 108864      |
+| train/                  |             |
+|    approx_kl            | 0.034643717 |
+|    clip_fraction        | 0.332       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.2       |
+|    explained_variance   | 0.672       |
+|    learning_rate        | 0.000466    |
+|    loss                 | -0.0195     |
+|    n_updates            | 140         |
+|    policy_gradient_loss | -0.0397     |
+|    value_loss           | 0.0686      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 22          |
+|    time_elapsed         | 54037       |
+|    total_timesteps      | 114048      |
+| train/                  |             |
+|    approx_kl            | 0.034869544 |
+|    clip_fraction        | 0.347       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.1       |
+|    explained_variance   | 0.659       |
+|    learning_rate        | 0.000464    |
+|    loss                 | -0.0263     |
+|    n_updates            | 147         |
+|    policy_gradient_loss | -0.0379     |
+|    value_loss           | 0.0713      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_16900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 23         |
+|    time_elapsed         | 56310      |
+|    total_timesteps      | 119232     |
+| train/                  |            |
+|    approx_kl            | 0.03701072 |
+|    clip_fraction        | 0.326      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.1      |
+|    explained_variance   | 0.675      |
+|    learning_rate        | 0.000462   |
+|    loss                 | -0.0258    |
+|    n_updates            | 154        |
+|    policy_gradient_loss | -0.041     |
+|    value_loss           | 0.0663     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_17900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18300_summary.csv
+
+Mission Completed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 24         |
+|    time_elapsed         | 58403      |
+|    total_timesteps      | 124416     |
+| train/                  |            |
+|    approx_kl            | 0.03517199 |
+|    clip_fraction        | 0.33       |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.1      |
+|    explained_variance   | 0.662      |
+|    learning_rate        | 0.000461   |
+|    loss                 | -0.0301    |
+|    n_updates            | 161        |
+|    policy_gradient_loss | -0.0425    |
+|    value_loss           | 0.0611     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_18900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 25         |
+|    time_elapsed         | 60829      |
+|    total_timesteps      | 129600     |
+| train/                  |            |
+|    approx_kl            | 0.03985259 |
+|    clip_fraction        | 0.348      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36        |
+|    explained_variance   | 0.66       |
+|    learning_rate        | 0.000459   |
+|    loss                 | -0.0152    |
+|    n_updates            | 168        |
+|    policy_gradient_loss | -0.0407    |
+|    value_loss           | 0.0646     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 26          |
+|    time_elapsed         | 63321       |
+|    total_timesteps      | 134784      |
+| train/                  |             |
+|    approx_kl            | 0.032029565 |
+|    clip_fraction        | 0.313       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -35.9       |
+|    explained_variance   | 0.66        |
+|    learning_rate        | 0.000457    |
+|    loss                 | -0.0174     |
+|    n_updates            | 175         |
+|    policy_gradient_loss | -0.0383     |
+|    value_loss           | 0.0805      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_19900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 27         |
+|    time_elapsed         | 65758      |
+|    total_timesteps      | 139968     |
+| train/                  |            |
+|    approx_kl            | 0.03716117 |
+|    clip_fraction        | 0.334      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36        |
+|    explained_variance   | 0.681      |
+|    learning_rate        | 0.000455   |
+|    loss                 | -0.00844   |
+|    n_updates            | 182        |
+|    policy_gradient_loss | -0.0374    |
+|    value_loss           | 0.0689     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_20900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 28         |
+|    time_elapsed         | 68177      |
+|    total_timesteps      | 145152     |
+| train/                  |            |
+|    approx_kl            | 0.03036158 |
+|    clip_fraction        | 0.314      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36        |
+|    explained_variance   | 0.663      |
+|    learning_rate        | 0.000454   |
+|    loss                 | -0.0166    |
+|    n_updates            | 189        |
+|    policy_gradient_loss | -0.0371    |
+|    value_loss           | 0.0689     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_21900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+---------------------------------------
+| time/                   |           |
+|    fps                  | 2         |
+|    iterations           | 29        |
+|    time_elapsed         | 70579     |
+|    total_timesteps      | 150336    |
+| train/                  |           |
+|    approx_kl            | 0.0346861 |
+|    clip_fraction        | 0.338     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -35.9     |
+|    explained_variance   | 0.662     |
+|    learning_rate        | 0.000452  |
+|    loss                 | -0.0222   |
+|    n_updates            | 196       |
+|    policy_gradient_loss | -0.0423   |
+|    value_loss           | 0.0761    |
+---------------------------------------
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_22900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 30         |
+|    time_elapsed         | 72811      |
+|    total_timesteps      | 155520     |
+| train/                  |            |
+|    approx_kl            | 0.03753409 |
+|    clip_fraction        | 0.336      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -35.8      |
+|    explained_variance   | 0.633      |
+|    learning_rate        | 0.00045    |
+|    loss                 | -0.0241    |
+|    n_updates            | 203        |
+|    policy_gradient_loss | -0.0423    |
+|    value_loss           | 0.0703     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23800_summary.csv
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 31         |
+|    time_elapsed         | 75197      |
+|    total_timesteps      | 160704     |
+| train/                  |            |
+|    approx_kl            | 0.03264855 |
+|    clip_fraction        | 0.323      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -35.8      |
+|    explained_variance   | 0.667      |
+|    learning_rate        | 0.000448   |
+|    loss                 | -0.0226    |
+|    n_updates            | 210        |
+|    policy_gradient_loss | -0.0397    |
+|    value_loss           | 0.0625     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_23900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 32         |
+|    time_elapsed         | 77707      |
+|    total_timesteps      | 165888     |
+| train/                  |            |
+|    approx_kl            | 0.03543167 |
+|    clip_fraction        | 0.339      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -35.7      |
+|    explained_variance   | 0.669      |
+|    learning_rate        | 0.000447   |
+|    loss                 | -0.0171    |
+|    n_updates            | 217        |
+|    policy_gradient_loss | -0.0384    |
+|    value_loss           | 0.0652     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_24900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 33          |
+|    time_elapsed         | 80086       |
+|    total_timesteps      | 171072      |
+| train/                  |             |
+|    approx_kl            | 0.032249376 |
+|    clip_fraction        | 0.314       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -35.7       |
+|    explained_variance   | 0.672       |
+|    learning_rate        | 0.000445    |
+|    loss                 | -0.0218     |
+|    n_updates            | 224         |
+|    policy_gradient_loss | -0.0403     |
+|    value_loss           | 0.0755      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_25900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 34          |
+|    time_elapsed         | 82483       |
+|    total_timesteps      | 176256      |
+| train/                  |             |
+|    approx_kl            | 0.036824804 |
+|    clip_fraction        | 0.326       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -35.6       |
+|    explained_variance   | 0.641       |
+|    learning_rate        | 0.000443    |
+|    loss                 | -0.024      |
+|    n_updates            | 231         |
+|    policy_gradient_loss | -0.0417     |
+|    value_loss           | 0.0731      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_26900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 35         |
+|    time_elapsed         | 84999      |
+|    total_timesteps      | 181440     |
+| train/                  |            |
+|    approx_kl            | 0.03663959 |
+|    clip_fraction        | 0.343      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -35.6      |
+|    explained_variance   | 0.676      |
+|    learning_rate        | 0.000441   |
+|    loss                 | -0.0249    |
+|    n_updates            | 238        |
+|    policy_gradient_loss | -0.036     |
+|    value_loss           | 0.0648     |
+----------------------------------------
+
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_27000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_27000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_27100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_27200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees12p_variant_a_1m_507100/results_pyrenees12p_variant_a_1m_27300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)

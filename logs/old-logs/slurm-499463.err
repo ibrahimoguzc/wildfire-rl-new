@@ -1,0 +1,13 @@
+Resetting modules to system default. Reseting $MODULEPATH back to system default. All extra directories will be removed from $MODULEPATH.
+Process ForkProcess-4:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 35, in _worker
+    observation, reward, terminated, truncated, info = env.step(data)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 1927, in step
+    raise RuntimeError("step called on terminated environment.")
+RuntimeError: step called on terminated environment.
+slurmstepd: error: *** JOB 499463 ON owl025 CANCELLED AT 2026-05-06T11:53:17 ***

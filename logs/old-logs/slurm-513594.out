@@ -1,0 +1,1222 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Pyrenees_9p.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Policy arch: variant_a (shared 512->256 ReLU trunk via SharedTrunkExtractor, pi/vf heads of 128, ReLU)
+Using cpu device
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------
+| time/              |      |
+|    fps             | 1    |
+|    iterations      | 1    |
+|    time_elapsed    | 2657 |
+|    total_timesteps | 5184 |
+-----------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 1           |
+|    iterations           | 2           |
+|    time_elapsed         | 5376        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.013946752 |
+|    clip_fraction        | 0.176       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.0571      |
+|    learning_rate        | 0.000489    |
+|    loss                 | -0.0241     |
+|    n_updates            | 7           |
+|    policy_gradient_loss | -0.0275     |
+|    value_loss           | 0.0499      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_1000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_1000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_1100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 1           |
+|    iterations           | 3           |
+|    time_elapsed         | 8110        |
+|    total_timesteps      | 15552       |
+| train/                  |             |
+|    approx_kl            | 0.016415447 |
+|    clip_fraction        | 0.177       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.631       |
+|    learning_rate        | 0.000478    |
+|    loss                 | -0.0212     |
+|    n_updates            | 14          |
+|    policy_gradient_loss | -0.0292     |
+|    value_loss           | 0.061       |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_1200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees9p_variant_a_150k_513594/results_pyrenees9p_variant_a_150k_1300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)

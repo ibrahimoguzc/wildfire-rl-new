@@ -1,0 +1,278 @@
+{
+    "name": "Salamis",
+    "time_step": 1.0,
+    "enable_adaptive_time_step": true,
+    "mission_start": "2023-07-17T15:39:00",
+    "max_runtime": 86400,
+    "run_headless": true,
+    "output_sampling_time": 300,
+    "map_in_map": true,
+    "export_img": true,
+    "import_features_osm": true,
+    "deploy_osm_airport_locations": false,
+    "k_nearest_airports": 1,
+    "terrain_inputs": {
+        "file_namespace_operational": "Salamis_128x128_800",
+        "file_namespace": "Salamis_2004x1996_5m",
+        "cell_size": 5,
+        "height_scale_factor": 1.0,
+        "priority_map_sigma": 30,
+        "import_features_osm": true
+    },
+    "max_elevation": 1,
+    "estimate_cost": true,
+    "run_api_for_atmosphere": false,
+    "atmosphere_inputs": {
+        "temperature_range": [
+            22,
+            35,
+            22
+        ],
+        "temperature_times": [
+            5,
+            15
+        ],
+        "sun_times": [
+            6,
+            20
+        ],
+        "time_of_max_solar_height": 12,
+        "humidity_range": [
+            30,
+            40
+        ],
+        "wind_run": 305,
+        "general_winddirection": 230,
+        "range_winddirection": 30,
+        "update_frequency": 600,
+        "latitude": 42.865,
+        "longitude": 0.022
+    },
+    "correction_coefficient": 0.4,
+    "ignition_centers": [
+        {
+            "gps_coords": [
+                37.9115,
+                23.431
+            ]
+        }
+    ],
+    "airports": [
+        {
+            "gps_coords": [
+                37.9788,
+                23.3645
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                37.94232835679198,
+                23.63185201728529
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "water"
+        }
+    ],
+    "deploy_osm_waters": false,
+    "water_sources": [
+        {
+            "gps_coords": [
+                37.9282,
+                23.4435
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9250,
+                23.4639
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9275,
+                23.4162
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9306,
+                23.4071
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9202,
+                23.4100
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9104,
+                23.4033
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9022,
+                23.4076
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8926,
+                23.4023
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8902,
+                23.4135
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8899,
+                23.4225
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8873,
+                23.4282
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8812,
+                23.4392
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8742,
+                23.4462
+            ]
+        },
+        {
+            "gps_coords": [
+                37.8857,
+                23.4707
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9014,
+                23.5022
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9037,
+                23.5157
+            ]
+        },
+        {
+            "gps_coords": [
+                37.9112,
+                23.5132
+            ]
+        }
+    ],
+    "protection_locations": [],
+    "urban_locations": [
+        {
+            "gps_coords": [
+                37.92137,
+                23.45427
+            ],
+            "radius": [
+                1100,
+                500
+            ]
+        },
+        {
+            "gps_coords": [
+                37.915066,
+                23.48511
+            ],
+            "radius": [
+                400,
+                1000
+            ],
+            "angle": 45
+        },
+        {
+            "gps_coords": [
+                37.88381,
+                23.46251
+            ],
+            "radius": [
+                400,
+                250
+            ],
+            "angle": 30
+        },
+        {
+            "gps_coords": [
+                37.87954,
+                23.44628
+            ],
+            "radius": [
+                300,
+                250
+            ],
+            "angle": 70
+        },
+        {
+            "gps_coords": [
+                37.89147,
+                23.47787
+            ],
+            "radius": [
+                400,
+                200
+            ],
+            "angle": 0
+        }
+    ],
+    "response_time": 7200,
+    "takeoff_interval": 300,
+    "turnaround_time": 100,
+    "suppression_altitude": 50,
+    "resupply_altitude": 15,
+    "enable_nighttime_operations": true,
+    "agents": [
+      {
+          "file_name": "example_seaplane_1.json",
+          "agents_per_base": [
+              1,
+              2
+          ],
+          "suppression_tactic": {
+              "main": {
+                  "select_poi": "indirect",
+                  "track_poi": "indirect",
+                  "suppress": "indirect"
+              },
+              "alternative": {
+                  "threshold": 8,
+                  "change_condition": "runtime",
+                  "alternative_tactic": {
+                      "select_poi": "water",
+                      "track_poi": "follow_firefront",
+                      "suppress": "direct"
+                  }
+              }
+          }
+      }
+        
+    ],
+    "scoop_time": 30,
+    "distance_cost_weight": 1.0,
+    "vip_cost_weight": 1.0,
+    "priority_cost_weight": 1.0,
+    "vegetation_cost_weight": 1.0,
+    "topography_cost_weight": 1.0
+}

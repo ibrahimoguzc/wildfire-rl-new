@@ -21,7 +21,7 @@ INPUT_FILE = "Palisades copy.json"
 print(INPUT_FILE)
 OVERWRITES = None
 RUN_PROFILER = False
-SEED = 1
+SEED = 42
 
 OUTPUT_DIR = SCENARIOS_DIR / "outputs"
 input_filepath = SCENARIOS_DIR / "inputs" / INPUT_FILE

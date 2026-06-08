@@ -1,0 +1,1374 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+============================================================
+>>> SOLO PROFILE: Palisades copy.json
+============================================================
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=12, n_steps=144, effective_batch=1728, minibatches=12, batch_size=144
+Decision start delay: Palisades copy.json response_time / 60 = 60.0 minutes
+Allowed tactic combinations: 17
+Profiling: per-step/reset wall time and RSS enabled.
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+[profile-timings] rollout 1 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Palisades copy.json         1728     0.9234    1.7390       69      2.8728          0.6674       1599.2      1836.1      1836.1
+-----------------------------
+| time/              |      |
+|    fps             | 4    |
+|    iterations      | 1    |
+|    time_elapsed    | 352  |
+|    total_timesteps | 1728 |
+-----------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_palisades/results_profile_palisades_100_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+[profile-timings] rollout 2 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Palisades copy.json         1728     0.9378    1.7653       72      2.8000          0.6425       1619.6      1837.1      1697.6
+----------------------------------------
+| time/                   |            |
+|    fps                  | 4          |
+|    iterations           | 2          |
+|    time_elapsed         | 727        |
+|    total_timesteps      | 3456       |
+| train/                  |            |
+|    approx_kl            | 0.02947773 |
+|    clip_fraction        | 0.28       |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.8      |
+|    explained_variance   | 0.0291     |
+|    learning_rate        | 0.000444   |
+|    loss                 | -0.0233    |
+|    n_updates            | 5          |
+|    policy_gradient_loss | -0.0444    |
+|    value_loss           | 0.108      |
+----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+[profile-timings] rollout 3 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Palisades copy.json         1728     0.9086    1.7348       73      2.8109          0.6532       1626.6      1804.8      1804.8
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 4           |
+|    iterations           | 3           |
+|    time_elapsed         | 1096        |
+|    total_timesteps      | 5184        |
+| train/                  |             |
+|    approx_kl            | 0.033098206 |
+|    clip_fraction        | 0.234       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.475       |
+|    learning_rate        | 0.000384    |
+|    loss                 | -0.0598     |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0444     |
+|    value_loss           | 0.0302      |
+-----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_palisades/results_profile_palisades_200_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+[profile-timings] rollout 4 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Palisades copy.json         1728     0.9387    1.7757       75      2.8177          0.6628       1629.3      1804.8      1728.0
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 4           |
+|    iterations           | 4           |
+|    time_elapsed         | 1481        |
+|    total_timesteps      | 6912        |
+| train/                  |             |
+|    approx_kl            | 0.035223957 |
+|    clip_fraction        | 0.298       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.423       |
+|    learning_rate        | 0.000319    |
+|    loss                 | -0.0756     |
+|    n_updates            | 15          |
+|    policy_gradient_loss | -0.0523     |
+|    value_loss           | 0.00589     |
+-----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_palisades/results_profile_palisades_300_summary.csv
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+[profile-timings] rollout 5 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Palisades copy.json         1728     0.9263    1.7576       72      2.8006          0.6476       1616.1      1728.0      1667.0
+----------------------------------------
+| time/                   |            |
+|    fps                  | 4          |
+|    iterations           | 5          |
+|    time_elapsed         | 1859       |
+|    total_timesteps      | 8640       |
+| train/                  |            |
+|    approx_kl            | 0.03119543 |
+|    clip_fraction        | 0.248      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.7      |
+|    explained_variance   | 0.714      |
+|    learning_rate        | 0.000245   |
+|    loss                 | -0.0567    |
+|    n_updates            | 20         |
+|    policy_gradient_loss | -0.0489    |
+|    value_loss           | 0.00156    |
+----------------------------------------
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+
+Mission Failed (Palisades)
+[profile-timings] rollout 6 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Palisades copy.json         1728     0.9152    1.6943       74      2.8249          0.6722       1615.9      1746.0      1746.0
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 4           |
+|    iterations           | 6           |
+|    time_elapsed         | 2227        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.021341348 |
+|    clip_fraction        | 0.188       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.849       |
+|    learning_rate        | 0.000156    |
+|    loss                 | -0.0867     |
+|    n_updates            | 25          |
+|    policy_gradient_loss | -0.0491     |
+|    value_loss           | 0.000574    |
+-----------------------------------------
+Per-step log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_palisades/results_profile_palisades_365_steps.csv
+Training complete in 2228.25 seconds.
+Episode training summary written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_palisades/training_episode_summaries.csv
+Episode training summary written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_palisades/training_episode_summaries.xlsx
+============================================================
+>>> SOLO PROFILE: Pyrenees.json
+============================================================
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=12, n_steps=144, effective_batch=1728, minibatches=12, batch_size=144
+Decision start delay: Pyrenees.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Profiling: per-step/reset wall time and RSS enabled.
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_300_summary.csv
+[profile-timings] rollout 1 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Pyrenees.json               1728     2.7203    4.9840      311      6.7470          0.6311       1600.5      1692.8      1608.3
+-----------------------------
+| time/              |      |
+|    fps             | 1    |
+|    iterations      | 1    |
+|    time_elapsed    | 1611 |
+|    total_timesteps | 1728 |
+-----------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_600_summary.csv
+[profile-timings] rollout 2 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Pyrenees.json               1728     2.7555    5.2743      308      6.7189          0.6313       1604.0      1694.7      1638.5
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 1           |
+|    iterations           | 2           |
+|    time_elapsed         | 3152        |
+|    total_timesteps      | 3456        |
+| train/                  |             |
+|    approx_kl            | 0.024509802 |
+|    clip_fraction        | 0.256       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | -0.101      |
+|    learning_rate        | 0.000444    |
+|    loss                 | -0.0497     |
+|    n_updates            | 5           |
+|    policy_gradient_loss | -0.0331     |
+|    value_loss           | 0.0709      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_900_summary.csv
+
+Mission Completed (Pyrenees)
+[profile-timings] rollout 3 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Pyrenees.json               1728     2.4222    3.7479      338      6.6935          0.6282       1608.3      1701.4      1639.4
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 1           |
+|    iterations           | 3           |
+|    time_elapsed         | 4543        |
+|    total_timesteps      | 5184        |
+| train/                  |             |
+|    approx_kl            | 0.038635764 |
+|    clip_fraction        | 0.304       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.649       |
+|    learning_rate        | 0.000384    |
+|    loss                 | -0.0453     |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.043      |
+|    value_loss           | 0.0411      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+[profile-timings] rollout 4 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Pyrenees.json               1728     2.5908    4.6636      318      6.6853          0.6274       1611.5      1730.9      1701.3
+---------------------------------------
+| time/                   |           |
+|    fps                  | 1         |
+|    iterations           | 4         |
+|    time_elapsed         | 6034      |
+|    total_timesteps      | 6912      |
+| train/                  |           |
+|    approx_kl            | 0.0363578 |
+|    clip_fraction        | 0.308     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -36.7     |
+|    explained_variance   | 0.598     |
+|    learning_rate        | 0.000319  |
+|    loss                 | -0.0393   |
+|    n_updates            | 15        |
+|    policy_gradient_loss | -0.037    |
+|    value_loss           | 0.0298    |
+---------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[profile-timings] rollout 5 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Pyrenees.json               1728     2.6816    5.1045      310      6.6759          0.6246       1615.2      1747.3      1677.7
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 1           |
+|    iterations           | 5           |
+|    time_elapsed         | 7551        |
+|    total_timesteps      | 8640        |
+| train/                  |             |
+|    approx_kl            | 0.030003933 |
+|    clip_fraction        | 0.258       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.672       |
+|    learning_rate        | 0.000245    |
+|    loss                 | -0.0514     |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0391     |
+|    value_loss           | 0.029       |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+[profile-timings] rollout 6 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Pyrenees.json               1728     2.6002    4.6748      323      6.6658          0.6244       1614.4      1677.7      1677.7
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 1           |
+|    iterations           | 6           |
+|    time_elapsed         | 9020        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.022955596 |
+|    clip_fraction        | 0.194       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.638       |
+|    learning_rate        | 0.000156    |
+|    loss                 | -0.0357     |
+|    n_updates            | 25          |
+|    policy_gradient_loss | -0.0371     |
+|    value_loss           | 0.0457      |
+-----------------------------------------
+Per-step log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/results_profile_pyrenees_1856_steps.csv
+Training complete in 9021.36 seconds.
+Episode training summary written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/training_episode_summaries.csv
+Episode training summary written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_pyrenees/training_episode_summaries.xlsx
+============================================================
+>>> SOLO PROFILE: Salamis.json
+============================================================
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=12, n_steps=144, effective_batch=1728, minibatches=12, batch_size=144
+Decision start delay: Salamis.json response_time / 60 = 90.0 minutes
+Allowed tactic combinations: 17
+Profiling: per-step/reset wall time and RSS enabled.
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+[profile-timings] rollout 1 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis.json                1728     2.7804    3.1037       56     20.4514         19.4323       1574.7      1598.5      1598.5
+-----------------------------
+| time/              |      |
+|    fps             | 1    |
+|    iterations      | 1    |
+|    time_elapsed    | 1039 |
+|    total_timesteps | 1728 |
+-----------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+[profile-timings] rollout 2 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis.json                1728     2.7616    3.1027       57     20.3208         19.3781       1592.5      1701.8      1701.8
+----------------------------------------
+| time/                   |            |
+|    fps                  | 1          |
+|    iterations           | 2          |
+|    time_elapsed         | 2201       |
+|    total_timesteps      | 3456       |
+| train/                  |            |
+|    approx_kl            | 0.03144501 |
+|    clip_fraction        | 0.264      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.8      |
+|    explained_variance   | -1.36      |
+|    learning_rate        | 0.000444   |
+|    loss                 | -0.0665    |
+|    n_updates            | 5          |
+|    policy_gradient_loss | -0.0427    |
+|    value_loss           | 0.0317     |
+----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500674/solo_salamis/results_profile_salamis_100_summary.csv

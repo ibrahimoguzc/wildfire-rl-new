@@ -1,0 +1,690 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Pyrenees.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-5-10p/results_pyrenees_switch_ignition_1m_100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-5-10p/results_pyrenees_switch_ignition_1m_200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-5-10p/results_pyrenees_switch_ignition_1m_300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+------------------------------
+| time/              |       |
+|    fps             | 0     |
+|    iterations      | 1     |
+|    time_elapsed    | 26926 |
+|    total_timesteps | 5184  |
+------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)

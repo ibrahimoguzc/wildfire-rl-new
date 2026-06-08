@@ -1,0 +1,818 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+Policies: switch_ignition_1m[ppo_model], random_tactics[random_tactic]
+Running parallel evaluation with 24 worker process(es).
+
+Mission Failed (Pyrenees)
+[1/200] Evaluated random_tactics on Pyrenees_comparison.json run=1 seed=1
+
+Mission Failed (Pyrenees)
+[2/200] Evaluated random_tactics on Pyrenees_comparison.json run=12 seed=12
+
+Mission Failed (Pyrenees)
+[3/200] Evaluated random_tactics on Pyrenees_comparison.json run=11 seed=11
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[4/200] Evaluated random_tactics on Pyrenees_comparison.json run=10 seed=10
+[5/200] Evaluated random_tactics on Pyrenees_comparison.json run=8 seed=8
+
+Mission Failed (Pyrenees)
+[6/200] Evaluated random_tactics on Pyrenees_comparison.json run=5 seed=5
+
+Mission Failed (Pyrenees)
+[7/200] Evaluated random_tactics on Pyrenees_comparison.json run=3 seed=3
+
+Mission Failed (Pyrenees)
+[8/200] Evaluated random_tactics on Pyrenees_comparison.json run=4 seed=4
+
+Mission Failed (Pyrenees)
+[9/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=5 seed=5
+
+Mission Failed (Pyrenees)
+[10/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=9 seed=9
+
+Mission Failed (Pyrenees)
+[11/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=1 seed=1
+
+Mission Failed (Pyrenees)
+[12/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=10 seed=10
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[13/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=11 seed=11
+[14/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=8 seed=8
+
+Mission Failed (Pyrenees)
+[15/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=2 seed=2
+
+Mission Failed (Pyrenees)
+[16/200] Evaluated random_tactics on Pyrenees_comparison.json run=6 seed=6
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[17/200] Evaluated random_tactics on Pyrenees_comparison.json run=2 seed=2
+[18/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=3 seed=3
+
+Mission Failed (Pyrenees)
+[19/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=12 seed=12
+
+Mission Failed (Pyrenees)
+[20/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=7 seed=7
+
+Mission Failed (Pyrenees)
+Mission Failed (Pyrenees)
+
+[21/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=6 seed=6
+[22/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=4 seed=4
+
+Mission Failed (Pyrenees)
+[23/200] Evaluated random_tactics on Pyrenees_comparison.json run=7 seed=7
+
+Mission Failed (Pyrenees)
+[24/200] Evaluated random_tactics on Pyrenees_comparison.json run=9 seed=9
+
+Mission Failed (Pyrenees)
+[25/200] Evaluated random_tactics on Pyrenees_comparison.json run=13 seed=13
+
+Mission Failed (Pyrenees)
+[26/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=13 seed=13
+
+Mission Failed (Pyrenees)
+[27/200] Evaluated random_tactics on Pyrenees_comparison.json run=14 seed=14
+
+Mission Failed (Pyrenees)
+[28/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=14 seed=14
+
+Mission Failed (Pyrenees)
+[29/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=17 seed=17
+
+Mission Failed (Pyrenees)
+[30/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=16 seed=16
+
+Mission Failed (Pyrenees)
+[31/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=19 seed=19
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[32/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=18 seed=18
+[33/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=20 seed=20
+
+Mission Failed (Pyrenees)
+[34/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=22 seed=22
+
+Mission Failed (Pyrenees)
+[35/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=15 seed=15
+
+Mission Failed (Pyrenees)
+[36/200] Evaluated random_tactics on Pyrenees_comparison.json run=15 seed=15
+
+Mission Failed (Pyrenees)
+[37/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=23 seed=23
+
+Mission Failed (Pyrenees)
+[38/200] Evaluated random_tactics on Pyrenees_comparison.json run=20 seed=20
+
+Mission Failed (Pyrenees)
+[39/200] Evaluated random_tactics on Pyrenees_comparison.json run=21 seed=21
+
+Mission Failed (Pyrenees)
+[40/200] Evaluated random_tactics on Pyrenees_comparison.json run=22 seed=22
+
+Mission Failed (Pyrenees)
+[41/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=21 seed=21
+
+Mission Failed (Pyrenees)
+[42/200] Evaluated random_tactics on Pyrenees_comparison.json run=18 seed=18
+
+Mission Failed (Pyrenees)
+[43/200] Evaluated random_tactics on Pyrenees_comparison.json run=19 seed=19
+
+Mission Failed (Pyrenees)
+[44/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=24 seed=24
+
+Mission Failed (Pyrenees)
+[45/200] Evaluated random_tactics on Pyrenees_comparison.json run=17 seed=17
+
+Mission Failed (Pyrenees)
+[46/200] Evaluated random_tactics on Pyrenees_comparison.json run=23 seed=23
+
+Mission Failed (Pyrenees)
+[47/200] Evaluated random_tactics on Pyrenees_comparison.json run=16 seed=16
+
+Mission Failed (Pyrenees)
+[48/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=25 seed=25
+
+Mission Failed (Pyrenees)
+[49/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=29 seed=29
+
+Mission Failed (Pyrenees)
+[50/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=27 seed=27
+
+Mission Failed (Pyrenees)
+[51/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=26 seed=26
+
+Mission Failed (Pyrenees)
+[52/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=28 seed=28
+
+Mission Failed (Pyrenees)
+[53/200] Evaluated random_tactics on Pyrenees_comparison.json run=25 seed=25
+
+Mission Failed (Pyrenees)
+[54/200] Evaluated random_tactics on Pyrenees_comparison.json run=24 seed=24
+
+Mission Failed (Pyrenees)
+[55/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=30 seed=30
+
+Mission Failed (Pyrenees)
+[56/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=31 seed=31
+
+Mission Failed (Pyrenees)
+[57/200] Evaluated random_tactics on Pyrenees_comparison.json run=28 seed=28
+
+Mission Failed (Pyrenees)
+[58/200] Evaluated random_tactics on Pyrenees_comparison.json run=30 seed=30
+
+Mission Failed (Pyrenees)
+[59/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=33 seed=33
+
+Mission Failed (Pyrenees)
+[60/200] Evaluated random_tactics on Pyrenees_comparison.json run=31 seed=31
+
+Mission Failed (Pyrenees)
+[61/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=32 seed=32
+
+Mission Failed (Pyrenees)
+[62/200] Evaluated random_tactics on Pyrenees_comparison.json run=27 seed=27
+
+Mission Failed (Pyrenees)
+[63/200] Evaluated random_tactics on Pyrenees_comparison.json run=29 seed=29
+
+Mission Failed (Pyrenees)
+[64/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=34 seed=34
+
+Mission Failed (Pyrenees)
+[65/200] Evaluated random_tactics on Pyrenees_comparison.json run=33 seed=33
+
+Mission Failed (Pyrenees)
+[66/200] Evaluated random_tactics on Pyrenees_comparison.json run=32 seed=32
+
+Mission Failed (Pyrenees)
+[67/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=35 seed=35
+
+Mission Failed (Pyrenees)
+[68/200] Evaluated random_tactics on Pyrenees_comparison.json run=26 seed=26
+
+Mission Failed (Pyrenees)
+[69/200] Evaluated random_tactics on Pyrenees_comparison.json run=34 seed=34
+
+Mission Failed (Pyrenees)
+[70/200] Evaluated random_tactics on Pyrenees_comparison.json run=35 seed=35
+
+Mission Failed (Pyrenees)
+[71/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=36 seed=36
+
+Mission Failed (Pyrenees)
+[72/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=38 seed=38
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[73/200] Evaluated random_tactics on Pyrenees_comparison.json run=36 seed=36
+[74/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=37 seed=37
+
+Mission Failed (Pyrenees)
+[75/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=39 seed=39
+
+Mission Failed (Pyrenees)
+[76/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=40 seed=40
+
+Mission Failed (Pyrenees)
+[77/200] Evaluated random_tactics on Pyrenees_comparison.json run=38 seed=38
+
+Mission Failed (Pyrenees)
+[78/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=41 seed=41
+
+Mission Failed (Pyrenees)
+[79/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=42 seed=42
+
+Mission Failed (Pyrenees)
+[80/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=43 seed=43
+
+Mission Failed (Pyrenees)
+[81/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=44 seed=44
+
+Mission Failed (Pyrenees)
+[82/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=45 seed=45
+
+Mission Failed (Pyrenees)
+[83/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=46 seed=46
+
+Mission Failed (Pyrenees)
+[84/200] Evaluated random_tactics on Pyrenees_comparison.json run=43 seed=43
+
+Mission Failed (Pyrenees)
+[85/200] Evaluated random_tactics on Pyrenees_comparison.json run=42 seed=42
+
+Mission Failed (Pyrenees)
+[86/200] Evaluated random_tactics on Pyrenees_comparison.json run=45 seed=45
+
+Mission Failed (Pyrenees)
+[87/200] Evaluated random_tactics on Pyrenees_comparison.json run=40 seed=40
+
+Mission Failed (Pyrenees)
+[88/200] Evaluated random_tactics on Pyrenees_comparison.json run=41 seed=41
+
+Mission Failed (Pyrenees)
+[89/200] Evaluated random_tactics on Pyrenees_comparison.json run=39 seed=39
+
+Mission Failed (Pyrenees)
+[90/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=47 seed=47
+
+Mission Failed (Pyrenees)
+[91/200] Evaluated random_tactics on Pyrenees_comparison.json run=44 seed=44
+
+Mission Failed (Pyrenees)
+[92/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=48 seed=48
+
+Mission Failed (Pyrenees)
+[93/200] Evaluated random_tactics on Pyrenees_comparison.json run=46 seed=46
+
+Mission Failed (Pyrenees)
+[94/200] Evaluated random_tactics on Pyrenees_comparison.json run=37 seed=37
+
+Mission Failed (Pyrenees)
+[95/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=50 seed=50
+
+Mission Failed (Pyrenees)
+[96/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=49 seed=49
+
+Mission Failed (Pyrenees)
+[97/200] Evaluated random_tactics on Pyrenees_comparison.json run=47 seed=47
+
+Mission Failed (Pyrenees)
+[98/200] Evaluated random_tactics on Pyrenees_comparison.json run=49 seed=49
+
+Mission Failed (Pyrenees)
+[99/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=52 seed=52
+
+Mission Failed (Pyrenees)
+[100/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=51 seed=51
+
+Mission Failed (Pyrenees)
+[101/200] Evaluated random_tactics on Pyrenees_comparison.json run=50 seed=50
+
+Mission Failed (Pyrenees)
+[102/200] Evaluated random_tactics on Pyrenees_comparison.json run=48 seed=48
+
+Mission Failed (Pyrenees)
+[103/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=53 seed=53
+
+Mission Failed (Pyrenees)
+[104/200] Evaluated random_tactics on Pyrenees_comparison.json run=51 seed=51
+
+Mission Failed (Pyrenees)
+[105/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=54 seed=54
+
+Mission Failed (Pyrenees)
+[106/200] Evaluated random_tactics on Pyrenees_comparison.json run=52 seed=52
+
+Mission Failed (Pyrenees)
+[107/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=56 seed=56
+
+Mission Failed (Pyrenees)
+[108/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=55 seed=55
+
+Mission Failed (Pyrenees)
+[109/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=57 seed=57
+
+Mission Failed (Pyrenees)
+[110/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=58 seed=58
+
+Mission Failed (Pyrenees)
+[111/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=59 seed=59
+
+Mission Failed (Pyrenees)
+[112/200] Evaluated random_tactics on Pyrenees_comparison.json run=54 seed=54
+
+Mission Failed (Pyrenees)
+[113/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=60 seed=60
+
+Mission Failed (Pyrenees)
+[114/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=61 seed=61
+
+Mission Failed (Pyrenees)
+[115/200] Evaluated random_tactics on Pyrenees_comparison.json run=56 seed=56
+
+Mission Failed (Pyrenees)
+[116/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=62 seed=62
+
+Mission Failed (Pyrenees)
+[117/200] Evaluated random_tactics on Pyrenees_comparison.json run=57 seed=57
+
+Mission Failed (Pyrenees)
+[118/200] Evaluated random_tactics on Pyrenees_comparison.json run=60 seed=60
+
+Mission Failed (Pyrenees)
+[119/200] Evaluated random_tactics on Pyrenees_comparison.json run=53 seed=53
+
+Mission Failed (Pyrenees)
+[120/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=63 seed=63
+
+Mission Failed (Pyrenees)
+[121/200] Evaluated random_tactics on Pyrenees_comparison.json run=55 seed=55
+
+Mission Failed (Pyrenees)
+[122/200] Evaluated random_tactics on Pyrenees_comparison.json run=59 seed=59
+
+Mission Failed (Pyrenees)
+[123/200] Evaluated random_tactics on Pyrenees_comparison.json run=62 seed=62
+
+Mission Failed (Pyrenees)
+[124/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=64 seed=64
+
+Mission Failed (Pyrenees)
+[125/200] Evaluated random_tactics on Pyrenees_comparison.json run=63 seed=63
+
+Mission Failed (Pyrenees)
+[126/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=65 seed=65
+
+Mission Failed (Pyrenees)
+[127/200] Evaluated random_tactics on Pyrenees_comparison.json run=64 seed=64
+
+Mission Failed (Pyrenees)
+[128/200] Evaluated random_tactics on Pyrenees_comparison.json run=58 seed=58
+
+Mission Failed (Pyrenees)
+[129/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=66 seed=66
+
+Mission Failed (Pyrenees)
+[130/200] Evaluated random_tactics on Pyrenees_comparison.json run=61 seed=61
+
+Mission Failed (Pyrenees)
+[131/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=67 seed=67
+
+Mission Failed (Pyrenees)
+[132/200] Evaluated random_tactics on Pyrenees_comparison.json run=66 seed=66
+
+Mission Failed (Pyrenees)
+[133/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=68 seed=68
+
+Mission Failed (Pyrenees)
+[134/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=69 seed=69
+
+Mission Failed (Pyrenees)
+[135/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=71 seed=71
+
+Mission Failed (Pyrenees)
+[136/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=73 seed=73
+
+Mission Failed (Pyrenees)
+[137/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=70 seed=70
+
+Mission Failed (Pyrenees)
+[138/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=72 seed=72
+
+Mission Failed (Pyrenees)
+[139/200] Evaluated random_tactics on Pyrenees_comparison.json run=68 seed=68
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[140/200] Evaluated random_tactics on Pyrenees_comparison.json run=65 seed=65
+[141/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=74 seed=74
+
+Mission Failed (Pyrenees)
+[142/200] Evaluated random_tactics on Pyrenees_comparison.json run=70 seed=70
+
+Mission Failed (Pyrenees)
+[143/200] Evaluated random_tactics on Pyrenees_comparison.json run=74 seed=74
+
+Mission Failed (Pyrenees)
+[144/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=75 seed=75
+
+Mission Failed (Pyrenees)
+[145/200] Evaluated random_tactics on Pyrenees_comparison.json run=67 seed=67
+
+Mission Failed (Pyrenees)
+[146/200] Evaluated random_tactics on Pyrenees_comparison.json run=73 seed=73
+
+Mission Failed (Pyrenees)
+[147/200] Evaluated random_tactics on Pyrenees_comparison.json run=69 seed=69
+
+Mission Failed (Pyrenees)
+[148/200] Evaluated random_tactics on Pyrenees_comparison.json run=76 seed=76
+
+Mission Failed (Pyrenees)
+[149/200] Evaluated random_tactics on Pyrenees_comparison.json run=75 seed=75
+
+Mission Failed (Pyrenees)
+[150/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=76 seed=76
+
+Mission Failed (Pyrenees)
+[151/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=77 seed=77
+
+Mission Failed (Pyrenees)
+[152/200] Evaluated random_tactics on Pyrenees_comparison.json run=72 seed=72
+
+Mission Failed (Pyrenees)
+[153/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=78 seed=78
+
+Mission Failed (Pyrenees)
+[154/200] Evaluated random_tactics on Pyrenees_comparison.json run=78 seed=78
+
+Mission Failed (Pyrenees)
+[155/200] Evaluated random_tactics on Pyrenees_comparison.json run=77 seed=77
+
+Mission Failed (Pyrenees)
+[156/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=79 seed=79
+
+Mission Failed (Pyrenees)
+[157/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=80 seed=80
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[158/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=81 seed=81
+[159/200] Evaluated random_tactics on Pyrenees_comparison.json run=71 seed=71
+
+Mission Failed (Pyrenees)
+[160/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=82 seed=82
+
+Mission Failed (Pyrenees)
+[161/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=83 seed=83
+
+Mission Failed (Pyrenees)
+[162/200] Evaluated random_tactics on Pyrenees_comparison.json run=83 seed=83
+
+Mission Failed (Pyrenees)
+[163/200] Evaluated random_tactics on Pyrenees_comparison.json run=81 seed=81
+
+Mission Failed (Pyrenees)
+[164/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=84 seed=84
+
+Mission Failed (Pyrenees)
+[165/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=85 seed=85
+
+Mission Failed (Pyrenees)
+[166/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=86 seed=86
+
+Mission Failed (Pyrenees)
+[167/200] Evaluated random_tactics on Pyrenees_comparison.json run=84 seed=84
+
+Mission Failed (Pyrenees)
+[168/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=87 seed=87
+
+Mission Failed (Pyrenees)
+[169/200] Evaluated random_tactics on Pyrenees_comparison.json run=88 seed=88
+
+Mission Failed (Pyrenees)
+[170/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=88 seed=88
+
+Mission Failed (Pyrenees)
+[171/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=89 seed=89
+
+Mission Failed (Pyrenees)
+[172/200] Evaluated random_tactics on Pyrenees_comparison.json run=79 seed=79
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[173/200] Evaluated random_tactics on Pyrenees_comparison.json run=85 seed=85
+[174/200] Evaluated random_tactics on Pyrenees_comparison.json run=87 seed=87
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[175/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=90 seed=90
+[176/200] Evaluated random_tactics on Pyrenees_comparison.json run=86 seed=86
+
+Mission Failed (Pyrenees)
+[177/200] Evaluated random_tactics on Pyrenees_comparison.json run=80 seed=80
+
+Mission Failed (Pyrenees)
+[178/200] Evaluated random_tactics on Pyrenees_comparison.json run=89 seed=89
+
+Mission Failed (Pyrenees)
+[179/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=91 seed=91
+
+Mission Failed (Pyrenees)
+[180/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=92 seed=92
+
+Mission Failed (Pyrenees)
+[181/200] Evaluated random_tactics on Pyrenees_comparison.json run=82 seed=82
+
+Mission Failed (Pyrenees)
+[182/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=93 seed=93
+
+Mission Failed (Pyrenees)
+[183/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=94 seed=94
+
+Mission Failed (Pyrenees)
+[184/200] Evaluated random_tactics on Pyrenees_comparison.json run=93 seed=93
+
+Mission Failed (Pyrenees)
+[185/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=95 seed=95
+
+Mission Failed (Pyrenees)
+[186/200] Evaluated random_tactics on Pyrenees_comparison.json run=94 seed=94
+
+Mission Failed (Pyrenees)
+[187/200] Evaluated random_tactics on Pyrenees_comparison.json run=90 seed=90
+
+Mission Failed (Pyrenees)
+[188/200] Evaluated random_tactics on Pyrenees_comparison.json run=92 seed=92
+
+Mission Failed (Pyrenees)
+[189/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=96 seed=96
+
+Mission Failed (Pyrenees)
+[190/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=97 seed=97
+
+Mission Failed (Pyrenees)
+[191/200] Evaluated random_tactics on Pyrenees_comparison.json run=91 seed=91
+
+Mission Failed (Pyrenees)
+[192/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=98 seed=98
+
+Mission Failed (Pyrenees)
+[193/200] Evaluated random_tactics on Pyrenees_comparison.json run=96 seed=96
+
+Mission Failed (Pyrenees)
+[194/200] Evaluated random_tactics on Pyrenees_comparison.json run=97 seed=97
+
+Mission Failed (Pyrenees)
+[195/200] Evaluated random_tactics on Pyrenees_comparison.json run=98 seed=98
+
+Mission Failed (Pyrenees)
+[196/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=100 seed=100
+
+Mission Failed (Pyrenees)
+[197/200] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=99 seed=99
+
+Mission Failed (Pyrenees)
+[198/200] Evaluated random_tactics on Pyrenees_comparison.json run=95 seed=95
+
+Mission Failed (Pyrenees)
+[199/200] Evaluated random_tactics on Pyrenees_comparison.json run=100 seed=100
+
+Mission Failed (Pyrenees)
+[200/200] Evaluated random_tactics on Pyrenees_comparison.json run=99 seed=99
+policy | scenario | run | seed | mission_h | burnt_area_m2 | cost_eur | casualties | emissions_t | moe
+switch_ignition_1m | Pyrenees_comparison.json | 1 | 1 | 3.00 | 11908200.00 | 5485976.00 | 5011.00 | 214172.25 | -0.1780
+switch_ignition_1m | Pyrenees_comparison.json | 2 | 2 | 3.17 | 12078900.00 | 5486842.75 | 5044.00 | 213644.31 | -0.1792
+switch_ignition_1m | Pyrenees_comparison.json | 3 | 3 | 3.17 | 12943575.00 | 5785681.97 | 5312.00 | 224832.90 | -0.1892
+switch_ignition_1m | Pyrenees_comparison.json | 4 | 4 | 3.17 | 13439775.00 | 6493511.10 | 5490.00 | 257942.07 | -0.1984
+switch_ignition_1m | Pyrenees_comparison.json | 5 | 5 | 3.00 | 11876225.00 | 5597374.88 | 4939.00 | 220447.55 | -0.1767
+switch_ignition_1m | Pyrenees_comparison.json | 6 | 6 | 3.17 | 14265125.00 | 6940051.70 | 5652.00 | 277230.39 | -0.2066
+switch_ignition_1m | Pyrenees_comparison.json | 7 | 7 | 3.17 | 13652425.00 | 6613167.65 | 5542.00 | 262894.19 | -0.2008
+switch_ignition_1m | Pyrenees_comparison.json | 8 | 8 | 3.17 | 13015125.00 | 6104734.12 | 5309.00 | 240503.37 | -0.1910
+switch_ignition_1m | Pyrenees_comparison.json | 9 | 9 | 3.17 | 11821450.00 | 5376639.77 | 4967.00 | 209299.48 | -0.1761
+switch_ignition_1m | Pyrenees_comparison.json | 10 | 10 | 3.17 | 12379325.00 | 5514475.33 | 5172.00 | 213428.01 | -0.1831
+switch_ignition_1m | Pyrenees_comparison.json | 11 | 11 | 3.00 | 12191450.00 | 5791856.25 | 5039.00 | 228648.51 | -0.1809
+switch_ignition_1m | Pyrenees_comparison.json | 12 | 12 | 3.17 | 12754425.00 | 6203869.98 | 5117.00 | 247526.37 | -0.1863
+switch_ignition_1m | Pyrenees_comparison.json | 13 | 13 | 3.17 | 12168150.00 | 5767383.45 | 5004.00 | 227814.84 | -0.1799
+switch_ignition_1m | Pyrenees_comparison.json | 14 | 14 | 3.00 | 12008900.00 | 5532883.73 | 5074.00 | 215891.45 | -0.1800
+switch_ignition_1m | Pyrenees_comparison.json | 15 | 15 | 3.17 | 13668775.00 | 6431900.20 | 5551.00 | 253984.40 | -0.2001
+switch_ignition_1m | Pyrenees_comparison.json | 16 | 16 | 3.17 | 12183450.00 | 5497186.15 | 5100.00 | 213583.33 | -0.1808
+switch_ignition_1m | Pyrenees_comparison.json | 17 | 17 | 3.17 | 12304000.00 | 5602233.42 | 5110.00 | 218474.62 | -0.1819
+switch_ignition_1m | Pyrenees_comparison.json | 18 | 18 | 3.17 | 12265900.00 | 5795488.58 | 5033.00 | 228785.90 | -0.1810
+switch_ignition_1m | Pyrenees_comparison.json | 19 | 19 | 3.17 | 12335350.00 | 5726023.30 | 5153.00 | 224216.08 | -0.1836
+switch_ignition_1m | Pyrenees_comparison.json | 20 | 20 | 3.17 | 11675200.00 | 5279786.45 | 4983.00 | 204568.19 | -0.1757
+switch_ignition_1m | Pyrenees_comparison.json | 21 | 21 | 3.17 | 14050750.00 | 7063155.20 | 5537.00 | 284726.20 | -0.2040
+switch_ignition_1m | Pyrenees_comparison.json | 22 | 22 | 3.17 | 13177300.00 | 6238607.88 | 5288.00 | 247064.12 | -0.1916
+switch_ignition_1m | Pyrenees_comparison.json | 23 | 23 | 3.17 | 12504125.00 | 5855180.18 | 5119.00 | 230539.52 | -0.1839
+switch_ignition_1m | Pyrenees_comparison.json | 24 | 24 | 3.17 | 13035875.00 | 6351007.78 | 5293.00 | 252891.88 | -0.1920
+switch_ignition_1m | Pyrenees_comparison.json | 25 | 25 | 3.00 | 12643100.00 | 5717706.45 | 5197.00 | 222780.00 | -0.1854
+switch_ignition_1m | Pyrenees_comparison.json | 26 | 26 | 3.17 | 12094300.00 | 5402552.98 | 5134.00 | 208755.95 | -0.1809
+switch_ignition_1m | Pyrenees_comparison.json | 27 | 27 | 3.17 | 12436425.00 | 5687554.80 | 5200.00 | 221680.53 | -0.1848
+switch_ignition_1m | Pyrenees_comparison.json | 28 | 28 | 3.17 | 12915150.00 | 5879593.83 | 5268.00 | 229840.38 | -0.1886
+switch_ignition_1m | Pyrenees_comparison.json | 29 | 29 | 3.00 | 11833900.00 | 5330398.60 | 4988.00 | 206759.59 | -0.1764
+switch_ignition_1m | Pyrenees_comparison.json | 30 | 30 | 3.17 | 11989275.00 | 5694931.57 | 4900.00 | 225166.49 | -0.1766
+switch_ignition_1m | Pyrenees_comparison.json | 31 | 31 | 3.17 | 13211225.00 | 6340013.62 | 5319.00 | 251838.08 | -0.1929
+switch_ignition_1m | Pyrenees_comparison.json | 32 | 32 | 3.17 | 12927825.00 | 6041153.03 | 5210.00 | 238430.29 | -0.1881
+switch_ignition_1m | Pyrenees_comparison.json | 33 | 33 | 3.00 | 11949400.00 | 5491007.10 | 4984.00 | 214411.04 | -0.1774
+switch_ignition_1m | Pyrenees_comparison.json | 34 | 34 | 3.00 | 11627975.00 | 5291336.73 | 4913.00 | 205860.37 | -0.1739
+switch_ignition_1m | Pyrenees_comparison.json | 35 | 35 | 3.17 | 12301575.00 | 5757671.88 | 5097.00 | 226358.98 | -0.1824
+switch_ignition_1m | Pyrenees_comparison.json | 36 | 36 | 3.17 | 12185225.00 | 5412413.47 | 5150.00 | 208826.75 | -0.1816
+switch_ignition_1m | Pyrenees_comparison.json | 37 | 37 | 3.17 | 13032325.00 | 6173286.30 | 5266.00 | 244251.12 | -0.1904
+switch_ignition_1m | Pyrenees_comparison.json | 38 | 38 | 3.17 | 12196700.00 | 5630233.00 | 5128.00 | 219978.70 | -0.1822
+switch_ignition_1m | Pyrenees_comparison.json | 39 | 39 | 3.00 | 11892250.00 | 5450588.85 | 4978.00 | 212680.05 | -0.1769
+switch_ignition_1m | Pyrenees_comparison.json | 40 | 40 | 3.17 | 12463075.00 | 5867806.33 | 5102.00 | 231554.74 | -0.1835
+switch_ignition_1m | Pyrenees_comparison.json | 41 | 41 | 3.17 | 11978050.00 | 5494267.30 | 5022.00 | 214399.88 | -0.1784
+switch_ignition_1m | Pyrenees_comparison.json | 42 | 42 | 3.17 | 12122200.00 | 5501609.88 | 5118.00 | 213766.11 | -0.1811
+switch_ignition_1m | Pyrenees_comparison.json | 43 | 43 | 3.17 | 12404125.00 | 5541922.92 | 5193.00 | 214690.82 | -0.1838
+switch_ignition_1m | Pyrenees_comparison.json | 44 | 44 | 3.17 | 12318125.00 | 5673907.40 | 5118.00 | 221921.50 | -0.1825
+switch_ignition_1m | Pyrenees_comparison.json | 45 | 45 | 3.17 | 12075250.00 | 5417018.03 | 5082.00 | 209859.77 | -0.1797
+switch_ignition_1m | Pyrenees_comparison.json | 46 | 46 | 3.00 | 11945475.00 | 5616356.33 | 4972.00 | 220901.78 | -0.1778
+switch_ignition_1m | Pyrenees_comparison.json | 47 | 47 | 3.17 | 12210650.00 | 5644143.15 | 5097.00 | 220836.98 | -0.1816
+switch_ignition_1m | Pyrenees_comparison.json | 48 | 48 | 3.17 | 12494225.00 | 6030737.38 | 5032.00 | 239873.77 | -0.1827
+switch_ignition_1m | Pyrenees_comparison.json | 49 | 49 | 3.17 | 12596075.00 | 5843351.40 | 5146.00 | 229524.71 | -0.1847
+switch_ignition_1m | Pyrenees_comparison.json | 50 | 50 | 3.00 | 11489550.00 | 5331306.25 | 4840.00 | 208622.00 | -0.1720
+switch_ignition_1m | Pyrenees_comparison.json | 51 | 51 | 3.17 | 12553050.00 | 5916542.15 | 5183.00 | 233044.61 | -0.1859
+switch_ignition_1m | Pyrenees_comparison.json | 52 | 52 | 3.00 | 11637900.00 | 5515507.67 | 4913.00 | 216774.97 | -0.1751
+switch_ignition_1m | Pyrenees_comparison.json | 53 | 53 | 3.00 | 11639225.00 | 5556614.42 | 4856.00 | 219429.52 | -0.1740
+switch_ignition_1m | Pyrenees_comparison.json | 54 | 54 | 3.00 | 12434550.00 | 5629741.20 | 5196.00 | 218955.55 | -0.1844
+switch_ignition_1m | Pyrenees_comparison.json | 55 | 55 | 3.17 | 12252525.00 | 5657792.62 | 5087.00 | 221382.14 | -0.1815
+switch_ignition_1m | Pyrenees_comparison.json | 56 | 56 | 3.00 | 12349850.00 | 5699887.03 | 5136.00 | 222981.67 | -0.1831
+switch_ignition_1m | Pyrenees_comparison.json | 57 | 57 | 3.17 | 13197125.00 | 6310891.50 | 5184.00 | 251239.35 | -0.1895
+switch_ignition_1m | Pyrenees_comparison.json | 58 | 58 | 3.17 | 14257175.00 | 6619364.12 | 5659.00 | 261340.65 | -0.2051
+switch_ignition_1m | Pyrenees_comparison.json | 59 | 59 | 3.17 | 12935800.00 | 6130531.43 | 5190.00 | 242836.50 | -0.1881
+switch_ignition_1m | Pyrenees_comparison.json | 60 | 60 | 3.17 | 12372725.00 | 5640778.15 | 5114.00 | 220215.12 | -0.1823
+switch_ignition_1m | Pyrenees_comparison.json | 61 | 61 | 3.17 | 12671550.00 | 5885656.47 | 5162.00 | 231379.80 | -0.1855
+switch_ignition_1m | Pyrenees_comparison.json | 62 | 62 | 3.17 | 12251000.00 | 5602534.92 | 5175.00 | 218139.18 | -0.1833
+switch_ignition_1m | Pyrenees_comparison.json | 63 | 63 | 3.17 | 13279775.00 | 5922318.50 | 5394.00 | 230380.04 | -0.1927
+switch_ignition_1m | Pyrenees_comparison.json | 64 | 64 | 3.17 | 13425650.00 | 6340702.45 | 5440.00 | 250592.83 | -0.1964
+switch_ignition_1m | Pyrenees_comparison.json | 65 | 65 | 3.17 | 12685475.00 | 5760361.40 | 5295.00 | 224128.33 | -0.1881
+switch_ignition_1m | Pyrenees_comparison.json | 66 | 66 | 3.17 | 11890925.00 | 5455929.92 | 5045.00 | 212294.34 | -0.1786
+switch_ignition_1m | Pyrenees_comparison.json | 67 | 67 | 3.17 | 11916450.00 | 5625106.95 | 4906.00 | 221905.30 | -0.1762
+switch_ignition_1m | Pyrenees_comparison.json | 68 | 68 | 3.17 | 12750125.00 | 6385199.97 | 5042.00 | 256915.98 | -0.1854
+switch_ignition_1m | Pyrenees_comparison.json | 69 | 69 | 3.17 | 12550025.00 | 6087143.20 | 5094.00 | 242072.85 | -0.1846
+switch_ignition_1m | Pyrenees_comparison.json | 70 | 70 | 3.00 | 12318625.00 | 5701676.60 | 5098.00 | 223505.80 | -0.1822
+switch_ignition_1m | Pyrenees_comparison.json | 71 | 71 | 3.17 | 12373425.00 | 5685521.62 | 5081.00 | 222582.49 | -0.1818
+switch_ignition_1m | Pyrenees_comparison.json | 72 | 72 | 3.17 | 13672275.00 | 6339861.28 | 5394.00 | 250353.45 | -0.1958
+switch_ignition_1m | Pyrenees_comparison.json | 73 | 73 | 3.17 | 12497525.00 | 5776309.77 | 5199.00 | 226035.96 | -0.1854
+switch_ignition_1m | Pyrenees_comparison.json | 74 | 74 | 3.17 | 12387050.00 | 5882655.95 | 5061.00 | 232490.47 | -0.1824
+switch_ignition_1m | Pyrenees_comparison.json | 75 | 75 | 3.00 | 12157950.00 | 5608553.20 | 4974.00 | 220087.73 | -0.1783
+switch_ignition_1m | Pyrenees_comparison.json | 76 | 76 | 3.17 | 12339050.00 | 5871433.20 | 4993.00 | 232686.48 | -0.1806
+switch_ignition_1m | Pyrenees_comparison.json | 77 | 77 | 3.17 | 12922450.00 | 5987348.47 | 5260.00 | 235229.39 | -0.1890
+switch_ignition_1m | Pyrenees_comparison.json | 78 | 78 | 3.17 | 12071650.00 | 5612952.05 | 5035.00 | 219954.21 | -0.1796
+switch_ignition_1m | Pyrenees_comparison.json | 79 | 79 | 3.17 | 13902725.00 | 6858395.18 | 5491.00 | 275114.96 | -0.2014
+switch_ignition_1m | Pyrenees_comparison.json | 80 | 80 | 3.17 | 13389400.00 | 6422220.47 | 5515.00 | 254304.78 | -0.1985
+switch_ignition_1m | Pyrenees_comparison.json | 81 | 81 | 3.17 | 12273600.00 | 5659805.75 | 5059.00 | 221793.14 | -0.1809
+switch_ignition_1m | Pyrenees_comparison.json | 82 | 82 | 3.17 | 12358125.00 | 5838011.15 | 5040.00 | 230448.60 | -0.1815
+switch_ignition_1m | Pyrenees_comparison.json | 83 | 83 | 3.17 | 12966475.00 | 6201913.22 | 5154.00 | 246637.86 | -0.1876
+switch_ignition_1m | Pyrenees_comparison.json | 84 | 84 | 3.00 | 11590275.00 | 5228898.67 | 4980.00 | 202260.60 | -0.1751
+switch_ignition_1m | Pyrenees_comparison.json | 85 | 85 | 3.17 | 12520125.00 | 5588557.38 | 5288.00 | 216050.05 | -0.1866
+switch_ignition_1m | Pyrenees_comparison.json | 86 | 86 | 3.17 | 13968425.00 | 6687348.97 | 5591.00 | 265759.66 | -0.2031
+switch_ignition_1m | Pyrenees_comparison.json | 87 | 87 | 3.17 | 12546825.00 | 5828743.60 | 5218.00 | 228306.82 | -0.1862
+switch_ignition_1m | Pyrenees_comparison.json | 88 | 88 | 3.17 | 12563275.00 | 5873482.23 | 5127.00 | 231294.27 | -0.1843
+switch_ignition_1m | Pyrenees_comparison.json | 89 | 89 | 3.17 | 11971400.00 | 5505880.23 | 4995.00 | 215027.50 | -0.1778
+switch_ignition_1m | Pyrenees_comparison.json | 90 | 90 | 3.17 | 12326550.00 | 5795946.77 | 5091.00 | 228212.15 | -0.1825
+switch_ignition_1m | Pyrenees_comparison.json | 91 | 91 | 3.17 | 12661250.00 | 5876029.45 | 5208.00 | 230446.73 | -0.1865
+switch_ignition_1m | Pyrenees_comparison.json | 92 | 92 | 3.17 | 11837650.00 | 5478754.98 | 4970.00 | 214316.33 | -0.1768
+switch_ignition_1m | Pyrenees_comparison.json | 93 | 93 | 3.17 | 12664550.00 | 6100013.70 | 5250.00 | 241567.67 | -0.1887
+switch_ignition_1m | Pyrenees_comparison.json | 94 | 94 | 3.00 | 11894225.00 | 5425938.23 | 4996.00 | 211293.65 | -0.1772
+switch_ignition_1m | Pyrenees_comparison.json | 95 | 95 | 3.17 | 12785925.00 | 5710115.12 | 5326.00 | 221211.60 | -0.1888
+switch_ignition_1m | Pyrenees_comparison.json | 96 | 96 | 3.17 | 13338300.00 | 5982108.88 | 5397.00 | 233079.59 | -0.1932
+switch_ignition_1m | Pyrenees_comparison.json | 97 | 97 | 3.17 | 12433200.00 | 6074456.22 | 4959.00 | 242669.52 | -0.1810
+switch_ignition_1m | Pyrenees_comparison.json | 98 | 98 | 3.17 | 12529725.00 | 5810171.42 | 5156.00 | 227958.42 | -0.1846
+switch_ignition_1m | Pyrenees_comparison.json | 99 | 99 | 3.33 | 14182575.00 | 7002118.77 | 5740.00 | 279909.21 | -0.2089
+switch_ignition_1m | Pyrenees_comparison.json | 100 | 100 | 3.17 | 12151900.00 | 5291142.83 | 5173.00 | 202870.11 | -0.1814
+random_tactics | Pyrenees_comparison.json | 1 | 1 | 3.00 | 11787225.00 | 5449862.40 | 4951.00 | 213032.82 | -0.1760
+random_tactics | Pyrenees_comparison.json | 2 | 2 | 3.00 | 12192500.00 | 5885436.10 | 4960.00 | 233913.08 | -0.1795
+random_tactics | Pyrenees_comparison.json | 3 | 3 | 3.00 | 12953900.00 | 6360542.23 | 5152.00 | 254510.55 | -0.1884
+random_tactics | Pyrenees_comparison.json | 4 | 4 | 3.17 | 12846425.00 | 6222217.25 | 5189.00 | 247605.85 | -0.1883
+random_tactics | Pyrenees_comparison.json | 5 | 5 | 3.17 | 13954025.00 | 6760776.47 | 5592.00 | 269352.53 | -0.2035
+random_tactics | Pyrenees_comparison.json | 6 | 6 | 3.17 | 12828525.00 | 5982760.20 | 5219.00 | 235462.63 | -0.1877
+random_tactics | Pyrenees_comparison.json | 7 | 7 | 3.17 | 13645450.00 | 6359067.58 | 5581.00 | 250088.00 | -0.2004
+random_tactics | Pyrenees_comparison.json | 8 | 8 | 3.17 | 12862100.00 | 6085923.83 | 5234.00 | 240548.18 | -0.1887
+random_tactics | Pyrenees_comparison.json | 9 | 9 | 3.17 | 13738725.00 | 6282227.58 | 6012.00 | 243488.14 | -0.2107
+random_tactics | Pyrenees_comparison.json | 10 | 10 | 3.00 | 12609850.00 | 7001377.70 | 4834.00 | 289339.57 | -0.1833
+random_tactics | Pyrenees_comparison.json | 11 | 11 | 3.17 | 12834600.00 | 5991831.88 | 5274.00 | 235517.85 | -0.1891
+random_tactics | Pyrenees_comparison.json | 12 | 12 | 3.17 | 12386350.00 | 5814162.78 | 5077.00 | 229112.39 | -0.1824
+random_tactics | Pyrenees_comparison.json | 13 | 13 | 3.17 | 12895450.00 | 6055920.67 | 5264.00 | 238561.63 | -0.1894
+random_tactics | Pyrenees_comparison.json | 14 | 14 | 3.17 | 12531700.00 | 5931151.25 | 5163.00 | 233998.47 | -0.1854
+random_tactics | Pyrenees_comparison.json | 15 | 15 | 3.00 | 11285200.00 | 5358959.12 | 4786.00 | 210740.62 | -0.1704
+random_tactics | Pyrenees_comparison.json | 16 | 16 | 3.17 | 12555900.00 | 5780110.70 | 5149.00 | 226563.40 | -0.1844
+random_tactics | Pyrenees_comparison.json | 17 | 17 | 3.00 | 12157925.00 | 5755671.70 | 5004.00 | 227162.80 | -0.1798
+random_tactics | Pyrenees_comparison.json | 18 | 18 | 3.17 | 12814175.00 | 5886259.05 | 5482.00 | 228959.29 | -0.1936
+random_tactics | Pyrenees_comparison.json | 19 | 19 | 3.17 | 12631850.00 | 6007168.17 | 5109.00 | 237872.58 | -0.1847
+random_tactics | Pyrenees_comparison.json | 20 | 20 | 3.17 | 12545200.00 | 6037099.03 | 5174.00 | 238994.26 | -0.1863
+random_tactics | Pyrenees_comparison.json | 21 | 21 | 3.17 | 12878825.00 | 6028083.67 | 5375.00 | 236745.86 | -0.1919
+random_tactics | Pyrenees_comparison.json | 22 | 22 | 3.17 | 12434200.00 | 5735205.33 | 5142.00 | 224526.49 | -0.1837
+random_tactics | Pyrenees_comparison.json | 23 | 23 | 3.17 | 12849425.00 | 6163191.72 | 5165.00 | 244905.80 | -0.1874
+random_tactics | Pyrenees_comparison.json | 24 | 24 | 3.17 | 12323875.00 | 6031766.88 | 5001.00 | 240474.98 | -0.1815
+random_tactics | Pyrenees_comparison.json | 25 | 25 | 3.17 | 12659475.00 | 5912645.30 | 5152.00 | 232870.46 | -0.1854
+random_tactics | Pyrenees_comparison.json | 26 | 26 | 3.33 | 15766200.00 | 7517690.10 | 6274.00 | 299093.46 | -0.2282
+random_tactics | Pyrenees_comparison.json | 27 | 27 | 3.17 | 12390700.00 | 5680522.15 | 5149.00 | 221862.92 | -0.1834
+random_tactics | Pyrenees_comparison.json | 28 | 28 | 3.17 | 12655350.00 | 5681884.75 | 5323.00 | 219954.13 | -0.1883
+random_tactics | Pyrenees_comparison.json | 29 | 29 | 3.00 | 12203650.00 | 5783576.35 | 5018.00 | 228332.05 | -0.1804
+random_tactics | Pyrenees_comparison.json | 30 | 30 | 3.17 | 12674625.00 | 5846648.72 | 5207.00 | 229161.15 | -0.1864
+random_tactics | Pyrenees_comparison.json | 31 | 31 | 3.17 | 12327925.00 | 5703748.90 | 5018.00 | 224106.31 | -0.1802
+random_tactics | Pyrenees_comparison.json | 32 | 32 | 3.17 | 13560800.00 | 6493769.15 | 5360.00 | 258445.19 | -0.1955
+random_tactics | Pyrenees_comparison.json | 33 | 33 | 3.17 | 13428925.00 | 6715269.83 | 5242.00 | 270575.51 | -0.1935
+random_tactics | Pyrenees_comparison.json | 34 | 34 | 3.00 | 11858700.00 | 5709698.77 | 4953.00 | 225803.26 | -0.1776
+random_tactics | Pyrenees_comparison.json | 35 | 35 | 3.17 | 13534700.00 | 6508579.58 | 5522.00 | 258199.69 | -0.1995
+random_tactics | Pyrenees_comparison.json | 36 | 36 | 3.00 | 11663225.00 | 5343410.30 | 4942.00 | 208008.29 | -0.1750
+random_tactics | Pyrenees_comparison.json | 37 | 37 | 3.17 | 14078475.00 | 6703374.00 | 5591.00 | 266319.29 | -0.2034
+random_tactics | Pyrenees_comparison.json | 38 | 38 | 3.17 | 12545225.00 | 5942697.58 | 5132.00 | 234685.02 | -0.1848
+random_tactics | Pyrenees_comparison.json | 39 | 39 | 3.17 | 13719050.00 | 6374942.17 | 5601.00 | 250651.44 | -0.2011
+random_tactics | Pyrenees_comparison.json | 40 | 40 | 3.17 | 11942525.00 | 5475612.95 | 5040.00 | 213363.51 | -0.1787
+random_tactics | Pyrenees_comparison.json | 41 | 41 | 3.00 | 12881400.00 | 6142535.88 | 5255.00 | 243165.73 | -0.1896
+random_tactics | Pyrenees_comparison.json | 42 | 42 | 3.17 | 12316825.00 | 5779001.50 | 5036.00 | 227755.79 | -0.1811
+random_tactics | Pyrenees_comparison.json | 43 | 43 | 3.17 | 13520900.00 | 6255175.03 | 5382.00 | 246582.99 | -0.1947
+random_tactics | Pyrenees_comparison.json | 44 | 44 | 3.17 | 12709500.00 | 6068917.12 | 5128.00 | 240762.30 | -0.1857
+random_tactics | Pyrenees_comparison.json | 45 | 45 | 3.00 | 12231225.00 | 5475899.90 | 5107.00 | 212477.31 | -0.1810
+random_tactics | Pyrenees_comparison.json | 46 | 46 | 3.17 | 13090025.00 | 6040142.05 | 5366.00 | 236832.25 | -0.1922
+random_tactics | Pyrenees_comparison.json | 47 | 47 | 3.17 | 12955350.00 | 6000707.55 | 5164.00 | 236673.32 | -0.1868
+random_tactics | Pyrenees_comparison.json | 48 | 48 | 3.17 | 12794775.00 | 6023719.47 | 5149.00 | 238176.55 | -0.1862
+random_tactics | Pyrenees_comparison.json | 49 | 49 | 3.17 | 12462025.00 | 6199428.92 | 5053.00 | 248332.16 | -0.1840
+random_tactics | Pyrenees_comparison.json | 50 | 50 | 3.17 | 12349175.00 | 5984323.65 | 5107.00 | 237332.72 | -0.1839
+random_tactics | Pyrenees_comparison.json | 51 | 51 | 3.17 | 13930150.00 | 6672380.98 | 5653.00 | 264686.47 | -0.2045
+random_tactics | Pyrenees_comparison.json | 52 | 52 | 3.00 | 11578500.00 | 5401799.50 | 4904.00 | 211468.01 | -0.1742
+random_tactics | Pyrenees_comparison.json | 53 | 53 | 3.17 | 12699975.00 | 5953916.95 | 5157.00 | 234780.97 | -0.1858
+random_tactics | Pyrenees_comparison.json | 54 | 54 | 3.17 | 12457325.00 | 5923186.55 | 5111.00 | 234225.92 | -0.1840
+random_tactics | Pyrenees_comparison.json | 55 | 55 | 3.00 | 12502350.00 | 5757835.90 | 5211.00 | 224925.96 | -0.1856
+random_tactics | Pyrenees_comparison.json | 56 | 56 | 3.17 | 12207450.00 | 5744480.05 | 5053.00 | 226203.70 | -0.1810
+random_tactics | Pyrenees_comparison.json | 57 | 57 | 3.17 | 12175475.00 | 5713361.20 | 5020.00 | 224837.95 | -0.1800
+random_tactics | Pyrenees_comparison.json | 58 | 58 | 3.17 | 13920000.00 | 6626623.85 | 5646.00 | 262588.61 | -0.2040
+random_tactics | Pyrenees_comparison.json | 59 | 59 | 3.17 | 12291375.00 | 5879935.25 | 5049.00 | 232729.89 | -0.1818
+random_tactics | Pyrenees_comparison.json | 60 | 60 | 3.00 | 12057300.00 | 5707247.72 | 4972.00 | 225142.49 | -0.1785
+random_tactics | Pyrenees_comparison.json | 61 | 61 | 3.17 | 13805325.00 | 6663194.35 | 5384.00 | 266179.51 | -0.1976
+random_tactics | Pyrenees_comparison.json | 62 | 62 | 3.00 | 12505650.00 | 6104291.65 | 5122.00 | 242950.29 | -0.1853
+random_tactics | Pyrenees_comparison.json | 63 | 63 | 3.17 | 12915850.00 | 5769598.50 | 5264.00 | 224566.91 | -0.1879
+random_tactics | Pyrenees_comparison.json | 64 | 64 | 3.17 | 13463800.00 | 6193688.35 | 5397.00 | 243349.65 | -0.1946
+random_tactics | Pyrenees_comparison.json | 65 | 65 | 3.17 | 13422500.00 | 6302358.17 | 5422.00 | 248766.64 | -0.1957
+random_tactics | Pyrenees_comparison.json | 66 | 66 | 3.17 | 12027950.00 | 5504481.62 | 5048.00 | 214568.36 | -0.1792
+random_tactics | Pyrenees_comparison.json | 67 | 67 | 3.33 | 13798250.00 | 6473593.27 | 5429.00 | 256644.29 | -0.1977
+random_tactics | Pyrenees_comparison.json | 68 | 68 | 3.17 | 13622075.00 | 6342778.03 | 5431.00 | 250381.75 | -0.1966
+random_tactics | Pyrenees_comparison.json | 69 | 69 | 3.00 | 12148525.00 | 5702097.27 | 5067.00 | 224071.24 | -0.1810
+random_tactics | Pyrenees_comparison.json | 70 | 70 | 3.17 | 12271750.00 | 5566555.48 | 5150.00 | 216422.86 | -0.1826
+random_tactics | Pyrenees_comparison.json | 71 | 71 | 3.17 | 12881975.00 | 5811385.50 | 5267.00 | 226422.73 | -0.1881
+random_tactics | Pyrenees_comparison.json | 72 | 72 | 3.17 | 12917050.00 | 6139856.20 | 5223.00 | 243169.66 | -0.1889
+random_tactics | Pyrenees_comparison.json | 73 | 73 | 3.17 | 13405100.00 | 6339019.03 | 5448.00 | 250415.99 | -0.1965
+random_tactics | Pyrenees_comparison.json | 74 | 74 | 3.17 | 12898600.00 | 6097142.10 | 5199.00 | 241170.98 | -0.1880
+random_tactics | Pyrenees_comparison.json | 75 | 75 | 3.00 | 12467575.00 | 5852852.00 | 5073.00 | 230896.67 | -0.1827
+random_tactics | Pyrenees_comparison.json | 76 | 76 | 3.17 | 11966550.00 | 5745648.62 | 4984.00 | 227175.86 | -0.1788
+random_tactics | Pyrenees_comparison.json | 77 | 77 | 3.17 | 12886000.00 | 6280256.35 | 5215.00 | 250353.87 | -0.1894
+random_tactics | Pyrenees_comparison.json | 78 | 78 | 3.17 | 11843500.00 | 5434044.55 | 4955.00 | 212201.21 | -0.1762
+random_tactics | Pyrenees_comparison.json | 79 | 79 | 3.17 | 13461225.00 | 6535274.75 | 5299.00 | 261128.97 | -0.1940
+random_tactics | Pyrenees_comparison.json | 80 | 80 | 3.17 | 13398600.00 | 6389397.35 | 5267.00 | 254373.54 | -0.1924
+random_tactics | Pyrenees_comparison.json | 81 | 81 | 3.17 | 11835250.00 | 5372085.77 | 4987.00 | 208828.33 | -0.1766
+random_tactics | Pyrenees_comparison.json | 82 | 82 | 3.17 | 12812425.00 | 5889595.80 | 5224.00 | 230850.61 | -0.1873
+random_tactics | Pyrenees_comparison.json | 83 | 83 | 3.17 | 12621950.00 | 5989357.70 | 5124.00 | 236995.58 | -0.1850
+random_tactics | Pyrenees_comparison.json | 84 | 84 | 3.00 | 11859900.00 | 5476301.95 | 4989.00 | 214043.37 | -0.1773
+random_tactics | Pyrenees_comparison.json | 85 | 85 | 3.17 | 11962875.00 | 5563678.10 | 5067.00 | 217449.41 | -0.1798
+random_tactics | Pyrenees_comparison.json | 86 | 86 | 3.17 | 12842725.00 | 6055941.10 | 5402.00 | 237935.07 | -0.1926
+random_tactics | Pyrenees_comparison.json | 87 | 87 | 3.17 | 12557550.00 | 5848133.03 | 5160.00 | 229865.97 | -0.1850
+random_tactics | Pyrenees_comparison.json | 88 | 88 | 3.17 | 12150900.00 | 5796451.90 | 4967.00 | 229483.94 | -0.1791
+random_tactics | Pyrenees_comparison.json | 89 | 89 | 3.17 | 12570175.00 | 5665915.85 | 5213.00 | 220291.67 | -0.1853
+random_tactics | Pyrenees_comparison.json | 90 | 90 | 3.17 | 12839275.00 | 5913561.00 | 5227.00 | 232028.16 | -0.1876
+random_tactics | Pyrenees_comparison.json | 91 | 91 | 3.17 | 12703325.00 | 5732844.20 | 5194.00 | 223489.48 | -0.1855
+random_tactics | Pyrenees_comparison.json | 92 | 92 | 3.17 | 12484300.00 | 5936910.18 | 5083.00 | 235020.36 | -0.1834
+random_tactics | Pyrenees_comparison.json | 93 | 93 | 3.17 | 12548575.00 | 5869940.52 | 5148.00 | 231012.54 | -0.1848
+random_tactics | Pyrenees_comparison.json | 94 | 94 | 3.17 | 11727100.00 | 5510592.70 | 4913.00 | 216473.60 | -0.1753
+random_tactics | Pyrenees_comparison.json | 95 | 95 | 3.17 | 11999075.00 | 5518487.23 | 5054.00 | 215255.56 | -0.1794
+random_tactics | Pyrenees_comparison.json | 96 | 96 | 3.17 | 13194775.00 | 6217983.30 | 5466.00 | 244874.30 | -0.1958
+random_tactics | Pyrenees_comparison.json | 97 | 97 | 3.17 | 13238975.00 | 6055815.53 | 5365.00 | 237301.46 | -0.1926
+random_tactics | Pyrenees_comparison.json | 98 | 98 | 3.17 | 12676325.00 | 5690702.50 | 5378.00 | 220197.73 | -0.1897
+random_tactics | Pyrenees_comparison.json | 99 | 99 | 3.17 | 12606950.00 | 5598091.00 | 5407.00 | 215381.96 | -0.1897
+random_tactics | Pyrenees_comparison.json | 100 | 100 | 3.00 | 11611500.00 | 5190875.23 | 4951.00 | 200553.71 | -0.1743
+
+Policy + Scenario summary (mean over runs)
+policy_type | policy_name | scenario_name | runs | mean_burnt_area_m2 | mean_cost_eur | mean_casualties | mean_emissions_tonnes | mean_mission_h | mean_moe
+ppo_model | switch_ignition_1m | Pyrenees_comparison.json | 100 | 12536846.25 | 5842468.56 | 5161.83 | 229561.48 | 3.14 | -0.1849
+random_tactic | random_tactics | Pyrenees_comparison.json | 100 | 12716358.25 | 5978522.41 | 5208.99 | 235651.34 | 3.14 | -0.1872
+Saved plot: examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/plots/pyrenees_comparison_json_moe_comparison.png
+Saved plot: examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/plots/pyrenees_comparison_json_burnt_area_comparison.png
+Saved plot: examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/plots/pyrenees_comparison_json_cost_comparison.png
+Saved plot: examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/plots/pyrenees_comparison_json_moe_boxplot.png
+
+Saved per-run results to examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/results.csv
+Saved summary results to examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/summary.csv
+Saved plots to examples/wildfire/data/scenarios/outputs/eval_palisades_on_pyrenees/plots
+Evaluation finished in 318.14 seconds

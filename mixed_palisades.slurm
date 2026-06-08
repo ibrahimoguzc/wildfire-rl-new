@@ -8,7 +8,7 @@
 #SBATCH -t 24:00:00
 #SBATCH -o logs/slurm-%j.out
 #SBATCH -e logs/slurm-%j.err
-#SBATCH --mem=300G
+#SBATCH --mem=400G
 #SBATCH --qos=owl_normal_short
 
 set -euo pipefail
@@ -51,6 +51,7 @@ OUTDIR=examples/wildfire/data/scenarios/outputs/palisades_v2_${SLURM_JOB_ID}
   --gc-collect-on-reset \
   --n-epochs 7 \
   --learning-rate 0.0004 \
+  --gamma 0.99 \
   --state-space mixed \
   --tactic-distribution group \
   --aircraft-group-size 2 \

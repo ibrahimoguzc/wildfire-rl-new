@@ -1,0 +1,7240 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Pyrenees.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------
+| time/              |      |
+|    fps             | 2    |
+|    iterations      | 1    |
+|    time_elapsed    | 2226 |
+|    total_timesteps | 5184 |
+-----------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 2           |
+|    time_elapsed         | 4556        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.014622952 |
+|    clip_fraction        | 0.187       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | -0.243      |
+|    learning_rate        | 0.000493    |
+|    loss                 | -0.0255     |
+|    n_updates            | 5           |
+|    policy_gradient_loss | -0.0199     |
+|    value_loss           | 0.102       |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_1900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 3           |
+|    time_elapsed         | 6978        |
+|    total_timesteps      | 15552       |
+| train/                  |             |
+|    approx_kl            | 0.027144914 |
+|    clip_fraction        | 0.251       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.694       |
+|    learning_rate        | 0.000487    |
+|    loss                 | -0.0166     |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0266     |
+|    value_loss           | 0.0365      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_2900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 4           |
+|    time_elapsed         | 8937        |
+|    total_timesteps      | 20736       |
+| train/                  |             |
+|    approx_kl            | 0.028137187 |
+|    clip_fraction        | 0.271       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | 0.691       |
+|    learning_rate        | 0.00048     |
+|    loss                 | -0.00807    |
+|    n_updates            | 15          |
+|    policy_gradient_loss | -0.0279     |
+|    value_loss           | 0.0501      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_3900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 5           |
+|    time_elapsed         | 11218       |
+|    total_timesteps      | 25920       |
+| train/                  |             |
+|    approx_kl            | 0.030543914 |
+|    clip_fraction        | 0.278       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.693       |
+|    learning_rate        | 0.000473    |
+|    loss                 | -0.0131     |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0225     |
+|    value_loss           | 0.0386      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_4900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 6           |
+|    time_elapsed         | 13784       |
+|    total_timesteps      | 31104       |
+| train/                  |             |
+|    approx_kl            | 0.027768103 |
+|    clip_fraction        | 0.295       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.684       |
+|    learning_rate        | 0.000466    |
+|    loss                 | -0.0235     |
+|    n_updates            | 25          |
+|    policy_gradient_loss | -0.0298     |
+|    value_loss           | 0.0501      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_5900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6200_summary.csv
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 7           |
+|    time_elapsed         | 16043       |
+|    total_timesteps      | 36288       |
+| train/                  |             |
+|    approx_kl            | 0.030996298 |
+|    clip_fraction        | 0.27        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.678       |
+|    learning_rate        | 0.000459    |
+|    loss                 | -0.0152     |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.0314     |
+|    value_loss           | 0.0598      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_6900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7100_summary.csv
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 8           |
+|    time_elapsed         | 18328       |
+|    total_timesteps      | 41472       |
+| train/                  |             |
+|    approx_kl            | 0.031346496 |
+|    clip_fraction        | 0.31        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.677       |
+|    learning_rate        | 0.000452    |
+|    loss                 | -0.0253     |
+|    n_updates            | 35          |
+|    policy_gradient_loss | -0.0279     |
+|    value_loss           | 0.0446      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_7900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8000_summary.csv
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 9           |
+|    time_elapsed         | 20557       |
+|    total_timesteps      | 46656       |
+| train/                  |             |
+|    approx_kl            | 0.033015545 |
+|    clip_fraction        | 0.306       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.668       |
+|    learning_rate        | 0.000445    |
+|    loss                 | -0.0133     |
+|    n_updates            | 40          |
+|    policy_gradient_loss | -0.0285     |
+|    value_loss           | 0.0473      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 10          |
+|    time_elapsed         | 22930       |
+|    total_timesteps      | 51840       |
+| train/                  |             |
+|    approx_kl            | 0.033886176 |
+|    clip_fraction        | 0.298       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.673       |
+|    learning_rate        | 0.000438    |
+|    loss                 | -0.0139     |
+|    n_updates            | 45          |
+|    policy_gradient_loss | -0.0297     |
+|    value_loss           | 0.0524      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_8900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 11          |
+|    time_elapsed         | 25204       |
+|    total_timesteps      | 57024       |
+| train/                  |             |
+|    approx_kl            | 0.034149077 |
+|    clip_fraction        | 0.301       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.6       |
+|    explained_variance   | 0.71        |
+|    learning_rate        | 0.00043     |
+|    loss                 | -0.00511    |
+|    n_updates            | 50          |
+|    policy_gradient_loss | -0.0303     |
+|    value_loss           | 0.0503      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_9900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 12          |
+|    time_elapsed         | 27192       |
+|    total_timesteps      | 62208       |
+| train/                  |             |
+|    approx_kl            | 0.028001798 |
+|    clip_fraction        | 0.287       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.5       |
+|    explained_variance   | 0.662       |
+|    learning_rate        | 0.000423    |
+|    loss                 | -0.0161     |
+|    n_updates            | 55          |
+|    policy_gradient_loss | -0.0267     |
+|    value_loss           | 0.0611      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_10900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 13         |
+|    time_elapsed         | 29121      |
+|    total_timesteps      | 67392      |
+| train/                  |            |
+|    approx_kl            | 0.03260945 |
+|    clip_fraction        | 0.295      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.5      |
+|    explained_variance   | 0.65       |
+|    learning_rate        | 0.000416   |
+|    loss                 | -0.0145    |
+|    n_updates            | 60         |
+|    policy_gradient_loss | -0.0271    |
+|    value_loss           | 0.0438     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_11900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 14          |
+|    time_elapsed         | 31392       |
+|    total_timesteps      | 72576       |
+| train/                  |             |
+|    approx_kl            | 0.032241706 |
+|    clip_fraction        | 0.3         |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.5       |
+|    explained_variance   | 0.669       |
+|    learning_rate        | 0.000408    |
+|    loss                 | -0.0301     |
+|    n_updates            | 65          |
+|    policy_gradient_loss | -0.0288     |
+|    value_loss           | 0.034       |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_12900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 15          |
+|    time_elapsed         | 33713       |
+|    total_timesteps      | 77760       |
+| train/                  |             |
+|    approx_kl            | 0.031580236 |
+|    clip_fraction        | 0.319       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.4       |
+|    explained_variance   | 0.69        |
+|    learning_rate        | 0.000401    |
+|    loss                 | -0.00901    |
+|    n_updates            | 70          |
+|    policy_gradient_loss | -0.0294     |
+|    value_loss           | 0.049       |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_13900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 16          |
+|    time_elapsed         | 36050       |
+|    total_timesteps      | 82944       |
+| train/                  |             |
+|    approx_kl            | 0.030874072 |
+|    clip_fraction        | 0.27        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.4       |
+|    explained_variance   | 0.702       |
+|    learning_rate        | 0.000393    |
+|    loss                 | -0.00317    |
+|    n_updates            | 75          |
+|    policy_gradient_loss | -0.0289     |
+|    value_loss           | 0.0531      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_14900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 17          |
+|    time_elapsed         | 38263       |
+|    total_timesteps      | 88128       |
+| train/                  |             |
+|    approx_kl            | 0.031663325 |
+|    clip_fraction        | 0.291       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.4       |
+|    explained_variance   | 0.668       |
+|    learning_rate        | 0.000386    |
+|    loss                 | -0.0188     |
+|    n_updates            | 80          |
+|    policy_gradient_loss | -0.0295     |
+|    value_loss           | 0.0538      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_15900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 18          |
+|    time_elapsed         | 40716       |
+|    total_timesteps      | 93312       |
+| train/                  |             |
+|    approx_kl            | 0.031205053 |
+|    clip_fraction        | 0.292       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.4       |
+|    explained_variance   | 0.67        |
+|    learning_rate        | 0.000378    |
+|    loss                 | -0.0189     |
+|    n_updates            | 85          |
+|    policy_gradient_loss | -0.0278     |
+|    value_loss           | 0.046       |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_16900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17000_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 19          |
+|    time_elapsed         | 43128       |
+|    total_timesteps      | 98496       |
+| train/                  |             |
+|    approx_kl            | 0.028363565 |
+|    clip_fraction        | 0.286       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.3       |
+|    explained_variance   | 0.686       |
+|    learning_rate        | 0.00037     |
+|    loss                 | -0.0233     |
+|    n_updates            | 90          |
+|    policy_gradient_loss | -0.0304     |
+|    value_loss           | 0.0471      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 20         |
+|    time_elapsed         | 45398      |
+|    total_timesteps      | 103680     |
+| train/                  |            |
+|    approx_kl            | 0.03149629 |
+|    clip_fraction        | 0.281      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.3      |
+|    explained_variance   | 0.689      |
+|    learning_rate        | 0.000362   |
+|    loss                 | -0.018     |
+|    n_updates            | 95         |
+|    policy_gradient_loss | -0.0278    |
+|    value_loss           | 0.0445     |
+----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_17900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18800_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 21          |
+|    time_elapsed         | 47665       |
+|    total_timesteps      | 108864      |
+| train/                  |             |
+|    approx_kl            | 0.028031329 |
+|    clip_fraction        | 0.264       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.3       |
+|    explained_variance   | 0.676       |
+|    learning_rate        | 0.000354    |
+|    loss                 | -0.0106     |
+|    n_updates            | 100         |
+|    policy_gradient_loss | -0.0298     |
+|    value_loss           | 0.0524      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_18900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19700_summary.csv
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 22         |
+|    time_elapsed         | 49963      |
+|    total_timesteps      | 114048     |
+| train/                  |            |
+|    approx_kl            | 0.03172912 |
+|    clip_fraction        | 0.305      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.3      |
+|    explained_variance   | 0.676      |
+|    learning_rate        | 0.000346   |
+|    loss                 | -0.0202    |
+|    n_updates            | 105        |
+|    policy_gradient_loss | -0.0247    |
+|    value_loss           | 0.047      |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_19900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 23         |
+|    time_elapsed         | 52088      |
+|    total_timesteps      | 119232     |
+| train/                  |            |
+|    approx_kl            | 0.02890796 |
+|    clip_fraction        | 0.275      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.2      |
+|    explained_variance   | 0.686      |
+|    learning_rate        | 0.000338   |
+|    loss                 | -0.0222    |
+|    n_updates            | 110        |
+|    policy_gradient_loss | -0.0285    |
+|    value_loss           | 0.0485     |
+----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_20900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21500_summary.csv
+
+Mission Completed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 24         |
+|    time_elapsed         | 54472      |
+|    total_timesteps      | 124416     |
+| train/                  |            |
+|    approx_kl            | 0.02949967 |
+|    clip_fraction        | 0.268      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.2      |
+|    explained_variance   | 0.695      |
+|    learning_rate        | 0.00033    |
+|    loss                 | -0.0238    |
+|    n_updates            | 115        |
+|    policy_gradient_loss | -0.0305    |
+|    value_loss           | 0.0449     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_21900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 25          |
+|    time_elapsed         | 56503       |
+|    total_timesteps      | 129600      |
+| train/                  |             |
+|    approx_kl            | 0.031975042 |
+|    clip_fraction        | 0.288       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.1       |
+|    explained_variance   | 0.71        |
+|    learning_rate        | 0.000321    |
+|    loss                 | -0.0246     |
+|    n_updates            | 120         |
+|    policy_gradient_loss | -0.0264     |
+|    value_loss           | 0.0371      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_22900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 26          |
+|    time_elapsed         | 59128       |
+|    total_timesteps      | 134784      |
+| train/                  |             |
+|    approx_kl            | 0.034182306 |
+|    clip_fraction        | 0.304       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.1       |
+|    explained_variance   | 0.684       |
+|    learning_rate        | 0.000313    |
+|    loss                 | -0.0261     |
+|    n_updates            | 125         |
+|    policy_gradient_loss | -0.0292     |
+|    value_loss           | 0.0445      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_23900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24200_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 27          |
+|    time_elapsed         | 61375       |
+|    total_timesteps      | 139968      |
+| train/                  |             |
+|    approx_kl            | 0.029901253 |
+|    clip_fraction        | 0.285       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.1       |
+|    explained_variance   | 0.699       |
+|    learning_rate        | 0.000304    |
+|    loss                 | -0.0253     |
+|    n_updates            | 130         |
+|    policy_gradient_loss | -0.0324     |
+|    value_loss           | 0.0541      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_24900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25100_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 28          |
+|    time_elapsed         | 63518       |
+|    total_timesteps      | 145152      |
+| train/                  |             |
+|    approx_kl            | 0.027544819 |
+|    clip_fraction        | 0.271       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.1       |
+|    explained_variance   | 0.675       |
+|    learning_rate        | 0.000295    |
+|    loss                 | -0.0262     |
+|    n_updates            | 135         |
+|    policy_gradient_loss | -0.0272     |
+|    value_loss           | 0.0501      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_25900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26000_summary.csv
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 29         |
+|    time_elapsed         | 65600      |
+|    total_timesteps      | 150336     |
+| train/                  |            |
+|    approx_kl            | 0.03126223 |
+|    clip_fraction        | 0.282      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36        |
+|    explained_variance   | 0.704      |
+|    learning_rate        | 0.000286   |
+|    loss                 | -0.0166    |
+|    n_updates            | 140        |
+|    policy_gradient_loss | -0.0265    |
+|    value_loss           | 0.0446     |
+----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_26900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 30          |
+|    time_elapsed         | 67593       |
+|    total_timesteps      | 155520      |
+| train/                  |             |
+|    approx_kl            | 0.027947864 |
+|    clip_fraction        | 0.271       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36         |
+|    explained_variance   | 0.715       |
+|    learning_rate        | 0.000277    |
+|    loss                 | -0.0306     |
+|    n_updates            | 145         |
+|    policy_gradient_loss | -0.0267     |
+|    value_loss           | 0.0403      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 31          |
+|    time_elapsed         | 69652       |
+|    total_timesteps      | 160704      |
+| train/                  |             |
+|    approx_kl            | 0.030882394 |
+|    clip_fraction        | 0.265       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36         |
+|    explained_variance   | 0.682       |
+|    learning_rate        | 0.000268    |
+|    loss                 | -0.0257     |
+|    n_updates            | 150         |
+|    policy_gradient_loss | -0.0282     |
+|    value_loss           | 0.0406      |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_27900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 32          |
+|    time_elapsed         | 72165       |
+|    total_timesteps      | 165888      |
+| train/                  |             |
+|    approx_kl            | 0.029856503 |
+|    clip_fraction        | 0.261       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36         |
+|    explained_variance   | 0.714       |
+|    learning_rate        | 0.000258    |
+|    loss                 | -0.0144     |
+|    n_updates            | 155         |
+|    policy_gradient_loss | -0.0258     |
+|    value_loss           | 0.0347      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_28900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 33          |
+|    time_elapsed         | 74423       |
+|    total_timesteps      | 171072      |
+| train/                  |             |
+|    approx_kl            | 0.025990734 |
+|    clip_fraction        | 0.237       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36         |
+|    explained_variance   | 0.706       |
+|    learning_rate        | 0.000249    |
+|    loss                 | -0.0188     |
+|    n_updates            | 160         |
+|    policy_gradient_loss | -0.0267     |
+|    value_loss           | 0.0517      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29800_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_29900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30100_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 34         |
+|    time_elapsed         | 76681      |
+|    total_timesteps      | 176256     |
+| train/                  |            |
+|    approx_kl            | 0.02376731 |
+|    clip_fraction        | 0.232      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36        |
+|    explained_variance   | 0.704      |
+|    learning_rate        | 0.000239   |
+|    loss                 | -0.00772   |
+|    n_updates            | 165        |
+|    policy_gradient_loss | -0.025     |
+|    value_loss           | 0.0472     |
+----------------------------------------
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_30900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31000_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31500_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 35          |
+|    time_elapsed         | 78809       |
+|    total_timesteps      | 181440      |
+| train/                  |             |
+|    approx_kl            | 0.023984188 |
+|    clip_fraction        | 0.223       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -35.9       |
+|    explained_variance   | 0.682       |
+|    learning_rate        | 0.000229    |
+|    loss                 | -0.00652    |
+|    n_updates            | 170         |
+|    policy_gradient_loss | -0.0268     |
+|    value_loss           | 0.0459      |
+-----------------------------------------
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_31900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32400_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 36          |
+|    time_elapsed         | 81035       |
+|    total_timesteps      | 186624      |
+| train/                  |             |
+|    approx_kl            | 0.023264425 |
+|    clip_fraction        | 0.237       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -35.9       |
+|    explained_variance   | 0.702       |
+|    learning_rate        | 0.000219    |
+|    loss                 | -0.0188     |
+|    n_updates            | 175         |
+|    policy_gradient_loss | -0.0282     |
+|    value_loss           | 0.0428      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32500_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_32900_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33200_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33300_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 37          |
+|    time_elapsed         | 83222       |
+|    total_timesteps      | 191808      |
+| train/                  |             |
+|    approx_kl            | 0.022443576 |
+|    clip_fraction        | 0.207       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -35.9       |
+|    explained_variance   | 0.707       |
+|    learning_rate        | 0.000208    |
+|    loss                 | -0.0178     |
+|    n_updates            | 180         |
+|    policy_gradient_loss | -0.0264     |
+|    value_loss           | 0.0387      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33600_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33700_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33800_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_33900_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Per-step log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34000_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34300_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 38          |
+|    time_elapsed         | 85491       |
+|    total_timesteps      | 196992      |
+| train/                  |             |
+|    approx_kl            | 0.020310106 |
+|    clip_fraction        | 0.201       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36         |
+|    explained_variance   | 0.702       |
+|    learning_rate        | 0.000197    |
+|    loss                 | -0.0147     |
+|    n_updates            | 185         |
+|    policy_gradient_loss | -0.0233     |
+|    value_loss           | 0.0374      |
+-----------------------------------------
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34400_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34500_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34600_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/pyrenees_switch_ignition_1m-5-7-15p/results_pyrenees_switch_ignition_1m_34700_summary.csv
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)

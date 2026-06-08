@@ -1,0 +1,286 @@
+Resetting modules to system default. Reseting $MODULEPATH back to system default. All extra directories will be removed from $MODULEPATH.
+Process ForkProcess-3:
+Process ForkProcess-7:
+Process ForkProcess-6:
+Process ForkProcess-1:
+Process ForkProcess-2:
+Process ForkProcess-5:
+Process ForkProcess-4:
+Process ForkProcess-8:
+Process ForkProcess-9:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+Process ForkProcess-10:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+Process ForkProcess-11:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+Process ForkProcess-12:
+    return _run_code(code, main_globals, None,
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 2725, in <module>
+    main()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 2561, in main
+    train_env = _build_vector_env(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 247, in _build_vector_env
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 170, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 632, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 747, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+urban_locations
+  Assertion failed, UrbanLocatio location (34.59704152, -118.98661773) exceeds map boundaries latitude [[34.59704151614417, -119.17968749999996], [33.43144133557528, -117.77343749999997]] [type=assertion_error, input_value=[{'gps_coords': [33.43144...6.9, 26.9], 'angle': 0}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/assertion_error
+    return SubprocVecEnv(env_fns, start_method=start_method)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 127, in __init__
+    observation_space, action_space = self.remotes[0].recv()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+ConnectionResetError: [Errno 104] Connection reset by peer
+Command exited with non-zero status 1
+	Command being timed: "python -u -m examples.wildfire.ppo_runner --scenario Palisades.json --switch-ignition-1 --num-envs 12 --timesteps 10368 --device cpu --profile-timings --gc-collect-on-reset --output-dir examples/wildfire/data/scenarios/outputs/profile_500657/solo_palisades --progress-file-tag profile_palisades --vec-start-method auto"
+	User time (seconds): 6.85
+	System time (seconds): 3.75
+	Percent of CPU this job got: 38%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:27.31
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 959716
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 7957
+	Minor (reclaiming a frame) page faults: 183768
+	Voluntary context switches: 23842
+	Involuntary context switches: 668
+	Swaps: 0
+	File system inputs: 1586304
+	File system outputs: 88
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
+slurmstepd: error: *** JOB 500657 ON owl051 CANCELLED AT 2026-05-07T12:06:48 ***

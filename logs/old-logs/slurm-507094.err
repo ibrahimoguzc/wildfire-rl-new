@@ -1,0 +1,24 @@
+Resetting modules to system default. Reseting $MODULEPATH back to system default. All extra directories will be removed from $MODULEPATH.
+	Command being timed: "python -u -m examples.wildfire.ppo_runner --scenario Salamis_12p.json --switch-ignition-1 --num-envs 12 --timesteps 10368 --device cpu --profile-timings --gc-collect-on-reset --output-dir examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094 --progress-file-tag profile_salamis12p_noadaptive --vec-start-method auto"
+	User time (seconds): 27605.79
+	System time (seconds): 87.43
+	Percent of CPU this job got: 774%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 59:36.29
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1933372
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 22664
+	Minor (reclaiming a frame) page faults: 9855202
+	Voluntary context switches: 1331790
+	Involuntary context switches: 625038
+	Swaps: 0
+	File system inputs: 1045736
+	File system outputs: 30896
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

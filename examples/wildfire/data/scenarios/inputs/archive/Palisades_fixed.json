@@ -1,0 +1,343 @@
+{
+    "name": "WildfireDefault",
+    "time_step": 1.0,
+    "enable_adaptive_time_step": false,
+    "mission_start": "2025-01-07T10:30:00",
+    "max_runtime": 86400,
+    "output_sampling_time": 300,
+    "run_headless": true,
+    "map_in_map": true,
+    "export_img": false,
+    "import_features_osm": true,
+    "deploy_osm_airport_locations": true,
+    "k_nearest_airports": 1,
+    "terrain_inputs": {
+        "file_namespace_operational": "Palisades_128x128_800",
+        "file_namespace": "Palisades_2004x1996_5m",
+        "cell_size": 5,
+        "height_scale_factor": 1.0,
+        "priority_map_sigma": 30,
+        "import_features_osm": true
+    },
+    "max_elevation": 1,
+    "run_api_for_atmosphere": false,
+    "atmosphere_inputs": {
+        "temperature_range": [
+            10,
+            23,
+            17
+        ],
+        "temperature_times": [
+            5,
+            13
+        ],
+        "sun_times": [
+            6,
+            20
+        ],
+        "time_of_max_solar_height": 12,
+        "humidity_range": [
+            22,
+            90
+        ],
+        "wind_run": 320,
+        "general_winddirection": 15,
+        "range_winddirection": 45,
+        "update_frequency": 600,
+        "latitude": 42.865,
+        "longitude": 0.022
+    },
+    "correction_coefficient": 0.4,
+    "ignition_centers": [
+        {
+            "gps_coords": [
+                34.07022,
+                -118.54453
+            ]
+        }
+    ],
+    "airports": [
+        {
+            "gps_coords": [
+                38.6934,
+                -9.4192
+            ]
+        },
+        {
+            "gps_coords": [
+                33.94126,
+                -118.42077
+            ]
+        }
+    ],
+    "deploy_osm_waters": true,
+    "water_sources": [
+        {
+            "gps_coords": [
+                34.0378973891474,
+                -118.5463204448615
+            ]
+        }
+    ],
+    "protection_locations": [],
+    "urban_locations": [{
+      "gps_coords": [
+        33.55993467,
+        -117.89137861
+      ],
+      "radius": [
+        1091.2,
+        1911.7
+      ],
+      "angle": 117
+    },
+    {
+      "gps_coords": [
+        33.74927943,
+        -118.43500324
+      ],
+      "radius": [
+        1172.3,
+        1740.9
+      ],
+      "angle": 66
+    },
+    {
+      "gps_coords": [
+        34.04934554,
+        -117.88746962
+      ],
+      "radius": [
+        774.0,
+        1731.5
+      ],
+      "angle": 60
+    },
+    {
+      "gps_coords": [
+        33.68722898,
+        -118.82627996
+      ],
+      "radius": [
+        439.1,
+        734.2
+      ],
+      "angle": 146
+    },
+    {
+      "gps_coords": [
+        34.25995425,
+        -119.11991402
+      ],
+      "radius": [
+        493.4,
+        666.8
+      ],
+      "angle": 78
+    },
+    {
+      "gps_coords": [
+        33.77697247,
+        -118.19079468
+      ],
+      "radius": [
+        450.2,
+        621.2
+      ],
+      "angle": 149
+    },
+    {
+      "gps_coords": [
+        34.04893358,
+        -118.5557142
+      ],
+      "radius": [
+        385.0,
+        712.7
+      ],
+      "angle": 108
+    },
+    {
+      "gps_coords": [
+        33.67017352,
+        -118.00918057
+      ],
+      "radius": [
+        247.4,
+        1219.8
+      ],
+      "angle": 120
+    },
+    {
+      "gps_coords": [
+        33.70057625,
+        -118.15666106
+      ],
+      "radius": [
+        349.9,
+        485.2
+      ],
+      "angle": 65
+    },
+    {
+      "gps_coords": [
+        33.54489555,
+        -118.18377965
+      ],
+      "radius": [
+        325.9,
+        669.4
+      ],
+      "angle": 79
+    },
+    {
+      "gps_coords": [
+        33.65304738,
+        -118.68201895
+      ],
+      "radius": [
+        341.2,
+        584.7
+      ],
+      "angle": 22
+    },
+    {
+      "gps_coords": [
+        34.45040859,
+        -119.07158018
+      ],
+      "radius": [
+        279.5,
+        616.8
+      ],
+      "angle": 61
+    },
+    {
+      "gps_coords": [
+        34.38929544,
+        -119.12607197
+      ],
+      "radius": [
+        253.4,
+        490.1
+      ],
+      "angle": 162
+    },
+    {
+      "gps_coords": [
+        34.48239318,
+        -117.92758442
+      ],
+      "radius": [
+        323.1,
+        907.6
+      ],
+      "angle": 103
+    },
+    {
+      "gps_coords": [
+        34.11728464,
+        -118.81456094
+      ],
+      "radius": [
+        270.6,
+        328.8
+      ],
+      "angle": 24
+    },
+    {
+      "gps_coords": [
+        34.05962809,
+        -118.69615126
+      ],
+      "radius": [
+        210.1,
+        473.8
+      ],
+      "angle": 53
+    },
+    {
+      "gps_coords": [
+        33.82557827,
+        -117.82205382
+      ],
+      "radius": [
+        174.6,
+        566.5
+      ],
+      "angle": 84
+    },
+    {
+      "gps_coords": [
+        34.11518332,
+        -118.7012056
+      ],
+      "radius": [
+        198.0,
+        412.5
+      ],
+      "angle": 17
+    },
+    {
+      "gps_coords": [
+        33.64791632,
+        -118.29057398
+      ],
+      "radius": [
+        155.5,
+        518.1
+      ],
+      "angle": 99
+    },
+    {
+      "gps_coords": [
+        33.61277918,
+        -118.24201607
+      ],
+      "radius": [
+        219.2,
+        481.1
+      ],
+      "angle": 87
+    }],
+    "response_time": 3600,
+    "takeoff_interval": 300,
+    "turnaround_time": 100,
+    "suppression_altitude": 50,
+    "resupply_altitude": 15,
+    "enable_nighttime_operations": true,
+    "agents": [
+      {
+          "file_name": "example_seaplane_1.json",
+          "agents_per_base": [
+              1,
+              2
+          ],
+          "suppression_tactic": {
+              "main": {
+                  "select_poi": "indirect",
+                  "track_poi": "indirect",
+                  "suppress": "indirect"
+              },
+              "alternative": {
+                  "threshold": 8,
+                  "change_condition": "runtime",
+                  "alternative_tactic": {
+                      "select_poi": "topography",
+                      "track_poi": "follow_firefront",
+                      "suppress": "direct"
+                  }
+              }
+          }
+      }
+        
+    ],
+    
+
+    "scoop_time": 30,
+    "distance_cost_weight": 1.0,
+    "vip_cost_weight": 1.0,
+    "priority_cost_weight": 1.0,
+    "vegetation_cost_weight": 1.0,
+    "topography_cost_weight": 1.0
+}

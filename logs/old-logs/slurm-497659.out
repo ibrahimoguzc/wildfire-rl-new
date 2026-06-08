@@ -1,0 +1,1357 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+Policies: switch_ignition_1m[ppo_model], random_tactics[random_tactic]
+Running parallel evaluation with 24 worker process(es).
+
+Mission Failed (Pyrenees)
+[1/500] Evaluated random_tactics on Pyrenees_comparison.json run=11 seed=11
+
+Mission Failed (Pyrenees)
+[2/500] Evaluated random_tactics on Pyrenees_comparison.json run=6 seed=6
+
+Mission Failed (Pyrenees)
+[3/500] Evaluated random_tactics on Pyrenees_comparison.json run=7 seed=7
+
+Mission Failed (Pyrenees)
+[4/500] Evaluated random_tactics on Pyrenees_comparison.json run=8 seed=8
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[5/500] Evaluated random_tactics on Pyrenees_comparison.json run=1 seed=1
+[6/500] Evaluated random_tactics on Pyrenees_comparison.json run=10 seed=10
+
+Mission Failed (Pyrenees)
+[7/500] Evaluated random_tactics on Pyrenees_comparison.json run=5 seed=5
+
+Mission Failed (Pyrenees)
+[8/500] Evaluated random_tactics on Pyrenees_comparison.json run=4 seed=4
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[9/500] Evaluated random_tactics on Pyrenees_comparison.json run=9 seed=9
+[10/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=9 seed=9
+
+Mission Failed (Pyrenees)
+[11/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=11 seed=11
+
+Mission Failed (Pyrenees)
+[12/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=2 seed=2
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[13/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=12 seed=12
+[14/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=10 seed=10
+
+Mission Failed (Pyrenees)
+[15/500] Evaluated random_tactics on Pyrenees_comparison.json run=3 seed=3
+
+Mission Failed (Pyrenees)
+[16/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=1 seed=1
+
+Mission Failed (Pyrenees)
+[17/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=8 seed=8
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[18/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=7 seed=7
+[19/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=6 seed=6
+
+Mission Failed (Pyrenees)
+[20/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=4 seed=4
+
+Mission Failed (Pyrenees)
+[21/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=3 seed=3
+
+Mission Failed (Pyrenees)
+[22/500] Evaluated random_tactics on Pyrenees_comparison.json run=12 seed=12
+
+Mission Failed (Pyrenees)
+[23/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=5 seed=5
+
+Mission Failed (Pyrenees)
+[24/500] Evaluated random_tactics on Pyrenees_comparison.json run=2 seed=2
+
+Mission Failed (Pyrenees)
+[25/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=13 seed=13
+
+Mission Failed (Pyrenees)
+[26/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=14 seed=14
+
+Mission Failed (Pyrenees)
+[27/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=16 seed=16
+
+Mission Failed (Pyrenees)
+[28/500] Evaluated random_tactics on Pyrenees_comparison.json run=13 seed=13
+
+Mission Failed (Pyrenees)
+[29/500] Evaluated random_tactics on Pyrenees_comparison.json run=16 seed=16
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[30/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=18 seed=18
+[31/500] Evaluated random_tactics on Pyrenees_comparison.json run=17 seed=17
+
+Mission Failed (Pyrenees)
+[32/500] Evaluated random_tactics on Pyrenees_comparison.json run=15 seed=15
+
+Mission Failed (Pyrenees)
+[33/500] Evaluated random_tactics on Pyrenees_comparison.json run=14 seed=14
+
+Mission Failed (Pyrenees)
+[34/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=17 seed=17
+
+Mission Failed (Pyrenees)
+[35/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=15 seed=15
+
+Mission Failed (Pyrenees)
+[36/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=19 seed=19
+
+Mission Failed (Pyrenees)
+[37/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=21 seed=21
+
+Mission Failed (Pyrenees)
+[38/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=22 seed=22
+
+Mission Failed (Pyrenees)
+[39/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=20 seed=20
+
+Mission Failed (Pyrenees)
+[40/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=23 seed=23
+
+Mission Failed (Pyrenees)
+[41/500] Evaluated random_tactics on Pyrenees_comparison.json run=20 seed=20
+
+Mission Failed (Pyrenees)
+[42/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=24 seed=24
+
+Mission Failed (Pyrenees)
+[43/500] Evaluated random_tactics on Pyrenees_comparison.json run=19 seed=19
+
+Mission Failed (Pyrenees)
+[44/500] Evaluated random_tactics on Pyrenees_comparison.json run=18 seed=18
+
+Mission Failed (Pyrenees)
+[45/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=25 seed=25
+
+Mission Failed (Pyrenees)
+[46/500] Evaluated random_tactics on Pyrenees_comparison.json run=21 seed=21
+
+Mission Failed (Pyrenees)
+[47/500] Evaluated random_tactics on Pyrenees_comparison.json run=24 seed=24
+
+Mission Failed (Pyrenees)
+[48/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=26 seed=26
+
+Mission Failed (Pyrenees)
+[49/500] Evaluated random_tactics on Pyrenees_comparison.json run=23 seed=23
+
+Mission Failed (Pyrenees)
+[50/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=28 seed=28
+
+Mission Failed (Pyrenees)
+[51/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=31 seed=31
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[52/500] Evaluated random_tactics on Pyrenees_comparison.json run=25 seed=25
+[53/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=30 seed=30
+
+Mission Failed (Pyrenees)
+[54/500] Evaluated random_tactics on Pyrenees_comparison.json run=29 seed=29
+
+Mission Failed (Pyrenees)
+[55/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=27 seed=27
+
+Mission Failed (Pyrenees)
+[56/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=29 seed=29
+
+Mission Failed (Pyrenees)
+[57/500] Evaluated random_tactics on Pyrenees_comparison.json run=22 seed=22
+
+Mission Failed (Pyrenees)
+[58/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=32 seed=32
+
+Mission Failed (Pyrenees)
+[59/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=33 seed=33
+
+Mission Failed (Pyrenees)
+[60/500] Evaluated random_tactics on Pyrenees_comparison.json run=30 seed=30
+
+Mission Failed (Pyrenees)
+[61/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=34 seed=34
+
+Mission Failed (Pyrenees)
+[62/500] Evaluated random_tactics on Pyrenees_comparison.json run=27 seed=27
+
+Mission Failed (Pyrenees)
+[63/500] Evaluated random_tactics on Pyrenees_comparison.json run=28 seed=28
+
+Mission Failed (Pyrenees)
+[64/500] Evaluated random_tactics on Pyrenees_comparison.json run=26 seed=26
+
+Mission Failed (Pyrenees)
+[65/500] Evaluated random_tactics on Pyrenees_comparison.json run=32 seed=32
+
+Mission Failed (Pyrenees)
+[66/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=35 seed=35
+
+Mission Failed (Pyrenees)
+[67/500] Evaluated random_tactics on Pyrenees_comparison.json run=31 seed=31
+
+Mission Failed (Pyrenees)
+[68/500] Evaluated random_tactics on Pyrenees_comparison.json run=33 seed=33
+
+Mission Failed (Pyrenees)
+[69/500] Evaluated random_tactics on Pyrenees_comparison.json run=35 seed=35
+
+Mission Failed (Pyrenees)
+[70/500] Evaluated random_tactics on Pyrenees_comparison.json run=34 seed=34
+
+Mission Failed (Pyrenees)
+[71/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=36 seed=36
+
+Mission Failed (Pyrenees)
+[72/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=37 seed=37
+
+Mission Failed (Pyrenees)
+[73/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=39 seed=39
+
+Mission Failed (Pyrenees)
+[74/500] Evaluated random_tactics on Pyrenees_comparison.json run=37 seed=37
+
+Mission Failed (Pyrenees)
+[75/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=38 seed=38
+
+Mission Failed (Pyrenees)
+[76/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=40 seed=40
+
+Mission Failed (Pyrenees)
+[77/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=41 seed=41
+
+Mission Failed (Pyrenees)
+[78/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=42 seed=42
+
+Mission Failed (Pyrenees)
+[79/500] Evaluated random_tactics on Pyrenees_comparison.json run=41 seed=41
+
+Mission Failed (Pyrenees)
+[80/500] Evaluated random_tactics on Pyrenees_comparison.json run=38 seed=38
+
+Mission Failed (Pyrenees)
+[81/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=43 seed=43
+
+Mission Failed (Pyrenees)
+[82/500] Evaluated random_tactics on Pyrenees_comparison.json run=42 seed=42
+
+Mission Failed (Pyrenees)
+[83/500] Evaluated random_tactics on Pyrenees_comparison.json run=36 seed=36
+
+Mission Failed (Pyrenees)
+[84/500] Evaluated random_tactics on Pyrenees_comparison.json run=39 seed=39
+
+Mission Failed (Pyrenees)
+[85/500] Evaluated random_tactics on Pyrenees_comparison.json run=44 seed=44
+
+Mission Failed (Pyrenees)
+[86/500] Evaluated random_tactics on Pyrenees_comparison.json run=40 seed=40
+
+Mission Failed (Pyrenees)
+[87/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=45 seed=45
+
+Mission Failed (Pyrenees)
+[88/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=44 seed=44
+
+Mission Failed (Pyrenees)
+[89/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=46 seed=46
+
+Mission Failed (Pyrenees)
+[90/500] Evaluated random_tactics on Pyrenees_comparison.json run=46 seed=46
+
+Mission Failed (Pyrenees)
+[91/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=47 seed=47
+
+Mission Failed (Pyrenees)
+[92/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=48 seed=48
+
+Mission Failed (Pyrenees)
+[93/500] Evaluated random_tactics on Pyrenees_comparison.json run=48 seed=48
+
+Mission Failed (Pyrenees)
+[94/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=50 seed=50
+
+Mission Failed (Pyrenees)
+[95/500] Evaluated random_tactics on Pyrenees_comparison.json run=43 seed=43
+
+Mission Failed (Pyrenees)
+[96/500] Evaluated random_tactics on Pyrenees_comparison.json run=49 seed=49
+
+Mission Failed (Pyrenees)
+[97/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=49 seed=49
+
+Mission Failed (Pyrenees)
+[98/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=51 seed=51
+
+Mission Failed (Pyrenees)
+[99/500] Evaluated random_tactics on Pyrenees_comparison.json run=50 seed=50
+
+Mission Failed (Pyrenees)
+[100/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=52 seed=52
+
+Mission Failed (Pyrenees)
+[101/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=53 seed=53
+
+Mission Failed (Pyrenees)
+[102/500] Evaluated random_tactics on Pyrenees_comparison.json run=52 seed=52
+
+Mission Failed (Pyrenees)
+[103/500] Evaluated random_tactics on Pyrenees_comparison.json run=47 seed=47
+
+Mission Failed (Pyrenees)
+[104/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=54 seed=54
+
+Mission Failed (Pyrenees)
+[105/500] Evaluated random_tactics on Pyrenees_comparison.json run=51 seed=51
+
+Mission Failed (Pyrenees)
+[106/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=56 seed=56
+
+Mission Failed (Pyrenees)
+[107/500] Evaluated random_tactics on Pyrenees_comparison.json run=45 seed=45
+
+Mission Failed (Pyrenees)
+[108/500] Evaluated random_tactics on Pyrenees_comparison.json run=55 seed=55
+
+Mission Failed (Pyrenees)
+[109/500] Evaluated random_tactics on Pyrenees_comparison.json run=54 seed=54
+
+Mission Failed (Pyrenees)
+[110/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=55 seed=55
+
+Mission Failed (Pyrenees)
+[111/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=58 seed=58
+
+Mission Failed (Pyrenees)
+[112/500] Evaluated random_tactics on Pyrenees_comparison.json run=53 seed=53
+
+Mission Failed (Pyrenees)
+[113/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=57 seed=57
+
+Mission Failed (Pyrenees)
+[114/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=59 seed=59
+
+Mission Failed (Pyrenees)
+[115/500] Evaluated random_tactics on Pyrenees_comparison.json run=58 seed=58
+
+Mission Failed (Pyrenees)
+[116/500] Evaluated random_tactics on Pyrenees_comparison.json run=59 seed=59
+
+Mission Failed (Pyrenees)
+[117/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=60 seed=60
+
+Mission Failed (Pyrenees)
+[118/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=61 seed=61
+
+Mission Failed (Pyrenees)
+[119/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=62 seed=62
+
+Mission Failed (Pyrenees)
+[120/500] Evaluated random_tactics on Pyrenees_comparison.json run=57 seed=57
+
+Mission Failed (Pyrenees)
+[121/500] Evaluated random_tactics on Pyrenees_comparison.json run=61 seed=61
+
+Mission Failed (Pyrenees)
+[122/500] Evaluated random_tactics on Pyrenees_comparison.json run=56 seed=56
+
+Mission Failed (Pyrenees)
+[123/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=64 seed=64
+
+Mission Failed (Pyrenees)
+[124/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=65 seed=65
+
+Mission Failed (Pyrenees)
+[125/500] Evaluated random_tactics on Pyrenees_comparison.json run=62 seed=62
+
+Mission Failed (Pyrenees)
+[126/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=63 seed=63
+
+Mission Failed (Pyrenees)
+[127/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=66 seed=66
+
+Mission Failed (Pyrenees)
+[128/500] Evaluated random_tactics on Pyrenees_comparison.json run=63 seed=63
+
+Mission Failed (Pyrenees)
+[129/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=69 seed=69
+
+Mission Failed (Pyrenees)
+[130/500] Evaluated random_tactics on Pyrenees_comparison.json run=66 seed=66
+
+Mission Failed (Pyrenees)
+[131/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=68 seed=68
+
+Mission Failed (Pyrenees)
+[132/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=67 seed=67
+
+Mission Failed (Pyrenees)
+[133/500] Evaluated random_tactics on Pyrenees_comparison.json run=64 seed=64
+
+Mission Failed (Pyrenees)
+[134/500] Evaluated random_tactics on Pyrenees_comparison.json run=65 seed=65
+
+Mission Failed (Pyrenees)
+[135/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=70 seed=70
+
+Mission Failed (Pyrenees)
+[136/500] Evaluated random_tactics on Pyrenees_comparison.json run=67 seed=67
+
+Mission Failed (Pyrenees)
+[137/500] Evaluated random_tactics on Pyrenees_comparison.json run=60 seed=60
+
+Mission Failed (Pyrenees)
+[138/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=71 seed=71
+
+Mission Failed (Pyrenees)
+[139/500] Evaluated random_tactics on Pyrenees_comparison.json run=68 seed=68
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[140/500] Evaluated random_tactics on Pyrenees_comparison.json run=70 seed=70
+[141/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=72 seed=72
+
+Mission Failed (Pyrenees)
+[142/500] Evaluated random_tactics on Pyrenees_comparison.json run=71 seed=71
+
+Mission Failed (Pyrenees)
+[143/500] Evaluated random_tactics on Pyrenees_comparison.json run=69 seed=69
+
+Mission Failed (Pyrenees)
+[144/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=74 seed=74
+
+Mission Failed (Pyrenees)
+[145/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=73 seed=73
+
+Mission Failed (Pyrenees)
+[146/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=75 seed=75
+
+Mission Failed (Pyrenees)
+[147/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=76 seed=76
+
+Mission Failed (Pyrenees)
+[148/500] Evaluated random_tactics on Pyrenees_comparison.json run=76 seed=76
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[149/500] Evaluated random_tactics on Pyrenees_comparison.json run=72 seed=72
+[150/500] Evaluated random_tactics on Pyrenees_comparison.json run=73 seed=73
+
+Mission Failed (Pyrenees)
+[151/500] Evaluated random_tactics on Pyrenees_comparison.json run=74 seed=74
+
+Mission Failed (Pyrenees)
+[152/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=77 seed=77
+
+Mission Failed (Pyrenees)
+[153/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=78 seed=78
+
+Mission Failed (Pyrenees)
+[154/500] Evaluated random_tactics on Pyrenees_comparison.json run=78 seed=78
+
+Mission Failed (Pyrenees)
+[155/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=80 seed=80
+
+Mission Failed (Pyrenees)
+[156/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=79 seed=79
+
+Mission Failed (Pyrenees)
+[157/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=81 seed=81
+
+Mission Failed (Pyrenees)
+[158/500] Evaluated random_tactics on Pyrenees_comparison.json run=75 seed=75
+
+Mission Failed (Pyrenees)
+[159/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=82 seed=82
+
+Mission Failed (Pyrenees)
+[160/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=83 seed=83
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[161/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=84 seed=84
+[162/500] Evaluated random_tactics on Pyrenees_comparison.json run=80 seed=80
+
+Mission Failed (Pyrenees)
+[163/500] Evaluated random_tactics on Pyrenees_comparison.json run=82 seed=82
+
+Mission Failed (Pyrenees)
+[164/500] Evaluated random_tactics on Pyrenees_comparison.json run=79 seed=79
+
+Mission Failed (Pyrenees)
+[165/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=85 seed=85
+
+Mission Failed (Pyrenees)
+[166/500] Evaluated random_tactics on Pyrenees_comparison.json run=77 seed=77
+
+Mission Failed (Pyrenees)
+[167/500] Evaluated random_tactics on Pyrenees_comparison.json run=86 seed=86
+
+Mission Failed (Pyrenees)
+[168/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=86 seed=86
+
+Mission Failed (Pyrenees)
+[169/500] Evaluated random_tactics on Pyrenees_comparison.json run=81 seed=81
+
+Mission Failed (Pyrenees)
+[170/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=88 seed=88
+
+Mission Failed (Pyrenees)
+[171/500] Evaluated random_tactics on Pyrenees_comparison.json run=83 seed=83
+
+Mission Failed (Pyrenees)
+[172/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=90 seed=90
+
+Mission Failed (Pyrenees)
+[173/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=89 seed=89
+
+Mission Failed (Pyrenees)
+[174/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=91 seed=91
+
+Mission Failed (Pyrenees)
+[175/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=87 seed=87
+
+Mission Failed (Pyrenees)
+[176/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=92 seed=92
+
+Mission Failed (Pyrenees)
+[177/500] Evaluated random_tactics on Pyrenees_comparison.json run=89 seed=89
+
+Mission Failed (Pyrenees)
+[178/500] Evaluated random_tactics on Pyrenees_comparison.json run=84 seed=84
+
+Mission Failed (Pyrenees)
+[179/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=93 seed=93
+
+Mission Failed (Pyrenees)
+[180/500] Evaluated random_tactics on Pyrenees_comparison.json run=85 seed=85
+
+Mission Failed (Pyrenees)
+[181/500] Evaluated random_tactics on Pyrenees_comparison.json run=88 seed=88
+
+Mission Failed (Pyrenees)
+[182/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=94 seed=94
+
+Mission Failed (Pyrenees)
+[183/500] Evaluated random_tactics on Pyrenees_comparison.json run=92 seed=92
+
+Mission Failed (Pyrenees)
+[184/500] Evaluated random_tactics on Pyrenees_comparison.json run=87 seed=87
+
+Mission Failed (Pyrenees)
+[185/500] Evaluated random_tactics on Pyrenees_comparison.json run=91 seed=91
+
+Mission Failed (Pyrenees)
+[186/500] Evaluated random_tactics on Pyrenees_comparison.json run=94 seed=94
+
+Mission Failed (Pyrenees)
+[187/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=95 seed=95
+
+Mission Failed (Pyrenees)
+[188/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=96 seed=96
+
+Mission Failed (Pyrenees)
+[189/500] Evaluated random_tactics on Pyrenees_comparison.json run=98 seed=98
+
+Mission Failed (Pyrenees)
+[190/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=97 seed=97
+
+Mission Failed (Pyrenees)
+[191/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=100 seed=100
+
+Mission Failed (Pyrenees)
+[192/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=98 seed=98
+
+Mission Failed (Pyrenees)
+[193/500] Evaluated random_tactics on Pyrenees_comparison.json run=97 seed=97
+
+Mission Failed (Pyrenees)
+[194/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=99 seed=99
+
+Mission Failed (Pyrenees)
+[195/500] Evaluated random_tactics on Pyrenees_comparison.json run=90 seed=90
+
+Mission Failed (Pyrenees)
+[196/500] Evaluated random_tactics on Pyrenees_comparison.json run=101 seed=101
+
+Mission Failed (Pyrenees)
+[197/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=101 seed=101
+
+Mission Failed (Pyrenees)
+[198/500] Evaluated random_tactics on Pyrenees_comparison.json run=95 seed=95
+
+Mission Failed (Pyrenees)
+[199/500] Evaluated random_tactics on Pyrenees_comparison.json run=99 seed=99
+
+Mission Failed (Pyrenees)
+[200/500] Evaluated random_tactics on Pyrenees_comparison.json run=93 seed=93
+
+Mission Failed (Pyrenees)
+[201/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=103 seed=103
+
+Mission Failed (Pyrenees)
+[202/500] Evaluated random_tactics on Pyrenees_comparison.json run=100 seed=100
+
+Mission Failed (Pyrenees)
+[203/500] Evaluated random_tactics on Pyrenees_comparison.json run=102 seed=102
+
+Mission Failed (Pyrenees)
+[204/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=104 seed=104
+
+Mission Failed (Pyrenees)
+[205/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=102 seed=102
+
+Mission Failed (Pyrenees)
+[206/500] Evaluated random_tactics on Pyrenees_comparison.json run=96 seed=96
+
+Mission Failed (Pyrenees)
+[207/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=105 seed=105
+
+Mission Failed (Pyrenees)
+[208/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=106 seed=106
+
+Mission Failed (Pyrenees)
+[209/500] Evaluated random_tactics on Pyrenees_comparison.json run=104 seed=104
+
+Mission Failed (Pyrenees)
+[210/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=109 seed=109
+
+Mission Failed (Pyrenees)
+[211/500] Evaluated random_tactics on Pyrenees_comparison.json run=103 seed=103
+
+Mission Failed (Pyrenees)
+[212/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=108 seed=108
+
+Mission Failed (Pyrenees)
+[213/500] Evaluated random_tactics on Pyrenees_comparison.json run=106 seed=106
+
+Mission Failed (Pyrenees)
+[214/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=107 seed=107
+
+Mission Failed (Pyrenees)
+[215/500] Evaluated random_tactics on Pyrenees_comparison.json run=108 seed=108
+
+Mission Failed (Pyrenees)
+[216/500] Evaluated random_tactics on Pyrenees_comparison.json run=110 seed=110
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[217/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=110 seed=110
+[218/500] Evaluated random_tactics on Pyrenees_comparison.json run=105 seed=105
+
+Mission Failed (Pyrenees)
+[219/500] Evaluated random_tactics on Pyrenees_comparison.json run=107 seed=107
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[220/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=113 seed=113
+[221/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=111 seed=111
+
+Mission Failed (Pyrenees)
+[222/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=112 seed=112
+
+Mission Failed (Pyrenees)
+[223/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=114 seed=114
+
+Mission Failed (Pyrenees)
+[224/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=115 seed=115
+
+Mission Failed (Pyrenees)
+[225/500] Evaluated random_tactics on Pyrenees_comparison.json run=109 seed=109
+
+Mission Failed (Pyrenees)
+[226/500] Evaluated random_tactics on Pyrenees_comparison.json run=113 seed=113
+
+Mission Failed (Pyrenees)
+[227/500] Evaluated random_tactics on Pyrenees_comparison.json run=115 seed=115
+
+Mission Failed (Pyrenees)
+[228/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=117 seed=117
+
+Mission Failed (Pyrenees)
+[229/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=116 seed=116
+
+Mission Failed (Pyrenees)
+[230/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=118 seed=118
+
+Mission Failed (Pyrenees)
+[231/500] Evaluated random_tactics on Pyrenees_comparison.json run=114 seed=114
+
+Mission Failed (Pyrenees)
+[232/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=119 seed=119
+
+Mission Failed (Pyrenees)
+[233/500] Evaluated random_tactics on Pyrenees_comparison.json run=119 seed=119
+
+Mission Failed (Pyrenees)
+[234/500] Evaluated random_tactics on Pyrenees_comparison.json run=116 seed=116
+
+Mission Failed (Pyrenees)
+[235/500] Evaluated random_tactics on Pyrenees_comparison.json run=112 seed=112
+
+Mission Failed (Pyrenees)
+[236/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=123 seed=123
+
+Mission Failed (Pyrenees)
+[237/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=121 seed=121
+
+Mission Failed (Pyrenees)
+[238/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=120 seed=120
+
+Mission Failed (Pyrenees)
+[239/500] Evaluated random_tactics on Pyrenees_comparison.json run=118 seed=118
+
+Mission Failed (Pyrenees)
+[240/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=122 seed=122
+
+Mission Failed (Pyrenees)
+[241/500] Evaluated random_tactics on Pyrenees_comparison.json run=120 seed=120
+
+Mission Failed (Pyrenees)
+[242/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=125 seed=125
+
+Mission Failed (Pyrenees)
+[243/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=124 seed=124
+
+Mission Failed (Pyrenees)
+[244/500] Evaluated random_tactics on Pyrenees_comparison.json run=122 seed=122
+
+Mission Failed (Pyrenees)
+[245/500] Evaluated random_tactics on Pyrenees_comparison.json run=124 seed=124
+
+Mission Failed (Pyrenees)
+[246/500] Evaluated random_tactics on Pyrenees_comparison.json run=121 seed=121
+
+Mission Failed (Pyrenees)
+[247/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=126 seed=126
+
+Mission Failed (Pyrenees)
+[248/500] Evaluated random_tactics on Pyrenees_comparison.json run=123 seed=123
+
+Mission Failed (Pyrenees)
+[249/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=128 seed=128
+
+Mission Failed (Pyrenees)
+[250/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=127 seed=127
+
+Mission Failed (Pyrenees)
+[251/500] Evaluated random_tactics on Pyrenees_comparison.json run=117 seed=117
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[252/500] Evaluated random_tactics on Pyrenees_comparison.json run=127 seed=127
+[253/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=129 seed=129
+
+Mission Failed (Pyrenees)
+[254/500] Evaluated random_tactics on Pyrenees_comparison.json run=128 seed=128
+
+Mission Failed (Pyrenees)
+[255/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=131 seed=131
+
+Mission Failed (Pyrenees)
+[256/500] Evaluated random_tactics on Pyrenees_comparison.json run=130 seed=130
+
+Mission Failed (Pyrenees)
+[257/500] Evaluated random_tactics on Pyrenees_comparison.json run=129 seed=129
+
+Mission Failed (Pyrenees)
+[258/500] Evaluated random_tactics on Pyrenees_comparison.json run=111 seed=111
+
+Mission Failed (Pyrenees)
+[259/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=130 seed=130
+
+Mission Failed (Pyrenees)
+[260/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=132 seed=132
+
+Mission Failed (Pyrenees)
+[261/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=133 seed=133
+
+Mission Failed (Pyrenees)
+[262/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=135 seed=135
+
+Mission Failed (Pyrenees)
+[263/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=134 seed=134
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[264/500] Evaluated random_tactics on Pyrenees_comparison.json run=132 seed=132
+[265/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=136 seed=136
+
+Mission Failed (Pyrenees)
+[266/500] Evaluated random_tactics on Pyrenees_comparison.json run=135 seed=135
+
+Mission Failed (Pyrenees)
+[267/500] Evaluated random_tactics on Pyrenees_comparison.json run=125 seed=125
+
+Mission Failed (Pyrenees)
+[268/500] Evaluated random_tactics on Pyrenees_comparison.json run=126 seed=126
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[269/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=138 seed=138
+[270/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=137 seed=137
+
+Mission Failed (Pyrenees)
+[271/500] Evaluated random_tactics on Pyrenees_comparison.json run=133 seed=133
+
+Mission Failed (Pyrenees)
+[272/500] Evaluated random_tactics on Pyrenees_comparison.json run=138 seed=138
+
+Mission Failed (Pyrenees)
+[273/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=139 seed=139
+
+Mission Failed (Pyrenees)
+[274/500] Evaluated random_tactics on Pyrenees_comparison.json run=137 seed=137
+
+Mission Failed (Pyrenees)
+[275/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=140 seed=140
+
+Mission Failed (Pyrenees)
+[276/500] Evaluated random_tactics on Pyrenees_comparison.json run=131 seed=131
+
+Mission Failed (Pyrenees)
+[277/500] Evaluated random_tactics on Pyrenees_comparison.json run=139 seed=139
+
+Mission Failed (Pyrenees)
+[278/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=141 seed=141
+
+Mission Failed (Pyrenees)
+[279/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=142 seed=142
+
+Mission Failed (Pyrenees)
+[280/500] Evaluated random_tactics on Pyrenees_comparison.json run=136 seed=136
+
+Mission Failed (Pyrenees)
+[281/500] Evaluated random_tactics on Pyrenees_comparison.json run=134 seed=134
+
+Mission Failed (Pyrenees)
+[282/500] Evaluated random_tactics on Pyrenees_comparison.json run=142 seed=142
+
+Mission Failed (Pyrenees)
+[283/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=144 seed=144
+
+Mission Failed (Pyrenees)
+[284/500] Evaluated random_tactics on Pyrenees_comparison.json run=141 seed=141
+
+Mission Failed (Pyrenees)
+[285/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=143 seed=143
+
+Mission Failed (Pyrenees)
+[286/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=145 seed=145
+
+Mission Failed (Pyrenees)
+[287/500] Evaluated random_tactics on Pyrenees_comparison.json run=143 seed=143
+
+Mission Failed (Pyrenees)
+[288/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=146 seed=146
+
+Mission Failed (Pyrenees)
+[289/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=148 seed=148
+
+Mission Failed (Pyrenees)
+[290/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=147 seed=147
+
+Mission Failed (Pyrenees)
+[291/500] Evaluated random_tactics on Pyrenees_comparison.json run=140 seed=140
+
+Mission Failed (Pyrenees)
+[292/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=149 seed=149
+
+Mission Failed (Pyrenees)
+[293/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=150 seed=150
+
+Mission Failed (Pyrenees)
+[294/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=151 seed=151
+
+Mission Failed (Pyrenees)
+[295/500] Evaluated random_tactics on Pyrenees_comparison.json run=144 seed=144
+
+Mission Failed (Pyrenees)
+[296/500] Evaluated random_tactics on Pyrenees_comparison.json run=148 seed=148
+
+Mission Failed (Pyrenees)
+[297/500] Evaluated random_tactics on Pyrenees_comparison.json run=145 seed=145
+
+Mission Failed (Pyrenees)
+[298/500] Evaluated random_tactics on Pyrenees_comparison.json run=147 seed=147
+
+Mission Failed (Pyrenees)
+[299/500] Evaluated random_tactics on Pyrenees_comparison.json run=146 seed=146
+
+Mission Failed (Pyrenees)
+[300/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=153 seed=153
+
+Mission Failed (Pyrenees)
+[301/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=152 seed=152
+
+Mission Failed (Pyrenees)
+[302/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=154 seed=154
+
+Mission Failed (Pyrenees)
+[303/500] Evaluated random_tactics on Pyrenees_comparison.json run=152 seed=152
+
+Mission Failed (Pyrenees)
+[304/500] Evaluated random_tactics on Pyrenees_comparison.json run=151 seed=151
+
+Mission Failed (Pyrenees)
+[305/500] Evaluated random_tactics on Pyrenees_comparison.json run=149 seed=149
+
+Mission Failed (Pyrenees)
+[306/500] Evaluated random_tactics on Pyrenees_comparison.json run=153 seed=153
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[307/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=155 seed=155
+[308/500] Evaluated random_tactics on Pyrenees_comparison.json run=155 seed=155
+
+Mission Failed (Pyrenees)
+[309/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=156 seed=156
+
+Mission Failed (Pyrenees)
+[310/500] Evaluated random_tactics on Pyrenees_comparison.json run=150 seed=150
+
+Mission Failed (Pyrenees)
+[311/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=157 seed=157
+
+Mission Failed (Pyrenees)
+[312/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=158 seed=158
+
+Mission Failed (Pyrenees)
+[313/500] Evaluated random_tactics on Pyrenees_comparison.json run=156 seed=156
+
+Mission Failed (Pyrenees)
+[314/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=159 seed=159
+
+Mission Failed (Pyrenees)
+[315/500] Evaluated random_tactics on Pyrenees_comparison.json run=154 seed=154
+
+Mission Failed (Pyrenees)
+[316/500] Evaluated random_tactics on Pyrenees_comparison.json run=159 seed=159
+
+Mission Failed (Pyrenees)
+[317/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=160 seed=160
+
+Mission Failed (Pyrenees)
+[318/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=161 seed=161
+
+Mission Failed (Pyrenees)
+[319/500] Evaluated random_tactics on Pyrenees_comparison.json run=158 seed=158
+
+Mission Failed (Pyrenees)
+[320/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=164 seed=164
+
+Mission Failed (Pyrenees)
+[321/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=163 seed=163
+
+Mission Failed (Pyrenees)
+[322/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=162 seed=162
+
+Mission Failed (Pyrenees)
+[323/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=165 seed=165
+
+Mission Failed (Pyrenees)
+[324/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=166 seed=166
+
+Mission Failed (Pyrenees)
+[325/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=167 seed=167
+
+Mission Failed (Pyrenees)
+[326/500] Evaluated random_tactics on Pyrenees_comparison.json run=165 seed=165
+
+Mission Failed (Pyrenees)
+[327/500] Evaluated random_tactics on Pyrenees_comparison.json run=166 seed=166
+
+Mission Failed (Pyrenees)
+[328/500] Evaluated random_tactics on Pyrenees_comparison.json run=160 seed=160
+
+Mission Failed (Pyrenees)
+[329/500] Evaluated random_tactics on Pyrenees_comparison.json run=164 seed=164
+
+Mission Failed (Pyrenees)
+[330/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=168 seed=168
+
+Mission Failed (Pyrenees)
+[331/500] Evaluated random_tactics on Pyrenees_comparison.json run=163 seed=163
+
+Mission Failed (Pyrenees)
+[332/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=169 seed=169
+
+Mission Failed (Pyrenees)
+[333/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=170 seed=170
+
+Mission Failed (Pyrenees)
+[334/500] Evaluated random_tactics on Pyrenees_comparison.json run=162 seed=162
+
+Mission Failed (Pyrenees)
+[335/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=171 seed=171
+
+Mission Failed (Pyrenees)
+[336/500] Evaluated random_tactics on Pyrenees_comparison.json run=169 seed=169
+
+Mission Failed (Pyrenees)
+[337/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=172 seed=172
+
+Mission Failed (Pyrenees)
+[338/500] Evaluated random_tactics on Pyrenees_comparison.json run=157 seed=157
+
+Mission Failed (Pyrenees)
+[339/500] Evaluated random_tactics on Pyrenees_comparison.json run=170 seed=170
+
+Mission Failed (Pyrenees)
+[340/500] Evaluated random_tactics on Pyrenees_comparison.json run=172 seed=172
+
+Mission Failed (Pyrenees)
+[341/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=174 seed=174
+
+Mission Failed (Pyrenees)
+[342/500] Evaluated random_tactics on Pyrenees_comparison.json run=161 seed=161
+
+Mission Failed (Pyrenees)
+[343/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=175 seed=175
+
+Mission Failed (Pyrenees)
+[344/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=173 seed=173
+
+Mission Failed (Pyrenees)
+[345/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=176 seed=176
+
+Mission Failed (Pyrenees)
+[346/500] Evaluated random_tactics on Pyrenees_comparison.json run=171 seed=171
+
+Mission Failed (Pyrenees)
+[347/500] Evaluated random_tactics on Pyrenees_comparison.json run=175 seed=175
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[348/500] Evaluated random_tactics on Pyrenees_comparison.json run=173 seed=173
+[349/500] Evaluated random_tactics on Pyrenees_comparison.json run=167 seed=167
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[350/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=177 seed=177
+[351/500] Evaluated random_tactics on Pyrenees_comparison.json run=168 seed=168
+
+Mission Failed (Pyrenees)
+[352/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=178 seed=178
+
+Mission Failed (Pyrenees)
+[353/500] Evaluated random_tactics on Pyrenees_comparison.json run=177 seed=177
+
+Mission Failed (Pyrenees)
+[354/500] Evaluated random_tactics on Pyrenees_comparison.json run=178 seed=178
+
+Mission Failed (Pyrenees)
+[355/500] Evaluated random_tactics on Pyrenees_comparison.json run=174 seed=174
+
+Mission Failed (Pyrenees)
+[356/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=179 seed=179
+
+Mission Failed (Pyrenees)
+[357/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=181 seed=181
+
+Mission Failed (Pyrenees)
+[358/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=180 seed=180
+
+Mission Failed (Pyrenees)
+[359/500] Evaluated random_tactics on Pyrenees_comparison.json run=176 seed=176
+
+Mission Failed (Pyrenees)
+[360/500] Evaluated random_tactics on Pyrenees_comparison.json run=181 seed=181
+
+Mission Failed (Pyrenees)
+[361/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=183 seed=183
+
+Mission Failed (Pyrenees)
+[362/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=182 seed=182
+
+Mission Failed (Pyrenees)
+[363/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=185 seed=185
+
+Mission Failed (Pyrenees)
+[364/500] Evaluated random_tactics on Pyrenees_comparison.json run=180 seed=180
+
+Mission Failed (Pyrenees)
+[365/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=184 seed=184
+
+Mission Failed (Pyrenees)
+[366/500] Evaluated random_tactics on Pyrenees_comparison.json run=183 seed=183
+
+Mission Failed (Pyrenees)
+[367/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=187 seed=187
+
+Mission Failed (Pyrenees)
+[368/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=186 seed=186
+
+Mission Failed (Pyrenees)
+[369/500] Evaluated random_tactics on Pyrenees_comparison.json run=184 seed=184
+
+Mission Failed (Pyrenees)
+[370/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=188 seed=188
+
+Mission Failed (Pyrenees)
+[371/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=189 seed=189
+
+Mission Failed (Pyrenees)
+[372/500] Evaluated random_tactics on Pyrenees_comparison.json run=187 seed=187
+
+Mission Failed (Pyrenees)
+[373/500] Evaluated random_tactics on Pyrenees_comparison.json run=179 seed=179
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[374/500] Evaluated random_tactics on Pyrenees_comparison.json run=185 seed=185
+[375/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=190 seed=190
+
+Mission Failed (Pyrenees)
+[376/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=191 seed=191
+
+Mission Failed (Pyrenees)
+[377/500] Evaluated random_tactics on Pyrenees_comparison.json run=190 seed=190
+
+Mission Failed (Pyrenees)
+[378/500] Evaluated random_tactics on Pyrenees_comparison.json run=188 seed=188
+
+Mission Failed (Pyrenees)
+[379/500] Evaluated random_tactics on Pyrenees_comparison.json run=182 seed=182
+
+Mission Failed (Pyrenees)
+[380/500] Evaluated random_tactics on Pyrenees_comparison.json run=186 seed=186
+
+Mission Failed (Pyrenees)
+[381/500] Evaluated random_tactics on Pyrenees_comparison.json run=191 seed=191
+
+Mission Failed (Pyrenees)
+[382/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=193 seed=193
+
+Mission Failed (Pyrenees)
+[383/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=192 seed=192
+
+Mission Failed (Pyrenees)
+[384/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=194 seed=194
+
+Mission Failed (Pyrenees)
+[385/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=195 seed=195
+
+Mission Failed (Pyrenees)
+[386/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=196 seed=196
+
+Mission Failed (Pyrenees)
+[387/500] Evaluated random_tactics on Pyrenees_comparison.json run=194 seed=194
+
+Mission Failed (Pyrenees)
+[388/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=198 seed=198
+
+Mission Failed (Pyrenees)
+[389/500] Evaluated random_tactics on Pyrenees_comparison.json run=192 seed=192
+
+Mission Failed (Pyrenees)
+[390/500] Evaluated random_tactics on Pyrenees_comparison.json run=196 seed=196
+
+Mission Failed (Pyrenees)
+[391/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=197 seed=197
+
+Mission Failed (Pyrenees)
+[392/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=199 seed=199
+
+Mission Failed (Pyrenees)
+[393/500] Evaluated random_tactics on Pyrenees_comparison.json run=198 seed=198
+
+Mission Failed (Pyrenees)
+[394/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=200 seed=200
+
+Mission Failed (Pyrenees)
+[395/500] Evaluated random_tactics on Pyrenees_comparison.json run=197 seed=197
+
+Mission Failed (Pyrenees)
+[396/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=201 seed=201
+
+Mission Failed (Pyrenees)
+[397/500] Evaluated random_tactics on Pyrenees_comparison.json run=193 seed=193
+
+Mission Failed (Pyrenees)
+[398/500] Evaluated random_tactics on Pyrenees_comparison.json run=189 seed=189
+
+Mission Failed (Pyrenees)
+[399/500] Evaluated random_tactics on Pyrenees_comparison.json run=199 seed=199
+
+Mission Failed (Pyrenees)
+[400/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=202 seed=202
+
+Mission Failed (Pyrenees)
+[401/500] Evaluated random_tactics on Pyrenees_comparison.json run=201 seed=201
+
+Mission Failed (Pyrenees)
+[402/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=204 seed=204
+
+Mission Failed (Pyrenees)
+[403/500] Evaluated random_tactics on Pyrenees_comparison.json run=195 seed=195
+
+Mission Failed (Pyrenees)
+[404/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=203 seed=203
+
+Mission Failed (Pyrenees)
+[405/500] Evaluated random_tactics on Pyrenees_comparison.json run=203 seed=203
+
+Mission Failed (Pyrenees)
+[406/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=206 seed=206
+
+Mission Failed (Pyrenees)
+[407/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=205 seed=205
+
+Mission Failed (Pyrenees)
+[408/500] Evaluated random_tactics on Pyrenees_comparison.json run=202 seed=202
+
+Mission Failed (Pyrenees)
+[409/500] Evaluated random_tactics on Pyrenees_comparison.json run=204 seed=204
+
+Mission Failed (Pyrenees)
+[410/500] Evaluated random_tactics on Pyrenees_comparison.json run=205 seed=205
+
+Mission Failed (Pyrenees)
+[411/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=207 seed=207
+
+Mission Failed (Pyrenees)
+[412/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=208 seed=208
+
+Mission Failed (Pyrenees)
+[413/500] Evaluated random_tactics on Pyrenees_comparison.json run=206 seed=206
+
+Mission Failed (Pyrenees)
+[414/500] Evaluated random_tactics on Pyrenees_comparison.json run=207 seed=207
+
+Mission Failed (Pyrenees)
+[415/500] Evaluated random_tactics on Pyrenees_comparison.json run=200 seed=200
+
+Mission Failed (Pyrenees)
+[416/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=209 seed=209
+
+Mission Failed (Pyrenees)
+[417/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=210 seed=210
+
+Mission Failed (Pyrenees)
+[418/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=211 seed=211
+
+Mission Failed (Pyrenees)
+[419/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=212 seed=212
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[420/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=213 seed=213
+[421/500] Evaluated random_tactics on Pyrenees_comparison.json run=208 seed=208
+
+Mission Failed (Pyrenees)
+[422/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=214 seed=214
+
+Mission Failed (Pyrenees)
+[423/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=215 seed=215
+
+Mission Failed (Pyrenees)
+[424/500] Evaluated random_tactics on Pyrenees_comparison.json run=209 seed=209
+
+Mission Failed (Pyrenees)
+[425/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=217 seed=217
+
+Mission Failed (Pyrenees)
+[426/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=216 seed=216
+
+Mission Failed (Pyrenees)
+[427/500] Evaluated random_tactics on Pyrenees_comparison.json run=214 seed=214
+
+Mission Failed (Pyrenees)
+[428/500] Evaluated random_tactics on Pyrenees_comparison.json run=217 seed=217
+
+Mission Failed (Pyrenees)
+[429/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=219 seed=219
+
+Mission Failed (Pyrenees)
+[430/500] Evaluated random_tactics on Pyrenees_comparison.json run=212 seed=212
+
+Mission Failed (Pyrenees)
+[431/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=218 seed=218
+
+Mission Failed (Pyrenees)
+[432/500] Evaluated random_tactics on Pyrenees_comparison.json run=215 seed=215
+
+Mission Failed (Pyrenees)
+[433/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=220 seed=220
+
+Mission Failed (Pyrenees)
+[434/500] Evaluated random_tactics on Pyrenees_comparison.json run=220 seed=220
+
+Mission Failed (Pyrenees)
+[435/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=221 seed=221
+
+Mission Failed (Pyrenees)
+[436/500] Evaluated random_tactics on Pyrenees_comparison.json run=211 seed=211
+
+Mission Failed (Pyrenees)
+[437/500] Evaluated random_tactics on Pyrenees_comparison.json run=221 seed=221
+
+Mission Failed (Pyrenees)
+[438/500] Evaluated random_tactics on Pyrenees_comparison.json run=218 seed=218
+
+Mission Failed (Pyrenees)
+[439/500] Evaluated random_tactics on Pyrenees_comparison.json run=213 seed=213
+
+Mission Failed (Pyrenees)
+[440/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=222 seed=222
+
+Mission Failed (Pyrenees)
+[441/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=223 seed=223
+
+Mission Failed (Pyrenees)
+[442/500] Evaluated random_tactics on Pyrenees_comparison.json run=216 seed=216
+
+Mission Failed (Pyrenees)
+[443/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=224 seed=224
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+[444/500] Evaluated random_tactics on Pyrenees_comparison.json run=222 seed=222
+[445/500] Evaluated random_tactics on Pyrenees_comparison.json run=224 seed=224
+
+Mission Failed (Pyrenees)
+[446/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=225 seed=225
+
+Mission Failed (Pyrenees)
+[447/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=226 seed=226
+
+Mission Failed (Pyrenees)
+[448/500] Evaluated random_tactics on Pyrenees_comparison.json run=219 seed=219
+
+Mission Failed (Pyrenees)
+[449/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=227 seed=227
+
+Mission Failed (Pyrenees)
+[450/500] Evaluated random_tactics on Pyrenees_comparison.json run=223 seed=223
+
+Mission Failed (Pyrenees)
+[451/500] Evaluated switch_ignition_1m on Pyrenees_comparison.json run=229 seed=229
+[452/500] Evaluated random_tactics on Pyrenees_comparison.json run=210 seed=210

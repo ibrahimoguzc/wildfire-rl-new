@@ -1,0 +1,10 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+
+Mission Completed (Palisades)
+Replayed episodes: 20
+Aircraft-episodes checked: 120
+Aircraft-episodes with no takeoff/flight/distance: 0
+Total takeoffs counted: 2109
+Total suppressions counted: 2039
+Decision trace written to: /home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/data/scenarios/outputs/aircraft_utilization_replay_554046/aircraft_utilization_decision_trace.csv
+Episode summary written to: /home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/data/scenarios/outputs/aircraft_utilization_replay_554046/aircraft_utilization_episode_summary.csv

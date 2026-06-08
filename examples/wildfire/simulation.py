@@ -328,6 +328,10 @@ class TerrainParameters(BaseModel):
     # Sets the strength of the blend for priority map
     # A stronger sigma corresponds to a larger area
     priority_map_sigma: int
+    # Optional selector for a pre-generated water-source subset. When set,
+    # water_sources_file resolves to {namespace}_water_sources_set{N}.pkl
+    # instead of the full {namespace}_water_sources.pkl. None -> full set.
+    water_set: int | None = None
 
     @model_validator(mode="before")
     def warn_removed_filename_fields(cls, values: dict) -> dict:
@@ -372,6 +376,8 @@ class TerrainParameters(BaseModel):
 
     @property
     def water_sources_file_name(self) -> str:
+        if self.water_set is not None:
+            return f"{self.file_namespace}_water_sources_set{self.water_set}.pkl"
         return f"{self.file_namespace}_water_sources.pkl"
 
     @property

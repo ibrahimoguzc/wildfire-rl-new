@@ -1,0 +1,1332 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+--switch-ignition enabled: ignition will be randomized each episode in non-water/non-urban interior cells.
+PPO rollout config: num_envs=36, n_steps=144, effective_batch=5184, minibatches=12, batch_size=432
+Decision start delay: Salamis.json response_time / 60 = 90.0 minutes
+Allowed tactic combinations: 17
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------
+| time/              |      |
+|    fps             | 2    |
+|    iterations      | 1    |
+|    time_elapsed    | 1740 |
+|    total_timesteps | 5184 |
+-----------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 2           |
+|    time_elapsed         | 4003        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.011270036 |
+|    clip_fraction        | 0.0823      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.49       |
+|    explained_variance   | -2.3        |
+|    learning_rate        | 0.000498    |
+|    loss                 | -0.0132     |
+|    n_updates            | 5           |
+|    policy_gradient_loss | -0.00823    |
+|    value_loss           | 0.0479      |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 3           |
+|    time_elapsed         | 6401        |
+|    total_timesteps      | 15552       |
+| train/                  |             |
+|    approx_kl            | 0.012049909 |
+|    clip_fraction        | 0.128       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.48       |
+|    explained_variance   | 0.674       |
+|    learning_rate        | 0.000497    |
+|    loss                 | -0.0127     |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0122     |
+|    value_loss           | 0.00209     |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_500_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 4           |
+|    time_elapsed         | 8646        |
+|    total_timesteps      | 20736       |
+| train/                  |             |
+|    approx_kl            | 0.011029632 |
+|    clip_fraction        | 0.111       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.47       |
+|    explained_variance   | 0.727       |
+|    learning_rate        | 0.000495    |
+|    loss                 | -0.0182     |
+|    n_updates            | 15          |
+|    policy_gradient_loss | -0.00935    |
+|    value_loss           | 0.000752    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_600_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_700_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 5           |
+|    time_elapsed         | 10861       |
+|    total_timesteps      | 25920       |
+| train/                  |             |
+|    approx_kl            | 0.012473543 |
+|    clip_fraction        | 0.127       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.46       |
+|    explained_variance   | 0.644       |
+|    learning_rate        | 0.000493    |
+|    loss                 | -0.0121     |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0104     |
+|    value_loss           | 0.000342    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_800_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+---------------------------------------
+| time/                   |           |
+|    fps                  | 2         |
+|    iterations           | 6         |
+|    time_elapsed         | 13018     |
+|    total_timesteps      | 31104     |
+| train/                  |           |
+|    approx_kl            | 0.0125904 |
+|    clip_fraction        | 0.125     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -8.45     |
+|    explained_variance   | 0.754     |
+|    learning_rate        | 0.000492  |
+|    loss                 | -0.0136   |
+|    n_updates            | 25        |
+|    policy_gradient_loss | -0.011    |
+|    value_loss           | 0.000149  |
+---------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_900_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 7           |
+|    time_elapsed         | 15315       |
+|    total_timesteps      | 36288       |
+| train/                  |             |
+|    approx_kl            | 0.011653978 |
+|    clip_fraction        | 0.132       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.43       |
+|    explained_variance   | 0.884       |
+|    learning_rate        | 0.00049     |
+|    loss                 | -0.0247     |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.0111     |
+|    value_loss           | 5.14e-05    |
+-----------------------------------------
+Per-step log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1000_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 8           |
+|    time_elapsed         | 17652       |
+|    total_timesteps      | 41472       |
+| train/                  |             |
+|    approx_kl            | 0.013684445 |
+|    clip_fraction        | 0.151       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.43       |
+|    explained_variance   | 0.877       |
+|    learning_rate        | 0.000488    |
+|    loss                 | -0.00584    |
+|    n_updates            | 35          |
+|    policy_gradient_loss | -0.0129     |
+|    value_loss           | 6.6e-05     |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 9           |
+|    time_elapsed         | 19867       |
+|    total_timesteps      | 46656       |
+| train/                  |             |
+|    approx_kl            | 0.015134054 |
+|    clip_fraction        | 0.16        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.42       |
+|    explained_variance   | 0.705       |
+|    learning_rate        | 0.000486    |
+|    loss                 | -0.0135     |
+|    n_updates            | 40          |
+|    policy_gradient_loss | -0.012      |
+|    value_loss           | 0.00016     |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 10          |
+|    time_elapsed         | 22142       |
+|    total_timesteps      | 51840       |
+| train/                  |             |
+|    approx_kl            | 0.012989244 |
+|    clip_fraction        | 0.144       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.43       |
+|    explained_variance   | 0.879       |
+|    learning_rate        | 0.000485    |
+|    loss                 | -0.0131     |
+|    n_updates            | 45          |
+|    policy_gradient_loss | -0.0127     |
+|    value_loss           | 6.02e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1500_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 11          |
+|    time_elapsed         | 24384       |
+|    total_timesteps      | 57024       |
+| train/                  |             |
+|    approx_kl            | 0.013904902 |
+|    clip_fraction        | 0.15        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.41       |
+|    explained_variance   | 0.784       |
+|    learning_rate        | 0.000483    |
+|    loss                 | -0.00971    |
+|    n_updates            | 50          |
+|    policy_gradient_loss | -0.0116     |
+|    value_loss           | 0.000123    |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1600_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1700_summary.csv
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 12          |
+|    time_elapsed         | 26729       |
+|    total_timesteps      | 62208       |
+| train/                  |             |
+|    approx_kl            | 0.014141407 |
+|    clip_fraction        | 0.151       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.4        |
+|    explained_variance   | 0.863       |
+|    learning_rate        | 0.000481    |
+|    loss                 | -0.0108     |
+|    n_updates            | 55          |
+|    policy_gradient_loss | -0.0122     |
+|    value_loss           | 9.46e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1800_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 13          |
+|    time_elapsed         | 28888       |
+|    total_timesteps      | 67392       |
+| train/                  |             |
+|    approx_kl            | 0.012190428 |
+|    clip_fraction        | 0.138       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.39       |
+|    explained_variance   | 0.915       |
+|    learning_rate        | 0.00048     |
+|    loss                 | -0.00969    |
+|    n_updates            | 60          |
+|    policy_gradient_loss | -0.00916    |
+|    value_loss           | 5.36e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_1900_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Per-step log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2000_summary.csv
+------------------------------------------
+| time/                   |              |
+|    fps                  | 2            |
+|    iterations           | 14           |
+|    time_elapsed         | 31086        |
+|    total_timesteps      | 72576        |
+| train/                  |              |
+|    approx_kl            | 0.0127380965 |
+|    clip_fraction        | 0.157        |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -8.37        |
+|    explained_variance   | 0.935        |
+|    learning_rate        | 0.000478     |
+|    loss                 | -0.0192      |
+|    n_updates            | 65           |
+|    policy_gradient_loss | -0.0101      |
+|    value_loss           | 5.32e-05     |
+------------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 15          |
+|    time_elapsed         | 33385       |
+|    total_timesteps      | 77760       |
+| train/                  |             |
+|    approx_kl            | 0.013947155 |
+|    clip_fraction        | 0.186       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.35       |
+|    explained_variance   | 0.865       |
+|    learning_rate        | 0.000476    |
+|    loss                 | -0.0118     |
+|    n_updates            | 70          |
+|    policy_gradient_loss | -0.0138     |
+|    value_loss           | 0.000113    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 16          |
+|    time_elapsed         | 35582       |
+|    total_timesteps      | 82944       |
+| train/                  |             |
+|    approx_kl            | 0.014231908 |
+|    clip_fraction        | 0.184       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.34       |
+|    explained_variance   | 0.716       |
+|    learning_rate        | 0.000474    |
+|    loss                 | -0.0165     |
+|    n_updates            | 75          |
+|    policy_gradient_loss | -0.012      |
+|    value_loss           | 0.000269    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+------------------------------------------
+| time/                   |              |
+|    fps                  | 2            |
+|    iterations           | 17           |
+|    time_elapsed         | 37788        |
+|    total_timesteps      | 88128        |
+| train/                  |              |
+|    approx_kl            | 0.0131703755 |
+|    clip_fraction        | 0.168        |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -8.32        |
+|    explained_variance   | 0.871        |
+|    learning_rate        | 0.000473     |
+|    loss                 | -0.0148      |
+|    n_updates            | 80           |
+|    policy_gradient_loss | -0.0123      |
+|    value_loss           | 0.000109     |
+------------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2500_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2600_summary.csv
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 18          |
+|    time_elapsed         | 39890       |
+|    total_timesteps      | 93312       |
+| train/                  |             |
+|    approx_kl            | 0.014300848 |
+|    clip_fraction        | 0.174       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.3        |
+|    explained_variance   | 0.913       |
+|    learning_rate        | 0.000471    |
+|    loss                 | -0.0147     |
+|    n_updates            | 85          |
+|    policy_gradient_loss | -0.0126     |
+|    value_loss           | 0.000105    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2700_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 19         |
+|    time_elapsed         | 42238      |
+|    total_timesteps      | 98496      |
+| train/                  |            |
+|    approx_kl            | 0.01478874 |
+|    clip_fraction        | 0.176      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -8.3       |
+|    explained_variance   | 0.867      |
+|    learning_rate        | 0.000469   |
+|    loss                 | -0.0176    |
+|    n_updates            | 90         |
+|    policy_gradient_loss | -0.0111    |
+|    value_loss           | 0.000168   |
+----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2800_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_2900_summary.csv
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 20          |
+|    time_elapsed         | 44611       |
+|    total_timesteps      | 103680      |
+| train/                  |             |
+|    approx_kl            | 0.015298598 |
+|    clip_fraction        | 0.176       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.28       |
+|    explained_variance   | 0.856       |
+|    learning_rate        | 0.000467    |
+|    loss                 | -0.0203     |
+|    n_updates            | 95          |
+|    policy_gradient_loss | -0.0108     |
+|    value_loss           | 0.000117    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Per-step log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3000_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 21          |
+|    time_elapsed         | 47010       |
+|    total_timesteps      | 108864      |
+| train/                  |             |
+|    approx_kl            | 0.014364728 |
+|    clip_fraction        | 0.179       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.25       |
+|    explained_variance   | 0.895       |
+|    learning_rate        | 0.000466    |
+|    loss                 | -0.0255     |
+|    n_updates            | 100         |
+|    policy_gradient_loss | -0.0131     |
+|    value_loss           | 0.000112    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 22          |
+|    time_elapsed         | 49292       |
+|    total_timesteps      | 114048      |
+| train/                  |             |
+|    approx_kl            | 0.013956085 |
+|    clip_fraction        | 0.176       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.23       |
+|    explained_variance   | 0.924       |
+|    learning_rate        | 0.000464    |
+|    loss                 | -0.0149     |
+|    n_updates            | 105         |
+|    policy_gradient_loss | -0.0116     |
+|    value_loss           | 6.92e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 23          |
+|    time_elapsed         | 51486       |
+|    total_timesteps      | 119232      |
+| train/                  |             |
+|    approx_kl            | 0.012990446 |
+|    clip_fraction        | 0.173       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.22       |
+|    explained_variance   | 0.88        |
+|    learning_rate        | 0.000462    |
+|    loss                 | -0.00717    |
+|    n_updates            | 110         |
+|    policy_gradient_loss | -0.0124     |
+|    value_loss           | 0.0005      |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3500_summary.csv
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 24          |
+|    time_elapsed         | 53909       |
+|    total_timesteps      | 124416      |
+| train/                  |             |
+|    approx_kl            | 0.015072975 |
+|    clip_fraction        | 0.202       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.2        |
+|    explained_variance   | 0.875       |
+|    learning_rate        | 0.00046     |
+|    loss                 | -0.00385    |
+|    n_updates            | 115         |
+|    policy_gradient_loss | -0.0125     |
+|    value_loss           | 5.62e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3600_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 25          |
+|    time_elapsed         | 56199       |
+|    total_timesteps      | 129600      |
+| train/                  |             |
+|    approx_kl            | 0.013596128 |
+|    clip_fraction        | 0.179       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.17       |
+|    explained_variance   | 0.933       |
+|    learning_rate        | 0.000459    |
+|    loss                 | -0.0123     |
+|    n_updates            | 120         |
+|    policy_gradient_loss | -0.0112     |
+|    value_loss           | 3.3e-05     |
+-----------------------------------------
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3700_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3800_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 26          |
+|    time_elapsed         | 58508       |
+|    total_timesteps      | 134784      |
+| train/                  |             |
+|    approx_kl            | 0.013678744 |
+|    clip_fraction        | 0.175       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.15       |
+|    explained_variance   | 0.936       |
+|    learning_rate        | 0.000457    |
+|    loss                 | -0.0145     |
+|    n_updates            | 125         |
+|    policy_gradient_loss | -0.0116     |
+|    value_loss           | 5.1e-05     |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_3900_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 27          |
+|    time_elapsed         | 60773       |
+|    total_timesteps      | 139968      |
+| train/                  |             |
+|    approx_kl            | 0.015977768 |
+|    clip_fraction        | 0.186       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.12       |
+|    explained_variance   | 0.907       |
+|    learning_rate        | 0.000455    |
+|    loss                 | -0.0103     |
+|    n_updates            | 130         |
+|    policy_gradient_loss | -0.0122     |
+|    value_loss           | 7.45e-05    |
+-----------------------------------------
+Per-step log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4000_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4100_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 28          |
+|    time_elapsed         | 62962       |
+|    total_timesteps      | 145152      |
+| train/                  |             |
+|    approx_kl            | 0.014116794 |
+|    clip_fraction        | 0.182       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.11       |
+|    explained_variance   | 0.872       |
+|    learning_rate        | 0.000453    |
+|    loss                 | -0.0191     |
+|    n_updates            | 135         |
+|    policy_gradient_loss | -0.0108     |
+|    value_loss           | 6.42e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 29          |
+|    time_elapsed         | 65169       |
+|    total_timesteps      | 150336      |
+| train/                  |             |
+|    approx_kl            | 0.018359525 |
+|    clip_fraction        | 0.208       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.1        |
+|    explained_variance   | 0.858       |
+|    learning_rate        | 0.000452    |
+|    loss                 | -0.0166     |
+|    n_updates            | 140         |
+|    policy_gradient_loss | -0.0124     |
+|    value_loss           | 9.83e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4400_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 30          |
+|    time_elapsed         | 67463       |
+|    total_timesteps      | 155520      |
+| train/                  |             |
+|    approx_kl            | 0.014225234 |
+|    clip_fraction        | 0.183       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.08       |
+|    explained_variance   | 0.89        |
+|    learning_rate        | 0.00045     |
+|    loss                 | -0.00617    |
+|    n_updates            | 145         |
+|    policy_gradient_loss | -0.0132     |
+|    value_loss           | 9.84e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4500_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 31          |
+|    time_elapsed         | 69753       |
+|    total_timesteps      | 160704      |
+| train/                  |             |
+|    approx_kl            | 0.016634941 |
+|    clip_fraction        | 0.191       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.04       |
+|    explained_variance   | 0.884       |
+|    learning_rate        | 0.000448    |
+|    loss                 | -0.00306    |
+|    n_updates            | 150         |
+|    policy_gradient_loss | -0.013      |
+|    value_loss           | 0.000159    |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4600_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4700_summary.csv
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 32          |
+|    time_elapsed         | 72039       |
+|    total_timesteps      | 165888      |
+| train/                  |             |
+|    approx_kl            | 0.017041545 |
+|    clip_fraction        | 0.197       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -8.02       |
+|    explained_variance   | 0.921       |
+|    learning_rate        | 0.000446    |
+|    loss                 | -0.0126     |
+|    n_updates            | 155         |
+|    policy_gradient_loss | -0.0132     |
+|    value_loss           | 7.96e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4800_summary.csv
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 33          |
+|    time_elapsed         | 74482       |
+|    total_timesteps      | 171072      |
+| train/                  |             |
+|    approx_kl            | 0.013628662 |
+|    clip_fraction        | 0.171       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.97       |
+|    explained_variance   | 0.916       |
+|    learning_rate        | 0.000444    |
+|    loss                 | -0.01       |
+|    n_updates            | 160         |
+|    policy_gradient_loss | -0.0123     |
+|    value_loss           | 9.48e-05    |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_4900_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Per-step log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5000_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 34          |
+|    time_elapsed         | 76696       |
+|    total_timesteps      | 176256      |
+| train/                  |             |
+|    approx_kl            | 0.015231739 |
+|    clip_fraction        | 0.184       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.92       |
+|    explained_variance   | 0.865       |
+|    learning_rate        | 0.000443    |
+|    loss                 | -0.0176     |
+|    n_updates            | 165         |
+|    policy_gradient_loss | -0.0137     |
+|    value_loss           | 6.17e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 35          |
+|    time_elapsed         | 79061       |
+|    total_timesteps      | 181440      |
+| train/                  |             |
+|    approx_kl            | 0.014650859 |
+|    clip_fraction        | 0.162       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.9        |
+|    explained_variance   | 0.908       |
+|    learning_rate        | 0.000441    |
+|    loss                 | -0.00834    |
+|    n_updates            | 170         |
+|    policy_gradient_loss | -0.0131     |
+|    value_loss           | 4.31e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5300_summary.csv
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 36          |
+|    time_elapsed         | 81377       |
+|    total_timesteps      | 186624      |
+| train/                  |             |
+|    approx_kl            | 0.013993281 |
+|    clip_fraction        | 0.164       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.91       |
+|    explained_variance   | 0.891       |
+|    learning_rate        | 0.000439    |
+|    loss                 | 0.00106     |
+|    n_updates            | 175         |
+|    policy_gradient_loss | -0.0123     |
+|    value_loss           | 6.72e-05    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 37          |
+|    time_elapsed         | 83806       |
+|    total_timesteps      | 191808      |
+| train/                  |             |
+|    approx_kl            | 0.013839512 |
+|    clip_fraction        | 0.161       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.88       |
+|    explained_variance   | 0.927       |
+|    learning_rate        | 0.000437    |
+|    loss                 | -0.0176     |
+|    n_updates            | 180         |
+|    policy_gradient_loss | -0.0102     |
+|    value_loss           | 4.94e-05    |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5500_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/salamis_switch_ignition_1m4-28/results_salamis_switch_ignition_1m_5600_summary.csv
+------------------------------------------
+| time/                   |              |
+|    fps                  | 2            |
+|    iterations           | 38           |
+|    time_elapsed         | 86072        |
+|    total_timesteps      | 196992       |
+| train/                  |              |
+|    approx_kl            | 0.0144123705 |
+|    clip_fraction        | 0.182        |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -7.85        |
+|    explained_variance   | 0.9          |
+|    learning_rate        | 0.000435     |
+|    loss                 | -0.0142      |
+|    n_updates            | 185          |
+|    policy_gradient_loss | -0.012       |
+|    value_loss           | 6.33e-05     |
+------------------------------------------

@@ -77,9 +77,40 @@
                 34.0378973891474,
                 -118.5463204448615
             ]
+        },
+        {
+            "gps_coords": [
+                34.037348,
+                -118.585996
+            ]
+        },
+        {
+            "gps_coords": [
+                34.038746,
+                -118.574509
+            ]
+        },
+        {
+            "gps_coords": [
+                34.039829,
+                -118.563022
+            ]
+        },
+        {
+            "gps_coords": [
+                34.035363,
+                -118.540102
+            ]
+        },
+        {
+            "gps_coords": [
+                34.030627,
+                -118.528615
+            ]
         }
     ],
-    "protection_locations": [{
+    "protection_locations": [
+        {
             "gps_coords": [
                 34.04429372626382,
                 -118.56621911552908
@@ -199,7 +230,8 @@
                 1101.3
             ],
             "angle": 4.554105
-        }],
+        }
+    ],
     "urban_locations": [
         {
             "gps_coords": [
@@ -333,79 +365,18 @@
         {
             "file_name": "example_seaplane_1.json",
             "agents_per_base": [
-                1,
+                3,
                 0
             ],
-
             "suppression_tactic": {
                 "main": {
                     "select_poi": "water",
                     "track_poi": "follow_firefront",
                     "suppress": "direct"
-                }
-            }
-        }
-        ,{
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                0,
-                1
-            ],
-
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "indirect",
-                    "track_poi": "indirect",
-                    "suppress": "indirect"
-                }
-            }
-        },{
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                0,
-                1
-            ],
-
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "vip",
-                    "track_poi": "indirect",
-                    "suppress": "indirect"
-                }
-            }
-        },{
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                1,
-                0
-            ],
-
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "water",
-                    "track_poi": "follow_firefront",
-                    "suppress": "direct"
-                }
-            }
-        }
-        ,{
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                0,
-                1
-            ],
-
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "indirect",
-                    "track_poi": "indirect",
-                    "suppress": "indirect"
                 }
             }
         }
     ],
-
-
     "scoop_time": 30,
     "distance_cost_weight": 1.0,
     "vip_cost_weight": 1.0,

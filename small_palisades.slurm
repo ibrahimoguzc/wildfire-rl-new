@@ -51,6 +51,7 @@ OUTDIR=examples/wildfire/data/scenarios/outputs/palisades_v2_${SLURM_JOB_ID}
   --gc-collect-on-reset \
   --n-epochs 7 \
   --learning-rate 0.0004 \
+  --gamma 0.99 \
   --state-space small \
   --tactic-distribution group \
   --aircraft-group-size 2 \

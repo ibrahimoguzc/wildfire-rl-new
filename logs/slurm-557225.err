@@ -1,0 +1,4 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+/home/ibrahimoguz/FirefightingSoS/rl-5-30/SoSID_X-Challenge-git/src/sosid/paths.py:13: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[2026-06-05T23:57:32.509] error: *** JOB 557225 ON owl042 CANCELLED AT 2026-06-05T23:57:32 DUE to SIGNAL Terminated ***

@@ -1,0 +1,325 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+Salamis_12p.json enable_adaptive_time_step = False
+============================================================
+>>> SOLO PROFILE: Salamis_12p.json (adaptive_time_step=false)
+============================================================
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=12, n_steps=144, effective_batch=1728, minibatches=12, batch_size=144
+Decision start delay: Salamis_12p.json response_time / 60 = 90.0 minutes
+Allowed tactic combinations: 17
+Profiling: per-step/reset wall time and RSS enabled.
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+[profile-timings] rollout 1 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis_12p.json            1728     1.4911    2.1725      280      2.6328          1.6509       1613.0      1826.4      1769.2
+-----------------------------
+| time/              |      |
+|    fps             | 2    |
+|    iterations      | 1    |
+|    time_elapsed    | 578  |
+|    total_timesteps | 1728 |
+-----------------------------
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_500_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+[profile-timings] rollout 2 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis_12p.json            1728     1.4924    2.1952      287      2.6131          1.6503       1637.3      1811.2      1704.7
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 2           |
+|    time_elapsed         | 1168        |
+|    total_timesteps      | 3456        |
+| train/                  |             |
+|    approx_kl            | 0.034919113 |
+|    clip_fraction        | 0.296       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | -9.57       |
+|    learning_rate        | 0.000444    |
+|    loss                 | -0.0859     |
+|    n_updates            | 5           |
+|    policy_gradient_loss | -0.0439     |
+|    value_loss           | 0.0639      |
+-----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_600_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_700_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_800_summary.csv
+
+Mission Completed (Salamis)
+[profile-timings] rollout 3 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis_12p.json            1728     1.4893    2.1616      285      2.6191          1.6560       1610.0      1829.4      1704.8
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 3           |
+|    time_elapsed         | 1764        |
+|    total_timesteps      | 5184        |
+| train/                  |             |
+|    approx_kl            | 0.037150603 |
+|    clip_fraction        | 0.32        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.8       |
+|    explained_variance   | -2.98       |
+|    learning_rate        | 0.000384    |
+|    loss                 | -0.0507     |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.05       |
+|    value_loss           | 0.000179    |
+-----------------------------------------
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_900_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Per-step log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1000_steps.csv
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1000_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+[profile-timings] rollout 4 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis_12p.json            1728     1.4907    2.1754      288      2.6183          1.6515       1606.1      1768.4      1768.4
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 4           |
+|    time_elapsed         | 2364        |
+|    total_timesteps      | 6912        |
+| train/                  |             |
+|    approx_kl            | 0.033731263 |
+|    clip_fraction        | 0.288       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | -0.741      |
+|    learning_rate        | 0.000319    |
+|    loss                 | -0.0395     |
+|    n_updates            | 15          |
+|    policy_gradient_loss | -0.0449     |
+|    value_loss           | 3.81e-05    |
+-----------------------------------------
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1100_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1200_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1300_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+[profile-timings] rollout 5 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis_12p.json            1728     1.4852    2.1619      286      2.6125          1.6458       1604.2      1768.4      1707.3
+----------------------------------------
+| time/                   |            |
+|    fps                  | 2          |
+|    iterations           | 5          |
+|    time_elapsed         | 2959       |
+|    total_timesteps      | 8640       |
+| train/                  |            |
+|    approx_kl            | 0.02601909 |
+|    clip_fraction        | 0.213      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -36.7      |
+|    explained_variance   | 0.145      |
+|    learning_rate        | 0.000245   |
+|    loss                 | -0.0594    |
+|    n_updates            | 20         |
+|    policy_gradient_loss | -0.0435    |
+|    value_loss           | 2.04e-05   |
+----------------------------------------
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1400_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1500_summary.csv
+
+Mission Completed (Salamis)
+
+Mission Completed (Salamis)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1600_summary.csv
+[profile-timings] rollout 6 summary:
+  scenario                  step_n  step_mean  step_p95  reset_n  reset_mean  free_burn_mean  rss_mean_MB  rss_max_MB  wkr_max_MB
+  Salamis_12p.json            1728     1.4881    2.1798      285      2.6061          1.6487       1604.1      1768.4      1707.3
+-----------------------------------------
+| time/                   |             |
+|    fps                  | 2           |
+|    iterations           | 6           |
+|    time_elapsed         | 3532        |
+|    total_timesteps      | 10368       |
+| train/                  |             |
+|    approx_kl            | 0.020868735 |
+|    clip_fraction        | 0.167       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -36.7       |
+|    explained_variance   | 0.402       |
+|    learning_rate        | 0.000156    |
+|    loss                 | -0.067      |
+|    n_updates            | 25          |
+|    policy_gradient_loss | -0.0403     |
+|    value_loss           | 1.66e-05    |
+-----------------------------------------
+Per-step log written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/results_profile_salamis12p_noadaptive_1644_steps.csv
+Training complete in 3533.57 seconds.
+Episode training summary written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/training_episode_summaries.csv
+Episode training summary written to examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094/training_episode_summaries.xlsx
+============================================================
+>>> DONE. Outputs under examples/wildfire/data/scenarios/outputs/profile_salamis12p_noadaptive_507094
+============================================================
+total 13892
+drwxrwx---  2 ibrahimoguz ibrahimoguz   10240 May 10 23:26 .
+drwxrwx--- 45 ibrahimoguz ibrahimoguz   50688 May 10 22:47 ..
+-rw-rw----  1 ibrahimoguz ibrahimoguz 5169497 May 10 23:03 results_profile_salamis12p_noadaptive_1000_steps.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  354967 May 10 23:03 results_profile_salamis12p_noadaptive_1000_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz   35700 May 10 22:30 results_profile_salamis12p_noadaptive_100_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  390427 May 10 23:06 results_profile_salamis12p_noadaptive_1100_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  425914 May 10 23:10 results_profile_salamis12p_noadaptive_1200_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  461379 May 10 23:14 results_profile_salamis12p_noadaptive_1300_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  496852 May 10 23:17 results_profile_salamis12p_noadaptive_1400_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  532325 May 10 23:20 results_profile_salamis12p_noadaptive_1500_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  567829 May 10 23:24 results_profile_salamis12p_noadaptive_1600_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz 3330530 May 10 23:26 results_profile_salamis12p_noadaptive_1644_steps.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz   71157 May 10 22:34 results_profile_salamis12p_noadaptive_200_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  106628 May 10 22:37 results_profile_salamis12p_noadaptive_300_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  142089 May 10 22:41 results_profile_salamis12p_noadaptive_400_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  177557 May 10 22:44 results_profile_salamis12p_noadaptive_500_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  213049 May 10 22:48 results_profile_salamis12p_noadaptive_600_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  248534 May 10 22:52 results_profile_salamis12p_noadaptive_700_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  284022 May 10 22:55 results_profile_salamis12p_noadaptive_800_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  319490 May 10 22:59 results_profile_salamis12p_noadaptive_900_summary.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  583445 May 10 23:26 training_episode_summaries.csv
+-rw-rw----  1 ibrahimoguz ibrahimoguz  169966 May 10 23:26 training_episode_summaries.xlsx

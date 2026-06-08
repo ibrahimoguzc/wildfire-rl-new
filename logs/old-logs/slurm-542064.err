@@ -1,0 +1,41 @@
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
+usage: ppo_runner.py [-h] [--scenario SCENARIO] [--timesteps TIMESTEPS]
+                     [--decision-interval-minutes DECISION_INTERVAL_MINUTES]
+                     [--fire-detection-delay-minutes FIRE_DETECTION_DELAY_MINUTES]
+                     [--learning-rate LEARNING_RATE] [--switch-scenario]
+                     [--switch-scenarios SCENARIO [SCENARIO ...]]
+                     [--switch-ignition]
+                     [--ignition-inputs IGNITION_SPEC [IGNITION_SPEC ...]]
+                     [--log-output LOG_OUTPUT] [--output-dir OUTPUT_DIR]
+                     [--summary-output SUMMARY_OUTPUT]
+                     [--progress-file-tag PROGRESS_FILE_TAG]
+                     [--save-model SAVE_MODEL] [--load-model LOAD_MODEL]
+                     [--device DEVICE]
+                     [--vec-start-method {auto,fork,spawn,forkserver}]
+                     [--num-envs NUM_ENVS] [--profile-timings]
+                     [--gc-collect-on-reset]
+ppo_runner.py: error: unrecognized arguments: --policy-arch default --target-kl 0.02 --checkpoint-interval 200000
+Command exited with non-zero status 2
+	Command being timed: "python -u -m examples.wildfire.ppo_runner --scenario Palisades copy.json --num-envs 36 --timesteps 1008000 --device cpu --policy-arch default --target-kl 0.02 --checkpoint-interval 200000 --output-dir examples/wildfire/data/scenarios/outputs/palisades_dt1_probe_542064 --save-model palisades_dt1_probe.zip --progress-file-tag palisades_dt1_probe --vec-start-method auto"
+	User time (seconds): 10.00
+	System time (seconds): 5.09
+	Percent of CPU this job got: 56%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:26.51
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 964812
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1733
+	Minor (reclaiming a frame) page faults: 176742
+	Voluntary context switches: 14753
+	Involuntary context switches: 160257
+	Swaps: 0
+	File system inputs: 344200
+	File system outputs: 152
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 2

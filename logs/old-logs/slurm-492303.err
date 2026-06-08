@@ -1,0 +1,29 @@
+Resetting modules to system default. Reseting $MODULEPATH back to system default. All extra directories will be removed from $MODULEPATH.
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/concurrent/futures/process.py", line 246, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_tester.py", line 532, in _eval_task
+    record = _run_single_episode(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_tester.py", line 415, in _run_single_episode
+    raw_env = WildfireHourlyEnv(
+TypeError: WildfireHourlyEnv.__init__() got an unexpected keyword argument 'propagation_mode'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_tester.py", line 917, in <module>
+    main()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_tester.py", line 878, in main
+    rows.append(future.result())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+TypeError: WildfireHourlyEnv.__init__() got an unexpected keyword argument 'propagation_mode'

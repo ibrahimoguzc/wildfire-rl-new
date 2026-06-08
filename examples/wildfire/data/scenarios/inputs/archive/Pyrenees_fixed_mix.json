@@ -1,0 +1,365 @@
+{
+    "name": "Pyrenees",
+    "time_step": 1.0,
+    "enable_adaptive_time_step": false,
+    "mission_start": "2023-08-17T06:15:00",
+    "max_runtime": 86400,
+    "run_headless": true,
+    "output_sampling_time": 300,
+    "map_in_map": true,
+    "export_img": true,
+    "import_features_osm": true,
+    "deploy_osm_airport_locations": true,
+    "k_nearest_airports": -1,
+    "terrain_inputs": {
+        "file_namespace_operational": "Pyrenees_128x128_800",
+        "file_namespace": "Pyrenees_2000x1996_5m",
+        "cell_size": 5,
+        "height_scale_factor": 1.0,
+        "priority_map_sigma": 30,
+        "import_features_osm": true
+    },
+    "max_elevation": 1,
+    "estimate_cost": true,
+    "run_api_for_atmosphere": false,
+    "atmosphere_inputs": {
+        "temperature_range": [
+            10,
+            25,
+            10
+        ],
+        "temperature_times": [
+            5,
+            15
+        ],
+        "sun_times": [
+            6,
+            20
+        ],
+        "time_of_max_solar_height": 12,
+        "humidity_range": [
+            20,
+            70
+        ],
+        "wind_run": 350,
+        "general_winddirection": 300,
+        "range_winddirection": 30,
+        "update_frequency": 600,
+        "latitude": 42.865,
+        "longitude": 0.022
+    },
+    "correction_coefficient": 0.4,
+    "ignition_centers": [
+        {
+            "gps_coords": [
+                42.86248,
+                0.00652
+            ]
+        }
+    ],
+    "airports": [
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        },
+        {
+            "gps_coords": [
+                42.865,
+                0.022
+            ],
+            "icon": "helipad_white.svg",
+            "takeoff_landing_type": "vertipad"
+        }
+    ],
+    "deploy_osm_waters": true,
+    "water_sources": [],
+    "protection_locations": [],
+    "urban_locations": [{
+      "gps_coords": [
+        43.03225308,
+        -0.10605067
+      ],
+      "radius": [
+        298.1,
+        544.1
+      ],
+      "angle": 14
+    },
+    {
+      "gps_coords": [
+        43.12137541,
+        -0.13542287
+      ],
+      "radius": [
+        258.1,
+        807.9
+      ],
+      "angle": 45
+    },
+    {
+      "gps_coords": [
+        43.19313744,
+        -0.32931263
+      ],
+      "radius": [
+        214.5,
+        283.3
+      ],
+      "angle": 51
+    },
+    {
+      "gps_coords": [
+        43.3723514,
+        0.64718968
+      ],
+      "radius": [
+        128.7,
+        515.1
+      ],
+      "angle": 161
+    },
+    {
+      "gps_coords": [
+        43.06252582,
+        0.00357354
+      ],
+      "radius": [
+        117.7,
+        288.1
+      ],
+      "angle": 150
+    },
+    {
+      "gps_coords": [
+        42.98953574,
+        -0.17761332
+      ],
+      "radius": [
+        129.3,
+        258.6
+      ],
+      "angle": 66
+    },
+    {
+      "gps_coords": [
+        43.09135481,
+        0.10001109
+      ],
+      "radius": [
+        106.1,
+        130.9
+      ],
+      "angle": 93
+    },
+    {
+      "gps_coords": [
+        43.0687672,
+        -0.23801625
+      ],
+      "radius": [
+        87.9,
+        231.5
+      ],
+      "angle": 63
+    },
+    {
+      "gps_coords": [
+        43.39005602,
+        -0.38222158
+      ],
+      "radius": [
+        96.3,
+        206.7
+      ],
+      "angle": 81
+    },
+    {
+      "gps_coords": [
+        43.32612226,
+        -0.29363291
+      ],
+      "radius": [
+        97.6,
+        216.7
+      ],
+      "angle": 71
+    },
+    {
+      "gps_coords": [
+        43.27656514,
+        -0.42336109
+      ],
+      "radius": [
+        96.8,
+        142.6
+      ],
+      "angle": 76
+    },
+    {
+      "gps_coords": [
+        43.12891865,
+        -0.24810075
+      ],
+      "radius": [
+        98.6,
+        163.7
+      ],
+      "angle": 60
+    },
+    {
+      "gps_coords": [
+        43.16863264,
+        0.32823729
+      ],
+      "radius": [
+        91.1,
+        170.5
+      ],
+      "angle": 15
+    },
+    {
+      "gps_coords": [
+        43.24580398,
+        0.37696016
+      ],
+      "radius": [
+        106.9,
+        118.2
+      ],
+      "angle": 55
+    },
+    {
+      "gps_coords": [
+        43.08609456,
+        -0.00579601
+      ],
+      "radius": [
+        57.4,
+        198.1
+      ],
+      "angle": 164
+    },
+    {
+      "gps_coords": [
+        43.53325058,
+        -0.4109794
+      ],
+      "radius": [
+        82.8,
+        203.5
+      ],
+      "angle": 29
+    },
+    {
+      "gps_coords": [
+        42.90558856,
+        -0.17924136
+      ],
+      "radius": [
+        65.6,
+        317.2
+      ],
+      "angle": 55
+    },
+    {
+      "gps_coords": [
+        43.03321286,
+        -0.22463131
+      ],
+      "radius": [
+        68.2,
+        136.2
+      ],
+      "angle": 62
+    },
+    {
+      "gps_coords": [
+        43.17440678,
+        0.21637609
+      ],
+      "radius": [
+        81.3,
+        198.2
+      ],
+      "angle": 14
+    },
+    {
+      "gps_coords": [
+        42.98249324,
+        -0.03772817
+      ],
+      "radius": [
+        69.5,
+        179.7
+      ],
+      "angle": 147
+    }],
+    "response_time": 1800,
+    "takeoff_interval": 300,
+    "turnaround_time": 100,
+    "suppression_altitude": 50,
+    "resupply_altitude": 15,
+    "enable_nighttime_operations": true,
+    "agents": [
+        {
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                1,
+                1,
+                0,
+                0
+            ],
+            
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "indirect",
+                    "track_poi": "indirect",
+                    "suppress": "indirect"
+                }
+            }
+        },
+        {
+            "file_name": "example_seaplane_1.json",
+            "agents_per_base": [
+                0,
+                0,
+                1,
+                0
+            ],
+            
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "water",
+                    "track_poi": "follow_firefront",
+                    "suppress": "direct"
+                }
+            }
+        }
+    ],
+    "scoop_time": 30,
+    "distance_cost_weight": 1.0,
+    "vip_cost_weight": 1.0,
+    "priority_cost_weight": 1.0,
+    "vegetation_cost_weight": 1.0,
+    "topography_cost_weight": 1.0
+}

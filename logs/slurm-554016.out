@@ -1,0 +1,31 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+================ WATER COMPARISON ================
+timesteps=25920 num_envs=36 delay=30min seed=0
+=================================================
+
+########## RUN: map=pyrenees water-set=off ##########
+RESULT map=pyrenees water-set=off exit=0 wall=9901s  log=logs/watercmp_pyrenees_off_554016.log
+
+########## RUN: map=pyrenees water-set=1 ##########
+RESULT map=pyrenees water-set=1 exit=0 wall=8062s  log=logs/watercmp_pyrenees_1_554016.log
+
+########## RUN: map=palisades water-set=off ##########
+RESULT map=palisades water-set=off exit=0 wall=3388s  log=logs/watercmp_palisades_off_554016.log
+
+########## RUN: map=palisades water-set=1 ##########
+RESULT map=palisades water-set=1 exit=0 wall=3111s  log=logs/watercmp_palisades_1_554016.log
+
+########## RUN: map=salamis water-set=off ##########
+RESULT map=salamis water-set=off exit=0 wall=1854s  log=logs/watercmp_salamis_off_554016.log
+
+########## RUN: map=salamis water-set=1 ##########
+RESULT map=salamis water-set=1 exit=0 wall=1771s  log=logs/watercmp_salamis_1_554016.log
+
+================ TIMING SUMMARY ================
+  pyrenees   water-set=off : fps=2     time_elapsed=9868    total_timesteps=25920  
+  pyrenees   water-set=1   : fps=3     time_elapsed=8036    total_timesteps=25920  
+  palisades  water-set=off : fps=7     time_elapsed=3362    total_timesteps=25920  
+  palisades  water-set=1   : fps=8     time_elapsed=3088    total_timesteps=25920  
+  salamis    water-set=off : fps=14    time_elapsed=1832    total_timesteps=25920  
+  salamis    water-set=1   : fps=14    time_elapsed=1750    total_timesteps=25920  
+===============================================

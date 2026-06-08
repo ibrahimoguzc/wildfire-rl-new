@@ -15,9 +15,9 @@ http://www.sphinx-doc.org/en/master/config
 
 import os
 import sys
+from importlib.metadata import PackageNotFoundError, version as get_version
 
 import sphinx_bootstrap_theme
-from pkg_resources import get_distribution
 
 # -- Path setup ---------------------------------------------------------# noqa
 
@@ -39,7 +39,11 @@ copyright = "2019, DLR Institute of System Architectures in Aeronautics"
 author = "San Kilkis"
 
 # Getting Current version and ensuring X.Y format
-version = ".".join(get_distribution("sosid").version.split(".")[:2])
+try:
+    version = ".".join(get_version("sosid").split(".")[:2])
+except PackageNotFoundError:
+    # Allows docs to build from source tree without installing the package.
+    version = "0.0"
 # The full version, including alpha/beta/rc tags
 # release = u'2.0'
 

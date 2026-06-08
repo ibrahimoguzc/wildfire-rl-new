@@ -183,6 +183,7 @@ def _make_env_factory(
     profile_timings: bool = False,
     gc_collect_on_reset: bool = False,
     include_scenario_features: bool | None = None,
+    controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
 ):
     def _init() -> WildfireHourlyEnv:
         env = WildfireHourlyEnv(
@@ -197,6 +198,7 @@ def _make_env_factory(
             profile_timings=profile_timings,
             gc_collect_on_reset=gc_collect_on_reset,
             include_scenario_features=include_scenario_features,
+            controlled_agent_count=controlled_agent_count,
         )
         env.reset(seed=seed)
         return env
@@ -217,6 +219,7 @@ def _build_vector_env(
     ts_budget_per_scenario: float | None = None,
     profile_timings: bool = False,
     gc_collect_on_reset: bool = False,
+    controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
 ) -> DummyVecEnv | SubprocVecEnv:
     num_envs = max(1, num_envs)
     base_seed = int(np.random.randint(0, 1_000_000))
@@ -237,6 +240,7 @@ def _build_vector_env(
                 profile_timings=profile_timings,
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=True,
+                controlled_agent_count=controlled_agent_count,
             )
             for idx in range(num_envs)
         ]
@@ -255,6 +259,7 @@ def _build_vector_env(
                 profile_timings=profile_timings,
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=switch_scenario,
+                controlled_agent_count=controlled_agent_count,
             )
             for idx in range(num_envs)
         ]
@@ -592,6 +597,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         profile_timings: bool = False,
         gc_collect_on_reset: bool = False,
         include_scenario_features: bool | None = None,
+        controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     ):
         super().__init__()
         self.scenario_path = scenario_path
@@ -671,7 +677,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         )
         self.max_steps = self._resolve_max_steps(self.parameters)
 
-        self.controlled_agent_count = CONTROLLED_AGENT_COUNT
+        self.controlled_agent_count = int(controlled_agent_count)
+        if self.controlled_agent_count <= 0:
+            raise ValueError("controlled_agent_count must be > 0")
         self.agent_feature_count = AGENT_FEATURE_COUNT
         self.include_scenario_flag = (
             bool(self.switch_scenario)
@@ -2054,12 +2062,15 @@ class TrainingLogger(BaseCallback):
         progress_file_tag: str = "run",
         output_dir: Path = SCENARIOS_DIR / "outputs",
         profile_timings: bool = False,
+        controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     ):
         super().__init__()
         self.training_step_records: list[dict[str, Any]] = []
         self.episode_summaries: list[dict[str, Any]] = []
         self.completed_episodes = 0
-        self.controlled_agent_count = CONTROLLED_AGENT_COUNT
+        self.controlled_agent_count = int(controlled_agent_count)
+        if self.controlled_agent_count <= 0:
+            raise ValueError("controlled_agent_count must be > 0")
         self.decision_interval_minutes = decision_interval_minutes
         self.progress_file_tag = progress_file_tag
         self.output_dir = Path(output_dir)
@@ -2357,12 +2368,6 @@ def main() -> None:
         help=argparse.SUPPRESS,
     )
     parser.add_argument(
-        "--propagation-mode",
-        choices=("binary",),
-        default="binary",
-        help=argparse.SUPPRESS,
-    )
-    parser.add_argument(
         "--switch-scenario",
         action="store_true",
         help=(
@@ -2463,6 +2468,16 @@ def main() -> None:
         type=int,
         default=1,
         help="Number of parallel wildfire environments to run (>=1).",
+    )
+    parser.add_argument(
+        "--controlled-agent-count",
+        type=int,
+        default=CONTROLLED_AGENT_COUNT,
+        help=(
+            "Number of aircraft the policy controls (firefighters[:N]). "
+            f"Default {CONTROLLED_AGENT_COUNT}. The scenario must define at "
+            "least this many aircraft."
+        ),
     )
     parser.add_argument(
         "--profile-timings",
@@ -2582,7 +2597,6 @@ def main() -> None:
         switch_scenario_paths = tuple(_resolve_scenario(name) for name in switch_names)
         if not switch_scenario_paths:
             raise ValueError("--switch-scenarios must contain at least one scenario.")
-        _validate_switch_scenario_agent_counts(switch_scenario_paths)
         aircraft_source_scenario_path = None
         scenario_path = switch_scenario_paths[0]
         switch_names_pretty = ", ".join(path.name for path in switch_scenario_paths)
@@ -2604,6 +2618,21 @@ def main() -> None:
         aircraft_source_scenario_path = None
     if args.num_envs < 1:
         raise ValueError("--num-envs must be >= 1")
+    if args.controlled_agent_count <= 0:
+        raise ValueError("--controlled-agent-count must be > 0")
+    # The policy commands firefighters[:controlled_agent_count]; validate up
+    # front so a mismatched scenario cannot silently shrink the controlled set.
+    _fleet_paths = (
+        switch_scenario_paths if use_switch_scenario and switch_scenario_paths
+        else (scenario_path,)
+    )
+    for _fleet_path in _fleet_paths:
+        _fleet_size = _scenario_agent_count(_fleet_path)
+        if _fleet_size < args.controlled_agent_count:
+            raise ValueError(
+                f"--controlled-agent-count={args.controlled_agent_count} exceeds "
+                f"the {_fleet_size} aircraft defined in {Path(_fleet_path).name}."
+            )
     if args.decision_interval_minutes <= 0:
         raise ValueError("--decision-interval-minutes must be > 0")
     if args.n_epochs < 1:
@@ -2669,6 +2698,7 @@ def main() -> None:
             profile_timings=args.profile_timings,
             gc_collect_on_reset=args.gc_collect_on_reset,
             include_scenario_features=use_switch_scenario,
+            controlled_agent_count=args.controlled_agent_count,
         )
     else:
         train_env = _build_vector_env(
@@ -2684,6 +2714,7 @@ def main() -> None:
             ts_budget_per_scenario=ts_budget_per_scenario,
             profile_timings=args.profile_timings,
             gc_collect_on_reset=args.gc_collect_on_reset,
+            controlled_agent_count=args.controlled_agent_count,
         )
     max_steps_allowed = max(1, total_timesteps // args.num_envs)
     rollout_steps = int(min(ROLLOUT_STEPS_PER_ENV, max_steps_allowed))
@@ -2723,6 +2754,7 @@ def main() -> None:
             f"Decision start delay override: {args.fire_detection_delay_minutes} minutes"
         )
     print(f"Allowed tactic combinations: {len(TACTIC_COMBINATIONS)}")
+    print(f"Controlled aircraft: {args.controlled_agent_count}")
     if args.profile_timings:
         print("Profiling: per-step/reset wall time and RSS enabled.")
     if args.gc_collect_on_reset:
@@ -2740,6 +2772,7 @@ def main() -> None:
         progress_file_tag=progress_file_tag,
         output_dir=output_dir,
         profile_timings=args.profile_timings,
+        controlled_agent_count=args.controlled_agent_count,
     )
     device = args.device
     if device != "auto":

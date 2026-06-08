@@ -1,0 +1,4 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+Policies: switch_ignition_1m[ppo_model]
+Running parallel evaluation with 24 worker process(es).
+[1/100] Evaluated switch_ignition_1m on Pyrenees.json run=2 seed=2

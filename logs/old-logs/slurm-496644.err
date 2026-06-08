@@ -1,0 +1,705 @@
+Resetting modules to system default. Reseting $MODULEPATH back to system default. All extra directories will be removed from $MODULEPATH.
+Process ForkProcess-1:
+Process ForkProcess-2:
+Process ForkProcess-3:
+Process ForkProcess-4:
+Process ForkProcess-5:
+Process ForkProcess-6:
+Process ForkProcess-7:
+Process ForkProcess-8:
+Process ForkProcess-9:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-10:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-11:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-12:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-13:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-14:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-15:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-16:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-17:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-18:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-19:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-20:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-21:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-22:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-23:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-24:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-25:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-26:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-27:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-28:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-29:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-30:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-31:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-32:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-33:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-34:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Process ForkProcess-35:
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)Process ForkProcess-36:
+
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 2620, in <module>
+    main()
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 2456, in main
+    train_env = _build_vector_env(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 241, in _build_vector_env
+    return SubprocVecEnv(env_fns, start_method=start_method)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 126, in __init__
+Traceback (most recent call last):
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/stable_baselines3/common/vec_env/subproc_vec_env.py", line 29, in _worker
+    env = _patch_env(env_fn_wrapper.var())
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 164, in _init
+    env = WildfireHourlyEnv(
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 621, in __init__
+    self.parameters = self._load_parameters(scenario_path)
+  File "/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/ppo_runner.py", line 736, in _load_parameters
+    return WildfireParameters.model_validate_json(handle.read())
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/site-packages/pydantic/main.py", line 766, in model_validate_json
+    return cls.__pydantic_validator__.validate_json(
+pydantic_core._pydantic_core.ValidationError: 1 validation error for WildfireParameters
+  Invalid JSON: expected value at line 422 column 9 [type=json_invalid, input_value='{\n    "name": "Pyrenees...hy_cost_weight": 1.0\n}', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+    self.remotes[0].send(("get_spaces", None))
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/connection.py", line 411, in _send_bytes
+    self._send(header + buf)
+  File "/home/ibrahimoguz/.conda/envs/rl-env/lib/python3.10/multiprocessing/connection.py", line 368, in _send
+    n = write(self._handle, buf)
+BrokenPipeError: [Errno 32] Broken pipe

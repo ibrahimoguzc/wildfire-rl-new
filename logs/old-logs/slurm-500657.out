@@ -1,0 +1,63 @@
+/home/ibrahimoguz/.conda/envs/rl-env/bin/python
+============================================================
+>>> SOLO PROFILE: Palisades.json
+============================================================
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+============================================================
+>>> SOLO PROFILE: Pyrenees.json
+============================================================
+--switch-ignition-1 enabled: ignition randomized each episode in a 100x100 cell box around the scenario's original ignition.
+PPO rollout config: num_envs=12, n_steps=144, effective_batch=1728, minibatches=12, batch_size=144
+Decision start delay: Pyrenees.json response_time / 60 = 30.0 minutes
+Allowed tactic combinations: 17
+Profiling: per-step/reset wall time and RSS enabled.
+Diagnostic: gc.collect() and prior-sim drop at reset start enabled.
+Vector env start method: fork
+Using cpu device
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500657/solo_pyrenees/results_profile_pyrenees_100_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500657/solo_pyrenees/results_profile_pyrenees_200_summary.csv
+
+Mission Completed (Pyrenees)
+
+Mission Completed (Pyrenees)
+
+Mission Failed (Pyrenees)
+
+Mission Failed (Pyrenees)
+Episode summary log written to examples/wildfire/data/scenarios/outputs/profile_500657/solo_pyrenees/results_profile_pyrenees_300_summary.csv
+
+Mission Completed (Pyrenees)
