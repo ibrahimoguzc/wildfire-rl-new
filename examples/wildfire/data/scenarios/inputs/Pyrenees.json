@@ -298,57 +298,9 @@
             "file_name": "example_seaplane_1.json",
             "agents_per_base": [
                 3,
-                0,
-                0,
-                0
-            ],
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "indirect",
-                    "track_poi": "indirect",
-                    "suppress": "indirect"
-                }
-            }
-        },
-        {
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                0,
                 3,
-                0,
-                0
-            ],
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "indirect",
-                    "track_poi": "indirect",
-                    "suppress": "indirect"
-                }
-            }
-        },
-        {
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                0,
-                0,
-                4,
-                0
-            ],
-            "suppression_tactic": {
-                "main": {
-                    "select_poi": "indirect",
-                    "track_poi": "indirect",
-                    "suppress": "indirect"
-                }
-            }
-        },
-        {
-            "file_name": "example_seaplane_1.json",
-            "agents_per_base": [
-                0,
-                0,
-                0,
-                4
+                2,
+                1
             ],
             "suppression_tactic": {
                 "main": {

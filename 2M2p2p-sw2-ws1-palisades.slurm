@@ -38,7 +38,7 @@ OUTDIR=examples/wildfire/data/scenarios/outputs/palisades_2p2p_lr00075_${SLURM_J
 # ceil(4/2)=2 decisions), water set 1, switch-ignition-2, old state space.
 /usr/bin/time -v python -u -m examples.wildfire.ppo_runnerv2 \
   --scenario "Palisades.json" \
-  --num-envs 128 \
+  --num-envs 128 \ #
   --timesteps 2016000 \
   --device cpu \
   --output-dir "$OUTDIR" \

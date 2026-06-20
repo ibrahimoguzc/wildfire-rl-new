@@ -46,7 +46,7 @@ from examples.wildfire.ppo_runnerv2 import (  # noqa: E402
     CONTROLLED_AGENT_COUNT,
     DEFAULT_DECISION_INTERVAL_MINUTES,
     DEFAULT_STATE_FIRE_FRONTS,
-    STATE_SPACE_SMALL,
+    STATE_SPACE_OLD,
     SUPPORTED_TACTIC_DISTRIBUTIONS,
     TACTIC_DISTRIBUTION_INDIVIDUAL,
     WildfireHourlyEnv,
@@ -318,8 +318,8 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--state-space",
-        default=STATE_SPACE_SMALL,
-        help="Runner state-space option. Use small to keep state cost minimal.",
+        default=STATE_SPACE_OLD,
+        help="Runner state-space option.",
     )
     parser.add_argument(
         "--tactic-distribution",

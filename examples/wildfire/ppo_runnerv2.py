@@ -27,6 +27,7 @@ from pathlib import Path
 import time
 from typing import Any, Sequence
 from datetime import timedelta
+import warnings
 
 import gymnasium as gym
 import numpy as np
@@ -80,8 +81,10 @@ from examples.wildfire.firefighter_model.tactic_pieces.track_poi import (
 from examples.wildfire.fire_model.states import (
     BURNT,
     COMBUSTIBLE,
+    EARLY_BURNING,
     EXTINGUISHING,
     FULL_BURNING,
+    NONFLAMMABLE,
     SUPPRESSED,
 )
 from examples.wildfire.paths import SCENARIOS_DIR
@@ -155,6 +158,68 @@ VEGETATION_MIN_COMBUSTIBLE_NEIGHBORS = 5
 INDIRECT_FRONT_DISTANCE_THRESHOLD_M = 250.0
 POI_CANDIDATE_QUANTILE = 0.95
 MAX_POI_CANDIDATES = 4000
+# --- Directional state space (per-flank projected threat) --------------------
+# A burning cell is an active-perimeter front candidate when its spread rate is
+# above this floor (interior / quenched cells are ~0).
+DIRECTIONAL_SPREAD_EPS = 1e-6
+# Each flank is projected T = decision_interval_minutes ahead; the threat search
+# radius around the landing point scales with the projected reach.
+DIRECTIONAL_SEARCH_ALPHA = 0.4
+DIRECTIONAL_R_MIN_CELLS = 3
+DIRECTIONAL_R_MAX_CELLS = 20
+# Hard cap on ray-march length so a fast flank / long interval stays bounded.
+DIRECTIONAL_MAX_RAY_CELLS = 400
+# Slope multiplier that maps to full topography urgency (must be > 1).
+DIRECTIONAL_SLOPE_REF = 1.5
+# A flank's representative cell keeps its own propagation bearing only when that
+# bearing points outward within this cosine threshold (0.0 == within +/-90 deg of
+# the radial outward direction); otherwise the projection uses the outward
+# bearing so a landing can never be aimed into the already-burnt interior.
+DIRECTIONAL_ALIGN_MIN = 0.0
+# VIP urgency is a time-to-impact score: the landing->nearest-VIP distance is
+# scaled by how far the flank travels in VIP_HORIZONS decision intervals
+# (ROS * VIP_HORIZONS * T metres). The sensing range therefore grows with flank
+# speed, and the feature rises while there is still ~1 h of lead time to act.
+DIRECTIONAL_VIP_HORIZONS = 6
+# Fixed distance scales (metres) for the indirect-line and water channels. The
+# earlier code reused the tiny vegetation search radius for the indirect line
+# (so it was ~always 0) and the whole map diagonal for water (so it was a near
+# constant ~0.97). 1 km is an operationally meaningful approach distance to the
+# planned containment line; 5 km is a representative scooper shuttle radius, so
+# sectors near water now read distinctly higher than sectors far from it.
+DIRECTIONAL_LINE_SCALE_M = 1000.0
+DIRECTIONAL_WATER_SCALE_M = 5000.0
+# Upper clamp for the slope-factor exponent: math.exp raises OverflowError
+# above ~709.8, reached at terrain slopes > ~74.8 deg (cliff cells under
+# projected landings). e^50 (~5e21) still dwarfs every threshold the factor
+# is compared against, so clamping cannot change any decision.
+SLOPE_FACTOR_EXP_MAX = 50.0
+# Highest fuel flammability in COMBUSTIBILITY_TABLE (pasture); normalizes the
+# vegetation fuel-escalation score to [0, 1].
+MAX_COMBUSTIBILITY = 2.0
+
+# --- Cell-size source (--cell-size) ------------------------------------------
+# The scenario JSON's nominal cell_size is 5 m, but the sim indexes positions on
+# a grid whose spacing is mercator_dimensions/grid_shape (~6-6.8 m away from the
+# equator). Geometry that mixes the two (e.g. the directional flank projection)
+# is skewed by that factor. --cell-size selects which value the directional
+# geometry uses: "json" = the scenario's nominal cell_size; "code" = the actual
+# projected metres/cell from ACTUAL_CELL_SIZE_M below (matching the sim's grid).
+CELL_SIZE_SOURCE_JSON = "json"
+CELL_SIZE_SOURCE_CODE = "code"
+SUPPORTED_CELL_SIZE_SOURCES: tuple[str, ...] = (
+    CELL_SIZE_SOURCE_JSON,
+    CELL_SIZE_SOURCE_CODE,
+)
+# Actual mean metres/cell (0.5*(dim_x/cols + dim_y/rows)), keyed by terrain
+# file_namespace. Computed from mercator_dimensions/grid_shape; cross-checked
+# against grid_description at load (see _cache_static_state_scalers).
+ACTUAL_CELL_SIZE_M: dict[str, float] = {
+    "Pyrenees_2000x1996_5m": 6.8360,
+    "Pyrenees_2000x1996_5m_reduced": 6.8360,
+    "Palisades_2004x1996_5m": 6.0455,
+    "Salamis_2004x1996_5m": 6.3376,
+}
 # These are the terrain types currently counted by
 # WildfireSimulation.area_burnt_by_type(). Keep this tuple aligned with that
 # method so the fast PPO reward metrics preserve the existing reward semantics.
@@ -174,7 +239,7 @@ IGNITION_URBAN_BUFFER_M = 350.0  # min distance from any urban cell, meters
 # --switch-ignition-2: center map box whose edges sit `IGNITION_V2_MARGIN_RATIO`
 # of the map edge length away from each map boundary. Default 0.25 → box edge
 # = (1 − 2·0.25) · map_edge = half the map.
-IGNITION_V2_MARGIN_RATIO = 0.25
+IGNITION_V2_MARGIN_RATIO = 0.30
 
 ROLLOUT_STEPS_PER_ENV = 144
 NUM_MINIBATCH = 24
@@ -224,11 +289,12 @@ def _make_env_factory(
     gc_collect_on_reset: bool = False,
     include_scenario_features: bool | None = None,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
-    state_space: str = "large",
+    state_space: str = "old",
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
     controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     water_set: int | None = None,
+    cell_size_source: str = "json",
     enable_adaptive_time_step: bool | None = None,
     adaptive_step_size_factor: float | None = None,
 ):
@@ -250,6 +316,7 @@ def _make_env_factory(
             aircraft_group_size=aircraft_group_size,
             controlled_agent_count=controlled_agent_count,
             water_set=water_set,
+            cell_size_source=cell_size_source,
             enable_adaptive_time_step=enable_adaptive_time_step,
             adaptive_step_size_factor=adaptive_step_size_factor,
         )
@@ -272,11 +339,12 @@ def _build_vector_env(
     ts_budget_per_scenario: float | None = None,
     gc_collect_on_reset: bool = False,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
-    state_space: str = "large",
+    state_space: str = "old",
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
     controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     water_set: int | None = None,
+    cell_size_source: str = "json",
     enable_adaptive_time_step: bool | None = None,
     adaptive_step_size_factor: float | None = None,
 ) -> DummyVecEnv | SubprocVecEnv:
@@ -304,6 +372,7 @@ def _build_vector_env(
                 aircraft_group_size=aircraft_group_size,
                 controlled_agent_count=controlled_agent_count,
                 water_set=water_set,
+                cell_size_source=cell_size_source,
                 enable_adaptive_time_step=enable_adaptive_time_step,
                 adaptive_step_size_factor=adaptive_step_size_factor,
             )
@@ -329,6 +398,7 @@ def _build_vector_env(
                 aircraft_group_size=aircraft_group_size,
                 controlled_agent_count=controlled_agent_count,
                 water_set=water_set,
+                cell_size_source=cell_size_source,
                 enable_adaptive_time_step=enable_adaptive_time_step,
                 adaptive_step_size_factor=adaptive_step_size_factor,
             )
@@ -350,17 +420,24 @@ SCENARIO_FEATURES: tuple[str, ...] = (
     "scenario_is_salamis",
 )
 
-STATE_SPACE_LARGE = "large"
-STATE_SPACE_SMALL = "small"
-STATE_SPACE_MIXED = "mixed"
 STATE_SPACE_OLD = "old"
 STATE_SPACE_UPDATED = "updated"
+STATE_SPACE_DIRECTIONAL = "directional"
 SUPPORTED_STATE_SPACES: tuple[str, ...] = (
-    STATE_SPACE_LARGE,
-    STATE_SPACE_SMALL,
-    STATE_SPACE_MIXED,
     STATE_SPACE_OLD,
     STATE_SPACE_UPDATED,
+    STATE_SPACE_DIRECTIONAL,
+)
+
+# Per-flank block appended by the "directional" state space (6 features per
+# flank slot, K = state_fire_fronts slots, each slot a compass sector).
+DIRECTIONAL_PER_FRONT_FEATURES: tuple[str, ...] = (
+    "front_severity",
+    "vip_urgency",
+    "vegetation_urgency",
+    "topography_urgency",
+    "indirect_urgency",
+    "water_access",
 )
 
 AGGREGATE_FRONT_FLAG_FEATURES: tuple[str, ...] = (
@@ -370,32 +447,6 @@ AGGREGATE_FRONT_FLAG_FEATURES: tuple[str, ...] = (
     "urban_flag",
     "water_flag",
 )
-
-LARGE_STATE_FEATURES = [
-    "time_since_detection_min",
-    "wind_speed_ms",
-    "wind_direction_deg",
-    "distance_to_fire_line_m",
-    "fire_center_x",
-    "fire_center_y",
-    "leftmost_x",
-    "leftmost_y",
-    "rightmost_x",
-    "rightmost_y",
-    "uppermost_x",
-    "uppermost_y",
-    "lowermost_x",
-    "lowermost_y",
-    "spread_angle_deg",
-    "spread_ray_hit_x",
-    "spread_ray_hit_y",
-    "max_spread_rate_norm",
-    *AGGREGATE_FRONT_FLAG_FEATURES,
-    "distance_left_boundary",
-    "distance_right_boundary",
-    "distance_bottom_boundary",
-    "distance_top_boundary",
-]
 
 # The "updated" state is the per-aircraft-altitude variant: it excludes the
 # fire->water distance, keeps each aircraft's altitude channel, and includes the
@@ -438,26 +489,38 @@ UPDATED_STATE_FEATURES = [
 # fire-centroid -> nearest-water distance (after distance_to_fire_line_m) and
 # drops the per-aircraft altitude channel, so 3 aircraft produce 30 + 2*3 = 36
 # features.
-OLD_STATE_FEATURES = (
-    UPDATED_STATE_FEATURES[:7]
-    + ["distance_to_water_m"]
-    + [
-        feature
-        for feature in UPDATED_STATE_FEATURES[7:]
-        if feature not in AGGREGATE_FRONT_FLAG_FEATURES
-    ]
-)
-
-MIXED_STATE_FEATURES: tuple[str, ...] = (
+OLD_STATE_FEATURES = [
+    "time_since_detection_min",
+    "temperature_c",
+    "humidity_pct",
+    "wind_speed_ms",
+    "wind_direction_deg",
+    "time_to_sunset_min",
+    "distance_to_fire_line_m",
+    "distance_to_water_m",
+    "distance_fire_boundary_to_water",
+    "distance_fire_boundary_to_vip",
+    "distance_fire_boundary_to_vegetation",
+    "distance_fire_boundary_to_topography",
+    "distance_fire_boundary_to_indirect",
+    "fire_center_x",
+    "fire_center_y",
+    "leftmost_x",
+    "leftmost_y",
+    "rightmost_x",
+    "rightmost_y",
+    "uppermost_x",
+    "uppermost_y",
+    "lowermost_x",
+    "lowermost_y",
+    "spread_angle_deg",
+    "spread_ray_hit_x",
+    "spread_ray_hit_y",
     "distance_left_boundary",
     "distance_right_boundary",
     "distance_bottom_boundary",
     "distance_top_boundary",
-    "distance_to_fire_line_m",
-    "spread_angle_deg",
-    "spread_ray_hit_x",
-    "spread_ray_hit_y",
-)
+]
 
 def _normalize_state_space(state_space: str) -> str:
     normalized = str(state_space).strip().lower()
@@ -469,11 +532,22 @@ def _normalize_state_space(state_space: str) -> str:
     return normalized
 
 
-def _per_front_flag_feature_names(state_fire_fronts: int) -> tuple[str, ...]:
+def _normalize_cell_size_source(cell_size_source: str) -> str:
+    normalized = str(cell_size_source).strip().lower()
+    if normalized not in SUPPORTED_CELL_SIZE_SOURCES:
+        supported = ", ".join(SUPPORTED_CELL_SIZE_SOURCES)
+        raise ValueError(
+            f"Unsupported cell size source {cell_size_source!r}. "
+            f"Supported choices: {supported}."
+        )
+    return normalized
+
+
+def _directional_per_front_feature_names(state_fire_fronts: int) -> tuple[str, ...]:
     names: list[str] = []
     for front_idx in range(state_fire_fronts):
-        for flag_name in AGGREGATE_FRONT_FLAG_FEATURES:
-            names.append(f"{flag_name}_{front_idx}")
+        for feature_name in DIRECTIONAL_PER_FRONT_FEATURES:
+            names.append(f"{feature_name}_{front_idx}")
     return tuple(names)
 
 
@@ -482,33 +556,38 @@ def _state_core_feature_names(
     state_fire_fronts: int,
 ) -> tuple[str, ...]:
     normalized = _normalize_state_space(state_space)
-    if normalized == STATE_SPACE_LARGE:
-        return tuple(LARGE_STATE_FEATURES)
-    if normalized == STATE_SPACE_SMALL:
-        return _per_front_flag_feature_names(state_fire_fronts)
-    if normalized == STATE_SPACE_MIXED:
-        return _per_front_flag_feature_names(state_fire_fronts) + MIXED_STATE_FEATURES
     if normalized == STATE_SPACE_OLD:
         return tuple(OLD_STATE_FEATURES)
     if normalized == STATE_SPACE_UPDATED:
         return tuple(UPDATED_STATE_FEATURES)
+    if normalized == STATE_SPACE_DIRECTIONAL:
+        # "directional" = old's 30-feature core, verbatim, + the per-flank block.
+        return tuple(OLD_STATE_FEATURES) + _directional_per_front_feature_names(
+            state_fire_fronts
+        )
     raise RuntimeError(f"Unhandled state space: {state_space!r}")
 
 
 def _agent_feature_count(state_space: str) -> int:
-    # "old" drops per-aircraft altitude (x, y only); every other state
-    # space keeps the altitude channel.
-    if _normalize_state_space(state_space) == STATE_SPACE_OLD:
+    # "old" and "directional" drop per-aircraft altitude (x, y only); every
+    # other state space keeps the altitude channel.
+    if _normalize_state_space(state_space) in (
+        STATE_SPACE_OLD,
+        STATE_SPACE_DIRECTIONAL,
+    ):
         return 2
     return AGENT_FEATURE_COUNT
 
 
 def _agent_feature_names(
     controlled_agent_count: int,
-    state_space: str = STATE_SPACE_LARGE,
+    state_space: str = STATE_SPACE_OLD,
 ) -> tuple[str, ...]:
     names: list[str] = []
-    include_altitude = _normalize_state_space(state_space) != STATE_SPACE_OLD
+    include_altitude = _normalize_state_space(state_space) not in (
+        STATE_SPACE_OLD,
+        STATE_SPACE_DIRECTIONAL,
+    )
     for idx in range(controlled_agent_count):
         names.extend(
             [
@@ -524,15 +603,9 @@ def _agent_feature_names(
 def _state_feature_names(
     include_scenario_flag: bool,
     controlled_agent_count: int,
-    state_space: str = STATE_SPACE_LARGE,
+    state_space: str = STATE_SPACE_OLD,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
 ) -> tuple[str, ...]:
-    if _normalize_state_space(state_space) in {
-        STATE_SPACE_SMALL,
-        STATE_SPACE_MIXED,
-    }:
-        return _state_core_feature_names(state_space, state_fire_fronts)
-
     feature_names: list[str] = []
     if include_scenario_flag:
         feature_names.extend(SCENARIO_FEATURES)
@@ -876,17 +949,19 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         gc_collect_on_reset: bool = False,
         include_scenario_features: bool | None = None,
         state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
-        state_space: str = STATE_SPACE_LARGE,
+        state_space: str = STATE_SPACE_OLD,
         tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
         aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
         controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
         water_set: int | None = None,
+        cell_size_source: str = CELL_SIZE_SOURCE_JSON,
         enable_adaptive_time_step: bool | None = None,
         adaptive_step_size_factor: float | None = None,
     ):
         super().__init__()
         self.scenario_path = scenario_path
         self.water_set = water_set
+        self.cell_size_source = _normalize_cell_size_source(cell_size_source)
         self.gc_collect_on_reset = bool(gc_collect_on_reset)
         self.state_space = _normalize_state_space(state_space)
         if (
@@ -1062,8 +1137,15 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self._coord_width: float = 1.0
         self._coord_height: float = 1.0
         self._map_diagonal: float = 1.0
+        # Metres/cell used by directional geometry; set per scenario in
+        # _cache_static_state_scalers based on self.cell_size_source.
+        self._cell_size_m: float = 1.0
         self._fire_line_tree: cKDTree | None = None
         self._fire_line_tree_block_index: int = -1
+        # Static POI KDTrees for the "directional" state (world-coord frame),
+        # rebuilt per scenario in _build_static_poi_positions.
+        self._vip_tree: cKDTree | None = None
+        self._water_tree: cKDTree | None = None
         self._ts_budget_per_scenario: float | None = ts_budget_per_scenario
         self._global_scenario_ts_counts: dict[str, int] = {}
 
@@ -1161,15 +1243,32 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         raise ValueError(f"Unsupported terrain feature array shape: {arr.shape}")
 
     @staticmethod
+    def _grid_description(parameters: WildfireParameters) -> GridDescriptor:
+        """Index<->position grid the sim actually uses.
+
+        Built from mercator_dimensions / grid_shape, not cell_size:
+        away from the equator the mercator metres per cell differ from
+        the nominal cell_size (~6.84 m vs 5 m at Pyrenees, ~1.37x), so
+        indexing a mercator position by cell_size mislocates the cell.
+        """
+        terrain_inputs = parameters.terrain_inputs
+        grid_shape = terrain_inputs.grid_shape
+        mercator_dimensions = terrain_inputs.meta_data["mercator_dimensions"]
+        return GridDescriptor(
+            shape=(int(grid_shape[0]), int(grid_shape[1])),
+            dimensions=(
+                float(mercator_dimensions[0]),
+                float(mercator_dimensions[1]),
+            ),
+        )
+
+    @staticmethod
     def _ignition_center_grid_pos(
         parameters: WildfireParameters,
     ) -> tuple[int, int] | None:
         if not parameters.ignition_centers:
             return None
         center = parameters.ignition_centers[0]
-        cell_size = float(parameters.cell_size)
-        if cell_size <= 0:
-            return None
         try:
             if center.gps_coords is not None:
                 tl_merc = gps_to_mercator(
@@ -1181,7 +1280,14 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 x, y = float(center.pos[0]), float(center.pos[1])
             else:
                 return None
-            return (int(y / cell_size), int(x / cell_size))
+            # Index with the sim's real grid (mercator_dimensions /
+            # grid_shape), not cell_size: the latter shifts the box
+            # center by the mercator factor (~3.7 km at Pyrenees).
+            row, col = pos_to_index(
+                (float(x), float(y)),
+                WildfireHourlyEnv._grid_description(parameters),
+            )
+            return (int(row), int(col))
         except Exception:
             return None
 
@@ -1348,16 +1454,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         terrain_inputs = selected_parameters.terrain_inputs
         cell_size = float(selected_parameters.cell_size)
         grid_shape = terrain_inputs.grid_shape
-        # dimensions = (width, height) in mercator metres; matches the sim's
-        # terrain.grid_description so index<->pos is identical on both sides.
-        mercator_dimensions = terrain_inputs.meta_data["mercator_dimensions"]
-        grid_description = GridDescriptor(
-            shape=(int(grid_shape[0]), int(grid_shape[1])),
-            dimensions=(
-                float(mercator_dimensions[0]),
-                float(mercator_dimensions[1]),
-            ),
-        )
+        # matches the sim's terrain.grid_description so index<->pos is identical
+        # on both sides (mercator_dimensions / grid_shape, not cell_size).
+        grid_description = self._grid_description(selected_parameters)
         fire_top_left_merc = gps_to_mercator(
             terrain_inputs.fire_map_coordinates[0]
         )
@@ -1764,6 +1863,36 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             1.0,
         )
 
+        # Metres/cell for directional geometry. "json" trusts the scenario's
+        # nominal cell_size; "code" uses the projected metres/cell baked into
+        # ACTUAL_CELL_SIZE_M (matching the sim's index<->position grid).
+        nominal_cell_size = float(self.sim.parameters.cell_size)
+        if self.cell_size_source == CELL_SIZE_SOURCE_CODE:
+            grid_desc = self.sim.environment.terrain.grid_description
+            grid_cell_size = 0.5 * (
+                grid_desc.dimensions[0] / grid_desc.shape[1]
+                + grid_desc.dimensions[1] / grid_desc.shape[0]
+            )
+            namespace = self.sim.parameters.terrain_inputs.file_namespace
+            cell_size = ACTUAL_CELL_SIZE_M.get(namespace)
+            if cell_size is None:
+                cell_size = grid_cell_size
+                warnings.warn(
+                    f"--cell-size code: {namespace!r} not in ACTUAL_CELL_SIZE_M; "
+                    f"falling back to grid_description value {cell_size:.4f} m.",
+                    stacklevel=2,
+                )
+            elif abs(cell_size - grid_cell_size) > 0.05:
+                warnings.warn(
+                    f"ACTUAL_CELL_SIZE_M[{namespace!r}]={cell_size:.4f} m disagrees "
+                    f"with grid_description {grid_cell_size:.4f} m; the constant may "
+                    "be stale.",
+                    stacklevel=2,
+                )
+            self._cell_size_m = float(cell_size)
+        else:
+            self._cell_size_m = nominal_cell_size
+
     def _distance_to_fire_line_m(self, burning_indices: np.ndarray) -> float:
         """Compute minimum burning-cell distance to active fire line segment in meters."""
         assert self.sim is not None
@@ -1827,9 +1956,22 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         # In this runner, protection locations are the urban objectives.
         self.vip_positions = self.urban_positions
 
+        if self.state_space == STATE_SPACE_DIRECTIONAL:
+            # World-coord KDTrees queried at projected landing points.
+            self._vip_tree = (
+                cKDTree(self.vip_positions) if self.vip_positions.size else None
+            )
+            self._water_tree = (
+                cKDTree(self.water_positions) if self.water_positions.size else None
+            )
+
         self.vegetation_poi_positions = np.empty((0, 2), dtype=float)
         self.topography_poi_positions = np.empty((0, 2), dtype=float)
-        if self.state_space not in (STATE_SPACE_OLD, STATE_SPACE_UPDATED):
+        if self.state_space not in (
+            STATE_SPACE_OLD,
+            STATE_SPACE_UPDATED,
+            STATE_SPACE_DIRECTIONAL,
+        ):
             return
 
         priority_map = np.asarray(
@@ -2011,13 +2153,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         # This is the same multiplier used by the spread model. Values above 1
         # mean slope is accelerating spread; values below 1 mean slope resists it.
         hill_dir = -1.0 if angle < 90.0 else 1.0
-        return float(
-            math.exp(
-                3.553
-                * hill_dir
-                * math.tan(1.2 * terrain_slope * math.pi / 180.0)
-            )
+        exponent = (
+            3.553 * hill_dir * math.tan(1.2 * terrain_slope * math.pi / 180.0)
         )
+        return float(math.exp(min(exponent, SLOPE_FACTOR_EXP_MAX)))
 
     def _has_forward_combustible_uphill(
         self,
@@ -2364,13 +2503,11 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self.done = True
 
     def _compute_state(self) -> np.ndarray:
-        if self.state_space == STATE_SPACE_LARGE:
-            return self._compute_large_state()
-        if self.state_space == STATE_SPACE_SMALL:
-            return self._compute_small_state()
-        if self.state_space == STATE_SPACE_MIXED:
-            return self._compute_mixed_state()
-        if self.state_space in (STATE_SPACE_OLD, STATE_SPACE_UPDATED):
+        if self.state_space in (
+            STATE_SPACE_OLD,
+            STATE_SPACE_UPDATED,
+            STATE_SPACE_DIRECTIONAL,
+        ):
             return self._compute_old_state()
         raise RuntimeError(f"Unhandled state space: {self.state_space!r}")
 
@@ -2395,176 +2532,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             "water_flag": 0.0,
         }
 
-    def _per_front_flag_values(self) -> list[float]:
-        values: list[float] = []
-        diagnostics = self.last_front_diagnostics
-        for front_idx in range(self.state_fire_fronts):
-            if front_idx >= len(diagnostics):
-                values.extend([0.0] * len(AGGREGATE_FRONT_FLAG_FEATURES))
-                continue
-
-            front = diagnostics[front_idx]
-            is_urban = front.objective_vote == "urban"
-            is_water = front.objective_vote == "water"
-            values.extend(
-                [
-                    1.0 if front.has_topography_growth else 0.0,
-                    1.0 if front.has_vegetation_threat else 0.0,
-                    1.0 if front.near_indirect_line else 0.0,
-                    1.0 if is_urban else 0.0,
-                    1.0 if is_water else 0.0,
-                ]
-            )
-        return values
-
-    def _compute_small_state(self) -> np.ndarray:
-        assert self.sim is not None
-        burning_indices = self.sim.wildfire.burning_indices
-        if int(burning_indices.shape[0]):
-            self._compute_fire_front_summary(burning_indices)
-        else:
-            self._clear_fire_front_summary()
-
-        obs = np.array(self._per_front_flag_values(), dtype=np.float32)
-        obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
-        np.clip(obs, 0.0, 1.0, out=obs)
-        return obs
-
-    def _compute_mixed_feature_values(
-        self,
-        burning_indices: np.ndarray,
-    ) -> list[float]:
-        assert self.sim is not None
-        x_min = self._coord_x_min
-        x_max = self._coord_x_max
-        y_min = self._coord_y_min
-        y_max = self._coord_y_max
-        coord_width = self._coord_width
-        coord_height = self._coord_height
-        map_diagonal = self._map_diagonal
-
-        fire_positions = np.asarray(self.sim.wildfire.fire_positions, dtype=float)
-        if fire_positions.size == 0:
-            return [0.0] * len(MIXED_STATE_FEATURES)
-
-        min_x = float(fire_positions[:, 0].min())
-        max_x = float(fire_positions[:, 0].max())
-        min_y = float(fire_positions[:, 1].min())
-        max_y = float(fire_positions[:, 1].max())
-        boundary_left = float(max(min_x - x_min, 0.0))
-        boundary_right = float(max(x_max - max_x, 0.0))
-        boundary_bottom = float(max(min_y - y_min, 0.0))
-        boundary_top = float(max(y_max - max_y, 0.0))
-
-        distance_fire_line = math.nan
-        fire_block_indices = self.sim.firefighters.fire_block_indices
-        if (
-            fire_block_indices is not None
-            and self.sim.firefighters.current_block_index > 0
-        ):
-            distance_fire_line = self._distance_to_fire_line_m(burning_indices)
-
-        spread_angle = math.nan
-        spread_ray_hit_x = math.nan
-        spread_ray_hit_y = math.nan
-        spread_rates = self.sim.wildfire.get_spread_rates(burning_indices)
-        if spread_rates.size:
-            centroid_idx = burning_indices.mean(axis=0)
-            fastest_idx = burning_indices[int(np.argmax(spread_rates))]
-            angle = math.degrees(
-                math.atan2(
-                    fastest_idx[0] - centroid_idx[0],
-                    fastest_idx[1] - centroid_idx[1],
-                )
-            )
-            spread_angle = float((angle + 360.0) % 360.0)
-
-        fire_center_x, fire_center_y = map(float, fire_positions.mean(axis=0))
-        if not math.isnan(spread_angle):
-            theta = math.radians(spread_angle)
-            dir_x = math.cos(theta)
-            dir_y = math.sin(theta)
-            eps = 1e-9
-            candidates: list[float] = []
-
-            if abs(dir_x) > eps:
-                t_left = (x_min - fire_center_x) / dir_x
-                y_left = fire_center_y + t_left * dir_y
-                if t_left >= 0.0 and y_min <= y_left <= y_max:
-                    candidates.append(t_left)
-
-                t_right = (x_max - fire_center_x) / dir_x
-                y_right = fire_center_y + t_right * dir_y
-                if t_right >= 0.0 and y_min <= y_right <= y_max:
-                    candidates.append(t_right)
-
-            if abs(dir_y) > eps:
-                t_bottom = (y_min - fire_center_y) / dir_y
-                x_bottom = fire_center_x + t_bottom * dir_x
-                if t_bottom >= 0.0 and x_min <= x_bottom <= x_max:
-                    candidates.append(t_bottom)
-
-                t_top = (y_max - fire_center_y) / dir_y
-                x_top = fire_center_x + t_top * dir_x
-                if t_top >= 0.0 and x_min <= x_top <= x_max:
-                    candidates.append(t_top)
-
-            if candidates:
-                t_hit = min(candidates)
-                spread_ray_hit_x = fire_center_x + t_hit * dir_x
-                spread_ray_hit_y = fire_center_y + t_hit * dir_y
-
-        mixed_values = [
-            _scale_to_unit(float(boundary_left), 0.0, coord_width),
-            _scale_to_unit(float(boundary_right), 0.0, coord_width),
-            _scale_to_unit(float(boundary_bottom), 0.0, coord_height),
-            _scale_to_unit(float(boundary_top), 0.0, coord_height),
-            (
-                _scale_to_unit(float(distance_fire_line), 0.0, map_diagonal)
-                if not math.isnan(distance_fire_line)
-                else 0.0
-            ),
-            (
-                _scale_to_unit(float(spread_angle), 0.0, 360.0)
-                if not math.isnan(spread_angle)
-                else 0.0
-            ),
-            (
-                _scale_to_unit(float(spread_ray_hit_x), x_min, x_max)
-                if not math.isnan(spread_ray_hit_x)
-                else 0.0
-            ),
-            (
-                _scale_to_unit(float(spread_ray_hit_y), y_min, y_max)
-                if not math.isnan(spread_ray_hit_y)
-                else 0.0
-            ),
-        ]
-        return mixed_values
-
-    def _compute_mixed_state(self) -> np.ndarray:
-        assert self.sim is not None
-        burning_indices = self.sim.wildfire.burning_indices
-        burning_count = int(burning_indices.shape[0])
-        if not burning_count:
-            self._clear_fire_front_summary()
-            return np.zeros(len(self.state_feature_names), dtype=np.float32)
-
-        # Mixed keeps the per-front tactical flags from the small state, but
-        # still avoids the unrelated work from the large state.
-        self._compute_fire_front_summary(burning_indices)
-        obs = np.array(
-            self._per_front_flag_values()
-            + self._compute_mixed_feature_values(burning_indices),
-            dtype=np.float32,
-        )
-        obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
-        np.clip(obs, 0.0, 1.0, out=obs)
-        return obs
-
     def _compute_old_state(self) -> np.ndarray:
         assert self.sim is not None
-        if self.state_space == STATE_SPACE_OLD:
+        if self.state_space in (STATE_SPACE_OLD, STATE_SPACE_DIRECTIONAL):
             self._clear_fire_front_summary()
         atmosphere = self.sim.atmosphere
         mission_time = self.sim.timer.mission_time
@@ -2901,9 +2871,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             time_to_sunset_norm,
             distance_fire_line_norm,
         ]
-        # "old" adds the fire->water distance right after the fire-line
-        # distance; "updated" omits that distance.
-        if self.state_space == STATE_SPACE_OLD:
+        # "old" and "directional" add the fire->water distance right after the
+        # fire-line distance; "updated" omits that distance.
+        if self.state_space in (STATE_SPACE_OLD, STATE_SPACE_DIRECTIONAL):
             core_values.append(distance_water_norm)
         core_values.extend(
             [
@@ -2947,6 +2917,13 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         )
         state_features.extend(core_values)
 
+        # "directional" appends the per-flank projected-threat block between the
+        # 30-feature core and the agent block.
+        if self.state_space == STATE_SPACE_DIRECTIONAL:
+            state_features.extend(
+                self._compute_directional_front_block(burning_indices)
+            )
+
         for idx in range(self.controlled_agent_count):
             if idx < len(agents):
                 agent = agents[idx]
@@ -2970,340 +2947,270 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         np.clip(obs, 0.0, 1.0, out=obs)
         return obs
 
-    def _compute_large_state(self) -> np.ndarray:
+    # -- Directional state (per-flank projected threat) ----------------------
+    def _compute_directional_front_block(
+        self, burning_indices: np.ndarray
+    ) -> list[float]:
+        """Return the K*6 per-flank threat block for the directional state.
+
+        Each of ``state_fire_fronts`` slots is one compass sector around the
+        fire centroid, zero-padded when empty. For the highest-ROS active cell
+        in a sector we project a landing point T = decision_interval_minutes
+        ahead and score five threat/resource channels around it.
+        """
         assert self.sim is not None
-        atmosphere = self.sim.atmosphere
-        mission_time = self.sim.timer.mission_time
-        time_since_detection_min = (
-            max(
-                0.0,
-                self.sim.timer.mission_runtime.total_seconds()
-                - self.fire_detection_delay_seconds,
-            )
-            / 60.0
+        n_feat = len(DIRECTIONAL_PER_FRONT_FEATURES)
+        fronts = int(self.state_fire_fronts)
+        block = [0.0] * (fronts * n_feat)
+
+        burning = self._coerce_grid_indices(np.asarray(burning_indices))
+        if burning.size == 0:
+            return block
+
+        wildfire = self.sim.wildfire
+        fire_states = np.asarray(wildfire.fire_states)
+        height, width = fire_states.shape
+        bi = burning[:, 0].astype(np.int64)
+        bj = burning[:, 1].astype(np.int64)
+        ros = np.asarray(wildfire.get_spread_rates(burning), dtype=float).reshape(-1)
+        aspect = np.asarray(wildfire.prop_aspect)[bi, bj].astype(float)
+
+        active = (
+            np.isfinite(ros)
+            & (ros > DIRECTIONAL_SPREAD_EPS)
+            & np.isfinite(aspect)
+            & self._has_combustible_neighbor(bi, bj, fire_states, height, width)
         )
-        burning_indices = self.sim.wildfire.burning_indices
-        burning_count = int(burning_indices.shape[0])
+        if not np.any(active):
+            return block
 
-        fire_center_x = math.nan
-        fire_center_y = math.nan
-        leftmost_x = math.nan
-        leftmost_y = math.nan
-        rightmost_x = math.nan
-        rightmost_y = math.nan
-        uppermost_x = math.nan
-        uppermost_y = math.nan
-        lowermost_x = math.nan
-        lowermost_y = math.nan
-        spread_angle = math.nan
-        spread_ray_hit_x = math.nan
-        spread_ray_hit_y = math.nan
-        max_spread_rate = math.nan
-        distance_fire_line = math.nan
-        topography_flag = 0.0
-        vegetation_flag = 0.0
-        indirect_flag = 0.0
-        urban_flag = 0.0
-        water_flag = 0.0
+        ai = bi[active]
+        aj = bj[active]
+        a_ros = ros[active]
+        a_aspect = aspect[active]
 
-        if burning_count:
-            # Front-derived state is computed first so the observation and the
-            # diagnostic `info` dict describe the same simulation instant.
-            front_summary = self._compute_fire_front_summary(burning_indices)
-            topography_flag = float(front_summary["topography_flag"])
-            vegetation_flag = float(front_summary["vegetation_flag"])
-            indirect_flag = float(front_summary["indirect_flag"])
-            urban_flag = float(front_summary["urban_flag"])
-            water_flag = float(front_summary["water_flag"])
-            fire_positions = self.sim.wildfire.fire_positions
-            centroid = fire_positions.mean(axis=0)
-            fire_center_x = float(centroid[0])
-            fire_center_y = float(centroid[1])
+        # Sector = compass bearing from the fire centroid (same convention as
+        # _grid_offset_aspect: 0=N, 90=E).
+        centroid_i = float(bi.mean())
+        centroid_j = float(bj.mean())
+        bearing = (
+            np.degrees(np.arctan2(aj - centroid_j, -(ai - centroid_i))) + 360.0
+        ) % 360.0
+        sector_width = 360.0 / fronts
+        sectors = np.clip((bearing / sector_width).astype(np.int64), 0, fronts - 1)
 
-            leftmost_idx = int(np.argmin(fire_positions[:, 0]))
-            rightmost_idx = int(np.argmax(fire_positions[:, 0]))
-            uppermost_idx = int(np.argmax(fire_positions[:, 1]))
-            lowermost_idx = int(np.argmin(fire_positions[:, 1]))
-            leftmost_x, leftmost_y = map(float, fire_positions[leftmost_idx])
-            rightmost_x, rightmost_y = map(float, fire_positions[rightmost_idx])
-            uppermost_x, uppermost_y = map(float, fire_positions[uppermost_idx])
-            lowermost_x, lowermost_y = map(float, fire_positions[lowermost_idx])
+        cell_size = float(self._cell_size_m)
+        map_diagonal = float(self._map_diagonal)
+        horizon_min = float(self.decision_interval_minutes)
+        combustibilities = self.sim.environment.terrain.features.combustibilities
 
-            centroid_idx = burning_indices.mean(axis=0)
-            spread_rates = self.sim.wildfire.get_spread_rates(burning_indices)
-            max_spread_rate = float(np.max(spread_rates))
-            fastest_idx = burning_indices[int(np.argmax(spread_rates))]
-            angle = math.degrees(
-                math.atan2(
-                    fastest_idx[0] - centroid_idx[0],
-                    fastest_idx[1] - centroid_idx[1],
+        for k in range(fronts):
+            in_sector = sectors == k
+            if not np.any(in_sector):
+                continue
+            k_ros = a_ros[in_sector]
+            k_i = ai[in_sector]
+            k_j = aj[in_sector]
+            k_aspect_all = a_aspect[in_sector]
+            k_bearing = bearing[in_sector]
+
+            severity = float(
+                min(max(float(k_ros.mean()) / MAX_SPREAD_RATE_NORM_MPM, 0.0), 1.0)
+            )
+
+            rep = int(np.argmax(k_ros))
+            src_i = int(k_i[rep])
+            src_j = int(k_j[rep])
+            src_ros = float(k_ros[rep])
+            # Direction repair: trust the representative's own propagation
+            # bearing only when it points outward (cos of the angle to the
+            # radial outward bearing exceeds the threshold); otherwise -- when it
+            # points inward/lateral, or is NaN (cos NaN -> NaN > x is False) --
+            # fall back to the outward bearing so the projected landing can never
+            # be aimed into the already-burnt interior.
+            src_aspect_raw = float(k_aspect_all[rep])
+            src_outward = float(k_bearing[rep])
+            align = math.cos(math.radians(src_aspect_raw - src_outward))
+            src_dir = (
+                src_aspect_raw if align > DIRECTIONAL_ALIGN_MIN else src_outward
+            )
+
+            land_i, land_j = self._project_flank_landing(
+                src_i, src_j, src_dir, src_ros, horizon_min,
+                cell_size, fire_states, height, width,
+            )
+
+            reach_cells = (src_ros * horizon_min) / cell_size
+            radius_cells = float(
+                min(
+                    max(DIRECTIONAL_SEARCH_ALPHA * reach_cells, DIRECTIONAL_R_MIN_CELLS),
+                    DIRECTIONAL_R_MAX_CELLS,
                 )
             )
-            spread_angle = float((angle + 360.0) % 360.0)
+            radius_m = radius_cells * cell_size
 
-            fire_block_indices = self.sim.firefighters.fire_block_indices
-            if (
-                fire_block_indices is not None
-                and self.sim.firefighters.current_block_index > 0
-            ):
-                distance_fire_line = self._distance_to_fire_line_m(burning_indices)
-        else:
-            self._clear_fire_front_summary()
-
-        x_min = self._coord_x_min
-        x_max = self._coord_x_max
-        y_min = self._coord_y_min
-        y_max = self._coord_y_max
-        coord_width = self._coord_width
-        coord_height = self._coord_height
-        map_diagonal = self._map_diagonal
-
-        boundary_left = 0.0
-        boundary_right = 0.0
-        boundary_bottom = 0.0
-        boundary_top = 0.0
-
-        if burning_count:
-            fire_positions = self.sim.wildfire.fire_positions
-            min_x = float(fire_positions[:, 0].min())
-            max_x = float(fire_positions[:, 0].max())
-            min_y = float(fire_positions[:, 1].min())
-            max_y = float(fire_positions[:, 1].max())
-            boundary_left = float(max(min_x - x_min, 0.0))
-            boundary_right = float(max(x_max - max_x, 0.0))
-            boundary_bottom = float(max(min_y - y_min, 0.0))
-            boundary_top = float(max(y_max - max_y, 0.0))
-
-        # Ray cast from fire center in spread direction to first map boundary hit.
-        if (
-            not math.isnan(fire_center_x)
-            and not math.isnan(fire_center_y)
-            and not math.isnan(spread_angle)
-        ):
-            theta = math.radians(spread_angle)
-            dir_x = math.cos(theta)
-            dir_y = math.sin(theta)
-            eps = 1e-9
-            candidates: list[float] = []
-
-            if abs(dir_x) > eps:
-                t_left = (x_min - fire_center_x) / dir_x
-                y_left = fire_center_y + t_left * dir_y
-                if t_left >= 0.0 and y_min <= y_left <= y_max:
-                    candidates.append(t_left)
-
-                t_right = (x_max - fire_center_x) / dir_x
-                y_right = fire_center_y + t_right * dir_y
-                if t_right >= 0.0 and y_min <= y_right <= y_max:
-                    candidates.append(t_right)
-
-            if abs(dir_y) > eps:
-                t_bottom = (y_min - fire_center_y) / dir_y
-                x_bottom = fire_center_x + t_bottom * dir_x
-                if t_bottom >= 0.0 and x_min <= x_bottom <= x_max:
-                    candidates.append(t_bottom)
-
-                t_top = (y_max - fire_center_y) / dir_y
-                x_top = fire_center_x + t_top * dir_x
-                if t_top >= 0.0 and x_min <= x_top <= x_max:
-                    candidates.append(t_top)
-
-            if candidates:
-                t_hit = min(candidates)
-                spread_ray_hit_x = fire_center_x + t_hit * dir_x
-                spread_ray_hit_y = fire_center_y + t_hit * dir_y
-
-        atmosphere_inputs = self.parameters.atmosphere_inputs
-        wind_speed_upper = max(20.0, float(atmosphere.wind_speed), 1.0)
-        if (
-            hasattr(atmosphere_inputs, "wind_run")
-            and hasattr(atmosphere_inputs, "sun_times")
-        ):
-            try:
-                wind_run = float(atmosphere_inputs.wind_run)
-                sun_rise, sunset = atmosphere_inputs.sun_times
-                t1 = float(sun_rise) + 1.0
-                t2 = 15.0
-                t3 = float(sunset) + 2.0
-                sf1 = 4.0 * (t2 - t1)
-                sf2 = 4.0 * (t3 - t2)
-                wind_min = wind_run * 0.0080
-                denom = 3600.0 * (sf1 + sf2)
-                wind_amp = 0.0
-                if denom > 0.0:
-                    wind_amp = (
-                        (wind_run - wind_min * 24.0 * 3.6)
-                        * 2.0
-                        * math.pi
-                        * 1000.0
-                    ) / denom
-                wind_speed_upper = max(1.0, wind_min + abs(wind_amp))
-            except Exception:
-                wind_speed_upper = max(20.0, float(atmosphere.wind_speed), 1.0)
-
-        day_minutes = 24.0 * 60.0
-
-        time_since_detection_norm = _scale_to_unit(
-            float(time_since_detection_min), 0.0, day_minutes
-        )
-        wind_speed_norm = _scale_to_unit(
-            float(atmosphere.wind_speed), 0.0, wind_speed_upper
-        )
-        wind_direction_norm = _scale_to_unit(
-            float((atmosphere.wind_aspect + 360.0) % 360.0), 0.0, 360.0
-        )
-        distance_fire_line_norm = (
-            _scale_to_unit(float(distance_fire_line), 0.0, map_diagonal)
-            if not math.isnan(distance_fire_line)
-            else 0.0
-        )
-        fire_center_x_norm = (
-            _scale_to_unit(float(fire_center_x), x_min, x_max)
-            if not math.isnan(fire_center_x)
-            else 0.0
-        )
-        fire_center_y_norm = (
-            _scale_to_unit(float(fire_center_y), y_min, y_max)
-            if not math.isnan(fire_center_y)
-            else 0.0
-        )
-        leftmost_x_norm = (
-            _scale_to_unit(float(leftmost_x), x_min, x_max)
-            if not math.isnan(leftmost_x)
-            else 0.0
-        )
-        leftmost_y_norm = (
-            _scale_to_unit(float(leftmost_y), y_min, y_max)
-            if not math.isnan(leftmost_y)
-            else 0.0
-        )
-        rightmost_x_norm = (
-            _scale_to_unit(float(rightmost_x), x_min, x_max)
-            if not math.isnan(rightmost_x)
-            else 0.0
-        )
-        rightmost_y_norm = (
-            _scale_to_unit(float(rightmost_y), y_min, y_max)
-            if not math.isnan(rightmost_y)
-            else 0.0
-        )
-        uppermost_x_norm = (
-            _scale_to_unit(float(uppermost_x), x_min, x_max)
-            if not math.isnan(uppermost_x)
-            else 0.0
-        )
-        uppermost_y_norm = (
-            _scale_to_unit(float(uppermost_y), y_min, y_max)
-            if not math.isnan(uppermost_y)
-            else 0.0
-        )
-        lowermost_x_norm = (
-            _scale_to_unit(float(lowermost_x), x_min, x_max)
-            if not math.isnan(lowermost_x)
-            else 0.0
-        )
-        lowermost_y_norm = (
-            _scale_to_unit(float(lowermost_y), y_min, y_max)
-            if not math.isnan(lowermost_y)
-            else 0.0
-        )
-        spread_angle_norm = (
-            _scale_to_unit(float(spread_angle), 0.0, 360.0)
-            if not math.isnan(spread_angle)
-            else 0.0
-        )
-        spread_ray_hit_x_norm = (
-            _scale_to_unit(float(spread_ray_hit_x), x_min, x_max)
-            if not math.isnan(spread_ray_hit_x)
-            else 0.0
-        )
-        spread_ray_hit_y_norm = (
-            _scale_to_unit(float(spread_ray_hit_y), y_min, y_max)
-            if not math.isnan(spread_ray_hit_y)
-            else 0.0
-        )
-        max_spread_rate_norm = (
-            _scale_to_unit(float(max_spread_rate), 0.0, MAX_SPREAD_RATE_NORM_MPM)
-            if not math.isnan(max_spread_rate)
-            else 0.0
-        )
-        boundary_left_norm = _scale_to_unit(float(boundary_left), 0.0, coord_width)
-        boundary_right_norm = _scale_to_unit(float(boundary_right), 0.0, coord_width)
-        boundary_bottom_norm = _scale_to_unit(float(boundary_bottom), 0.0, coord_height)
-        boundary_top_norm = _scale_to_unit(float(boundary_top), 0.0, coord_height)
-
-        agents = self.sim.firefighters.firefighters
-        state_features: list[float] = []
-        if self.include_scenario_flag:
-            state_features.extend(
-                _clip01(value) for value in self._current_scenario_one_hot()
+            landing_pos = self._indices_to_positions(
+                np.array([[land_i, land_j]], dtype=np.int64)
             )
-        state_features.extend(
-            [
-                time_since_detection_norm,
-                wind_speed_norm,
-                wind_direction_norm,
-                distance_fire_line_norm,
-                fire_center_x_norm,
-                fire_center_y_norm,
-                leftmost_x_norm,
-                leftmost_y_norm,
-                rightmost_x_norm,
-                rightmost_y_norm,
-                uppermost_x_norm,
-                uppermost_y_norm,
-                lowermost_x_norm,
-                lowermost_y_norm,
-                spread_angle_norm,
-                spread_ray_hit_x_norm,
-                spread_ray_hit_y_norm,
-                max_spread_rate_norm,
-                # Binary [0, 1]: 1 when at least half of the inspected fastest
-                # fronts show likely upslope combustible growth.
-                _clip01(topography_flag),
-                # Binary [0, 1]: 1 when at least half of the inspected fastest
-                # fronts have >5 fuel-bearing cells in a radius-3 Moore window.
-                _clip01(vegetation_flag),
-                # Binary [0, 1]: 1 when at least half of the inspected fastest
-                # fronts are within 250 m of the current indirect/fire line.
-                _clip01(indirect_flag),
-                # Objective flags are mutually exclusive when any inspected
-                # front can compare urban/protection targets with water.
-                _clip01(urban_flag),
-                _clip01(water_flag),
-                boundary_left_norm,
-                boundary_right_norm,
-                boundary_bottom_norm,
-                boundary_top_norm,
-            ]
+            # Time-to-impact: scale the landing->VIP distance by the distance the
+            # flank covers in VIP_HORIZONS intervals, so urgency rises while there
+            # is still lead time (ROS*T and the KD distance are both world metres,
+            # so this is independent of the cell-size source).
+            vip_scale_m = src_ros * DIRECTIONAL_VIP_HORIZONS * horizon_min
+            vip_urgency = self._tree_proximity(
+                self._vip_tree, landing_pos, vip_scale_m
+            )
+            # Water proximity on a fixed shuttle-distance scale (not the whole
+            # map diagonal, which pinned every sector near 1).
+            water_access = self._tree_proximity(
+                self._water_tree, landing_pos, DIRECTIONAL_WATER_SCALE_M
+            )
+
+            # Closeness of the projected flank to the planned containment line on
+            # a fixed approach-distance scale (not the tiny vegetation radius).
+            line_dist = self._front_distance_to_fire_line_m(land_i, land_j)
+            indirect_urgency = (
+                float(min(max(1.0 - line_dist / DIRECTIONAL_LINE_SCALE_M, 0.0), 1.0))
+                if math.isfinite(line_dist)
+                else 0.0
+            )
+
+            vegetation_urgency = self._vegetation_escalation(
+                src_i, src_j, land_i, land_j, radius_cells,
+                fire_states, combustibilities, height, width,
+            )
+            topography_urgency = self._topography_local(land_i, land_j, src_dir)
+
+            base = k * n_feat
+            block[base + 0] = severity
+            block[base + 1] = vip_urgency
+            block[base + 2] = vegetation_urgency
+            block[base + 3] = topography_urgency
+            block[base + 4] = indirect_urgency
+            block[base + 5] = water_access
+        return block
+
+    @staticmethod
+    def _has_combustible_neighbor(
+        bi: np.ndarray,
+        bj: np.ndarray,
+        fire_states: np.ndarray,
+        height: int,
+        width: int,
+    ) -> np.ndarray:
+        """Vectorized: True where a burning cell has a combustible 8-neighbor."""
+        has = np.zeros(bi.shape[0], dtype=bool)
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                if di == 0 and dj == 0:
+                    continue
+                ni = bi + di
+                nj = bj + dj
+                valid = (ni >= 0) & (ni < height) & (nj >= 0) & (nj < width)
+                ni_c = np.clip(ni, 0, height - 1)
+                nj_c = np.clip(nj, 0, width - 1)
+                has |= valid & (fire_states[ni_c, nj_c] == COMBUSTIBLE)
+        return has
+
+    @staticmethod
+    def _project_flank_landing(
+        i: int,
+        j: int,
+        aspect: float,
+        ros: float,
+        horizon_min: float,
+        cell_size: float,
+        fire_states: np.ndarray,
+        height: int,
+        width: int,
+    ) -> tuple[int, int]:
+        """Ray-march the flank `horizon_min` ahead, clipped at barriers/edge."""
+        if cell_size <= 0.0 or not math.isfinite(aspect):
+            return i, j
+        reach_cells = (ros * horizon_min) / cell_size
+        n_steps = int(min(reach_cells, DIRECTIONAL_MAX_RAY_CELLS))
+        if n_steps < 1:
+            return i, j
+        theta = math.radians(aspect)
+        di = -math.cos(theta)
+        dj = math.sin(theta)
+        steps = np.arange(1, n_steps + 1)
+        ii = np.rint(i + steps * di).astype(np.int64)
+        jj = np.rint(j + steps * dj).astype(np.int64)
+        in_bounds = (ii >= 0) & (ii < height) & (jj >= 0) & (jj < width)
+        if not bool(in_bounds[0]):
+            return i, j
+        if not bool(np.all(in_bounds)):
+            limit = int(np.argmin(in_bounds))  # first out-of-bounds step
+            ii = ii[:limit]
+            jj = jj[:limit]
+        if ii.size == 0:
+            return i, j
+        # Fire only advances into unburned fuel or actively-burning cells; BURNT,
+        # EXTINGUISHING, SUPPRESSED and NONFLAMMABLE all stop the projection so a
+        # landing is never placed inside the already-burnt interior.
+        s = fire_states[ii, jj]
+        barrier = ~(
+            (s == COMBUSTIBLE) | (s == EARLY_BURNING) | (s == FULL_BURNING)
         )
+        if bool(barrier.any()):
+            stop = int(np.argmax(barrier))
+            if stop == 0:
+                return i, j
+            return int(ii[stop - 1]), int(jj[stop - 1])
+        return int(ii[-1]), int(jj[-1])
 
-        for idx in range(self.controlled_agent_count):
-            if idx < len(agents):
-                agent = agents[idx]
-                pos_x, pos_y = agent.pos
-                norm_x = _scale_to_unit(float(pos_x), x_min, x_max)
-                norm_y = _scale_to_unit(float(pos_y), y_min, y_max)
-                norm_alt = _scale_to_unit(
-                    float(agent.altitude), 0.0, ALTITUDE_NORM_M
-                )
+    def _tree_proximity(
+        self, tree: cKDTree | None, point_pos: np.ndarray, scale: float
+    ) -> float:
+        """1 - clip(dist(point, nearest tree node)/scale, 0, 1); 0 if no tree."""
+        if tree is None or point_pos.size == 0 or scale <= 0.0:
+            return 0.0
+        dist, _ = tree.query(point_pos[0])
+        return float(min(max(1.0 - float(dist) / scale, 0.0), 1.0))
 
-                state_features.extend(
-                    [
-                        norm_x,
-                        norm_y,
-                        norm_alt,
-                    ]
-                )
-            else:
-                state_features.extend([0.0] * self.agent_feature_count)
+    @staticmethod
+    def _vegetation_escalation(
+        src_i: int,
+        src_j: int,
+        land_i: int,
+        land_j: int,
+        radius_cells: float,
+        fire_states: np.ndarray,
+        combustibilities: np.ndarray,
+        height: int,
+        width: int,
+    ) -> float:
+        """Max flammability of unburned fuel near the landing that is more
+        flammable than the flank's current fuel (mirrors the VEGETATION tactic),
+        normalized by the most flammable fuel."""
+        current = float(combustibilities[src_i, src_j])
+        r = int(min(max(int(round(radius_cells)), 1), DIRECTIONAL_R_MAX_CELLS))
+        i0 = max(land_i - r, 0)
+        i1 = min(land_i + r + 1, height)
+        j0 = max(land_j - r, 0)
+        j1 = min(land_j + r + 1, width)
+        if i0 >= i1 or j0 >= j1:
+            return 0.0
+        win_states = fire_states[i0:i1, j0:j1]
+        win_comb = combustibilities[i0:i1, j0:j1]
+        mask = (win_states == COMBUSTIBLE) & (win_comb > current)
+        if not np.any(mask):
+            return 0.0
+        best = float(win_comb[mask].max())
+        return float(min(max(best / MAX_COMBUSTIBILITY, 0.0), 1.0))
 
-        obs = np.array(state_features, dtype=np.float32)
-        # Hard guarantee for normalized observations expected by training:
-        # convert NaN/inf to finite values and clamp to [0, 1].
-        obs = np.nan_to_num(obs, nan=0.0, posinf=1.0, neginf=0.0)
-        np.clip(obs, 0.0, 1.0, out=obs)
-        return obs
+    def _topography_local(self, land_i: int, land_j: int, aspect: float) -> float:
+        """Local uphill drive at the landing, gated on burnable higher ground."""
+        if DIRECTIONAL_SLOPE_REF <= 1.0:
+            return 0.0
+        if not self._has_forward_combustible_uphill(int(land_i), int(land_j), aspect):
+            return 0.0
+        slope_factor = self._front_slope_factor(int(land_i), int(land_j), aspect)
+        if not math.isfinite(slope_factor):
+            return 0.0
+        value = (slope_factor - 1.0) / (DIRECTIONAL_SLOPE_REF - 1.0)
+        return float(min(max(value, 0.0), 1.0))
 
     def _compute_reward_and_info(
         self,
@@ -3835,6 +3742,19 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--cell-size",
+        choices=SUPPORTED_CELL_SIZE_SOURCES,
+        default=CELL_SIZE_SOURCE_JSON,
+        help=(
+            "Source of the metres/cell used by directional-state geometry. "
+            "'json' (default) = the scenario's nominal cell_size (~5 m), the "
+            "legacy behavior; 'code' = the actual projected metres/cell from "
+            "ACTUAL_CELL_SIZE_M (~6-6.8 m), matching the sim's index<->position "
+            "grid so projected landing distances are not skewed. Only affects "
+            "the 'directional' state space."
+        ),
+    )
+    parser.add_argument(
         "--adaptive-step-size-factor",
         type=float,
         default=None,
@@ -3876,16 +3796,15 @@ def main() -> None:
     parser.add_argument(
         "--state-space",
         choices=SUPPORTED_STATE_SPACES,
-        default=STATE_SPACE_LARGE,
+        default=STATE_SPACE_OLD,
         help=(
-            "Observation/state-space definition to use. 'large' is the "
-            "current full state vector; 'small' uses only per-front flag sets; "
-            "'mixed' uses per-front flags plus boundary, fire-line, and "
-            "spread-ray features; 'old' matches ppo_runner.py's original "
-            "state vector (36 features: includes fire->water distance, no "
-            "per-aircraft altitude); 'updated' is the altitude/front-flag "
-            "variant (43 features: adds per-aircraft altitude and aggregate "
-            "front flags, drops fire->water distance)."
+            "Observation/state-space definition to use. 'old' matches "
+            "ppo_runner.py's original state vector (36 features: includes "
+            "fire->water distance, no per-aircraft altitude); 'updated' is the "
+            "altitude/front-flag variant (43 features: adds per-aircraft "
+            "altitude and aggregate front flags, drops fire->water distance); "
+            "'directional' is 'old' plus the per-flank projected-threat block "
+            "(K = --state-fire-fronts sectors x 6 channels)."
         ),
     )
     parser.add_argument(
@@ -4267,6 +4186,7 @@ def main() -> None:
             aircraft_group_size=args.aircraft_group_size,
             controlled_agent_count=args.controlled_agent_count,
             water_set=args.water_set,
+            cell_size_source=args.cell_size,
             enable_adaptive_time_step=adaptive_time_step_override,
             adaptive_step_size_factor=args.adaptive_step_size_factor,
         )
@@ -4289,6 +4209,7 @@ def main() -> None:
             aircraft_group_size=args.aircraft_group_size,
             controlled_agent_count=args.controlled_agent_count,
             water_set=args.water_set,
+            cell_size_source=args.cell_size,
             enable_adaptive_time_step=adaptive_time_step_override,
             adaptive_step_size_factor=args.adaptive_step_size_factor,
         )

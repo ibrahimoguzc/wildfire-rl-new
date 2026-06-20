@@ -110,7 +110,7 @@ def profile_scenario(name, reset_samples, step_samples, seed):
         decision_interval_minutes=10,
         fire_detection_delay_minutes=30,
         switch_ignition_mode=2,
-        state_space="mixed",
+        state_space="old",
         gc_collect_on_reset=True,
         tactic_distribution="group",
         aircraft_group_size=group_size,

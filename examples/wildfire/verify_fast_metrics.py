@@ -25,7 +25,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from examples.wildfire.ppo_runnerv2 import (  # noqa: E402
     DEFAULT_DECISION_INTERVAL_MINUTES,
     DEFAULT_STATE_FIRE_FRONTS,
-    STATE_SPACE_SMALL,
+    STATE_SPACE_OLD,
     SUPPORTED_STATE_SPACES,
     SUPPORTED_TACTIC_DISTRIBUTIONS,
     TACTIC_DISTRIBUTION_INDIVIDUAL,
@@ -81,7 +81,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--state-space",
         choices=SUPPORTED_STATE_SPACES,
-        default=STATE_SPACE_SMALL,
+        default=STATE_SPACE_OLD,
         help="State-space option for the test environment.",
     )
     parser.add_argument(

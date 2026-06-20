@@ -1,8 +1,0 @@
-Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None
-/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/firefighter_model/agents.py:448: RuntimeWarning: overflow encountered in power
-  return c1 ** sum(exponents)
-/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/firefighter_model/agents.py:448: RuntimeWarning: overflow encountered in power
-  return c1 ** sum(exponents)
-/home/ibrahimoguz/FirefightingSoS/wildfire-rl-new/examples/wildfire/firefighter_model/agents.py:448: RuntimeWarning: overflow encountered in power
-  return c1 ** sum(exponents)
-[2026-06-04T12:29:19.279] error: *** JOB 550025 ON owl042 CANCELLED AT 2026-06-04T12:29:19 DUE to SIGNAL Terminated ***

@@ -8,7 +8,6 @@
 #SBATCH -t 24:00:00
 #SBATCH -o logs/slurm-%j.out
 #SBATCH -e logs/slurm-%j.err
-#SBATCH --mem=300G
 #SBATCH --qos=owl_normal_short
 
 # Pyrenees: REGULAR water (--water-set off, 140 bodies) vs SMALLEST water

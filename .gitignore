@@ -151,3 +151,13 @@ examples/wildfire/data/rl/
 
 # Output Files
 examples/wildfire/data/scenarios/outputs
+
+# SLURM logs (generated)
+logs/
+
+# Directional flank / ignition snapshot images (generated)
+examples/wildfire/snapshots/
+
+# Local agent / tooling config
+.claude/
+.codex

@@ -28,7 +28,7 @@ from examples.wildfire.firefighter_model.suppression_tactics import (
 from examples.wildfire.ppo_runnerv2 import (
     DEFAULT_STATE_FIRE_FRONTS,
     SCENARIOS_DIR,
-    STATE_SPACE_MIXED,
+    STATE_SPACE_OLD,
     TACTIC_COMBINATIONS,
     TACTIC_DISTRIBUTION_GROUP,
     WildfireHourlyEnv,
@@ -311,7 +311,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--decision-interval-minutes", type=int, default=10)
     parser.add_argument("--fire-detection-delay-minutes", type=float, default=30.0)
-    parser.add_argument("--state-space", default=STATE_SPACE_MIXED)
+    parser.add_argument("--state-space", default=STATE_SPACE_OLD)
     parser.add_argument("--state-fire-fronts", type=int, default=DEFAULT_STATE_FIRE_FRONTS)
     parser.add_argument("--controlled-agent-count", type=int, default=6)
     parser.add_argument("--aircraft-group-size", type=int, default=2)

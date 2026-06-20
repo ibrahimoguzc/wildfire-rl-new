@@ -34,7 +34,7 @@ from examples.wildfire.firefighter_model.tactic_pieces.select_poi import (  # no
 from examples.wildfire.ppo_runnerv2 import (  # noqa: E402
     DEFAULT_DECISION_INTERVAL_MINUTES,
     DEFAULT_STATE_FIRE_FRONTS,
-    STATE_SPACE_SMALL,
+    STATE_SPACE_OLD,
     WildfireHourlyEnv,
     _resolve_scenario,
 )
@@ -329,7 +329,7 @@ def main() -> None:
         decision_interval_minutes=args.decision_interval_minutes,
         fire_detection_delay_minutes=args.fire_detection_delay_minutes,
         state_fire_fronts=DEFAULT_STATE_FIRE_FRONTS,
-        state_space=STATE_SPACE_SMALL,
+        state_space=STATE_SPACE_OLD,
     )
 
     try:
