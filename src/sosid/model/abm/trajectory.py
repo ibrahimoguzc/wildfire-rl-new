@@ -360,7 +360,12 @@ class BaseTrajectory(metaclass=ABCMeta):
     def get_state_duration_segements(
         self, *, start_idx: int | None = None, end_idx: int | None = None
     ) -> Iterable[tuple[FlightState, float]]:
-        """Get segments of flight states and their durations."""
+        """Get segments of flight states and their durations.
+
+        Materialised rather than a lazy ``zip``: callers estimate
+        propellant from these segments, and a one-shot iterator silently
+        yields nothing (i.e. zero propellant) on a second pass.
+        """
         idxs = self.state_start_indices
         if start_idx is not None:
             idxs = idxs[idxs >= start_idx]
@@ -377,7 +382,7 @@ class BaseTrajectory(metaclass=ABCMeta):
         timestamps = np.concatenate(
             (self.timestamps[idxs], [self.timestamps[-1]])
         )
-        return zip(self.flight_states[idxs], np.diff(timestamps))
+        return list(zip(self.flight_states[idxs], np.diff(timestamps)))
 
     def __len__(self) -> int:
         """Number of points in the trajectory."""
