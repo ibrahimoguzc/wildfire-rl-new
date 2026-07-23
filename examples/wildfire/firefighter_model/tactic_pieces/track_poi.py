@@ -113,6 +113,72 @@ class FollowFirefrontTrackPOI(TrackPOITask):
         return agent.follower.navigate()
 
 
+class EvtolFollowFirefrontTrackPOI(FollowFirefrontTrackPOI):
+    """Firefront tracking with an eVTOL-only return-energy guard."""
+
+    def __init__(self):
+        super().__init__()
+        self.task_method.__func__.__name__ = "evtol_follow_firefront_track_poi"
+
+    def task_method(self, agent):
+        """Track the firefront only while a safe return remains feasible."""
+        i, j = pos_to_index(
+            agent.destination,
+            grid_description=agent.terrain.grid_description,
+            origin=agent.fire_terrain_origin,
+        )
+        width = agent.terrain.width_in_cells
+        height = agent.terrain.height_in_cells
+
+        # Getting a 5x5 Moore Neighborhood of the spread_rates
+        moore_range = np.array((-2, -1, 0, 1, 2))
+        i_range, j_range = moore_range + i, moore_range + j
+        i_neighborhood, j_neighborhood = np.meshgrid(
+            i_range[(i_range >= 0) & (i_range < height)],
+            j_range[(j_range >= 0) & (j_range < width)],
+            copy=False,
+            sparse=True,
+            indexing="ij",
+        )
+
+        rate_neighborhood = agent.model.wildfire.get_spread_rates()[
+            i_neighborhood, j_neighborhood
+        ]
+
+        # Checks if there is zero spread rate in Moore neighbourhood
+        if np.amax(rate_neighborhood) == 0:
+            return TaskStatus.FAILED
+
+        # Tracking fire-front by selecting highest spread-rate index
+        max_idx = np.unravel_index(
+            np.argmax(rate_neighborhood), rate_neighborhood.shape
+        ) + np.array((i - 2, j - 2))
+
+        destination = np.array(
+            index_to_pos(
+                max_idx,
+                grid_description=agent.terrain.grid_description,
+                origin=agent.fire_terrain_origin,
+            )
+        )
+
+        has_propellant, trajectory = (
+            agent.has_propellant_for_firefront_and_return(destination)
+        )
+        if not has_propellant:
+            nearest_airport, _ = agent.get_nearest_airport()
+            agent.set_destination(nearest_airport.pos, DestinationType.BASE)
+            agent.tasks.set_active(agent.tactic.return_to_base)
+            agent.follower.navigate()
+            return TaskStatus.IN_PROGRESS
+
+        # Converting fire-front index to position and navigating to it
+        agent.full_trajectory = trajectory
+        agent.full_trajectory.start_datetime = agent.current_mission_time
+
+        return agent.follower.navigate()
+
+
 TRACK_POI_TABLE = {
     TrackPOIType.DIRECT: DirectTrackPOI,
     TrackPOIType.INDIRECT: IndirectTrackPOI,

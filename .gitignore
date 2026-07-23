@@ -161,3 +161,6 @@ examples/wildfire/snapshots/
 # Local agent / tooling config
 .claude/
 .codex
+
+# Generated verification/comparison plots (data, not source)
+verification_plots/

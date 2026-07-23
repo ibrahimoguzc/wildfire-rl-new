@@ -23,6 +23,8 @@ from examples.wildfire.firefighter_model.tactic_pieces.suppress import (
 )
 from examples.wildfire.firefighter_model.tactic_pieces.track_poi import (
     TRACK_POI_TABLE,
+    EvtolFollowFirefrontTrackPOI,
+    FollowFirefrontTrackPOI,
 )
 from sosid.model.abm.task import Task, TaskStatus
 from sosid.model.transform import bearing_from_coords
@@ -41,11 +43,39 @@ class SuppresionTactic:
     need to be protected against fire.
     """
 
-    def __init__(self, suppression_tactic, change_task):
+    def __init__(
+        self,
+        suppression_tactic,
+        change_task,
+        needs_evtol_firefront_guard: bool = False,
+    ):
+        self._needs_evtol_firefront_guard = needs_evtol_firefront_guard
         self.select_poi = SELECT_POI_TABLE[suppression_tactic.select_poi]()
         self.track_poi = TRACK_POI_TABLE[suppression_tactic.track_poi]()
         self.suppress = SUPPRESS_TABLE[suppression_tactic.suppress]()
         self.change = change_task
+
+    @property
+    def track_poi(self):
+        """Active track-POI task."""
+        return self._track_poi
+
+    @track_poi.setter
+    def track_poi(self, track_poi) -> None:
+        """Install ``track_poi``, preserving the eVTOL return-energy guard.
+
+        Every track-POI (re)assignment routes through here -- including
+        runtime tactic switches from the PPO policy and in-sim change
+        tasks -- so eVTOLs keep their firefront return-energy guard
+        instead of silently reverting to the unguarded base task.
+        """
+        if (
+            self._needs_evtol_firefront_guard
+            and isinstance(track_poi, FollowFirefrontTrackPOI)
+            and not isinstance(track_poi, EvtolFollowFirefrontTrackPOI)
+        ):
+            track_poi = EvtolFollowFirefrontTrackPOI()
+        self._track_poi = track_poi
 
     @Task
     def hold(self) -> TaskStatus:
@@ -80,6 +110,22 @@ class SuppresionTactic:
     def trigger_takeoff_from_base(self) -> None:
         """Trigger takeoff from base."""
         self.tactic.initiate_takeoff(self)
+        # `initiate_takeoff` aims at `follower.trajectory.altitudes[0]`, but
+        # on departure from base that trajectory is the *inbound* leg the
+        # agent just flew in on -- the next destination is only chosen after
+        # `transition_segment`. Its start altitude is the altitude over the
+        # fire the agent came from, so the agent climbs vertically from the
+        # apron all the way up to it at `takeoff_climb_rate`, burning
+        # hundreds of thousands of kJ at takeoff power that no propellant
+        # estimate books. Retarget to the altitude a takeoff actually ends
+        # at, matching what `generate_straight_trajectory` bills for the
+        # TAKEOFF segment (`elevation_start + takeoff_altitude`). Set after
+        # `initiate_takeoff` so the ground-roll heading it derives for
+        # conventional aircraft is left untouched.
+        self._takeoff_altitude = (
+            self.model.simulation.environment.get_elevation(self.pos)
+            + self.profile_parameters.takeoff_altitude
+        )
         self.current_base.deregister_from_base(self)
         self.current_base = None
 
@@ -191,11 +237,23 @@ class SuppresionTactic:
             self.pos, self.destination, destination_type, retour=False
         )
 
+        # The bail-out leg is flown with whatever payload the agent has on
+        # arrival. For a WATER stop that is a *full* payload it has not
+        # scooped yet, so booking it at the current (empty) mass
+        # under-estimates the leg and the shortfall is paid out of the
+        # reserve. Book it at the mass it will actually be flown at.
+        bail_out_mass = self.current_mass
+        if destination_type == DestinationType.WATER:
+            bail_out_mass = min(
+                self.current_mass + self.payload_capacity - self.payload_mass,
+                self.mtom,
+            )
         propellant_to_base = self.estimate_propellant_for_journey(
             self.destination,
             nearest_airport.pos,
             DestinationType.BASE,
             retour=False,
+            start_mass=bail_out_mass,
         )
         required_propellant = propellant_attack + propellant_to_base
 
@@ -213,6 +271,8 @@ class SuppresionTactic:
     @to_suppressant.on_complete
     def start_descent_to_suppressant(self) -> None:
         """Activates hold to resupply payload."""
+        if self._needs_water_retransition_accounting:
+            self.flight_state = FlightState.RETRANSITION
         self.tasks.set_active(self.tactic.retransition_before_resupply)
 
     @Task

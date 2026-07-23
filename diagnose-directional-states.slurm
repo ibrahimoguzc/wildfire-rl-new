@@ -5,7 +5,7 @@
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=8
-#SBATCH -t 02:00:00
+#SBATCH -t 08:00:00
 #SBATCH -o logs/slurm-%j.out
 #SBATCH -e logs/slurm-%j.err
 #SBATCH --mem=32G
@@ -23,29 +23,31 @@ source activate rl-env
 which python
 
 cd /home/ibrahimoguz/FirefightingSoS/wildfire-rl-new
+export PYTHONPATH="$PWD:$PWD/src:${PYTHONPATH:-}"
 
 # Measure how the directional state channels behave across Pyrenees and
-# Palisades (3 episodes each) and flag channels that are noise -- i.e. stuck
-# near 0 or near 1 for the whole episode (no variance, so the agent cannot
-# learn anything from them). --cell-size code exercises the corrected flank
-# geometry (2c/2e/2f). Pyrenees.json defines 9 aircraft (6 controlled here),
-# Palisades.json defines 4 (4 controlled).
+# Palisades (3 episodes each, 144 decision steps per episode) under individual
+# tactics, and flag channels that are noise -- i.e. stuck near 0 or near 1 for
+# the whole episode (no variance, so the agent cannot learn anything from
+# them). --cell-size code exercises the corrected flank geometry (2c/2e/2f).
+# Pyrenees.json defines 9 aircraft (6 controlled here), Palisades.json defines
+# 4 (4 controlled).
 OUTDIR=examples/wildfire/data/scenarios/outputs/directional_state_diag_${SLURM_JOB_ID}
 mkdir -p "$OUTDIR"
 
 K=3
 EPISODES=3
-STEPS=36
+STEPS=144
 
-# 1) Pyrenees -- 6 planes in 3 groups of 2.
+# 1) Pyrenees -- 6 planes, individual tactics.
 python -u scripts/diagnose_directional_state.py \
   --scenario "Pyrenees.json" \
   --state-fire-fronts "$K" \
   --episodes "$EPISODES" \
   --steps "$STEPS" \
   --controlled-agent-count 6 \
-  --tactic-distribution group \
-  --aircraft-group-size 2 \
+  --tactic-distribution individual \
+  --aircraft-group-size 1 \
   --water-set 1 \
   --action-mode random \
   --cell-size code \
@@ -59,6 +61,7 @@ python -u scripts/diagnose_directional_state.py \
   --steps "$STEPS" \
   --controlled-agent-count 4 \
   --tactic-distribution individual \
+  --aircraft-group-size 1 \
   --water-set 1 \
   --action-mode random \
   --cell-size code \

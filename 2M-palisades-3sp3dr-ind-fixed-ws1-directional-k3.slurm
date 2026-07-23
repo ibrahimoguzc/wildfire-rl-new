@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH -J pyr4-ws1-fix
+#SBATCH -J pal3sp3dr-dir-k3-fix
 #SBATCH -p normal_q
 #SBATCH -A stselab_sos
 #SBATCH -N 1
@@ -33,25 +33,30 @@ cd /home/ibrahimoguz/FirefightingSoS/wildfire-rl-new
 #export NUMEXPR_NUM_THREADS=1
 #export VECLIB_MAXIMUM_THREADS=1
 
-OUTDIR=examples/wildfire/data/scenarios/outputs/pyrenees_4p_ind_old_${SLURM_JOB_ID}
+OUTDIR=examples/wildfire/data/scenarios/outputs/palisades_3sp3dr_ind_directional_k3_fixed_${SLURM_JOB_ID}
 
-# 4 planes, individual tactics, water set 1, fixed (scenario) ignition, old
-# state space. Pyrenees.json defines 14 aircraft, so 4 controlled aircraft is valid.
+# 6 planes (3 example_seaplane_1 + 3 example_aircraft_1), individual tactics,
+# water set 2 (bodies example_aircraft_1 can scoop), fixed (scenario) ignition,
+# directional state space (K=3).
+# --cell-size code uses the actual projected metres/cell for the corrected flank
+# geometry (2c/2e/2f) and the rescaled vip/indirect/water channels.
+# Palisades3sp3dr.json defines 6 aircraft.
 /usr/bin/time -v python -u -m examples.wildfire.ppo_runnerv2 \
-  --scenario "Pyrenees4peasy.json" \
+  --scenario "Palisades3sp3dr.json" \
   --num-envs 128 \
-  --timesteps 1008000 \
+  --timesteps 2016000 \
   --device cpu \
   --output-dir "$OUTDIR" \
-  --save-model pyrenees_4p_ind_old.zip \
-  --progress-file-tag pyrenees_4p_ind_old \
+  --save-model palisades_3sp3dr_ind_directional_k3_fixed.zip \
+  --progress-file-tag palisades_3sp3dr_ind_directional_k3_fixed \
   --vec-start-method fork \
-  --state-fire-fronts 5 \
+  --state-fire-fronts 3 \
   --gc-collect-on-reset \
   --n-epochs 5 \
   --learning-rate 0.0005 \
   --gamma 0.99 \
   --tactic-distribution individual \
-  --controlled-agent-count 4 \
-  --water-set 1 \
-  --state-space old
+  --controlled-agent-count 6 \
+  --water-set 2 \
+  --state-space directional \
+  --cell-size code

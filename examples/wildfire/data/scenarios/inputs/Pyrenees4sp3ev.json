@@ -41,7 +41,7 @@
             20,
             70
         ],
-        "wind_run": 335,
+        "wind_run": 350,
         "general_winddirection": 300,
         "range_winddirection": 30,
         "update_frequency": 600,
@@ -297,10 +297,26 @@
         {
             "file_name": "example_seaplane_1.json",
             "agents_per_base": [
-                3,
-                3,
-                2,
+                1,
+                1,
+                1,
                 1
+            ],
+            "suppression_tactic": {
+                "main": {
+                    "select_poi": "indirect",
+                    "track_poi": "indirect",
+                    "suppress": "indirect"
+                }
+            }
+        },
+        {
+            "file_name": "example_aircraft_1.json",
+            "agents_per_base": [
+                1,
+                1,
+                1,
+                0
             ],
             "suppression_tactic": {
                 "main": {

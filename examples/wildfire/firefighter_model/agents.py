@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import math
+from collections import deque
 from collections.abc import Iterable
 from datetime import datetime, timedelta
 from functools import cached_property
@@ -111,6 +112,11 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         self.current_base.register_at_base(self)
 
         self._profile_parameters = profile_parameters
+        self._needs_water_retransition_accounting = (
+            propulsion_input.architecture == "electric"
+            and takeoff_landing_type == TakeoffLandingType.VERTIPAD
+            and profile_parameters.retransition_duration > 0
+        )
         self.follower = StraightTrajectoryFollower(self)
         self.full_trajectory = None
 
@@ -126,12 +132,150 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
             change_condition if change_condition else ChangeType.NO_CHANGE
         ](threshold, suppression_tactic, alternative_tactic)
 
-        self.tactic = SuppresionTactic(suppression_tactic, change)
+        self.tactic = SuppresionTactic(
+            suppression_tactic,
+            change,
+            needs_evtol_firefront_guard=(
+                self._needs_water_retransition_accounting
+            ),
+        )
 
         self.altitude = self.model.simulation.environment.get_elevation(pos)
         self.payload_status = PayloadStatus.ONBOARD
         self.force_tactic_swap = False
         self.set_active_tactic()
+
+    def step(self) -> None:
+        """Step the aircraft, diverting eVTOLs before return energy is lost."""
+        self._divert_evtol_to_base_if_return_energy_is_low()
+        self._trace_return_commit()
+        try:
+            super().step()
+        except ValueError as exc:
+            if "propellant" in str(exc):
+                self._log_propellant_depletion()
+            raise
+
+    def _trace_return_commit(self) -> None:
+        """Record a rolling task/energy history for eVTOLs.
+
+        Kept only so that :py:meth:`_log_propellant_depletion` can print the
+        whole sortie leading up to a propellant exhaustion instead of just
+        the final snapshot. Writes nothing unless the sim actually runs the
+        battery flat, so it is silent in normal operation.
+        """
+        if not self._needs_water_retransition_accounting:
+            return
+        try:
+            cur = self.tasks.active_task
+            cur_name = (
+                cur.task_method.__name__ if cur is not None else "None(idle)"
+            )
+            if cur_name == getattr(self, "_hist_last_task", None):
+                return
+            hist = getattr(self, "_hist", None)
+            if hist is None:
+                hist = self._hist = deque(maxlen=45)
+            _, dist = self.get_nearest_airport()
+            hist.append(
+                "t=%.0f %s fs=%d usable=%.0f dist=%.0f %s m=%.0f"
+                % (
+                    self.model.simulation.timer.mission_runtime.total_seconds(),
+                    cur_name,
+                    int(getattr(self, "flight_state", 0)),
+                    self.propulsion.mission_usable_propellant,
+                    dist,
+                    str(getattr(self, "payload_status", "?")).split(".")[-1],
+                    self.current_mass,
+                )
+            )
+            self._hist_last_task = cur_name
+        except Exception:  # noqa: BLE001,S110 - best-effort history only
+            # This buffer exists purely to enrich a crash report; never let
+            # it raise into, or print over, a live simulation.
+            pass
+
+    def _log_propellant_depletion(self) -> None:
+        """Dump eVTOL state when propellant validation fails (diagnostic).
+
+        Wrapped in its own guard so the diagnostic can never mask the
+        original ValueError. Grep the slurm .err for the prefix below.
+        """
+        import sys
+
+        try:
+            active_task = self.tasks.active_task
+            task_name = (
+                active_task.task_method.__name__
+                if active_task is not None
+                else "None(idle)"
+            )
+            nearest_airport, distance_to_base = self.get_nearest_airport()
+            return_estimate = self.estimate_propellant_for_journey(
+                self.pos, nearest_airport.pos, DestinationType.BASE
+            )
+            print(
+                "EVTOL_PROPELLANT_DEPLETION "
+                f"id={self.unique_id} "
+                f"evtol_guard={self._needs_water_retransition_accounting} "
+                f"track_poi={type(self.tactic.track_poi).__name__} "
+                f"active_task={task_name} "
+                f"flight_state={getattr(self, 'flight_state', '?')} "
+                f"payload_status={getattr(self, 'payload_status', '?')} "
+                f"mass={getattr(self, 'current_mass', float('nan')):.1f} "
+                f"usable={self.propulsion.mission_usable_propellant:.1f} "
+                f"reserve={self.propulsion.specs.reserve_propellant:.1f} "
+                f"dist_to_base_m={distance_to_base:.1f} "
+                f"return_estimate={return_estimate:.1f}",
+                file=sys.stderr,
+                flush=True,
+            )
+            for row in getattr(self, "_hist", []):
+                print(f"EVTOL_HIST id={self.unique_id} {row}", file=sys.stderr)
+            sys.stderr.flush()
+        except Exception as diag_exc:  # noqa: BLE001 - never mask real error
+            print(
+                f"EVTOL_PROPELLANT_DEPLETION diag_failed={diag_exc!r}",
+                file=sys.stderr,
+                flush=True,
+            )
+
+    def _divert_evtol_to_base_if_return_energy_is_low(self) -> None:
+        """Divert eVTOLs to base when the current task risks return energy."""
+        if not self._needs_water_retransition_accounting:
+            return
+
+        # Compare by identity: ``Task.__eq__`` compares ``priority``, and
+        # tactic-piece tasks (select/track/suppress) never set ``priority``,
+        # so ``active_task in (...)`` raises AttributeError when one of them
+        # is active. ``active_task`` is also None while the agent is idle.
+        active_task = self.tasks.active_task
+        excluded_tasks = (
+            self.tactic.await_operational_clearance,
+            self.tactic.await_takeoff_clearance,
+            self.tactic.takeoff,
+            self.tactic.transition_segment,
+            self.tactic.return_to_base,
+            self.tactic.retransition_before_land_to_base,
+            self.tactic.land_to_base,
+            self.tactic.refuel,
+        )
+        if active_task is None or any(
+            active_task is task for task in excluded_tasks
+        ):
+            return
+
+        nearest_airport, _ = self.get_nearest_airport()
+        required_propellant = self.estimate_propellant_for_journey(
+            self.pos,
+            nearest_airport.pos,
+            DestinationType.BASE,
+        )
+        if self.propulsion.is_propellant_available(required_propellant):
+            return
+
+        self.set_destination(nearest_airport.pos, DestinationType.BASE)
+        self.tasks.set_active(self.tactic.return_to_base)
 
     def __gui_repr__(self):
         """Implements GUI representation protocol."""
@@ -756,6 +900,7 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         retour: bool = False,
         resupply_payload: bool | None = None,
         refill_propellant: bool | None = None,
+        start_mass: float | None = None,
     ) -> float:
         """Estimate propellant required to reach destination.
 
@@ -766,6 +911,11 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
             retour: If True, the propellant required to return
                 to the current position and altitude is included.
                 Default is False.
+            start_mass: Mass to fly the outbound leg at. Defaults to the
+                agent's current mass. Pass explicitly when the leg is
+                flown at a mass the agent does not have yet, e.g. a
+                bail-out from a water source that is flown with the
+                payload the agent will have scooped on arrival.
             resupply_payload: If True, the mass is updated to include
                 the payload capacity on the return journey. Default is
                 None. If None, the value is set to True if the
@@ -784,8 +934,27 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
             destination_type=destination_type,
         )
         propellant, mass = self.propulsion.estimate_propellant_for_trajectory(
-            trajectory, start_mass=self.current_mass
+            trajectory,
+            start_mass=(
+                self.current_mass if start_mass is None else start_mass
+            ),
         )
+        if (
+            self._needs_water_retransition_accounting
+            and destination_type == DestinationType.WATER
+        ):
+            retransition_propellant, _ = (
+                self.propulsion.estimate_propellant_consumption(
+                    [
+                        (
+                            FlightState.RETRANSITION,
+                            self.profile_parameters.retransition_duration,
+                        )
+                    ],
+                    start_mass=mass,
+                )
+            )
+            propellant += retransition_propellant
         if retour:
             if resupply_payload is None:
                 resupply_payload = destination_type in (
@@ -811,6 +980,44 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
                 trajectory, start_mass=min(mass, self.mtom)
             )[0]
         return propellant
+
+    def has_propellant_for_firefront_and_return(
+        self,
+        destination: Position,
+    ) -> tuple[bool, StraightTrajectory]:
+        """Return whether the eVTOL can chase a firefront and return."""
+        trajectory = self.generate_trajectory(
+            starting_pos=self.pos,
+            ending_pos=destination,
+            destination_type=DestinationType.FIRE,
+        )
+        propellant, mass = self.propulsion.estimate_propellant_for_trajectory(
+            trajectory,
+            start_mass=self.current_mass,
+        )
+        mass -= self.payload
+
+        nearest_airport, _ = self.get_nearest_airport(pos=destination)
+        elev_poi = self.model.simulation.environment.get_elevation(destination)
+        elev_base = self.model.simulation.environment.get_elevation(
+            nearest_airport.pos
+        )
+        to_base_trajectory = generate_straight_trajectory(
+            profile=self.profile_parameters,
+            gps_start=trajectory.gps_end,
+            gps_end=nearest_airport.gps_coords,
+            altitude_start=trajectory.altitudes[-1],
+            altitude_end=elev_base + self.profile_parameters.landing_altitude,
+            elevation_start=elev_poi,
+            elevation_end=elev_base,
+            include_landing=True,
+            include_takeoff=True,
+        )
+        propellant += self.propulsion.estimate_propellant_for_trajectory(
+            to_base_trajectory,
+            start_mass=mass,
+        )[0]
+        return self.propulsion.is_propellant_available(propellant), trajectory
 
     def suppression_patch(
         self, payload: float, suppressant_flow_rate: float
