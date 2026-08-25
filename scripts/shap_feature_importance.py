@@ -253,7 +253,11 @@ def main() -> None:
     ap.add_argument("--model-path", required=True,
                     help="Path to the trained PPO .zip checkpoint (run ID).")
     ap.add_argument("--scenario", default="Palisades copy.json")
-    ap.add_argument("--switch-ignition-mode", type=int, default=0, choices=(0, 1, 2))
+    # 3 and 4 were added to the runner after this script was written; without
+    # them a model trained with --switch-ignition-4 cannot be explained on the
+    # ignition distribution it actually saw.
+    ap.add_argument("--switch-ignition-mode", type=int, default=0,
+                    choices=(0, 1, 2, 3, 4))
     ap.add_argument("--state-space", default="old")
     ap.add_argument("--state-fire-fronts", type=int, default=5)
     ap.add_argument("--controlled-agent-count", type=int, default=5)

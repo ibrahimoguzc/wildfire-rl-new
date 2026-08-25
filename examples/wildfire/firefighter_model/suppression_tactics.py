@@ -293,7 +293,30 @@ class SuppresionTactic:
 
     @land_to_resupply.on_complete
     def initiate_resupply(self) -> None:
-        """Agent refuelling and payload resupply."""
+        """Agent refuelling and payload resupply.
+
+        ``select_suppressant_source`` picks whichever of the nearest
+        airport or the nearest water body is cheaper, so this hold is
+        reached at an airport too -- not just at water. Historically it
+        refilled payload only, so an agent could land on the apron, top up
+        water and depart on whatever charge was left, repeating until the
+        propellant was gone. Off-airport water stops legitimately refill
+        payload alone, since there is nothing to re-energize from.
+
+        Restricted to eVTOLs deliberately. Applying it fleet-wide measurably
+        changes conventional aircraft on Pyrenees (suppressions 171 -> 147 on
+        seed 0), and they carry enough margin that they do not exhaust
+        propellant on this path, so their behaviour is left untouched.
+        """
+        if (
+            self._needs_water_retransition_accounting
+            and self.destination_type is DestinationType.BASE
+        ):
+            # `resupply` is a plain function on the tactic class taking the
+            # agent, so call it through the class rather than the instance
+            # (which would bind the tactic as `self`).
+            SuppresionTactic.resupply(self)
+            return
         self.flight_state = FlightState.LOITER
         self.tasks.set_active(self.tactic.resupply_payload)
 

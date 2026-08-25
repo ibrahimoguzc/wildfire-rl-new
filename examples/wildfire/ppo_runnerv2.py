@@ -24,6 +24,7 @@ from dataclasses import dataclass
 import math
 from numbers import Real
 from pathlib import Path
+import signal
 import time
 from typing import Any, Sequence
 from datetime import timedelta
@@ -235,7 +236,18 @@ DAMAGE_TERRAIN_TYPES: tuple[TerrainTypes, ...] = (
 )
 IGNITION_BOUNDARY_MARGIN_RATIO = 0.3
 IGNITION_BOX_HALF_SIZE = 50  # half-side of 100×100 candidate box in grid cells
+# --switch-ignition-3: same local box as v1, widened to 500×500 cells. Cells are
+# `cell_size` (5 m) of real ground on every map, so this is a 2.5×2.5 km ground
+# box regardless of latitude. Sizing in cells (not mercator metres) is what keeps
+# it identical across maps: mercator metres inflate by 1/cos(lat), i.e. 21%
+# at Palisades vs 36% at Pyrenees.
+IGNITION_BOX_HALF_SIZE_V3 = 250
 IGNITION_URBAN_BUFFER_M = 350.0  # min distance from any urban cell, meters
+# --switch-ignition-4: 400×400 cells = 2.0×2.0 km ground (same cells-are-5m-of-
+# ground reasoning as v3), paired with a relaxed 150 m urban keep-out so fires
+# may start closer to the wildland-urban interface than modes 1/2/3 allow.
+IGNITION_BOX_HALF_SIZE_V4 = 200
+IGNITION_URBAN_BUFFER_M_V4 = 150.0
 # --switch-ignition-2: center map box whose edges sit `IGNITION_V2_MARGIN_RATIO`
 # of the map edge length away from each map boundary. Default 0.25 → box edge
 # = (1 − 2·0.25) · map_edge = half the map.
@@ -256,15 +268,27 @@ SWITCH_SCENARIO_NAMES = (
     "Pyrenees.json",
     "Salamis.json",
 )
+# --missions splits one training budget between several maps. Which unit the
+# split is expressed in follows the budget flag that sized the run:
+# --simulations/--chain-total-simulations give every mission a share of the
+# episode count, --timesteps/--chain-total-timesteps a share of the timesteps.
+MISSION_BUDGET_SIMULATIONS = "simulations"
+MISSION_BUDGET_TIMESTEPS = "timesteps"
 
 
 def _make_lr_schedule(initial_lr: float, decay_exponent: float = LR_DECAY_EXPONENT):
     """Return a callable learning-rate schedule decaying with training progress.
 
-    schedule(p) = initial_lr * p^decay_exponent
-        decay_exponent = 0.65 (default): aggressive early decay, slow late
+    schedule(p) = initial_lr * p^decay_exponent, p = progress remaining (1 -> 0)
+
+    Exponents below 1 keep the LR *above* the linear schedule for the whole
+    run (p^e > p for 0 < p < 1) and then drop steeply over the last percent:
+        decay_exponent = 0.70 (default): gentle decay, late collapse
+                                         (0.5x initial at ~63% through)
         decay_exponent = 1.0:            linear decay (sb3's default behaviour)
+                                         (0.5x initial at 50% through)
         decay_exponent = 0.0:            constant LR (no decay)
+    Lower the exponent to hold the LR up longer; raise it to decay sooner.
     """
     base_lr = float(initial_lr)
     exponent = float(decay_exponent)
@@ -272,6 +296,48 @@ def _make_lr_schedule(initial_lr: float, decay_exponent: float = LR_DECAY_EXPONE
     def schedule(progress_remaining: float) -> float:
         progress = max(progress_remaining, 1e-8)
         return base_lr * (progress**exponent)
+
+    return schedule
+
+
+class EpisodeProgress:
+    """Shared episode counter driving a simulation-based LR schedule.
+
+    ``TrainingLogger`` bumps ``completed`` as episodes finish and the schedule
+    reads it, so the LR decays over simulations instead of over timesteps.
+    Deliberately tiny and free of references to the model, env or callbacks:
+    SB3 cloudpickles the schedule (and therefore this object) into the saved
+    zip. A resumed chunk seeds ``completed`` from the previous chunk's episode
+    count, which is what keeps the decay continuous across SLURM jobs.
+    """
+
+    def __init__(self, completed: int = 0, total: int = 1):
+        self.completed = int(completed)
+        self.total = max(1, int(total))
+
+    def progress_remaining(self) -> float:
+        return max(0.0, 1.0 - self.completed / float(self.total))
+
+
+def _make_episode_lr_schedule(
+    initial_lr: float,
+    decay_exponent: float,
+    progress: EpisodeProgress,
+):
+    """LR schedule decaying with completed simulations, not timesteps.
+
+    Same curve as ``_make_lr_schedule`` — initial_lr * p^decay_exponent — but
+    p comes from ``progress`` rather than from SB3's timestep-derived
+    ``progress_remaining``, which is ignored. Used for chains budgeted in
+    simulations, where the timestep total is only a loose ceiling (episodes
+    end well before ``max_runtime``) and would leave the LR nearly flat.
+    """
+    base_lr = float(initial_lr)
+    exponent = float(decay_exponent)
+
+    def schedule(_progress_remaining: float) -> float:
+        progress_value = max(progress.progress_remaining(), 1e-8)
+        return base_lr * (progress_value**exponent)
 
     return schedule
 
@@ -286,12 +352,17 @@ def _make_env_factory(
     switch_ignition_mode: int,
     seed: int,
     ts_budget_per_scenario: float | None = None,
+    mission_budgets: dict[str, float] | None = None,
+    mission_budget_mode: str = MISSION_BUDGET_SIMULATIONS,
+    initial_scenario_episode_counts: dict[str, int] | None = None,
+    initial_scenario_timestep_counts: dict[str, int] | None = None,
     gc_collect_on_reset: bool = False,
     include_scenario_features: bool | None = None,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
     state_space: str = "old",
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+    group_sizes: Sequence[int] | None = None,
     controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     water_set: int | None = None,
     cell_size_source: str = "json",
@@ -308,12 +379,17 @@ def _make_env_factory(
             aircraft_source_scenario_path=aircraft_source_scenario_path,
             switch_ignition_mode=switch_ignition_mode,
             ts_budget_per_scenario=ts_budget_per_scenario,
+            mission_budgets=mission_budgets,
+            mission_budget_mode=mission_budget_mode,
+            initial_scenario_episode_counts=initial_scenario_episode_counts,
+            initial_scenario_timestep_counts=initial_scenario_timestep_counts,
             gc_collect_on_reset=gc_collect_on_reset,
             include_scenario_features=include_scenario_features,
             state_fire_fronts=state_fire_fronts,
             state_space=state_space,
             tactic_distribution=tactic_distribution,
             aircraft_group_size=aircraft_group_size,
+            group_sizes=group_sizes,
             controlled_agent_count=controlled_agent_count,
             water_set=water_set,
             cell_size_source=cell_size_source,
@@ -337,11 +413,16 @@ def _build_vector_env(
     switch_ignition_mode: int,
     vec_start_method: str | None = None,
     ts_budget_per_scenario: float | None = None,
+    mission_budgets: dict[str, float] | None = None,
+    mission_budget_mode: str = MISSION_BUDGET_SIMULATIONS,
+    initial_scenario_episode_counts: dict[str, int] | None = None,
+    initial_scenario_timestep_counts: dict[str, int] | None = None,
     gc_collect_on_reset: bool = False,
     state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
     state_space: str = "old",
     tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
     aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+    group_sizes: Sequence[int] | None = None,
     controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
     water_set: int | None = None,
     cell_size_source: str = "json",
@@ -350,7 +431,7 @@ def _build_vector_env(
 ) -> DummyVecEnv | SubprocVecEnv:
     num_envs = max(1, num_envs)
     base_seed = int(np.random.randint(0, 1_000_000))
-    if switch_scenario and switch_scenario_paths:
+    if switch_scenario and switch_scenario_paths and mission_budgets is None:
         # Fix one scenario per worker in round-robin order so workers keep
         # their assigned scenario across episode resets.
         env_fns = [
@@ -370,6 +451,7 @@ def _build_vector_env(
                 state_space=state_space,
                 tactic_distribution=tactic_distribution,
                 aircraft_group_size=aircraft_group_size,
+                group_sizes=group_sizes,
                 controlled_agent_count=controlled_agent_count,
                 water_set=water_set,
                 cell_size_source=cell_size_source,
@@ -390,12 +472,17 @@ def _build_vector_env(
                 switch_ignition_mode,
                 seed=base_seed + idx,
                 ts_budget_per_scenario=ts_budget_per_scenario,
+                mission_budgets=mission_budgets,
+                mission_budget_mode=mission_budget_mode,
+                initial_scenario_episode_counts=initial_scenario_episode_counts,
+                initial_scenario_timestep_counts=initial_scenario_timestep_counts,
                 gc_collect_on_reset=gc_collect_on_reset,
                 include_scenario_features=switch_scenario,
                 state_fire_fronts=state_fire_fronts,
                 state_space=state_space,
                 tactic_distribution=tactic_distribution,
                 aircraft_group_size=aircraft_group_size,
+                group_sizes=group_sizes,
                 controlled_agent_count=controlled_agent_count,
                 water_set=water_set,
                 cell_size_source=cell_size_source,
@@ -423,10 +510,12 @@ SCENARIO_FEATURES: tuple[str, ...] = (
 STATE_SPACE_OLD = "old"
 STATE_SPACE_UPDATED = "updated"
 STATE_SPACE_DIRECTIONAL = "directional"
+STATE_SPACE_DIRECTIONAL_2 = "directional-2"
 SUPPORTED_STATE_SPACES: tuple[str, ...] = (
     STATE_SPACE_OLD,
     STATE_SPACE_UPDATED,
     STATE_SPACE_DIRECTIONAL,
+    STATE_SPACE_DIRECTIONAL_2,
 )
 
 # Per-flank block appended by the "directional" state space (6 features per
@@ -522,6 +611,47 @@ OLD_STATE_FEATURES = [
     "distance_top_boundary",
 ]
 
+# The "directional-2" core is "old" with two changes. It drops the four
+# map-boundary distances, each of which is an exact duplicate of a fire-extreme
+# coordinate already in the vector (both are scaled by the same span, so
+# distance_left_boundary == leftmost_x, distance_bottom_boundary == lowermost_y,
+# distance_right_boundary == 1 - rightmost_x, distance_top_boundary ==
+# 1 - uppermost_y). In their place it adds the episode's ignition point, so the
+# current fire extent can be read against where the fire started rather than
+# against the map edges. 30 - 4 + 2 = 28 core features, then the same per-flank
+# block and the altitude-free agent block used by "directional".
+DIRECTIONAL2_STATE_FEATURES = [
+    "time_since_detection_min",
+    "temperature_c",
+    "humidity_pct",
+    "wind_speed_ms",
+    "wind_direction_deg",
+    "time_to_sunset_min",
+    "distance_to_fire_line_m",
+    "distance_to_water_m",
+    "distance_fire_boundary_to_water",
+    "distance_fire_boundary_to_vip",
+    "distance_fire_boundary_to_vegetation",
+    "distance_fire_boundary_to_topography",
+    "distance_fire_boundary_to_indirect",
+    "ignition_x",
+    "ignition_y",
+    "fire_center_x",
+    "fire_center_y",
+    "leftmost_x",
+    "leftmost_y",
+    "rightmost_x",
+    "rightmost_y",
+    "uppermost_x",
+    "uppermost_y",
+    "lowermost_x",
+    "lowermost_y",
+    "spread_angle_deg",
+    "spread_ray_hit_x",
+    "spread_ray_hit_y",
+]
+
+
 def _normalize_state_space(state_space: str) -> str:
     normalized = str(state_space).strip().lower()
     if normalized not in SUPPORTED_STATE_SPACES:
@@ -565,15 +695,22 @@ def _state_core_feature_names(
         return tuple(OLD_STATE_FEATURES) + _directional_per_front_feature_names(
             state_fire_fronts
         )
+    if normalized == STATE_SPACE_DIRECTIONAL_2:
+        # "directional-2" = the 28-feature core (no boundary distances, plus the
+        # ignition point) + the same per-flank block.
+        return tuple(
+            DIRECTIONAL2_STATE_FEATURES
+        ) + _directional_per_front_feature_names(state_fire_fronts)
     raise RuntimeError(f"Unhandled state space: {state_space!r}")
 
 
 def _agent_feature_count(state_space: str) -> int:
-    # "old" and "directional" drop per-aircraft altitude (x, y only); every
-    # other state space keeps the altitude channel.
+    # "old", "directional" and "directional-2" drop per-aircraft altitude
+    # (x, y only); every other state space keeps the altitude channel.
     if _normalize_state_space(state_space) in (
         STATE_SPACE_OLD,
         STATE_SPACE_DIRECTIONAL,
+        STATE_SPACE_DIRECTIONAL_2,
     ):
         return 2
     return AGENT_FEATURE_COUNT
@@ -587,6 +724,7 @@ def _agent_feature_names(
     include_altitude = _normalize_state_space(state_space) not in (
         STATE_SPACE_OLD,
         STATE_SPACE_DIRECTIONAL,
+        STATE_SPACE_DIRECTIONAL_2,
     )
     for idx in range(controlled_agent_count):
         names.extend(
@@ -674,13 +812,41 @@ def _normalize_tactic_distribution(tactic_distribution: str) -> str:
     return normalized
 
 
+def _validate_group_sizes(
+    group_sizes: Sequence[int], controlled_agent_count: int
+) -> list[int]:
+    """Validate an explicit per-decision group layout.
+
+    ``group_sizes[i]`` is the number of consecutive controlled aircraft that
+    share the i-th tactic decision. They are laid over the controlled agents
+    in order, so e.g. ``[1, 1, 1, 1, 4]`` on a 4-seaplane + 4-eVTOL fleet
+    gives each seaplane its own decision and all four eVTOLs one shared
+    decision. Must be positive and sum to ``controlled_agent_count``.
+    """
+    sizes = [int(s) for s in group_sizes]
+    if not sizes or any(s <= 0 for s in sizes):
+        raise ValueError(
+            f"group_sizes must be a non-empty list of positive ints, "
+            f"got {list(group_sizes)!r}"
+        )
+    if sum(sizes) != controlled_agent_count:
+        raise ValueError(
+            f"group_sizes {sizes} sum to {sum(sizes)}, but "
+            f"controlled_agent_count={controlled_agent_count}"
+        )
+    return sizes
+
+
 def _action_decision_count(
     tactic_distribution: str,
     controlled_agent_count: int,
     aircraft_group_size: int,
+    group_sizes: Sequence[int] | None = None,
 ) -> int:
     if controlled_agent_count <= 0:
         raise ValueError("controlled_agent_count must be > 0")
+    if group_sizes is not None:
+        return len(_validate_group_sizes(group_sizes, controlled_agent_count))
     if aircraft_group_size <= 0:
         raise ValueError("aircraft_group_size must be > 0")
     if _normalize_tactic_distribution(tactic_distribution) == (
@@ -702,8 +868,15 @@ def _expand_tactic_combinations(
     tactic_distribution: str,
     controlled_agent_count: int,
     aircraft_group_size: int,
+    group_sizes: Sequence[int] | None = None,
 ) -> list[tuple[SelectPOIType, TrackPOIType, SuppressType]]:
     combinations = _tactic_combinations_from_action(action)
+    if group_sizes is not None:
+        sizes = _validate_group_sizes(group_sizes, controlled_agent_count)
+        expanded = []
+        for combination, size in zip(combinations, sizes, strict=False):
+            expanded.extend([combination] * size)
+        return expanded[:controlled_agent_count]
     if _normalize_tactic_distribution(tactic_distribution) == (
         TACTIC_DISTRIBUTION_INDIVIDUAL
     ):
@@ -734,6 +907,25 @@ def _scenario_agent_count(scenario_path: Path) -> int:
     )
 
 
+def _scenario_fleet_composition(scenario_path: Path) -> tuple[tuple[str, int], ...]:
+    """Aircraft profiles in scenario order with their totals.
+
+    The policy commands ``firefighters[:controlled_agent_count]`` and
+    ``--group-sizes`` slices that list positionally, so one action only means
+    the same thing on two missions if both declare the same aircraft in the
+    same order.
+    """
+    with scenario_path.open() as handle:
+        data = json.load(handle)
+    return tuple(
+        (
+            str(agent.get("file_name", "")),
+            sum(int(count) for count in agent.get("agents_per_base", [])),
+        )
+        for agent in data.get("agents", [])
+    )
+
+
 def _validate_switch_scenario_agent_counts(paths: tuple[Path, ...]) -> None:
     counts = {path: _scenario_agent_count(path) for path in paths}
     unique = set(counts.values())
@@ -743,6 +935,77 @@ def _validate_switch_scenario_agent_counts(paths: tuple[Path, ...]) -> None:
             f"Scenarios have different agent counts ({detail}). "
             "All switch-scenarios must have the same number of agents."
         )
+
+
+def _split_budget(total: int, weights: Sequence[float]) -> list[int]:
+    """Apportion ``total`` between missions so the shares sum back to ``total``.
+
+    Largest-remainder method: each mission takes floor(total * w_i / sum(w))
+    and the leftover units go to the largest fractional parts. A 3-way split of
+    100000 simulations therefore comes out 33334/33333/33333 instead of losing
+    the remainder to truncation.
+    """
+    total = int(total)
+    weight_values = [float(weight) for weight in weights]
+    if not weight_values:
+        raise ValueError("mission weights must not be empty")
+    if any(weight <= 0.0 for weight in weight_values):
+        raise ValueError(f"mission weights must all be > 0 (got {weight_values})")
+    weight_sum = sum(weight_values)
+    exact = [total * weight / weight_sum for weight in weight_values]
+    shares = [int(math.floor(value)) for value in exact]
+    remainder = total - sum(shares)
+    if remainder > 0:
+        order = sorted(
+            range(len(shares)),
+            key=lambda idx: exact[idx] - shares[idx],
+            reverse=True,
+        )
+        for idx in order[:remainder]:
+            shares[idx] += 1
+    return shares
+
+
+def _episode_counts_by_scenario(
+    rows: Sequence[dict[str, Any]],
+    mission_names: Sequence[str],
+) -> dict[str, int]:
+    """Count episode-summary rows per scenario file name.
+
+    Used to carry a mission split across a chained run: the resumed summary
+    says how much of each mission's share earlier chunks already spent. Rows
+    written before the mission split existed carry no ``scenario_name`` (or one
+    outside this run's mission list) and are ignored.
+    """
+    counts = {name: 0 for name in mission_names}
+    for row in rows:
+        name = row.get("scenario_name")
+        if name in counts:
+            counts[name] += 1
+    return counts
+
+
+def _timestep_counts_by_scenario(
+    rows: Sequence[dict[str, Any]],
+    mission_names: Sequence[str],
+) -> dict[str, int]:
+    """Sum each mission's collected timesteps over episode-summary rows.
+
+    The timestep-budgeted counterpart of ``_episode_counts_by_scenario``: an
+    episode contributes its ``total_decision_steps``, which is exactly the PPO
+    timesteps it produced. Without this a resumed chunk of a timestep-budgeted
+    chain would restart at the first phase.
+    """
+    counts = {name: 0 for name in mission_names}
+    for row in rows:
+        name = row.get("scenario_name")
+        if name not in counts:
+            continue
+        try:
+            counts[name] += int(float(row.get("total_decision_steps") or 0))
+        except (TypeError, ValueError):
+            continue
+    return counts
 
 
 def _resolve_output_path(base_dir: Path, path_or_name: str | None, default_name: str) -> Path:
@@ -860,6 +1123,99 @@ def _write_records(
         writer.writerows(records)
 
 
+def _read_summary_rows(summary_path: Path) -> list[dict[str, Any]]:
+    """Read a previously written ``*_summary.csv`` back into records.
+
+    Used by ``--resume-summary`` so a chained chunk continues the episode
+    numbering and re-emits the full chain history in its own progress files.
+    Values stay strings; nothing downstream of the logger re-reads them as
+    numbers, and the CSV round-trips byte-identically for the resumed rows.
+    """
+    with summary_path.open("r", newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
+
+
+CHAIN_PROGRESS_FILE = "chain_progress.json"
+
+
+def _write_chain_progress(output_dir: Path, simulations: int, timesteps: int) -> None:
+    """Record how far the chain has come, next to the saved model.
+
+    A simulation-budgeted chain decays its LR over completed episodes, so the
+    episode count is training state, not just logging: it has to survive the
+    SLURM job boundary alongside the weights. The summary CSV also carries it,
+    but only up to the last export, so this sidecar is the authoritative copy.
+    """
+    (output_dir / CHAIN_PROGRESS_FILE).write_text(
+        json.dumps(
+            {
+                "simulations": int(simulations),
+                "timesteps": int(timesteps),
+                "saved_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            },
+            indent=2,
+        )
+    )
+
+
+def _read_chain_progress(output_dir: Path) -> dict[str, Any] | None:
+    path = output_dir / CHAIN_PROGRESS_FILE
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text())
+    except (OSError, ValueError) as err:  # noqa: BLE001 - diagnostic only
+        print(f"Ignoring unreadable {path}: {err}")
+        return None
+
+
+def _saved_num_timesteps(model_path: Path) -> int:
+    """Read ``num_timesteps`` out of an SB3 zip without loading the policy.
+
+    Lets a chained chunk decide it has nothing left to do before paying for
+    environment construction. Returns 0 if the field cannot be read; the
+    authoritative value is still whatever ``PPO.load`` restores.
+    """
+    import zipfile
+
+    try:
+        with zipfile.ZipFile(model_path) as archive:
+            data = json.loads(archive.read("data"))
+    except Exception as err:  # noqa: BLE001 - diagnostic only
+        print(f"Could not read num_timesteps from {model_path}: {err}")
+        return 0
+    return int(data.get("num_timesteps") or 0)
+
+
+def _latest_summary_path(output_dir: Path, progress_file_tag: str) -> Path | None:
+    """Most complete episode summary in ``output_dir``.
+
+    Interim files are written every ``LOG_INTERVAL_SUMMARY_EPISODES`` episodes
+    as ``results_<tag>_<N>_summary.csv``, which is also what the plotting
+    scripts read, so ``--resume-summary auto`` picks the highest N among them.
+    A chunk that ran to completion then writes the full history once more to
+    ``training_episode_summaries.csv``, which holds up to 99 episodes the
+    interim files missed; prefer it when it is the newer of the two (i.e. the
+    previous chunk finished cleanly rather than being interrupted).
+    """
+    best_path: Path | None = None
+    best_count = -1
+    for path in output_dir.glob(f"results_{progress_file_tag}_*_summary.csv"):
+        tail = path.name[len(f"results_{progress_file_tag}_") : -len("_summary.csv")]
+        if not tail.isdigit():
+            continue
+        count = int(tail)
+        if count > best_count:
+            best_count = count
+            best_path = path
+    final_path = output_dir / "training_episode_summaries.csv"
+    if final_path.exists() and (
+        best_path is None or final_path.stat().st_mtime >= best_path.stat().st_mtime
+    ):
+        return final_path
+    return best_path
+
+
 def _resolve_moe_norms(scenario_path: Path) -> dict[str, float]:
     name = scenario_path.stem.lower()
     for key in SCENARIO_MOE_NORMS:
@@ -946,12 +1302,17 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         aircraft_source_scenario_path: Path | None = None,
         switch_ignition_mode: int = 0,
         ts_budget_per_scenario: float | None = None,
+        mission_budgets: dict[str, float] | None = None,
+        mission_budget_mode: str = MISSION_BUDGET_SIMULATIONS,
+        initial_scenario_episode_counts: dict[str, int] | None = None,
+        initial_scenario_timestep_counts: dict[str, int] | None = None,
         gc_collect_on_reset: bool = False,
         include_scenario_features: bool | None = None,
         state_fire_fronts: int = DEFAULT_STATE_FIRE_FRONTS,
         state_space: str = STATE_SPACE_OLD,
         tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
         aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+        group_sizes: Sequence[int] | None = None,
         controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
         water_set: int | None = None,
         cell_size_source: str = CELL_SIZE_SOURCE_JSON,
@@ -984,12 +1345,21 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             tuple(switch_scenario_paths) if switch_scenario_paths else tuple()
         )
         self.aircraft_source_scenario_path = aircraft_source_scenario_path
-        if switch_ignition_mode not in (0, 1, 2):
+        if switch_ignition_mode not in (0, 1, 2, 3, 4):
             raise ValueError(
-                f"switch_ignition_mode must be 0, 1, or 2 (got {switch_ignition_mode})"
+                "switch_ignition_mode must be 0, 1, 2, 3, or 4 "
+                f"(got {switch_ignition_mode})"
             )
         self.switch_ignition_mode = int(switch_ignition_mode)
         self.switch_ignition = self.switch_ignition_mode != 0
+        # Mode 4 relaxes the urban keep-out; every other mode keeps 350 m.
+        # Held on the env so the candidate builders AND the post-round-trip
+        # re-check in _sample_ignition_centers agree on one value.
+        self.ignition_urban_buffer_m = (
+            IGNITION_URBAN_BUFFER_M_V4
+            if self.switch_ignition_mode == 4
+            else IGNITION_URBAN_BUFFER_M
+        )
 
         self.decision_interval_minutes = decision_interval_minutes
         self.decision_interval = timedelta(minutes=decision_interval_minutes)
@@ -1064,10 +1434,16 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self.aircraft_group_size = int(aircraft_group_size)
         if self.aircraft_group_size <= 0:
             raise ValueError("aircraft_group_size must be > 0")
+        self.group_sizes = (
+            _validate_group_sizes(group_sizes, self.controlled_agent_count)
+            if group_sizes is not None
+            else None
+        )
         self.action_decision_count = _action_decision_count(
             self.tactic_distribution,
             self.controlled_agent_count,
             self.aircraft_group_size,
+            self.group_sizes,
         )
         self.include_scenario_flag = (
             bool(self.switch_scenario)
@@ -1147,10 +1523,89 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         self._vip_tree: cKDTree | None = None
         self._water_tree: cKDTree | None = None
         self._ts_budget_per_scenario: float | None = ts_budget_per_scenario
-        self._global_scenario_ts_counts: dict[str, int] = {}
+        # Timesteps collected per scenario, refreshed from the callback. Seeded
+        # for a resumed chunk of a timestep-budgeted mission chain so it picks
+        # up the phase it left off in.
+        self._global_scenario_ts_counts: dict[str, int] = dict(
+            initial_scenario_timestep_counts or {}
+        )
+        # --missions: each mission's share of the training budget, keyed by
+        # scenario file name, in simulations or in timesteps. The missions run
+        # as phases in list order -- every worker trains the first mission whose
+        # share is not spent yet, so the whole fleet finishes one map before
+        # moving to the next (see _select_mission_index).
+        self._mission_budgets: dict[str, float] | None = (
+            dict(mission_budgets) if mission_budgets else None
+        )
+        self._mission_budget_mode = mission_budget_mode
+        if self._mission_budgets is not None and mission_budget_mode not in (
+            MISSION_BUDGET_SIMULATIONS,
+            MISSION_BUDGET_TIMESTEPS,
+        ):
+            raise ValueError(
+                "mission_budget_mode must be "
+                f"{MISSION_BUDGET_SIMULATIONS!r} or {MISSION_BUDGET_TIMESTEPS!r} "
+                f"(got {mission_budget_mode!r})"
+            )
+        # Simulations started per mission: fleet-wide as of the last sync, this
+        # worker's own running total, and the snapshot of that total taken at
+        # the sync. The difference of the last two is what this worker has begun
+        # since the fleet figure was current, which is what stops a phase from
+        # running long between syncs. Seeded with the episodes a chained run's
+        # earlier chunks already spent, so a resumed chunk starts in the phase
+        # it left off in.
+        self._fleet_scenario_ep_starts: dict[str, int] = dict(
+            initial_scenario_episode_counts or {}
+        )
+        self._scenario_ep_starts: dict[str, int] = {}
+        self._scenario_ep_starts_at_sync: dict[str, int] = {}
+        # Mission chosen by the last reset, counted as started once the episode
+        # actually steps. Resets whose episode never runs must not consume any
+        # of a phase's share, and there are two of them per worker before
+        # training begins: the factory seeds the env with reset(seed=...) and
+        # SB3 resets the vector env again before the first rollout.
+        self._pending_mission_start: str | None = None
 
     def set_global_scenario_counts(self, counts: dict[str, int]) -> None:
         self._global_scenario_ts_counts = dict(counts)
+
+    def get_scenario_episode_starts(self) -> dict[str, int]:
+        """Simulations this worker has started per mission, since construction."""
+        return dict(self._scenario_ep_starts)
+
+    def set_fleet_scenario_episode_starts(self, totals: dict[str, int]) -> None:
+        """Adopt the fleet-wide per-mission count of started simulations.
+
+        ``totals`` already includes this worker's starts up to now, so the
+        since-sync baseline moves with it instead of being counted twice.
+        """
+        self._fleet_scenario_ep_starts = dict(totals)
+        self._scenario_ep_starts_at_sync = dict(self._scenario_ep_starts)
+
+    def _count_pending_mission_start(self) -> None:
+        """Charge the running episode to its mission, once, at its first step.
+
+        Called from ``step``: an episode counts against its phase's share when
+        it actually runs, not when it is set up, so the resets whose episode is
+        discarded before training (see ``_pending_mission_start``) cost nothing.
+        """
+        pending = self._pending_mission_start
+        if pending is None:
+            return
+        self._scenario_ep_starts[pending] = (
+            self._scenario_ep_starts.get(pending, 0) + 1
+        )
+        self._pending_mission_start = None
+
+    def mission_simulations_started(self, scenario_name: str) -> int:
+        """Best current estimate of fleet-wide starts for one mission.
+
+        The fleet figure plus whatever this worker has begun since it arrived.
+        """
+        return self._fleet_scenario_ep_starts.get(scenario_name, 0) + (
+            self._scenario_ep_starts.get(scenario_name, 0)
+            - self._scenario_ep_starts_at_sync.get(scenario_name, 0)
+        )
 
     @staticmethod
     def _protection_location_key(location: ProtectionLocationInput) -> tuple[Any, ...]:
@@ -1298,6 +1753,14 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         """Dispatch to the candidate builder for the active ignition mode."""
         if self.switch_ignition_mode == 2:
             return self._build_ignition_candidate_positions_v2(parameters)
+        if self.switch_ignition_mode == 3:
+            return self._build_ignition_candidate_positions_v1(
+                parameters, half_size=IGNITION_BOX_HALF_SIZE_V3
+            )
+        if self.switch_ignition_mode == 4:
+            return self._build_ignition_candidate_positions_v1(
+                parameters, half_size=IGNITION_BOX_HALF_SIZE_V4
+            )
         return self._build_ignition_candidate_positions_v1(parameters)
 
     @staticmethod
@@ -1341,7 +1804,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         if feature_data.ndim < 2:
             return np.empty((0, 2), dtype=np.int64)
         non_forbidden_mask = self._build_ignitable_mask(
-            feature_data, float(parameters.cell_size)
+            feature_data,
+            float(parameters.cell_size),
+            urban_buffer_m=self.ignition_urban_buffer_m,
         )
         rows, cols = non_forbidden_mask.shape
 
@@ -1362,8 +1827,14 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
     def _build_ignition_candidate_positions_v1(
         self,
         parameters: WildfireParameters,
+        half_size: int = IGNITION_BOX_HALF_SIZE,
     ) -> np.ndarray:
-        """100×100 cell box around the scenario's original ignition center."""
+        """Square cell box around the scenario's original ignition center.
+
+        ``half_size`` is the box half-side in grid cells: 50 for
+        --switch-ignition-1 (100×100 cells, 0.5 km ground) and 250 for
+        --switch-ignition-3 (500×500 cells, 2.5 km ground).
+        """
         feature_data = np.asarray(
             np.load(parameters.terrain_inputs.features_file, allow_pickle=False)
         )
@@ -1371,7 +1842,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             return np.empty((0, 2), dtype=np.int64)
 
         buffered_ignitable_mask = self._build_ignitable_mask(
-            feature_data, float(parameters.cell_size)
+            feature_data,
+            float(parameters.cell_size),
+            urban_buffer_m=self.ignition_urban_buffer_m,
         )
         hard_ignitable_mask = self._build_ignitable_mask(
             feature_data,
@@ -1380,14 +1853,14 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         )
         rows, cols = hard_ignitable_mask.shape
 
-        # Try a 100×100 cell box around the scenario's original ignition center first.
+        # Try the local box around the scenario's original ignition center first.
         center_pos = self._ignition_center_grid_pos(parameters)
         if center_pos is not None:
             cr, cc = center_pos
-            r0 = max(0, cr - IGNITION_BOX_HALF_SIZE)
-            r1 = min(rows, cr + IGNITION_BOX_HALF_SIZE)
-            c0 = max(0, cc - IGNITION_BOX_HALF_SIZE)
-            c1 = min(cols, cc + IGNITION_BOX_HALF_SIZE)
+            r0 = max(0, cr - half_size)
+            r1 = min(rows, cr + half_size)
+            c0 = max(0, cc - half_size)
+            c1 = min(cols, cc + half_size)
             box_mask = np.zeros_like(hard_ignitable_mask, dtype=bool)
             box_mask[r0:r1, c0:c1] = True
             valid_mask = buffered_ignitable_mask & box_mask
@@ -1478,7 +1951,11 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 np.load(terrain_inputs.features_file, allow_pickle=False)
             )
             ignitable_mask = (
-                self._build_ignitable_mask(feature_data, cell_size)
+                self._build_ignitable_mask(
+                    feature_data,
+                    cell_size,
+                    urban_buffer_m=self.ignition_urban_buffer_m,
+                )
                 if feature_data.ndim >= 2
                 else None
             )
@@ -1545,6 +2022,38 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             )
         return tuple(normalized_agents)
 
+    def _select_mission_index(self) -> int:
+        """Index of the mission this episode belongs to: the first unspent one.
+
+        The missions are phases in list order. Every new simulation asks how
+        many the fleet has already started (or, for a timestep budget, how many
+        timesteps it has already collected) on each mission and takes the first
+        one still inside its share, so the whole fleet finishes one map before
+        any worker moves to the next.
+
+        The fleet figure is refreshed each step, and this worker's own starts
+        since that refresh are added on top (see ``mission_simulations_started``)
+        so a phase cannot run long while the figure is in flight. What is left
+        is workers whose resets land in the same step: they see the same figure
+        and can claim the same last slot, which is why a phase can overrun its
+        share by a few simulations. Once every share is spent the last mission
+        keeps running, so training that continues past its budget (a wall-clock
+        chunk, a longer chain) stays in the final phase instead of restarting
+        the sequence.
+        """
+        budgets = self._mission_budgets or {}
+        by_simulations = self._mission_budget_mode == MISSION_BUDGET_SIMULATIONS
+        for index, (path, _) in enumerate(self._scenario_templates):
+            name = path.name
+            spent = (
+                self.mission_simulations_started(name)
+                if by_simulations
+                else self._global_scenario_ts_counts.get(name, 0)
+            )
+            if float(spent) < float(budgets.get(name, 0.0)):
+                return index
+        return len(self._scenario_templates) - 1
+
     def _select_episode_setup(self) -> tuple[Path, WildfireParameters]:
         if not self.switch_scenario:
             selected_path = self.scenario_path
@@ -1553,7 +2062,9 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             if not self._scenario_templates:
                 raise RuntimeError("No scenario templates available for switching.")
 
-            if self._ts_budget_per_scenario is not None:
+            if self._mission_budgets is not None:
+                choice_idx = self._select_mission_index()
+            elif self._ts_budget_per_scenario is not None:
                 budget = self._ts_budget_per_scenario
                 weights = np.array(
                     [
@@ -1571,6 +2082,8 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             else:
                 choice_idx = int(self.np_random.integers(0, len(self._scenario_templates)))
             selected_path, selected_template = self._scenario_templates[choice_idx]
+            if self._mission_budgets is not None:
+                self._pending_mission_start = selected_path.name
             selected_parameters = selected_template.model_copy(
                 deep=True,
                 update={"agents": self._scenario_agents[selected_path]},
@@ -1956,7 +2469,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         # In this runner, protection locations are the urban objectives.
         self.vip_positions = self.urban_positions
 
-        if self.state_space == STATE_SPACE_DIRECTIONAL:
+        if self.state_space in (STATE_SPACE_DIRECTIONAL, STATE_SPACE_DIRECTIONAL_2):
             # World-coord KDTrees queried at projected landing points.
             self._vip_tree = (
                 cKDTree(self.vip_positions) if self.vip_positions.size else None
@@ -1971,6 +2484,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             STATE_SPACE_OLD,
             STATE_SPACE_UPDATED,
             STATE_SPACE_DIRECTIONAL,
+            STATE_SPACE_DIRECTIONAL_2,
         ):
             return
 
@@ -2467,6 +2981,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             self.tactic_distribution,
             self.controlled_agent_count,
             self.aircraft_group_size,
+            self.group_sizes,
         )
         agents = self.sim.firefighters.firefighters[: self.controlled_agent_count]
         for agent, (select, track, suppress) in zip(
@@ -2507,6 +3022,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             STATE_SPACE_OLD,
             STATE_SPACE_UPDATED,
             STATE_SPACE_DIRECTIONAL,
+            STATE_SPACE_DIRECTIONAL_2,
         ):
             return self._compute_old_state()
         raise RuntimeError(f"Unhandled state space: {self.state_space!r}")
@@ -2534,7 +3050,11 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
     def _compute_old_state(self) -> np.ndarray:
         assert self.sim is not None
-        if self.state_space in (STATE_SPACE_OLD, STATE_SPACE_DIRECTIONAL):
+        if self.state_space in (
+            STATE_SPACE_OLD,
+            STATE_SPACE_DIRECTIONAL,
+            STATE_SPACE_DIRECTIONAL_2,
+        ):
             self._clear_fire_front_summary()
         atmosphere = self.sim.atmosphere
         mission_time = self.sim.timer.mission_time
@@ -2856,6 +3376,19 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         boundary_bottom_norm = _scale_to_unit(float(boundary_bottom), 0.0, coord_height)
         boundary_top_norm = _scale_to_unit(float(boundary_top), 0.0, coord_height)
 
+        # Ignition point of the current episode, scaled on the same map extent as
+        # the fire-geometry coordinates so the two are directly comparable. Zero
+        # when the scenario declared no ignition center.
+        ignition_x_norm = 0.0
+        ignition_y_norm = 0.0
+        if self.current_ignition_pos is not None:
+            ignition_x_norm = _scale_to_unit(
+                float(self.current_ignition_pos[0]), x_min, x_max
+            )
+            ignition_y_norm = _scale_to_unit(
+                float(self.current_ignition_pos[1]), y_min, y_max
+            )
+
         agents = self.sim.firefighters.firefighters
         state_features: list[float] = []
         if self.include_scenario_flag:
@@ -2871,9 +3404,13 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
             time_to_sunset_norm,
             distance_fire_line_norm,
         ]
-        # "old" and "directional" add the fire->water distance right after the
-        # fire-line distance; "updated" omits that distance.
-        if self.state_space in (STATE_SPACE_OLD, STATE_SPACE_DIRECTIONAL):
+        # "old", "directional" and "directional-2" add the fire->water distance
+        # right after the fire-line distance; "updated" omits that distance.
+        if self.state_space in (
+            STATE_SPACE_OLD,
+            STATE_SPACE_DIRECTIONAL,
+            STATE_SPACE_DIRECTIONAL_2,
+        ):
             core_values.append(distance_water_norm)
         core_values.extend(
             [
@@ -2882,6 +3419,14 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 _clip01(distance_boundary_to_vegetation),
                 _clip01(distance_boundary_to_topography),
                 _clip01(distance_boundary_to_indirect),
+            ]
+        )
+        # "directional-2" carries the ignition point just ahead of the fire
+        # geometry it is meant to be read against.
+        if self.state_space == STATE_SPACE_DIRECTIONAL_2:
+            core_values.extend([ignition_x_norm, ignition_y_norm])
+        core_values.extend(
+            [
                 fire_center_x_norm,
                 fire_center_y_norm,
                 leftmost_x_norm,
@@ -2907,19 +3452,22 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                     _clip01(water_flag),
                 ]
             )
-        core_values.extend(
-            [
-                boundary_left_norm,
-                boundary_right_norm,
-                boundary_bottom_norm,
-                boundary_top_norm,
-            ]
-        )
+        # "directional-2" omits the four map-boundary distances: each one is an
+        # exact duplicate of a fire-extreme coordinate already emitted above.
+        if self.state_space != STATE_SPACE_DIRECTIONAL_2:
+            core_values.extend(
+                [
+                    boundary_left_norm,
+                    boundary_right_norm,
+                    boundary_bottom_norm,
+                    boundary_top_norm,
+                ]
+            )
         state_features.extend(core_values)
 
-        # "directional" appends the per-flank projected-threat block between the
-        # 30-feature core and the agent block.
-        if self.state_space == STATE_SPACE_DIRECTIONAL:
+        # Both directional state spaces append the per-flank projected-threat
+        # block between the core and the agent block.
+        if self.state_space in (STATE_SPACE_DIRECTIONAL, STATE_SPACE_DIRECTIONAL_2):
             state_features.extend(
                 self._compute_directional_front_block(burning_indices)
             )
@@ -3366,6 +3914,7 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         action: np.ndarray,
     ) -> tuple[np.ndarray, float, bool, bool, dict[str, Any]]:
         assert self.sim is not None
+        self._count_pending_mission_start()
         if self.done:
             raise RuntimeError("step called on terminated environment.")
 
@@ -3419,6 +3968,184 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
 
 
+class StopTrainingOnTotalEpisodes(BaseCallback):
+    """Stop once ``max_episodes`` episodes have finished across ALL workers.
+
+    SB3 ships ``StopTrainingOnMaxEpisodes``, but that one multiplies the limit
+    by ``num_envs`` (its budget is per-env). ``--simulations`` is a total count,
+    so we count ``dones`` across the whole vector env instead.
+    """
+
+    def __init__(self, max_episodes: int, verbose: int = 1):
+        super().__init__(verbose=verbose)
+        if int(max_episodes) <= 0:
+            raise ValueError(f"max_episodes must be > 0 (got {max_episodes})")
+        self.max_episodes = int(max_episodes)
+        self.n_episodes = 0
+
+    def _on_step(self) -> bool:
+        dones = self.locals.get("dones")
+        if dones is not None:
+            self.n_episodes += int(np.sum(dones))
+        if self.n_episodes < self.max_episodes:
+            return True
+        if self.verbose >= 1:
+            print(
+                f"Reached --simulations={self.max_episodes} "
+                f"({self.n_episodes} episodes finished) after "
+                f"{self.num_timesteps} timesteps; stopping training."
+            )
+        return False
+
+
+class StopTrainingOnMissionSimulations(BaseCallback):
+    """Stop once every mission has run its share of the simulation budget.
+
+    ``StopTrainingOnTotalEpisodes`` stops on the fleet-wide episode count, which
+    a multi-mission run can reach with the split still lopsided — the short-
+    episode map finishes episodes several times faster than the long one. This
+    stops on the per-mission counts instead, so the run ends holding the split
+    the CLI asked for. Which mission each simulation runs is the env's decision
+    (phases in list order); this only decides when to stop, and reports each
+    phase as it completes.
+
+    Counts start at ``completed``, the shares earlier chunks of a chained run
+    already spent, so the quotas span the chain rather than each chunk.
+    """
+
+    def __init__(
+        self,
+        quotas: dict[str, int],
+        completed: dict[str, int] | None = None,
+        verbose: int = 1,
+    ):
+        super().__init__(verbose=verbose)
+        if not quotas:
+            raise ValueError("quotas must not be empty")
+        self.quotas = {name: int(quota) for name, quota in quotas.items()}
+        self.counts = {
+            name: int((completed or {}).get(name, 0)) for name in self.quotas
+        }
+
+    def _on_step(self) -> bool:
+        for info in self.locals.get("infos") or ():
+            if "episode_summary" not in info:
+                continue
+            scenario_name = info.get("scenario_name")
+            if scenario_name not in self.counts:
+                continue
+            self.counts[scenario_name] += 1
+            if (
+                self.verbose >= 1
+                and self.counts[scenario_name] == self.quotas[scenario_name]
+            ):
+                print(
+                    f"Mission phase complete: {scenario_name} finished its "
+                    f"{self.quotas[scenario_name]} simulations after "
+                    f"{self.num_timesteps} timesteps."
+                )
+        if any(self.counts[name] < self.quotas[name] for name in self.quotas):
+            return True
+        if self.verbose >= 1:
+            split = ", ".join(
+                f"{name}: {self.counts[name]}/{self.quotas[name]}"
+                for name in self.quotas
+            )
+            print(
+                f"Mission simulation budget spent ({split}) after "
+                f"{self.num_timesteps} timesteps; stopping training."
+            )
+        return False
+
+
+class StopTrainingOnChunkTimesteps(BaseCallback):
+    """Stop once this chunk has collected ``chunk_timesteps`` new timesteps.
+
+    Chained runs hand ``model.learn()`` the *chain's* remaining budget so SB3's
+    ``progress_remaining`` (and therefore the LR schedule) spans the whole
+    chain rather than restarting each chunk. The per-chunk budget is enforced
+    here instead, counting from the timestep the chunk started at.
+    """
+
+    def __init__(self, chunk_timesteps: int, verbose: int = 1):
+        super().__init__(verbose=verbose)
+        if int(chunk_timesteps) <= 0:
+            raise ValueError(f"chunk_timesteps must be > 0 (got {chunk_timesteps})")
+        self.chunk_timesteps = int(chunk_timesteps)
+        self._start_timesteps: int | None = None
+
+    def _on_training_start(self) -> None:
+        self._start_timesteps = int(self.model.num_timesteps)
+
+    def _on_step(self) -> bool:
+        start = self._start_timesteps or 0
+        collected = int(self.num_timesteps) - start
+        if collected < self.chunk_timesteps:
+            return True
+        if self.verbose >= 1:
+            print(
+                f"Chunk budget reached: {collected} timesteps collected this "
+                f"chunk (>= {self.chunk_timesteps}); total {self.num_timesteps}. "
+                "Stopping so the chunk can save and hand off."
+            )
+        return False
+
+
+class StopTrainingOnWallClock(BaseCallback):
+    """Stop after ``max_hours`` of wall-clock training.
+
+    Safety net for chunked runs: SB3 exits ``learn()`` cleanly, so the normal
+    ``--save-model`` and CSV flush still run. Without it a chunk whose budget
+    does not fit the queue's wall limit is SIGKILLed and loses everything since
+    the last checkpoint.
+    """
+
+    def __init__(self, max_hours: float, verbose: int = 1):
+        super().__init__(verbose=verbose)
+        if float(max_hours) <= 0.0:
+            raise ValueError(f"max_hours must be > 0 (got {max_hours})")
+        self.max_seconds = float(max_hours) * 3600.0
+        self._start_time: float | None = None
+
+    def _on_training_start(self) -> None:
+        self._start_time = time.perf_counter()
+
+    def _on_step(self) -> bool:
+        if self._start_time is None:
+            return True
+        elapsed = time.perf_counter() - self._start_time
+        if elapsed < self.max_seconds:
+            return True
+        if self.verbose >= 1:
+            print(
+                f"Wall-clock budget reached: {elapsed / 3600.0:.2f}h trained "
+                f"(limit {self.max_seconds / 3600.0:.2f}h) after "
+                f"{self.num_timesteps} timesteps; stopping so the chunk can "
+                "save and hand off."
+            )
+        return False
+
+
+def _estimate_episode_steps(
+    scenario_paths: Sequence[Path],
+    decision_interval_minutes: int,
+) -> int:
+    """Upper bound on decision steps per episode, from the scenario JSONs.
+
+    Mirrors ``WildfireHourlyEnv._resolve_max_steps`` (max_runtime divided by
+    the decision interval) but reads ``max_runtime`` straight out of the JSON
+    so no terrain has to be loaded. Takes the max across scenarios so the
+    derived timestep ceiling covers the longest episode when switching.
+    """
+    interval_seconds = max(1.0, float(decision_interval_minutes) * 60.0)
+    longest = 0
+    for path in scenario_paths:
+        with open(path, "r", encoding="utf-8") as handle:
+            max_runtime = float(json.load(handle)["max_runtime"])
+        longest = max(longest, math.ceil(max_runtime / interval_seconds))
+    return max(1, longest)
+
+
 class TrainingLogger(BaseCallback):
     """Capture per-step training data and per-episode summaries."""
 
@@ -3427,9 +4154,16 @@ class TrainingLogger(BaseCallback):
         decision_interval_minutes: int = DEFAULT_DECISION_INTERVAL_MINUTES,
         tactic_distribution: str = TACTIC_DISTRIBUTION_INDIVIDUAL,
         aircraft_group_size: int = AIRCRAFT_GROUP_SIZE,
+        group_sizes: Sequence[int] | None = None,
         controlled_agent_count: int = CONTROLLED_AGENT_COUNT,
         progress_file_tag: str = "run",
         output_dir: Path = SCENARIOS_DIR / "outputs",
+        resume_summaries: Sequence[dict[str, Any]] | None = None,
+        episode_progress: EpisodeProgress | None = None,
+        lr_episode_offset: int | None = None,
+        summary_retention: int = 0,
+        mission_names: Sequence[str] | None = None,
+        mission_budget_mode: str = MISSION_BUDGET_SIMULATIONS,
     ):
         super().__init__()
         self.training_step_records: list[dict[str, Any]] = []
@@ -3437,8 +4171,25 @@ class TrainingLogger(BaseCallback):
         # Per-env buffers let us export decision rows only after their
         # simulation episode has completed and received a simulation index.
         self._episode_decision_buffers: dict[int, list[dict[str, Any]]] = {}
-        self.episode_summaries: list[dict[str, Any]] = []
-        self.completed_episodes = 0
+        # Seeding with a previous chunk's summary rows keeps the episode
+        # numbering continuous across a chained run and keeps every progress
+        # file a full-history file, which is what the plotting scripts assume
+        # when they pick the highest-N summary in a run directory.
+        self.episode_summaries: list[dict[str, Any]] = list(resume_summaries or ())
+        self.resumed_episodes = len(self.episode_summaries)
+        self.completed_episodes = self.resumed_episodes
+        # Episode numbering follows the resumed CSV rows so each progress file
+        # matches its own contents. The LR offset is tracked separately because
+        # it comes from the sidecar written with the weights, which can be up
+        # to one export interval ahead of the CSV.
+        self.lr_episode_offset = (
+            self.resumed_episodes
+            if lr_episode_offset is None
+            else int(lr_episode_offset)
+        )
+        self.episode_progress = episode_progress
+        if self.episode_progress is not None:
+            self.episode_progress.completed = self.lr_episode_offset
         self.controlled_agent_count = int(controlled_agent_count)
         if self.controlled_agent_count <= 0:
             raise ValueError("controlled_agent_count must be > 0")
@@ -3448,15 +4199,51 @@ class TrainingLogger(BaseCallback):
         self.aircraft_group_size = int(aircraft_group_size)
         if self.aircraft_group_size <= 0:
             raise ValueError("aircraft_group_size must be > 0")
+        self.group_sizes = (
+            _validate_group_sizes(group_sizes, self.controlled_agent_count)
+            if group_sizes is not None
+            else None
+        )
         self.action_decision_count = _action_decision_count(
             self.tactic_distribution,
             self.controlled_agent_count,
             self.aircraft_group_size,
+            self.group_sizes,
         )
         self.decision_interval_minutes = decision_interval_minutes
+        self.summary_retention = max(0, int(summary_retention))
         self.progress_file_tag = progress_file_tag
         self.output_dir = Path(output_dir)
         self._global_scenario_ts_counts: dict[str, int] = {}
+        # Per-mission episode tally driving the --missions budget split. Seeded
+        # from the resumed summary so a chained run keeps spending the same
+        # split rather than restarting it each chunk; counts every mission the
+        # run knows about, including those already finished.
+        self.mission_names = tuple(mission_names or ())
+        self.mission_budget_mode = mission_budget_mode
+        self._resumed_scenario_ep_counts: dict[str, int] = (
+            _episode_counts_by_scenario(self.episode_summaries, self.mission_names)
+            if self.mission_names
+            else {}
+        )
+        self._global_scenario_ep_counts: dict[str, int] = dict(
+            self._resumed_scenario_ep_counts
+        )
+
+    def scenario_episode_counts(self) -> dict[str, int]:
+        """Episodes per mission over the whole chain, this chunk included."""
+        return dict(self._global_scenario_ep_counts)
+
+    def episode_count_for_chain(self) -> int:
+        """Episodes completed by the whole chain, this chunk included.
+
+        Counts from the LR offset (the previous chunk's authoritative count)
+        rather than from the resumed CSV rows, so a gap between the two does
+        not accumulate across chunks.
+        """
+        return self.lr_episode_offset + (
+            self.completed_episodes - self.resumed_episodes
+        )
 
     def _on_rollout_end(self) -> None:
         if self._global_scenario_ts_counts:
@@ -3464,6 +4251,34 @@ class TrainingLogger(BaseCallback):
                 "set_global_scenario_counts",
                 self._global_scenario_ts_counts,
             )
+
+    def _sync_mission_progress(self) -> None:
+        """Give every worker the fleet-wide view its next mission choice needs.
+
+        A worker only knows what it has run itself, so on its own it would keep
+        a phase going long past the fleet's share. Collecting the per-worker
+        start counts and handing back the totals is what makes the phase
+        boundary a fleet-wide decision. Run every step rather than at rollout
+        end: a rollout is 144 steps per worker, which is enough episodes for a
+        phase to overrun its share by hundreds of simulations. Both calls are
+        small dicts over pipes that are idle between steps, next to multi-second
+        simulation steps.
+        """
+        if not self.mission_names:
+            return
+        if self.mission_budget_mode == MISSION_BUDGET_TIMESTEPS:
+            # Timestep-budgeted phases switch on the per-mission timestep
+            # counts, which this callback already tallies from the infos.
+            self.training_env.env_method(
+                "set_global_scenario_counts",
+                self._global_scenario_ts_counts,
+            )
+            return
+        totals = dict(self._resumed_scenario_ep_counts)
+        for counts in self.training_env.env_method("get_scenario_episode_starts"):
+            for name, value in counts.items():
+                totals[name] = totals.get(name, 0) + int(value)
+        self.training_env.env_method("set_fleet_scenario_episode_starts", totals)
 
     def _on_step(self) -> bool:
         infos = self.locals["infos"]
@@ -3479,6 +4294,7 @@ class TrainingLogger(BaseCallback):
                 self.tactic_distribution,
                 self.controlled_agent_count,
                 self.aircraft_group_size,
+                self.group_sizes,
             )
             metrics_dict = _ensure_metrics_dict(info.get("metrics"))
             deltas_dict = _ensure_metrics_dict(info.get("deltas"))
@@ -3569,6 +4385,10 @@ class TrainingLogger(BaseCallback):
 
             if "episode_summary" in info:
                 self.completed_episodes += 1
+                if self.episode_progress is not None:
+                    self.episode_progress.completed = self.lr_episode_offset + (
+                        self.completed_episodes - self.resumed_episodes
+                    )
                 summary_record = dict(info["episode_summary"])
                 episode_decisions = self._episode_decision_buffers.pop(env_idx, [])
                 for decision_record in episode_decisions:
@@ -3593,6 +4413,9 @@ class TrainingLogger(BaseCallback):
                 summary_record["scenario_name"] = info.get("scenario_name")
                 summary_record["scenario_path"] = info.get("scenario_path")
                 self.episode_summaries.append(summary_record)
+                episode_scenario = info.get("scenario_name")
+                if episode_scenario in self._global_scenario_ep_counts:
+                    self._global_scenario_ep_counts[episode_scenario] += 1
                 if (
                     self.completed_episodes % LOG_INTERVAL_SUMMARY_EPISODES
                     == 0
@@ -3616,6 +4439,7 @@ class TrainingLogger(BaseCallback):
                 self._global_scenario_ts_counts[scenario_name] = (
                     self._global_scenario_ts_counts.get(scenario_name, 0) + 1
                 )
+        self._sync_mission_progress()
         return True
 
     def _on_training_end(self) -> None:
@@ -3676,6 +4500,33 @@ class TrainingLogger(BaseCallback):
             )
             _write_records(self.episode_summaries, summary_path)
             print(f"Episode summary log written to {summary_path}")
+            self._prune_summaries(newest=summary_path)
+
+    def _prune_summaries(self, newest: Path) -> None:
+        """Keep only the newest ``summary_retention`` summary snapshots.
+
+        Every snapshot holds the full episode history, so each one is a prefix
+        of the next and the older files carry no extra information. Keeping
+        them all costs O(N^2) disk: a 150k-episode run writes 1500 snapshots
+        averaging ~29 MB, about 43 GB. Pruning runs only after the replacement
+        has been written, so nothing is lost if the job dies mid-export.
+        """
+        if self.summary_retention <= 0:
+            return
+        prefix = f"results_{self.progress_file_tag}_"
+        snapshots: list[tuple[int, Path]] = []
+        for path in self.output_dir.glob(f"{prefix}*_summary.csv"):
+            tail = path.name[len(prefix) : -len("_summary.csv")]
+            if tail.isdigit():
+                snapshots.append((int(tail), path))
+        snapshots.sort()
+        for _, path in snapshots[: -self.summary_retention]:
+            if path == newest:
+                continue
+            try:
+                path.unlink()
+            except OSError as err:  # noqa: PERF203 - rare, and non-fatal
+                print(f"Could not prune old summary {path}: {err}")
 
 
 def main() -> None:
@@ -3687,10 +4538,96 @@ def main() -> None:
         default="Palisades copy.json",
         help="Scenario JSON (name in inputs/ or absolute path).",
     )
-    parser.add_argument(
+    budget_group = parser.add_mutually_exclusive_group()
+    budget_group.add_argument(
         "--timesteps",
         type=int,
         help="Total PPO timesteps to collect during training (default: 1680).",
+    )
+    budget_group.add_argument(
+        "--simulations",
+        type=int,
+        help=(
+            "Train for this many simulations (episodes) in total across all "
+            "workers, instead of a fixed timestep budget. The timestep budget "
+            "is derived as simulations x the scenario's max episode length "
+            "(max_runtime / decision-interval-minutes) and acts as a ceiling; "
+            "training stops as soon as the episode count is reached."
+        ),
+    )
+    chain_group = parser.add_mutually_exclusive_group()
+    chain_group.add_argument(
+        "--chain-total-timesteps",
+        type=int,
+        help=(
+            "Total PPO timesteps for a CHAINED run split across several SLURM "
+            "jobs. With this set, --timesteps/--simulations size only THIS "
+            "chunk, while the LR schedule, the checkpoint numbering and the "
+            "stopping point are driven by the chain total: the chunk resumes "
+            "at the loaded model's timestep count and trains until its own "
+            "budget is spent. When the chain total is already reached the run "
+            "exits immediately printing CHAIN COMPLETE."
+        ),
+    )
+    chain_group.add_argument(
+        "--chain-total-simulations",
+        type=int,
+        help=(
+            "Simulation (episode) equivalent of --chain-total-timesteps. "
+            "Episodes already completed are counted from the resumed summary "
+            "(--resume-summary), so this is a whole-chain episode budget. The "
+            "LR schedule uses the derived timestep ceiling (simulations x "
+            "longest episode), exactly as a single-job --simulations run does."
+        ),
+    )
+    parser.add_argument(
+        "--summary-retention",
+        type=int,
+        default=0,
+        help=(
+            "Keep only the newest N results_<tag>_<N>_summary.csv snapshots, "
+            "deleting older ones once their replacement is written. Each "
+            "snapshot holds the whole episode history, so keeping them all "
+            "costs O(episodes^2) disk — about 43 GB over a 150k-episode run. "
+            "Default 0 keeps every snapshot (previous behaviour). Use 3 for "
+            "long chained runs; the newest file still holds everything, so "
+            "the plotting scripts and --resume-summary are unaffected."
+        ),
+    )
+    parser.add_argument(
+        "--chain-elapsed-timesteps",
+        type=int,
+        help=(
+            "Declare how far into a --chain-total-timesteps chain the loaded "
+            "model already is, overriding the timestep counter stored in its "
+            "zip. Needed when adopting a run whose counter does not reflect "
+            "true chain progress — e.g. a policy continued with --load-model "
+            "before chaining existed, whose counter restarted at 0 each job. "
+            "The counter is set to this value, so the LR schedule, the "
+            "stopping point and checkpoint numbering all follow it."
+        ),
+    )
+    parser.add_argument(
+        "--resume-summary",
+        help=(
+            "Path to a previous chunk's results_<tag>_<N>_summary.csv, or "
+            "'auto' to pick the highest-N summary for --progress-file-tag in "
+            "--output-dir. Its rows are prepended to this chunk's episode "
+            "summaries so episode numbering and the training curve continue "
+            "across the chain instead of restarting at 1."
+        ),
+    )
+    parser.add_argument(
+        "--max-train-hours",
+        type=float,
+        default=None,
+        help=(
+            "Stop training after this many hours of wall clock and save "
+            "normally. Safety net for chunked runs: set it a little under the "
+            "queue's wall limit (e.g. 22.5 for a 24h job) so a chunk whose "
+            "timestep/simulation budget turns out too large still exits "
+            "cleanly instead of being killed by SLURM."
+        ),
     )
     parser.add_argument(
         "--decision-interval-minutes",
@@ -3715,6 +4652,21 @@ def main() -> None:
         help=(
             "Number of sequential aircraft sharing one tactic decision when "
             "--tactic-distribution group is used. Default 2."
+        ),
+    )
+    parser.add_argument(
+        "--group-sizes",
+        type=int,
+        nargs="+",
+        metavar="N",
+        default=None,
+        help=(
+            "Explicit per-decision group layout over the controlled aircraft "
+            "in scenario order; overrides --tactic-distribution/"
+            "--aircraft-group-size. E.g. '--group-sizes 1 1 1 1 4' on a "
+            "4-seaplane + 4-eVTOL fleet gives each seaplane its own tactic "
+            "decision and all four eVTOLs one shared decision. Values must "
+            "sum to --controlled-agent-count."
         ),
     )
     parser.add_argument(
@@ -3804,7 +4756,10 @@ def main() -> None:
             "altitude/front-flag variant (43 features: adds per-aircraft "
             "altitude and aggregate front flags, drops fire->water distance); "
             "'directional' is 'old' plus the per-flank projected-threat block "
-            "(K = --state-fire-fronts sectors x 6 channels)."
+            "(K = --state-fire-fronts sectors x 6 channels); 'directional-2' is "
+            "'directional' with the four map-boundary distances removed (each "
+            "duplicated a fire-extreme coordinate) and the episode's scaled "
+            "ignition point added instead."
         ),
     )
     parser.add_argument(
@@ -3855,6 +4810,40 @@ def main() -> None:
             "If omitted, uses the default switch set."
         ),
     )
+    parser.add_argument(
+        "--missions",
+        nargs="+",
+        metavar="SCENARIO",
+        default=None,
+        help=(
+            "Train one policy across several missions in sequence, splitting "
+            "the training budget between them (JSON names in inputs/ or "
+            "absolute paths, e.g. --missions Palisades6sp6ev.json "
+            "Pyrenees6sp6ev.json). The missions run as phases in the order "
+            "given: the whole fleet trains the first mission until its share of "
+            "the budget is spent, then moves to the next. Every new simulation "
+            "checks how many the fleet has already started on each mission, so "
+            "a phase ends within a few simulations of its share. The unit of "
+            "the split follows the budget flag: --simulations / "
+            "--chain-total-simulations divide the episode count, --timesteps / "
+            "--chain-total-timesteps the timesteps. Replaces "
+            "--switch-scenario/--switch-scenarios, which round-robins whole "
+            "workers and mixes the missions throughout."
+        ),
+    )
+    parser.add_argument(
+        "--mission-weights",
+        nargs="+",
+        type=float,
+        metavar="W",
+        default=None,
+        help=(
+            "Relative shares of the budget per --missions entry, in the same "
+            "order (default: equal shares). Values are normalized, so "
+            "'--mission-weights 2 1' gives the first mission's phase two thirds "
+            "of the budget."
+        ),
+    )
     ignition_group = parser.add_mutually_exclusive_group()
     ignition_group.add_argument(
         "--switch-ignition-1",
@@ -3869,8 +4858,34 @@ def main() -> None:
         action="store_true",
         help=(
             "Randomize ignition each episode within a map-centered box whose "
-            f"edges sit {IGNITION_V2_MARGIN_RATIO:.0%} of the map edge length "
+            # argparse runs help strings through %-formatting, so a literal
+            # '%' here raises TypeError when --help is printed.
+            f"edges sit {IGNITION_V2_MARGIN_RATIO * 100:.0f} percent of the "
+            "map edge length "
             "from each map boundary (excludes water/urban)."
+        ),
+    )
+    ignition_group.add_argument(
+        "--switch-ignition-3",
+        action="store_true",
+        help=(
+            "Randomize ignition each episode within a "
+            f"{2*IGNITION_BOX_HALF_SIZE_V3}x{2*IGNITION_BOX_HALF_SIZE_V3} cell "
+            "box (2.5x2.5 km ground) around the scenario's original ignition "
+            "center. Same geometry as --switch-ignition-1, widened to sit "
+            "between it and --switch-ignition-2 (excludes water/urban)."
+        ),
+    )
+    ignition_group.add_argument(
+        "--switch-ignition-4",
+        action="store_true",
+        help=(
+            "Randomize ignition each episode within a "
+            f"{2*IGNITION_BOX_HALF_SIZE_V4}x{2*IGNITION_BOX_HALF_SIZE_V4} cell "
+            "box (2.0x2.0 km ground) around the scenario's original ignition "
+            f"center, with a relaxed {IGNITION_URBAN_BUFFER_M_V4:.0f} m urban "
+            f"keep-out instead of the {IGNITION_URBAN_BUFFER_M:.0f} m used by "
+            "modes 1/2/3, so fires may start nearer the urban interface."
         ),
     )
     parser.add_argument(
@@ -3973,10 +4988,12 @@ def main() -> None:
         type=float,
         default=LR_DECAY_EXPONENT,
         help=(
-            "Exponent of the LR schedule lr(p)=initial*p^exponent. "
-            "0.65 (default) decays aggressively early; 1.0 is linear; "
-            "0.0 disables decay. Use 1.0 for long runs where you want "
-            "the actor to keep moving past iter ~30."
+            "Exponent of the LR schedule lr(p)=initial*p^exponent, where p is "
+            "the fraction of the run remaining. 0.70 (default) stays above a "
+            "linear schedule throughout and collapses only over the last "
+            "percent; 1.0 is linear; 0.0 disables decay. Lower the exponent "
+            "(e.g. 0.5) for long runs where you want the actor to keep moving "
+            "late, raise it towards 1.0 to settle sooner."
         ),
     )
     parser.add_argument(
@@ -4010,7 +5027,11 @@ def main() -> None:
             "vf=[512,256,128]."
         )
 
-    if args.switch_ignition_2:
+    if args.switch_ignition_4:
+        switch_ignition_mode = 4
+    elif args.switch_ignition_3:
+        switch_ignition_mode = 3
+    elif args.switch_ignition_2:
         switch_ignition_mode = 2
     elif args.switch_ignition_1:
         switch_ignition_mode = 1
@@ -4031,6 +5052,20 @@ def main() -> None:
             f"in a map-centered box (margin {IGNITION_V2_MARGIN_RATIO:.0%} "
             "of map edge from each boundary)."
         )
+    elif switch_ignition_mode == 3:
+        print(
+            "--switch-ignition-3 enabled: ignition randomized each episode "
+            f"in a {2*IGNITION_BOX_HALF_SIZE_V3}x{2*IGNITION_BOX_HALF_SIZE_V3} "
+            "cell box (2.5x2.5 km ground) around the scenario's original "
+            "ignition."
+        )
+    elif switch_ignition_mode == 4:
+        print(
+            "--switch-ignition-4 enabled: ignition randomized each episode "
+            f"in a {2*IGNITION_BOX_HALF_SIZE_V4}x{2*IGNITION_BOX_HALF_SIZE_V4} "
+            "cell box (2.0x2.0 km ground) around the scenario's original "
+            f"ignition, urban keep-out {IGNITION_URBAN_BUFFER_M_V4:.0f} m."
+        )
     if switch_ignition_mode != 0 and ignition_switch_config["inputs"]:
         print(
             "--ignition-inputs are currently parsed but ignored by "
@@ -4043,8 +5078,60 @@ def main() -> None:
     else:
         adaptive_time_step_override = None
 
-    use_switch_scenario = bool(args.switch_scenario or args.switch_scenarios)
-    if use_switch_scenario:
+    if args.missions and (args.switch_scenario or args.switch_scenarios):
+        raise ValueError(
+            "--missions and --switch-scenario/--switch-scenarios both select "
+            "the scenario set; pass only one. --missions splits the training "
+            "budget between the maps, --switch-scenarios round-robins workers."
+        )
+    if args.mission_weights and not args.missions:
+        raise ValueError("--mission-weights requires --missions.")
+
+    mission_paths: tuple[Path, ...] = ()
+    mission_weights: tuple[float, ...] = ()
+    if args.missions:
+        mission_paths = tuple(_resolve_scenario(name) for name in args.missions)
+        # Budgets, episode counts and the env-side weighting are all keyed by
+        # scenario file name, so a repeated mission would share one share of
+        # the budget instead of getting its own.
+        duplicate_names = {
+            path.name
+            for path in mission_paths
+            if [p.name for p in mission_paths].count(path.name) > 1
+        }
+        if duplicate_names:
+            raise ValueError(
+                "--missions must list distinct scenarios (repeated: "
+                + ", ".join(sorted(duplicate_names))
+                + ")."
+            )
+        if args.mission_weights is None:
+            mission_weights = tuple(1.0 for _ in mission_paths)
+        else:
+            if len(args.mission_weights) != len(mission_paths):
+                raise ValueError(
+                    f"--mission-weights takes one value per mission: got "
+                    f"{len(args.mission_weights)} weights for "
+                    f"{len(mission_paths)} missions."
+                )
+            if any(weight <= 0.0 for weight in args.mission_weights):
+                raise ValueError("--mission-weights values must all be > 0.")
+            mission_weights = tuple(float(w) for w in args.mission_weights)
+
+    use_switch_scenario = bool(
+        args.switch_scenario or args.switch_scenarios or mission_paths
+    )
+    if mission_paths:
+        switch_scenario_paths = mission_paths
+        aircraft_source_scenario_path = None
+        scenario_path = mission_paths[0]
+        print(
+            "--missions enabled: ignoring --scenario and training in phases: "
+            + " -> ".join(path.name for path in mission_paths)
+            + ". The fleet spends one mission's budget share before moving to "
+            "the next, using each scenario's fleet definition."
+        )
+    elif use_switch_scenario:
         switch_names = (
             tuple(args.switch_scenarios)
             if args.switch_scenarios
@@ -4093,6 +5180,26 @@ def main() -> None:
                 f"--controlled-agent-count={args.controlled_agent_count} exceeds "
                 f"the {_fleet_size} aircraft defined in {Path(_fleet_path).name}."
             )
+    # One policy drives every mission, so a fleet that differs between them
+    # silently re-points the same action at different aircraft. Warned about
+    # rather than rejected: the fleet sizes are already checked above, and a
+    # deliberate mismatch is the user's call.
+    if mission_paths:
+        _compositions = {
+            path: _scenario_fleet_composition(path) for path in mission_paths
+        }
+        if len(set(_compositions.values())) > 1:
+            print(
+                "WARNING: --missions fleets differ ("
+                + "; ".join(
+                    f"{path.name}: "
+                    + ", ".join(f"{name}x{count}" for name, count in composition)
+                    for path, composition in _compositions.items()
+                )
+                + "). --controlled-agent-count/--group-sizes slice each "
+                "scenario's aircraft list positionally, so the same action "
+                "commands different aircraft on different missions."
+            )
     # Normalize --water-set ("off" -> None, "1"/"2" -> int) and verify the
     # corresponding pre-generated pkl exists for every scenario in use.
     args.water_set = None if args.water_set == "off" else int(args.water_set)
@@ -4131,6 +5238,10 @@ def main() -> None:
         raise ValueError("--fire-detection-delay-minutes must be >= 0")
     if args.progress_file_tag:
         progress_file_tag = args.progress_file_tag.strip().replace(" ", "_")
+    elif mission_paths:
+        progress_file_tag = "missions_" + "_".join(
+            path.stem.lower().replace(" ", "_") for path in mission_paths
+        )
     elif use_switch_scenario:
         progress_file_tag = "switch_scenarios"
     else:
@@ -4140,33 +5251,321 @@ def main() -> None:
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    default_timesteps = args.timesteps if args.timesteps is not None else 1680
+    # Training length is either a timestep budget (default) or a simulation
+    # (episode) count. For --simulations the timestep budget becomes a derived
+    # ceiling: simulations x the longest possible episode. Episodes that end
+    # early simply consume less of it, and StopTrainingOnTotalEpisodes ends
+    # training on the exact episode count before the ceiling is reached.
+    episode_steps = _estimate_episode_steps(
+        switch_scenario_paths if use_switch_scenario and switch_scenario_paths
+        else (scenario_path,),
+        args.decision_interval_minutes,
+    )
+    if args.simulations is not None:
+        if args.simulations <= 0:
+            raise ValueError(
+                f"--simulations must be > 0 (got {args.simulations})"
+            )
+        default_timesteps = args.simulations * episode_steps
+        print(
+            f"--simulations {args.simulations}: up to {episode_steps} steps per "
+            f"episode -> timestep ceiling {default_timesteps}. Training stops "
+            "at the episode count, whichever comes first."
+        )
+    else:
+        default_timesteps = args.timesteps if args.timesteps is not None else 1680
     total_timesteps = max(default_timesteps, args.num_envs, 2)
 
-    ts_budget_per_scenario: float | None = None
-    if use_switch_scenario and switch_scenario_paths and args.num_envs == 1:
-        ts_budget_per_scenario = float(total_timesteps) / len(switch_scenario_paths)
+    # Chained runs: --timesteps/--simulations size this chunk, the --chain-*
+    # total sizes the whole multi-job run. The chain total is what gets handed
+    # to model.learn(), so SB3's progress_remaining (and the LR schedule that
+    # reads it) spans the chain; the chunk budget is enforced by callbacks.
+    if args.max_train_hours is not None and args.max_train_hours <= 0.0:
+        raise ValueError("--max-train-hours must be > 0")
+    chain_total_timesteps: int | None = None
+    if args.chain_total_timesteps is not None:
+        if args.chain_total_timesteps <= 0:
+            raise ValueError(
+                f"--chain-total-timesteps must be > 0 "
+                f"(got {args.chain_total_timesteps})"
+            )
+        chain_total_timesteps = args.chain_total_timesteps
+        print(f"Chain budget: {chain_total_timesteps} total timesteps.")
+    elif args.chain_total_simulations is not None:
+        if args.chain_total_simulations <= 0:
+            raise ValueError(
+                f"--chain-total-simulations must be > 0 "
+                f"(got {args.chain_total_simulations})"
+            )
+        chain_total_timesteps = args.chain_total_simulations * episode_steps
         print(
-            f"Scenario balance budget: {total_timesteps} total timesteps / "
-            f"{len(switch_scenario_paths)} scenarios = "
-            f"{ts_budget_per_scenario:.0f} timesteps per scenario"
+            f"Chain budget: {args.chain_total_simulations} total simulations "
+            f"-> timestep ceiling {chain_total_timesteps} "
+            f"({episode_steps} steps per episode)."
         )
-    elif use_switch_scenario and switch_scenario_paths and args.num_envs > 1:
-        worker_assignments = [
-            switch_scenario_paths[idx % len(switch_scenario_paths)].name
-            for idx in range(args.num_envs)
-        ]
-        assignment_counts = {
-            path.name: worker_assignments.count(path.name)
-            for path in switch_scenario_paths
-        }
+    if chain_total_timesteps is not None and not (
+        args.timesteps is not None
+        or args.simulations is not None
+        or args.max_train_hours is not None
+    ):
+        raise ValueError(
+            "Chained runs need a per-chunk bound: pass --timesteps or "
+            "--simulations to size the chunk, or --max-train-hours to let it "
+            "fill the queue's wall limit. Without one the chunk would train "
+            "to the chain total and be killed by SLURM."
+        )
+    if args.max_train_hours is not None:
+        print(f"Wall-clock training cutoff: {args.max_train_hours}h.")
+
+    # Episode history carried over from the previous chunk. Seeds the logger so
+    # progress files stay full-history and simulation indices keep counting.
+    resume_summaries: list[dict[str, Any]] = []
+    if args.resume_summary:
+        if args.resume_summary.strip().lower() == "auto":
+            resume_summary_path = _latest_summary_path(output_dir, progress_file_tag)
+            if resume_summary_path is None:
+                print(
+                    "--resume-summary auto: no previous "
+                    f"results_{progress_file_tag}_<N>_summary.csv under "
+                    f"{output_dir}; episode numbering starts at 1."
+                )
+        else:
+            resume_summary_path = Path(args.resume_summary)
+            if not resume_summary_path.exists():
+                raise FileNotFoundError(
+                    f"--resume-summary path not found: {resume_summary_path}"
+                )
+        if resume_summary_path is not None:
+            resume_summaries = _read_summary_rows(resume_summary_path)
+            print(
+                f"Resuming episode history from {resume_summary_path}: "
+                f"{len(resume_summaries)} episodes already completed."
+            )
+
+    # Episodes completed by earlier chunks. The sidecar is written with the
+    # weights so it cannot lag them; the CSV row count is the fallback for runs
+    # that predate it or that were adopted from a non-chained job.
+    elapsed_episodes = len(resume_summaries)
+    if args.load_model:
+        saved_progress = _read_chain_progress(output_dir)
+        if saved_progress is not None:
+            sidecar_episodes = int(saved_progress.get("simulations") or 0)
+            if sidecar_episodes != elapsed_episodes:
+                print(
+                    f"Episode count: {sidecar_episodes} from "
+                    f"{CHAIN_PROGRESS_FILE} (saved with the weights) vs "
+                    f"{elapsed_episodes} summary rows; using the sidecar."
+                )
+            elapsed_episodes = sidecar_episodes
+
+    # A chunk that has nothing left to do exits before building environments so
+    # the driver can stop the chain cheaply.
+    chain_complete_marker = output_dir / "CHAIN_COMPLETE"
+    if chain_total_timesteps is not None:
+        elapsed_timesteps = 0
+        if args.load_model:
+            elapsed_timesteps = _saved_num_timesteps(Path(args.load_model))
+            saved_progress = _read_chain_progress(output_dir)
+            sidecar_timesteps = int((saved_progress or {}).get("timesteps") or 0)
+            if saved_progress is not None and sidecar_timesteps != elapsed_timesteps:
+                # The two are written together, so a mismatch means the model
+                # was swapped — usually a checkpoint restored by hand. The
+                # zip's own counter matches the weights, so it wins.
+                print(
+                    f"Timestep count: {elapsed_timesteps} in the model zip vs "
+                    f"{sidecar_timesteps} in {CHAIN_PROGRESS_FILE}; using the "
+                    "model's own counter (it matches the weights)."
+                )
+        if args.chain_elapsed_timesteps is not None:
+            if args.chain_elapsed_timesteps < 0:
+                raise ValueError("--chain-elapsed-timesteps must be >= 0")
+            print(
+                f"Chain position overridden: {elapsed_timesteps} -> "
+                f"{args.chain_elapsed_timesteps} timesteps "
+                "(--chain-elapsed-timesteps)."
+            )
+            elapsed_timesteps = args.chain_elapsed_timesteps
+        elif (
+            args.load_model
+            and elapsed_timesteps == 0
+            and args.chain_total_simulations is None
+        ):
+            # Same failure as losing the episode count in a simulation chain:
+            # the decay would silently restart at the initial LR.
+            raise ValueError(
+                f"Resuming a --chain-total-timesteps chain from "
+                f"{args.load_model}, but its stored timestep counter is 0, so "
+                f"the LR decay would restart at {args.learning_rate}. This "
+                "happens with policies continued before chaining existed. "
+                "Pass --chain-elapsed-timesteps with the run's true cumulative "
+                "timesteps, or delete the saved model to start the chain over."
+            )
+        if args.chain_total_simulations is not None:
+            # Simulation-budgeted chains stop on the episode count; the
+            # timestep total is only the ceiling handed to learn().
+            chain_done = elapsed_episodes >= args.chain_total_simulations
+        else:
+            chain_done = elapsed_timesteps >= chain_total_timesteps
+        if chain_done:
+            print(
+                "CHAIN COMPLETE: "
+                f"{elapsed_timesteps}/{chain_total_timesteps} timesteps and "
+                f"{elapsed_episodes}"
+                + (
+                    f"/{args.chain_total_simulations}"
+                    if args.chain_total_simulations is not None
+                    else ""
+                )
+                + " simulations already done; nothing left to train."
+            )
+            chain_complete_marker.write_text(
+                f"timesteps={elapsed_timesteps}\n"
+                f"simulations={elapsed_episodes}\n"
+            )
+            return
+
+    # In a simulation-budgeted chain the episode count IS the LR state: losing
+    # it would silently restart the decay at the initial LR.
+    episode_progress: EpisodeProgress | None = None
+    if args.chain_total_simulations is not None:
+        if args.load_model and elapsed_episodes == 0:
+            raise ValueError(
+                "Resuming a --chain-total-simulations chain but no completed "
+                f"episodes were found: neither {output_dir / CHAIN_PROGRESS_FILE} "
+                f"nor a summary CSV for tag '{progress_file_tag}' under "
+                f"{output_dir}. Continuing would restart the LR decay at "
+                f"{args.learning_rate}. Point --resume-summary at the previous "
+                "chunk's summary, or delete the saved model to restart the "
+                "chain from scratch."
+            )
+        episode_progress = EpisodeProgress(
+            completed=elapsed_episodes,
+            total=args.chain_total_simulations,
+        )
+        resumed_progress = episode_progress.progress_remaining()
+        resumed_lr = args.learning_rate * resumed_progress**args.lr_decay_exponent
+        # An exponent of 0 makes p^0 = 1 for every p, so the LR never moves.
+        # Saying "-> 0" there would describe a decay the run does not perform.
+        if args.lr_decay_exponent == 0.0:
+            print(
+                "LR is constant over simulations: "
+                f"{elapsed_episodes}/{args.chain_total_simulations} done, "
+                f"progress_remaining {resumed_progress:.3f}, "
+                f"LR held at {resumed_lr:.3e} for all "
+                f"{args.chain_total_simulations} simulations "
+                "(--lr-decay-exponent 0)."
+            )
+        else:
+            print(
+                "LR decays over simulations: "
+                f"{elapsed_episodes}/{args.chain_total_simulations} done, "
+                f"progress_remaining {resumed_progress:.3f}, "
+                f"LR {resumed_lr:.3e} -> 0 at "
+                f"{args.chain_total_simulations} simulations "
+                f"(exponent {args.lr_decay_exponent})."
+            )
+
+    # --missions: turn the run's budget into a per-mission share. Simulation
+    # budgets split the episode count, timestep budgets split the timesteps;
+    # with --chain-total-* the shares span the whole chain and the episodes
+    # earlier chunks already spent are read back from the resumed summary.
+    mission_budgets: dict[str, float] | None = None
+    mission_budget_mode = MISSION_BUDGET_SIMULATIONS
+    mission_quotas: dict[str, int] = {}
+    resumed_mission_counts: dict[str, int] = {}
+    resumed_mission_timesteps: dict[str, int] = {}
+    if mission_paths:
+        mission_names = tuple(path.name for path in mission_paths)
+        resumed_mission_counts = _episode_counts_by_scenario(
+            resume_summaries, mission_names
+        )
+        resumed_mission_timesteps = _timestep_counts_by_scenario(
+            resume_summaries, mission_names
+        )
+        simulation_budget = (
+            args.chain_total_simulations
+            if args.chain_total_simulations is not None
+            else args.simulations
+        )
+        if simulation_budget is not None:
+            mission_budget_mode = MISSION_BUDGET_SIMULATIONS
+            mission_quotas = dict(
+                zip(
+                    mission_names,
+                    _split_budget(simulation_budget, mission_weights),
+                    strict=True,
+                )
+            )
+            mission_budgets = {
+                name: float(quota) for name, quota in mission_quotas.items()
+            }
+            budget_label = f"{simulation_budget} simulations"
+            unit = "simulations"
+        else:
+            mission_budget_mode = MISSION_BUDGET_TIMESTEPS
+            timestep_budget = (
+                chain_total_timesteps
+                if chain_total_timesteps is not None
+                else total_timesteps
+            )
+            mission_budgets = {
+                name: float(share)
+                for name, share in zip(
+                    mission_names,
+                    _split_budget(timestep_budget, mission_weights),
+                    strict=True,
+                )
+            }
+            budget_label = f"{timestep_budget} timesteps"
+            unit = "timesteps"
         print(
-            "Worker scenario assignment (round-robin): "
-            + ", ".join(
-                f"{scenario} -> {count} workers"
-                for scenario, count in assignment_counts.items()
+            f"Mission phase budgets ({budget_label}, weights "
+            + "/".join(f"{weight:g}" for weight in mission_weights)
+            + "), run in this order: "
+            + " then ".join(
+                f"{name} -> {mission_budgets[name]:.0f} {unit}"
+                + (
+                    f" ({resumed_mission_counts[name]} already run)"
+                    if resumed_mission_counts.get(name)
+                    else ""
+                )
+                for name in mission_names
             )
         )
+        if mission_budget_mode == MISSION_BUDGET_TIMESTEPS:
+            print(
+                "Note: no --simulations/--chain-total-simulations budget was "
+                "given, so the split is by timesteps. Missions with shorter "
+                "episodes will run more simulations for the same share."
+            )
+
+    # --missions brings its own per-mission budget, set above; what follows is
+    # the --switch-scenario path, which balances timesteps only.
+    ts_budget_per_scenario: float | None = None
+    if not mission_paths and use_switch_scenario and switch_scenario_paths:
+        if args.num_envs == 1:
+            ts_budget_per_scenario = float(total_timesteps) / len(switch_scenario_paths)
+            print(
+                f"Scenario balance budget: {total_timesteps} total timesteps / "
+                f"{len(switch_scenario_paths)} scenarios = "
+                f"{ts_budget_per_scenario:.0f} timesteps per scenario"
+            )
+        else:
+            worker_assignments = [
+                switch_scenario_paths[idx % len(switch_scenario_paths)].name
+                for idx in range(args.num_envs)
+            ]
+            assignment_counts = {
+                path.name: worker_assignments.count(path.name)
+                for path in switch_scenario_paths
+            }
+            print(
+                "Worker scenario assignment (round-robin): "
+                + ", ".join(
+                    f"{scenario} -> {count} workers"
+                    for scenario, count in assignment_counts.items()
+                )
+            )
 
     if args.num_envs == 1:
         train_env = WildfireHourlyEnv(
@@ -4178,12 +5577,17 @@ def main() -> None:
             aircraft_source_scenario_path=aircraft_source_scenario_path,
             switch_ignition_mode=switch_ignition_mode,
             ts_budget_per_scenario=ts_budget_per_scenario,
+            mission_budgets=mission_budgets,
+            mission_budget_mode=mission_budget_mode,
+            initial_scenario_episode_counts=resumed_mission_counts,
+            initial_scenario_timestep_counts=resumed_mission_timesteps,
             gc_collect_on_reset=args.gc_collect_on_reset,
             include_scenario_features=use_switch_scenario,
             state_fire_fronts=args.state_fire_fronts,
             state_space=args.state_space,
             tactic_distribution=args.tactic_distribution,
             aircraft_group_size=args.aircraft_group_size,
+            group_sizes=args.group_sizes,
             controlled_agent_count=args.controlled_agent_count,
             water_set=args.water_set,
             cell_size_source=args.cell_size,
@@ -4202,11 +5606,16 @@ def main() -> None:
             switch_ignition_mode,
             vec_start_method,
             ts_budget_per_scenario=ts_budget_per_scenario,
+            mission_budgets=mission_budgets,
+            mission_budget_mode=mission_budget_mode,
+            initial_scenario_episode_counts=resumed_mission_counts,
+            initial_scenario_timestep_counts=resumed_mission_timesteps,
             gc_collect_on_reset=args.gc_collect_on_reset,
             state_fire_fronts=args.state_fire_fronts,
             state_space=args.state_space,
             tactic_distribution=args.tactic_distribution,
             aircraft_group_size=args.aircraft_group_size,
+            group_sizes=args.group_sizes,
             controlled_agent_count=args.controlled_agent_count,
             water_set=args.water_set,
             cell_size_source=args.cell_size,
@@ -4230,15 +5639,15 @@ def main() -> None:
     )
     if args.fire_detection_delay_minutes is None:
         if use_switch_scenario:
-            if args.num_envs > 1:
+            if mission_paths or args.num_envs == 1:
                 print(
                     "Decision start delay: scenario response_time / 60 "
-                    "(computed per worker-assigned scenario)."
+                    "(computed per selected scenario each episode)."
                 )
             else:
                 print(
                     "Decision start delay: scenario response_time / 60 "
-                    "(computed per selected scenario each episode)."
+                    "(computed per worker-assigned scenario)."
                 )
             for switch_path in switch_scenario_paths or ():
                 response_delay_min = _scenario_response_time_seconds(switch_path) / 60.0
@@ -4285,12 +5694,21 @@ def main() -> None:
         f"Fleet size (scenario agents): {fleet_desc}; "
         f"policy-controlled: {args.controlled_agent_count}"
     )
-    print(
-        f"Tactic distribution: {args.tactic_distribution}; "
-        f"controlled_aircraft={args.controlled_agent_count}; "
-        f"aircraft_group_size={args.aircraft_group_size}; "
-        f"action_decisions={len(train_env.action_space.nvec)}"
-    )
+    if args.group_sizes:
+        # --group-sizes overrides tactic_distribution/aircraft_group_size, so
+        # don't print those: they would misreport how tactics are assigned.
+        print(
+            f"Tactic distribution: explicit group_sizes={args.group_sizes}; "
+            f"controlled_aircraft={args.controlled_agent_count}; "
+            f"action_decisions={len(train_env.action_space.nvec)}"
+        )
+    else:
+        print(
+            f"Tactic distribution: {args.tactic_distribution}; "
+            f"controlled_aircraft={args.controlled_agent_count}; "
+            f"aircraft_group_size={args.aircraft_group_size}; "
+            f"action_decisions={len(train_env.action_space.nvec)}"
+        )
     if args.num_envs > 1:
         effective_vec_method = (
             vec_start_method
@@ -4303,9 +5721,16 @@ def main() -> None:
         decision_interval_minutes=args.decision_interval_minutes,
         tactic_distribution=args.tactic_distribution,
         aircraft_group_size=args.aircraft_group_size,
+        group_sizes=args.group_sizes,
         controlled_agent_count=args.controlled_agent_count,
         progress_file_tag=progress_file_tag,
         output_dir=output_dir,
+        resume_summaries=resume_summaries,
+        episode_progress=episode_progress,
+        lr_episode_offset=elapsed_episodes,
+        summary_retention=args.summary_retention,
+        mission_names=tuple(path.name for path in mission_paths),
+        mission_budget_mode=mission_budget_mode,
     )
     device = args.device
     if device != "auto":
@@ -4333,9 +5758,14 @@ def main() -> None:
         )
         model.n_steps = rollout_steps
         model.batch_size = batch_size
-        model.learning_rate = _make_lr_schedule(
-            args.learning_rate,
-            args.lr_decay_exponent,
+        model.learning_rate = (
+            _make_episode_lr_schedule(
+                args.learning_rate,
+                args.lr_decay_exponent,
+                episode_progress,
+            )
+            if episode_progress is not None
+            else _make_lr_schedule(args.learning_rate, args.lr_decay_exponent)
         )
         model.n_epochs = args.n_epochs
         model.target_kl = args.target_kl
@@ -4377,7 +5807,15 @@ def main() -> None:
         model = PPO(
             "MlpPolicy",
             train_env,
-            learning_rate=_make_lr_schedule(args.learning_rate, args.lr_decay_exponent),
+            learning_rate=(
+                _make_episode_lr_schedule(
+                    args.learning_rate,
+                    args.lr_decay_exponent,
+                    episode_progress,
+                )
+                if episode_progress is not None
+                else _make_lr_schedule(args.learning_rate, args.lr_decay_exponent)
+            ),
             verbose=1,
             tensorboard_log=None,
             n_steps=rollout_steps,
@@ -4409,17 +5847,108 @@ def main() -> None:
             save_vecnormalize=False,
             verbose=1,
         )
-        callbacks = CallbackList([step_logger, ckpt_cb])
+        active_callbacks = [step_logger, ckpt_cb]
         print(
             f"Checkpointing every {args.checkpoint_interval} timesteps "
             f"({save_freq_per_env}/env) to {checkpoint_dir}"
         )
     else:
-        callbacks = step_logger
+        active_callbacks = [step_logger]
+
+    # Episode budget for this chunk: the smaller of the per-chunk --simulations
+    # and whatever the chain has left after the resumed episodes.
+    chunk_episode_budget: int | None = args.simulations
+    if args.chain_total_simulations is not None:
+        chain_episodes_left = args.chain_total_simulations - elapsed_episodes
+        chunk_episode_budget = (
+            chain_episodes_left
+            if chunk_episode_budget is None
+            else min(chunk_episode_budget, chain_episodes_left)
+        )
+    if chunk_episode_budget is not None:
+        active_callbacks.append(StopTrainingOnTotalEpisodes(chunk_episode_budget))
+    # With simulation-budgeted phases the run ends when every mission has
+    # completed its share, which is a step or two after the last phase's
+    # simulations were started. The total-episode stop above still caps the
+    # chunk, so a chunked run stops at whichever comes first.
+    if mission_quotas:
+        active_callbacks.append(
+            StopTrainingOnMissionSimulations(
+                mission_quotas,
+                completed=resumed_mission_counts,
+            )
+        )
+
+    # In chain mode learn() gets the chain's remaining budget so the LR
+    # schedule decays across the whole chain; the chunk is bounded here.
+    learn_timesteps = total_timesteps
+    reset_num_timesteps = True
+    if chain_total_timesteps is not None:
+        if args.load_model and args.chain_elapsed_timesteps is not None:
+            # SB3 derives progress_remaining from num_timesteps, so the
+            # override has to move the counter itself, not just our arithmetic.
+            model.num_timesteps = int(args.chain_elapsed_timesteps)
+        elapsed_timesteps = int(model.num_timesteps) if args.load_model else 0
+        learn_timesteps = max(1, chain_total_timesteps - elapsed_timesteps)
+        reset_num_timesteps = not args.load_model
+        if args.timesteps is not None:
+            active_callbacks.append(
+                StopTrainingOnChunkTimesteps(min(total_timesteps, learn_timesteps))
+            )
+        if args.timesteps is not None:
+            chunk_cap = f"{min(total_timesteps, learn_timesteps)} timesteps"
+        elif chunk_episode_budget is not None:
+            chunk_cap = f"{chunk_episode_budget} simulations"
+        else:
+            chunk_cap = f"{args.max_train_hours}h wall clock"
+        if episode_progress is not None:
+            # LR is driven by simulations here; it was reported above.
+            lr_note = (
+                f"LR follows simulations ({elapsed_episodes}/"
+                f"{args.chain_total_simulations})."
+            )
+        else:
+            chunk_progress = 1.0 - elapsed_timesteps / float(chain_total_timesteps)
+            lr_note = (
+                "LR resumes at "
+                f"{args.learning_rate * chunk_progress ** args.lr_decay_exponent:.3g} "
+                f"(progress_remaining {chunk_progress:.3f})."
+            )
+        print(
+            f"Chain position: {elapsed_timesteps}/{chain_total_timesteps} "
+            f"timesteps done ({elapsed_episodes} simulations); "
+            f"{learn_timesteps} left in the chain, this chunk capped at "
+            f"{chunk_cap}. {lr_note}"
+        )
+
+    if args.max_train_hours is not None:
+        active_callbacks.append(StopTrainingOnWallClock(args.max_train_hours))
+
+    callbacks = (
+        active_callbacks[0]
+        if len(active_callbacks) == 1
+        else CallbackList(active_callbacks)
+    )
+
+    # SLURM sends SIGTERM before SIGKILL at the wall limit. Python's default
+    # SIGTERM disposition kills the process outright, which would skip the
+    # rescue save below; turning it into SystemExit routes it there instead.
+    def _terminate(signum, _frame):  # noqa: ANN001 - signal handler signature
+        raise SystemExit(f"received signal {signum}")
+
+    for _sig in (signal.SIGTERM, signal.SIGUSR1):
+        try:
+            signal.signal(_sig, _terminate)
+        except (ValueError, OSError) as err:  # noqa: PERF203 - startup only
+            print(f"Could not install handler for {_sig}: {err}")
 
     start_time = time.perf_counter()
     try:
-        model.learn(total_timesteps=total_timesteps, callback=callbacks)
+        model.learn(
+            total_timesteps=learn_timesteps,
+            callback=callbacks,
+            reset_num_timesteps=reset_num_timesteps,
+        )
     except (KeyboardInterrupt, SystemExit) as err:
         # Best-effort save on signal-driven termination (SLURM time-limit).
         print(f"\nTraining interrupted ({type(err).__name__}); saving rescue model.")
@@ -4427,13 +5956,64 @@ def main() -> None:
             rescue_path = output_dir / "rescue_on_interrupt.zip"
             model.save(str(rescue_path))
             print(f"Rescue model saved to {rescue_path}")
+            if args.save_model:
+                # Advance the chunk's own output too, so a chained run can
+                # resume from the interrupted chunk instead of replaying it.
+                rescue_save_path = _resolve_output_path(
+                    output_dir,
+                    args.save_model,
+                    "trained_policy.zip",
+                )
+                rescue_save_path.parent.mkdir(parents=True, exist_ok=True)
+                model.save(str(rescue_save_path))
+                print(f"Rescue model also saved to {rescue_save_path}")
+                if chain_total_timesteps is not None:
+                    _write_chain_progress(
+                        output_dir,
+                        simulations=step_logger.episode_count_for_chain(),
+                        timesteps=int(model.num_timesteps),
+                    )
         except Exception as save_err:  # noqa: BLE001
             print(f"Rescue save failed: {save_err}")
+        try:
+            # Summary only: the per-step CSVs can be tens of MB and SLURM
+            # follows SIGTERM with SIGKILL after ~30s.
+            step_logger._export_progress(
+                step_logger.completed_episodes,
+                export_steps=False,
+                export_decision_steps=False,
+                export_summary=True,
+            )
+        except Exception as flush_err:  # noqa: BLE001
+            print(f"Rescue summary flush failed: {flush_err}")
         raise
     training_duration = time.perf_counter() - start_time
     train_env.close()
 
     print(f"Training complete in {training_duration:.2f} seconds.")
+
+    if mission_paths:
+        run_mission_counts = step_logger.scenario_episode_counts()
+        total_mission_episodes = sum(run_mission_counts.values()) or 1
+        print(
+            "Mission phases actually run"
+            + (
+                " (whole chain, resumed episodes included)"
+                if any(resumed_mission_counts.values())
+                else ""
+            )
+            + ": "
+            + ", ".join(
+                f"{path.name}: {run_mission_counts.get(path.name, 0)} simulations"
+                + (
+                    f"/{mission_quotas[path.name]}"
+                    if path.name in mission_quotas
+                    else ""
+                )
+                + f" ({100.0 * run_mission_counts.get(path.name, 0) / total_mission_episodes:.1f}%)"
+                for path in mission_paths
+            )
+        )
 
     if args.save_model:
         save_path = _resolve_output_path(
@@ -4444,6 +6024,36 @@ def main() -> None:
         save_path.parent.mkdir(parents=True, exist_ok=True)
         model.save(str(save_path))
         print(f"Trained model saved to {save_path}")
+
+    if chain_total_timesteps is not None:
+        chain_episodes = step_logger.episode_count_for_chain()
+        _write_chain_progress(
+            output_dir,
+            simulations=chain_episodes,
+            timesteps=int(model.num_timesteps),
+        )
+        if args.chain_total_simulations is not None:
+            chain_done = chain_episodes >= args.chain_total_simulations
+        else:
+            chain_done = int(model.num_timesteps) >= chain_total_timesteps
+        if chain_done:
+            # Lets the driver stop without submitting a job just to find out.
+            chain_complete_marker.write_text(
+                f"timesteps={model.num_timesteps}\n"
+                f"simulations={chain_episodes}\n"
+            )
+            print(
+                "CHAIN COMPLETE: "
+                f"{model.num_timesteps}/{chain_total_timesteps} timesteps, "
+                f"{chain_episodes} simulations. "
+                f"Marker written to {chain_complete_marker}"
+            )
+        else:
+            print(
+                "Chunk finished; chain continues at "
+                f"{model.num_timesteps}/{chain_total_timesteps} timesteps "
+                f"({chain_episodes} simulations)."
+            )
 
     all_step_records = step_logger.training_step_records
     if all_step_records:

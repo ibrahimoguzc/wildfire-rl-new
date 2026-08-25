@@ -423,6 +423,9 @@ class SuppressionUAV(TrackFlightDurationMixin, BaseAircraftAgent):
         self, pos: Position, destination_type: DestinationType
     ) -> None:
         """Sets the destination of the agent."""
+        # Remembered so the resupply hold can tell an airport stop from an
+        # off-airport water stop: only the former can re-energize the agent.
+        self.destination_type = destination_type
         self.full_trajectory = self.generate_trajectory(
             starting_pos=self.pos,
             ending_pos=pos,

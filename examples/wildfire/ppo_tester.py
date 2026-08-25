@@ -16,13 +16,19 @@ import numpy as np
 from stable_baselines3 import PPO
 
 from examples.wildfire.paths import SCENARIOS_DIR
-from examples.wildfire.ppo_runner import (
+# ppo_runnerv2, not ppo_runner: every model since mid-2026 was trained with v2,
+# and only v2's env accepts state_space / water_set / group_sizes /
+# state_fire_fronts / cell_size_source. ppo_runner also still carries the
+# ignition cell-size drift (5 m assumed vs the sim's ~6 m grid), which would
+# put switch-ignition fires about a kilometre from where training placed them.
+from examples.wildfire.ppo_runnerv2 import (
     CONTROLLED_AGENT_COUNT,
     DEFAULT_DECISION_INTERVAL_MINUTES,
+    OLD_STATE_FEATURES as STATE_FEATURES,
     SCENARIO_FEATURES,
-    STATE_FEATURES,
     SWITCH_SCENARIO_NAMES,
     TACTIC_COMBINATIONS,
+    TACTIC_DISTRIBUTION_GROUP,
     WildfireHourlyEnv,
     _resolve_scenario,
     _write_records,
@@ -39,6 +45,12 @@ _WORKER_DETERMINISTIC: bool = True
 _WORKER_DEVICE: str = "cpu"
 _WORKER_MODEL_CACHE: dict[str, PPO] = {}
 _WORKER_FIXED_ACTION_CACHE: dict[str, np.ndarray] = {}
+# Env construction options that must match how the model was trained. The
+# defaults here reproduce the tester's historical behaviour (state_space="old",
+# 3 individually-controlled aircraft, no ignition switching, no water set), so
+# older invocations keep working; --state-space and friends override them.
+_WORKER_ENV_KWARGS: dict[str, Any] = {}
+_WORKER_GROUP_SIZES: tuple[int, ...] | None = None
 
 
 class ObservationDropPrefixWrapper(gym.ObservationWrapper):
@@ -101,11 +113,42 @@ class ObservationDropIndicesWrapper(gym.ObservationWrapper):
         return observation[self._keep_mask]
 
 
+def _terminal_moe(summary: dict[str, Any], reward_total: float) -> float:
+    """End-of-simulation MoE, not a sum of per-step rewards.
+
+    The env's ``episode_summary["moe_cumulative_reward"]`` is recomputed at
+    termination from the terminal burnt area / cost / emissions / casualties and
+    the terminal propagation factor, which is the quantity we want to compare
+    policies on. ``reward_total`` (the summed step rewards) is a different
+    number, so falling back to it silently would mix two metrics in one column.
+    Fail loudly instead - an episode with no summary did not terminate normally.
+    """
+    if "moe_cumulative_reward" not in summary:
+        raise RuntimeError(
+            "Episode produced no episode_summary['moe_cumulative_reward']; "
+            "cannot report end-of-simulation MoE. The episode likely ended by "
+            f"truncation rather than termination (summed step reward was "
+            f"{reward_total:.6f})."
+        )
+    return float(summary["moe_cumulative_reward"])
+
+
 def _fixed_action_vector_from_scenario(
     scenario_path: Path,
     *,
     controlled_count: int = CONTROLLED_AGENT_COUNT,
+    group_sizes: Sequence[int] | None = None,
 ) -> np.ndarray:
+    """Read a scenario's per-aircraft tactics into a fixed action vector.
+
+    Without ``group_sizes`` the action has one entry per controlled aircraft,
+    which is what an ungrouped (``tactic_distribution="individual"``) env
+    expects. With ``group_sizes`` the env takes one decision per group, so the
+    vector has one entry per group and every aircraft in a group must carry the
+    same tactic - otherwise the scenario is asking for something the grouped
+    action space cannot express, and silently keeping the first aircraft's
+    tactic would misreport what was evaluated.
+    """
     with scenario_path.open(encoding="utf-8") as handle:
         parameters = WildfireParameters.model_validate_json(handle.read())
 
@@ -120,17 +163,42 @@ def _fixed_action_vector_from_scenario(
     if not combos_per_aircraft:
         raise ValueError(f"No aircraft tactics found in {scenario_path.name}")
 
-    action_indices: list[int] = []
-    for i in range(controlled_count):
-        combo = combos_per_aircraft[min(i, len(combos_per_aircraft) - 1)]
+    def index_of(combo: tuple[Any, Any, Any]) -> int:
         if combo not in TACTIC_COMBINATIONS:
             raise ValueError(
                 "Scenario tactic is not in PPO action space "
                 f"for {scenario_path.name}: {combo}"
             )
-        action_indices.append(TACTIC_COMBINATIONS.index(combo))
+        return TACTIC_COMBINATIONS.index(combo)
 
-    return np.asarray(action_indices, dtype=np.int64)
+    if group_sizes:
+        expected = sum(int(size) for size in group_sizes)
+        if expected != len(combos_per_aircraft):
+            raise ValueError(
+                f"--group-sizes sums to {expected} aircraft but "
+                f"{scenario_path.name} defines {len(combos_per_aircraft)}."
+            )
+        action_indices: list[int] = []
+        start = 0
+        for group_idx, size in enumerate(group_sizes):
+            group = combos_per_aircraft[start:start + int(size)]
+            start += int(size)
+            if len(set(group)) != 1:
+                raise ValueError(
+                    f"Group {group_idx} of {scenario_path.name} mixes tactics "
+                    f"{sorted({str(c) for c in group})}; a grouped action space "
+                    "issues one tactic per group, so each group must be uniform."
+                )
+            action_indices.append(index_of(group[0]))
+        return np.asarray(action_indices, dtype=np.int64)
+
+    return np.asarray(
+        [
+            index_of(combos_per_aircraft[min(i, len(combos_per_aircraft) - 1)])
+            for i in range(controlled_count)
+        ],
+        dtype=np.int64,
+    )
 
 
 def _run_single_episode_fixed(
@@ -139,11 +207,13 @@ def _run_single_episode_fixed(
     scenario_path: Path,
     decision_interval_minutes: int,
     seed: int,
+    env_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     env = WildfireHourlyEnv(
         scenario_path=scenario_path,
         decision_interval_minutes=decision_interval_minutes,
         switch_scenario=False,
+        **(env_kwargs or {}),
     )
     wall_start = time.perf_counter()
     try:
@@ -164,6 +234,10 @@ def _run_single_episode_fixed(
             "scenario_name": info.get("scenario_name"),
             "scenario_path": info.get("scenario_path"),
             "seed": seed,
+            # Recorded so a switch-ignition run can be checked for what it
+            # claims: all policies in a run share a seed, so they must share an
+            # ignition, and the ignitions must vary across runs.
+            "ignition_pos": summary.get("ignition_pos"),
             "total_decision_steps": int(summary.get("total_decision_steps", 0)),
             "total_minutes": total_minutes,
             "mission_hours": total_minutes / 60.0,
@@ -172,7 +246,7 @@ def _run_single_episode_fixed(
             "casualties": float(final_metrics.get("casualties", 0.0)),
             "emissions_tonnes": float(final_metrics.get("emissions_tonnes", 0.0)),
             "moe_cumulative_reward": float(
-                summary.get("moe_cumulative_reward", reward_total)
+                _terminal_moe(summary, reward_total)
             ),
             "propagation_factor": float(summary.get("propagation_factor", 0.0)),
             "episode_reward_sum": reward_total,
@@ -187,12 +261,14 @@ def _run_single_episode_random(
     scenario_path: Path,
     decision_interval_minutes: int,
     seed: int,
+    env_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Evaluate with random tactic assignment at every decision step."""
     env = WildfireHourlyEnv(
         scenario_path=scenario_path,
         decision_interval_minutes=decision_interval_minutes,
         switch_scenario=False,
+        **(env_kwargs or {}),
     )
     wall_start = time.perf_counter()
     rng = np.random.default_rng(seed)
@@ -202,12 +278,15 @@ def _run_single_episode_random(
         truncated = False
         reward_total = 0.0
 
+        # One random tactic tuple per action head at every decision step. The
+        # head count comes from the env, not CONTROLLED_AGENT_COUNT: a grouped
+        # env (--group-sizes) issues one tactic per group, not per aircraft, and
+        # hardcoding the aircraft count silently builds the wrong-length action.
+        action_nvec = np.asarray(env.action_space.nvec, dtype=np.int64)
         while not (terminated or truncated):
-            # Randomly assign one tactic tuple per controlled aircraft each step.
             action = rng.integers(
                 low=0,
-                high=len(TACTIC_COMBINATIONS),
-                size=CONTROLLED_AGENT_COUNT,
+                high=action_nvec,
                 dtype=np.int64,
             )
             _, reward, terminated, truncated, info = env.step(action)
@@ -221,6 +300,10 @@ def _run_single_episode_random(
             "scenario_name": info.get("scenario_name"),
             "scenario_path": info.get("scenario_path"),
             "seed": seed,
+            # Recorded so a switch-ignition run can be checked for what it
+            # claims: all policies in a run share a seed, so they must share an
+            # ignition, and the ignitions must vary across runs.
+            "ignition_pos": summary.get("ignition_pos"),
             "total_decision_steps": int(summary.get("total_decision_steps", 0)),
             "total_minutes": total_minutes,
             "mission_hours": total_minutes / 60.0,
@@ -229,7 +312,7 @@ def _run_single_episode_random(
             "casualties": float(final_metrics.get("casualties", 0.0)),
             "emissions_tonnes": float(final_metrics.get("emissions_tonnes", 0.0)),
             "moe_cumulative_reward": float(
-                summary.get("moe_cumulative_reward", reward_total)
+                _terminal_moe(summary, reward_total)
             ),
             "propagation_factor": float(summary.get("propagation_factor", 0.0)),
             "episode_reward_sum": reward_total,
@@ -409,12 +492,15 @@ def _run_single_episode(
     decision_interval_minutes: int,
     seed: int,
     deterministic: bool,
+    env_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    env_kwargs = env_kwargs or {}
     raw_env = WildfireHourlyEnv(
         scenario_path=scenario_path,
         decision_interval_minutes=decision_interval_minutes,
         switch_scenario=False,
         include_scenario_features=False,
+        **env_kwargs,
     )
     model_obs_dim = int(model.observation_space.shape[0])
     env_obs_dim = int(raw_env.observation_space.shape[0])
@@ -428,6 +514,7 @@ def _run_single_episode(
             decision_interval_minutes=decision_interval_minutes,
             switch_scenario=False,
             include_scenario_features=True,
+            **env_kwargs,
         )
     elif env_obs_dim > model_obs_dim:
         drop_count = env_obs_dim - model_obs_dim
@@ -468,6 +555,10 @@ def _run_single_episode(
             "scenario_name": info.get("scenario_name"),
             "scenario_path": info.get("scenario_path"),
             "seed": seed,
+            # Recorded so a switch-ignition run can be checked for what it
+            # claims: all policies in a run share a seed, so they must share an
+            # ignition, and the ignitions must vary across runs.
+            "ignition_pos": summary.get("ignition_pos"),
             "total_decision_steps": int(summary.get("total_decision_steps", 0)),
             "total_minutes": total_minutes,
             "mission_hours": total_minutes / 60.0,
@@ -476,7 +567,7 @@ def _run_single_episode(
             "casualties": float(final_metrics.get("casualties", 0.0)),
             "emissions_tonnes": float(final_metrics.get("emissions_tonnes", 0.0)),
             "moe_cumulative_reward": float(
-                summary.get("moe_cumulative_reward", reward_total)
+                _terminal_moe(summary, reward_total)
             ),
             "propagation_factor": float(summary.get("propagation_factor", 0.0)),
             "episode_reward_sum": reward_total,
@@ -491,17 +582,23 @@ def _init_eval_worker(
     device: str,
     decision_interval_minutes: int,
     deterministic: bool,
+    env_kwargs: dict[str, Any] | None = None,
+    group_sizes: tuple[int, ...] | None = None,
 ) -> None:
     global _WORKER_DEVICE
     global _WORKER_DECISION_INTERVAL_MINUTES
     global _WORKER_DETERMINISTIC
     global _WORKER_MODEL_CACHE
     global _WORKER_FIXED_ACTION_CACHE
+    global _WORKER_ENV_KWARGS
+    global _WORKER_GROUP_SIZES
     _WORKER_DEVICE = device
     _WORKER_DECISION_INTERVAL_MINUTES = int(decision_interval_minutes)
     _WORKER_DETERMINISTIC = bool(deterministic)
     _WORKER_MODEL_CACHE = {}
     _WORKER_FIXED_ACTION_CACHE = {}
+    _WORKER_ENV_KWARGS = dict(env_kwargs or {})
+    _WORKER_GROUP_SIZES = group_sizes
 
 
 def _get_worker_model(model_path: str) -> PPO:
@@ -515,7 +612,15 @@ def _get_worker_model(model_path: str) -> PPO:
 def _get_worker_fixed_action(tactic_source_path: str) -> np.ndarray:
     action = _WORKER_FIXED_ACTION_CACHE.get(tactic_source_path)
     if action is None:
-        action = _fixed_action_vector_from_scenario(Path(tactic_source_path))
+        action = _fixed_action_vector_from_scenario(
+            Path(tactic_source_path),
+            controlled_count=int(
+                _WORKER_ENV_KWARGS.get(
+                    "controlled_agent_count", CONTROLLED_AGENT_COUNT
+                )
+            ),
+            group_sizes=_WORKER_GROUP_SIZES,
+        )
         _WORKER_FIXED_ACTION_CACHE[tactic_source_path] = action
     return action
 
@@ -541,6 +646,7 @@ def _eval_task(
             decision_interval_minutes=_WORKER_DECISION_INTERVAL_MINUTES,
             seed=seed,
             deterministic=_WORKER_DETERMINISTIC,
+            env_kwargs=_WORKER_ENV_KWARGS,
         )
     elif policy_type == "fixed_tactic":
         fixed_action = _get_worker_fixed_action(policy_source)
@@ -549,12 +655,14 @@ def _eval_task(
             scenario_path=scenario_path,
             decision_interval_minutes=_WORKER_DECISION_INTERVAL_MINUTES,
             seed=seed,
+            env_kwargs=_WORKER_ENV_KWARGS,
         )
     elif policy_type == "random_tactic":
         record = _run_single_episode_random(
             scenario_path=scenario_path,
             decision_interval_minutes=_WORKER_DECISION_INTERVAL_MINUTES,
             seed=seed,
+            env_kwargs=_WORKER_ENV_KWARGS,
         )
     else:
         raise ValueError(f"Unsupported policy type: {policy_type}")
@@ -700,7 +808,83 @@ def main() -> None:
         default=default_plots_dir_arg,
         help="Directory for plots (3 per scenario).",
     )
+    # --- env construction: must match how the model was trained ---------------
+    # Defaults reproduce the tester's historical behaviour so older commands
+    # keep working. A model trained with anything else will fail on observation
+    # or action shape unless these are set to the training values.
+    env_group = parser.add_argument_group(
+        "environment (match the model's training settings)"
+    )
+    env_group.add_argument(
+        "--state-space",
+        default="old",
+        help="State-space variant used at training time (e.g. directional-2).",
+    )
+    env_group.add_argument(
+        "--state-fire-fronts",
+        type=int,
+        default=5,
+        help="Number of fire fronts in the state vector (default: 5).",
+    )
+    env_group.add_argument(
+        "--water-set",
+        default=None,
+        help="Water-source subset: 1, 2 or off. Default: the scenario's own list.",
+    )
+    env_group.add_argument(
+        "--switch-ignition",
+        type=int,
+        default=0,
+        choices=(0, 1, 2, 3, 4),
+        help=(
+            "Ignition randomisation mode, matching ppo_runnerv2's "
+            "--switch-ignition-N. 0 (default) keeps the scenario's ignition."
+        ),
+    )
+    env_group.add_argument(
+        "--group-sizes",
+        type=int,
+        nargs="+",
+        default=None,
+        help=(
+            "Aircraft group sizes, e.g. '5 5'. One tactic decision is issued "
+            "per group. Omit for per-aircraft control."
+        ),
+    )
+    env_group.add_argument(
+        "--controlled-agent-count",
+        type=int,
+        default=None,
+        help="Number of controlled aircraft (default: the env's own default).",
+    )
+    env_group.add_argument(
+        "--cell-size",
+        default=None,
+        choices=("json", "code"),
+        help="Cell-size source for the corrected flank geometry.",
+    )
     args = parser.parse_args()
+
+    # Only forward what was explicitly asked for, so the env keeps its own
+    # defaults for anything untouched.
+    env_kwargs: dict[str, Any] = {
+        "state_space": args.state_space,
+        "state_fire_fronts": args.state_fire_fronts,
+        "switch_ignition_mode": args.switch_ignition,
+    }
+    if args.water_set is not None:
+        env_kwargs["water_set"] = args.water_set
+    if args.cell_size is not None:
+        env_kwargs["cell_size_source"] = args.cell_size
+    group_sizes: tuple[int, ...] | None = None
+    if args.group_sizes:
+        group_sizes = tuple(int(v) for v in args.group_sizes)
+        env_kwargs["group_sizes"] = list(group_sizes)
+        env_kwargs["tactic_distribution"] = TACTIC_DISTRIBUTION_GROUP
+    if args.controlled_agent_count is not None:
+        env_kwargs["controlled_agent_count"] = args.controlled_agent_count
+    elif group_sizes:
+        env_kwargs["controlled_agent_count"] = sum(group_sizes)
 
     if args.runs_per_scenario < 1:
         raise ValueError("--runs-per-scenario must be >= 1")
@@ -847,12 +1031,19 @@ def main() -> None:
                     decision_interval_minutes=args.decision_interval_minutes,
                     seed=seed,
                     deterministic=deterministic,
+                    env_kwargs=env_kwargs,
                 )
             elif policy_type == "fixed_tactic":
                 fixed_action = fixed_action_cache.get(policy_source)
                 if fixed_action is None:
                     fixed_action = _fixed_action_vector_from_scenario(
-                        Path(policy_source)
+                        Path(policy_source),
+                        controlled_count=int(
+                            env_kwargs.get(
+                                "controlled_agent_count", CONTROLLED_AGENT_COUNT
+                            )
+                        ),
+                        group_sizes=group_sizes,
                     )
                     fixed_action_cache[policy_source] = fixed_action
                 row = _run_single_episode_fixed(
@@ -860,12 +1051,14 @@ def main() -> None:
                     scenario_path=scenario_path,
                     decision_interval_minutes=args.decision_interval_minutes,
                     seed=seed,
+                    env_kwargs=env_kwargs,
                 )
             elif policy_type == "random_tactic":
                 row = _run_single_episode_random(
                     scenario_path=scenario_path,
                     decision_interval_minutes=args.decision_interval_minutes,
                     seed=seed,
+                    env_kwargs=env_kwargs,
                 )
             else:
                 raise ValueError(f"Unsupported policy type: {policy_type}")
@@ -887,6 +1080,8 @@ def main() -> None:
                 args.device,
                 args.decision_interval_minutes,
                 deterministic,
+                env_kwargs,
+                group_sizes,
             ),
         ) as executor:
             future_map = {executor.submit(_eval_task, task): task for task in tasks}

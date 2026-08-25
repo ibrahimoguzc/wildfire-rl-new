@@ -270,13 +270,36 @@ def world_to_grid(env: WildfireHourlyEnv, positions: np.ndarray) -> np.ndarray:
     return np.column_stack([ii, jj])
 
 
+def _nearest_grid_point(
+    grid: np.ndarray | None,
+    ci: float,
+    cj: float,
+) -> tuple[float, float] | None:
+    """(i, j) of the point in ``grid`` closest to the fire centroid (ci, cj)."""
+    if grid is None or len(grid) == 0:
+        return None
+    arr = np.asarray(grid, dtype=float).reshape(-1, 2)
+    d = (arr[:, 0] - ci) ** 2 + (arr[:, 1] - cj) ** 2
+    n = int(np.argmin(d))
+    return float(arr[n, 0]), float(arr[n, 1])
+
+
 def _view_window(
     flanks: dict,
     height: int,
     width: int,
     full_map: bool,
+    water_grid: np.ndarray | None = None,
+    urban_grid: np.ndarray | None = None,
+    include_objectives: bool = False,
 ) -> tuple[float, float, float, float]:
-    """(i0, i1, j0, j1) view bounds around the fire, or the full grid."""
+    """(i0, i1, j0, j1) view bounds around the fire, or the full grid.
+
+    When ``include_objectives`` is set, the window is grown just enough to
+    also contain the single nearest water source and nearest urban/VIP
+    objective (the ones aircraft would actually scoop from / protect), so
+    the fire detail is kept while the relevant objectives come into frame.
+    """
     if full_map or flanks["burning"] is None:
         return 0.0, float(height), 0.0, float(width)
     bi, bj = flanks["burning"]
@@ -288,11 +311,30 @@ def _view_window(
         pts_i.extend([li - info["radius_cells"], li + info["radius_cells"]])
         pts_j.extend([lj - info["radius_cells"], lj + info["radius_cells"]])
         max_radius = max(max_radius, info["radius_cells"])
+    if include_objectives and flanks["centroid"] is not None:
+        ci, cj = flanks["centroid"]
+        for grid in (water_grid, urban_grid):
+            nearest = _nearest_grid_point(grid, ci, cj)
+            if nearest is not None:
+                pts_i.append(nearest[0])
+                pts_j.append(nearest[1])
     margin = max(30.0, 1.5 * max_radius)
     i0 = max(0.0, float(min(pts_i)) - margin)
     i1 = min(float(height), float(max(pts_i)) + margin)
     j0 = max(0.0, float(min(pts_j)) - margin)
     j1 = min(float(width), float(max(pts_j)) + margin)
+
+    # Keep the window near the fire-panel's aspect so equal-aspect imshow
+    # does not leave large gaps (which detach the title / sector labels).
+    # Cells stay square, so the sector rays and search circles are undistorted.
+    target_aspect = 1.25  # panel width / height
+    w, h = j1 - j0, i1 - i0
+    if h > 0 and w / h > target_aspect:  # too wide -> grow height
+        pad = (w / target_aspect - h) / 2.0
+        i0, i1 = max(0.0, i0 - pad), min(float(height), i1 + pad)
+    elif w > 0 and w / h < target_aspect:  # too tall -> grow width
+        pad = (h * target_aspect - w) / 2.0
+        j0, j1 = max(0.0, j0 - pad), min(float(width), j1 + pad)
     return i0, i1, j0, j1
 
 
@@ -304,11 +346,21 @@ def save_snapshot(
     out_path: Path,
     full_map: bool,
     dpi: int,
+    include_objectives: bool = False,
 ) -> None:
     fire_states = np.asarray(env.sim.wildfire.fire_states)
     height, width = fire_states.shape
     fronts = flanks["fronts"]
     sector_width = 360.0 / fronts
+
+    water_grid = (
+        world_to_grid(env, env.water_positions)
+        if env.water_positions.size else np.empty((0, 2))
+    )
+    urban_grid = (
+        world_to_grid(env, env.urban_positions)
+        if env.urban_positions.size else np.empty((0, 2))
+    )
 
     fig = plt.figure(figsize=(15, 8.5))
     gs = fig.add_gridspec(1, 2, width_ratios=[2.6, 1.0], wspace=0.18)
@@ -324,22 +376,31 @@ def save_snapshot(
         interpolation="nearest",
     )
 
-    i0, i1, j0, j1 = _view_window(flanks, height, width, full_map)
+    i0, i1, j0, j1 = _view_window(
+        flanks, height, width, full_map, water_grid, urban_grid,
+        include_objectives,
+    )
 
     # Static objectives + aircraft (clipped to view by the axis limits).
     handles: list = []
-    if env.water_positions.size:
-        wg = world_to_grid(env, env.water_positions)
-        ax.scatter(wg[:, 1], wg[:, 0], marker="s", s=14, c="#0050ff",
-                   edgecolors="white", linewidths=0.3, zorder=4)
+    centroid = flanks["centroid"]
+    if water_grid.size:
+        ax.scatter(water_grid[:, 1], water_grid[:, 0], marker="s", s=14,
+                   c="#0050ff", edgecolors="white", linewidths=0.3, zorder=4)
         handles.append(Line2D([], [], marker="s", ls="", mfc="#0050ff",
                               mec="white", label="water source"))
-    if env.urban_positions.size:
-        ug = world_to_grid(env, env.urban_positions)
-        ax.scatter(ug[:, 1], ug[:, 0], marker="D", s=18, c="magenta",
-                   edgecolors="black", linewidths=0.3, zorder=4)
+    if urban_grid.size:
+        ax.scatter(urban_grid[:, 1], urban_grid[:, 0], marker="D", s=18,
+                   c="magenta", edgecolors="black", linewidths=0.3, zorder=4)
         handles.append(Line2D([], [], marker="D", ls="", mfc="magenta",
                               mec="black", label="urban/VIP"))
+    # Ring the nearest water/urban objective that pulled the view open.
+    if include_objectives and centroid is not None:
+        for grid, ring_c in ((water_grid, "#0050ff"), (urban_grid, "magenta")):
+            nearest = _nearest_grid_point(grid, centroid[0], centroid[1])
+            if nearest is not None:
+                ax.add_patch(Circle((nearest[1], nearest[0]), 12.0, fill=False,
+                                    ec=ring_c, lw=1.6, zorder=5))
     agents = env.sim.firefighters.firefighters
     if agents:
         ag = world_to_grid(env, np.array([a.pos for a in agents], dtype=float))
@@ -510,6 +571,9 @@ def main() -> None:
     parser.add_argument("--full-map", action="store_true",
                         help="show the whole grid instead of zooming on the "
                         "fire")
+    parser.add_argument("--include-objectives", action="store_true",
+                        help="grow the fire zoom to also include the nearest "
+                        "water source and nearest urban/VIP objective")
     parser.add_argument("--dpi", type=int, default=140)
     args = parser.parse_args()
 
@@ -547,7 +611,7 @@ def main() -> None:
             f"_t{minutes:04.0f}min.png"
         )
         save_snapshot(env, flanks, step, minutes, out_path, args.full_map,
-                      args.dpi)
+                      args.dpi, args.include_objectives)
         n_burning = 0 if flanks["burning"] is None else flanks["burning"][0].size
         n_active = 0 if flanks["active"] is None else flanks["active"][0].size
         occupied = sorted(flanks["sectors"])
@@ -575,7 +639,7 @@ def main() -> None:
                 f"_t{minutes:04.0f}min.png"
             )
             save_snapshot(env, flanks, step + 1, minutes, out_path,
-                          args.full_map, args.dpi)
+                          args.full_map, args.dpi, args.include_objectives)
             print(f"final snapshot -> {out_path.name}")
             break
 

@@ -1,0 +1,283 @@
+{
+  "name": "Salamis",
+  "time_step": 1.0,
+  "enable_adaptive_time_step": false,
+  "mission_start": "2023-07-17T15:39:00",
+  "max_runtime": 86400,
+  "run_headless": true,
+  "output_sampling_time": 300,
+  "map_in_map": true,
+  "export_img": true,
+  "import_features_osm": true,
+  "deploy_osm_airport_locations": false,
+  "k_nearest_airports": 1,
+  "terrain_inputs": {
+    "file_namespace_operational": "Salamis_128x128_800",
+    "file_namespace": "Salamis_2004x1996_5m",
+    "cell_size": 5,
+    "height_scale_factor": 1.0,
+    "priority_map_sigma": 30,
+    "import_features_osm": true
+  },
+  "max_elevation": 1,
+  "estimate_cost": true,
+  "run_api_for_atmosphere": false,
+  "atmosphere_inputs": {
+    "temperature_range": [
+      22,
+      35,
+      22
+    ],
+    "temperature_times": [
+      5,
+      15
+    ],
+    "sun_times": [
+      6,
+      20
+    ],
+    "time_of_max_solar_height": 12,
+    "humidity_range": [
+      30,
+      40
+    ],
+    "wind_run": 305,
+    "general_winddirection": 230,
+    "range_winddirection": 30,
+    "update_frequency": 600,
+    "latitude": 42.865,
+    "longitude": 0.022
+  },
+  "correction_coefficient": 0.4,
+  "ignition_centers": [
+    {
+      "gps_coords": [
+        37.9115,
+        23.431
+      ]
+    }
+  ],
+  "airports": [
+    {
+      "gps_coords": [
+        37.9788,
+        23.3645
+      ],
+      "icon": "helipad_white.svg",
+      "takeoff_landing_type": "vertipad"
+    },
+    {
+      "gps_coords": [
+        37.94232835679198,
+        23.63185201728529
+      ],
+      "icon": "helipad_white.svg",
+      "takeoff_landing_type": "water"
+    }
+  ],
+  "deploy_osm_waters": false,
+  "water_sources": [
+    {
+      "gps_coords": [
+        37.9282,
+        23.4435
+      ]
+    },
+    {
+      "gps_coords": [
+        37.925,
+        23.4639
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9275,
+        23.4162
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9306,
+        23.4071
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9202,
+        23.41
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9104,
+        23.4033
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9022,
+        23.4076
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8926,
+        23.4023
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8902,
+        23.4135
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8899,
+        23.4225
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8873,
+        23.4282
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8812,
+        23.4392
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8742,
+        23.4462
+      ]
+    },
+    {
+      "gps_coords": [
+        37.8857,
+        23.4707
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9014,
+        23.5022
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9037,
+        23.5157
+      ]
+    },
+    {
+      "gps_coords": [
+        37.9112,
+        23.5132
+      ]
+    }
+  ],
+  "protection_locations": [],
+  "urban_locations": [
+    {
+      "gps_coords": [
+        37.90603092779706,
+        23.412440931476382
+      ],
+      "radius": [
+        536.69,
+        276.28
+      ],
+      "angle": 5.93586
+    },
+    {
+      "gps_coords": [
+        37.938490274657696,
+        23.483601223614855
+      ],
+      "radius": [
+        993.27,
+        590.28
+      ],
+      "angle": 5.198342
+    },
+    {
+      "gps_coords": [
+        37.89360164422624,
+        23.412781683074808
+      ],
+      "radius": [
+        106.6,
+        57.61
+      ],
+      "angle": 0.003256
+    },
+    {
+      "gps_coords": [
+        37.94938187846455,
+        23.495868281158277
+      ],
+      "radius": [
+        655.77,
+        183.87
+      ],
+      "angle": 0.118405
+    },
+    {
+      "gps_coords": [
+        37.908237356557706,
+        23.417438621586665
+      ],
+      "radius": [
+        405.12,
+        248.66
+      ],
+      "angle": 4.839842
+    }
+  ],
+  "response_time": 5400,
+  "takeoff_interval": 300,
+  "turnaround_time": 100,
+  "suppression_altitude": 50,
+  "resupply_altitude": 15,
+  "enable_nighttime_operations": true,
+  "agents": [
+    {
+      "file_name": "example_seaplane_1.json",
+      "agents_per_base": [
+        7,
+        0
+      ],
+      "suppression_tactic": {
+        "main": {
+          "select_poi": "water",
+          "track_poi": "follow_firefront",
+          "suppress": "direct"
+        }
+      }
+    },
+    {
+      "file_name": "example_aircraft_1.json",
+      "agents_per_base": [
+        0,
+        7
+      ],
+      "suppression_tactic": {
+        "main": {
+          "select_poi": "water",
+          "track_poi": "follow_firefront",
+          "suppress": "direct"
+        }
+      }
+    }
+  ],
+  "scoop_time": 30,
+  "distance_cost_weight": 1.0,
+  "vip_cost_weight": 1.0,
+  "priority_cost_weight": 1.0,
+  "vegetation_cost_weight": 1.0,
+  "topography_cost_weight": 1.0
+}
