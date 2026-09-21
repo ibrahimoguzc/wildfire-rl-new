@@ -24,6 +24,7 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from examples.wildfire.firefighter_model.tactic_pieces.select_poi import (  # noqa: E402
+    _cost_weights,
     _nearest_position_cost,
     _positions_from_agents,
     _select_topography_destination,
@@ -175,9 +176,10 @@ def _reference_water(agent):
         objective_positions=_positions_from_agents(agent.model.water_sources),
         map_diagonal=map_diagonal,
     )
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * water_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * water_cost
     )
     return fire_positions[int(np.argmax(selection_cost)), :]
 
@@ -199,9 +201,10 @@ def _reference_vip(agent):
         ),
         map_diagonal=map_diagonal,
     )
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * urban_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * urban_cost
     )
     return fire_positions[int(np.argmax(selection_cost)), :]
 
@@ -225,10 +228,11 @@ def _reference_vegetation(agent):
         map_diagonal=map_diagonal,
     )
     vegetation_cost = agent.priority_cost_vegetation(burning_indices)
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * vip_cost
-        + agent.parameters.vegetation_cost_weight * vegetation_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * vip_cost
+        + weights.vegetation_cost_weight * vegetation_cost
     )
     return fire_positions[int(np.argmax(selection_cost)), :]
 
@@ -252,10 +256,11 @@ def _reference_topography(agent):
         map_diagonal=map_diagonal,
     )
     topography_cost = agent.priority_cost_topography(burning_indices)
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * vip_cost
-        + agent.parameters.topography_cost_weight * topography_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * vip_cost
+        + weights.topography_cost_weight * topography_cost
     )
     return fire_positions[int(np.argmax(selection_cost)), :]
 

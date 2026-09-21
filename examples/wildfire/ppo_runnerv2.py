@@ -2469,7 +2469,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         # In this runner, protection locations are the urban objectives.
         self.vip_positions = self.urban_positions
 
-        if self.state_space in (STATE_SPACE_DIRECTIONAL, STATE_SPACE_DIRECTIONAL_2):
+        if self.state_space in (
+            STATE_SPACE_DIRECTIONAL,
+            STATE_SPACE_DIRECTIONAL_2,
+        ):
             # World-coord KDTrees queried at projected landing points.
             self._vip_tree = (
                 cKDTree(self.vip_positions) if self.vip_positions.size else None
@@ -3155,6 +3158,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         coord_height = self._coord_height
         map_diagonal = self._map_diagonal
 
+        poi_distance_scale = map_diagonal
+        geo_x_lo, geo_x_hi = x_min, x_max
+        geo_y_lo, geo_y_hi = y_min, y_max
+
         boundary_left = 0.0
         boundary_right = 0.0
         boundary_bottom = 0.0
@@ -3221,20 +3228,20 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
                 dtype=float,
             )
             distance_boundary_to_water = self._distance_boundary_to_poi(
-                boundary_points, self.water_positions, map_diagonal
+                boundary_points, self.water_positions, poi_distance_scale
             )
             distance_boundary_to_vip = self._distance_boundary_to_poi(
-                boundary_points, self.vip_positions, map_diagonal
+                boundary_points, self.vip_positions, poi_distance_scale
             )
             distance_boundary_to_vegetation = self._distance_boundary_to_poi(
-                boundary_points, self.vegetation_poi_positions, map_diagonal
+                boundary_points, self.vegetation_poi_positions, poi_distance_scale
             )
             distance_boundary_to_topography = self._distance_boundary_to_poi(
-                boundary_points, self.topography_poi_positions, map_diagonal
+                boundary_points, self.topography_poi_positions, poi_distance_scale
             )
             indirect_positions = self._current_indirect_poi_positions()
             distance_boundary_to_indirect = self._distance_boundary_to_poi(
-                boundary_points, indirect_positions, map_diagonal
+                boundary_points, indirect_positions, poi_distance_scale
             )
 
         atmosphere_inputs = self.parameters.atmosphere_inputs
@@ -3296,63 +3303,63 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         )
         time_to_sunset_norm = _scale_to_unit(float(time_to_sunset), 0.0, day_minutes)
         distance_fire_line_norm = (
-            _scale_to_unit(float(distance_fire_line), 0.0, map_diagonal)
+            _scale_to_unit(float(distance_fire_line), 0.0, poi_distance_scale)
             if not math.isnan(distance_fire_line)
             else 0.0
         )
         distance_water_norm = (
-            _scale_to_unit(float(distance_water), 0.0, map_diagonal)
+            _scale_to_unit(float(distance_water), 0.0, poi_distance_scale)
             if not math.isnan(distance_water)
             else 0.0
         )
 
         fire_center_x_norm = (
-            _scale_to_unit(float(fire_center_x), x_min, x_max)
+            _scale_to_unit(float(fire_center_x), geo_x_lo, geo_x_hi)
             if not math.isnan(fire_center_x)
             else 0.0
         )
         fire_center_y_norm = (
-            _scale_to_unit(float(fire_center_y), y_min, y_max)
+            _scale_to_unit(float(fire_center_y), geo_y_lo, geo_y_hi)
             if not math.isnan(fire_center_y)
             else 0.0
         )
         leftmost_x_norm = (
-            _scale_to_unit(float(leftmost_x), x_min, x_max)
+            _scale_to_unit(float(leftmost_x), geo_x_lo, geo_x_hi)
             if not math.isnan(leftmost_x)
             else 0.0
         )
         leftmost_y_norm = (
-            _scale_to_unit(float(leftmost_y), y_min, y_max)
+            _scale_to_unit(float(leftmost_y), geo_y_lo, geo_y_hi)
             if not math.isnan(leftmost_y)
             else 0.0
         )
         rightmost_x_norm = (
-            _scale_to_unit(float(rightmost_x), x_min, x_max)
+            _scale_to_unit(float(rightmost_x), geo_x_lo, geo_x_hi)
             if not math.isnan(rightmost_x)
             else 0.0
         )
         rightmost_y_norm = (
-            _scale_to_unit(float(rightmost_y), y_min, y_max)
+            _scale_to_unit(float(rightmost_y), geo_y_lo, geo_y_hi)
             if not math.isnan(rightmost_y)
             else 0.0
         )
         uppermost_x_norm = (
-            _scale_to_unit(float(uppermost_x), x_min, x_max)
+            _scale_to_unit(float(uppermost_x), geo_x_lo, geo_x_hi)
             if not math.isnan(uppermost_x)
             else 0.0
         )
         uppermost_y_norm = (
-            _scale_to_unit(float(uppermost_y), y_min, y_max)
+            _scale_to_unit(float(uppermost_y), geo_y_lo, geo_y_hi)
             if not math.isnan(uppermost_y)
             else 0.0
         )
         lowermost_x_norm = (
-            _scale_to_unit(float(lowermost_x), x_min, x_max)
+            _scale_to_unit(float(lowermost_x), geo_x_lo, geo_x_hi)
             if not math.isnan(lowermost_x)
             else 0.0
         )
         lowermost_y_norm = (
-            _scale_to_unit(float(lowermost_y), y_min, y_max)
+            _scale_to_unit(float(lowermost_y), geo_y_lo, geo_y_hi)
             if not math.isnan(lowermost_y)
             else 0.0
         )
@@ -3383,10 +3390,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
         ignition_y_norm = 0.0
         if self.current_ignition_pos is not None:
             ignition_x_norm = _scale_to_unit(
-                float(self.current_ignition_pos[0]), x_min, x_max
+                float(self.current_ignition_pos[0]), geo_x_lo, geo_x_hi
             )
             ignition_y_norm = _scale_to_unit(
-                float(self.current_ignition_pos[1]), y_min, y_max
+                float(self.current_ignition_pos[1]), geo_y_lo, geo_y_hi
             )
 
         agents = self.sim.firefighters.firefighters
@@ -3467,7 +3474,10 @@ class WildfireHourlyEnv(gym.Env[np.ndarray, np.ndarray]):
 
         # Both directional state spaces append the per-flank projected-threat
         # block between the core and the agent block.
-        if self.state_space in (STATE_SPACE_DIRECTIONAL, STATE_SPACE_DIRECTIONAL_2):
+        if self.state_space in (
+            STATE_SPACE_DIRECTIONAL,
+            STATE_SPACE_DIRECTIONAL_2,
+        ):
             state_features.extend(
                 self._compute_directional_front_block(burning_indices)
             )

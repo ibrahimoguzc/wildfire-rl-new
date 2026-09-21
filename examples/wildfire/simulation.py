@@ -177,6 +177,24 @@ class AgentInput(BaseModel):
         return self
 
 
+class FirefrontCostWeightsInput(BaseModel):
+    """Firefront-selection cost weights for one aircraft type.
+
+    One entry of `WildfireParameters.weights`, matched by position
+    to the `agents` entry with the same index - that index is the
+    `ac_type_id` the firefighter model stamps on every aircraft it
+    builds from that definition. All five are required: `extra` is
+    "ignore", so a misspelt key is dropped and the resulting missing
+    field is the only thing left to catch the typo.
+    """
+
+    distance_cost_weight: float
+    vip_cost_weight: float
+    priority_cost_weight: float
+    vegetation_cost_weight: float
+    topography_cost_weight: float
+
+
 class TacticInput(BaseModel):
     select_poi: SelectPOIType = SelectPOIType.WATER
     track_poi: TrackPOIType = TrackPOIType.FOLLOW_FIREFRONT
@@ -631,12 +649,67 @@ class WildfireParameters(SimulationParameters):
 
     scoop_time: PositiveFloat  # SI second
 
-    # Firefront selection cost weights
-    distance_cost_weight: float
-    vip_cost_weight: float
-    priority_cost_weight: float
-    vegetation_cost_weight: float
-    topography_cost_weight: float
+    # Firefront selection cost weights, scenario-wide. Used for every
+    # aircraft unless `weights` below overrides them per aircraft type.
+    distance_cost_weight: float = 1.0
+    vip_cost_weight: float = 1.0
+    priority_cost_weight: float = 1.0
+    vegetation_cost_weight: float = 1.0
+    topography_cost_weight: float = 1.0
+
+    # Optional per-aircraft-type overrides: one entry per `agents`
+    # entry, in the same order. Empty (the default) keeps the
+    # scenario-wide weights above for every aircraft, which is what
+    # every scenario without this key gets.
+    weights: tuple[FirefrontCostWeightsInput, ...] = ()
+
+    @field_validator("weights")
+    @classmethod
+    def check_weights_match_agents(
+        cls,
+        weights: tuple[FirefrontCostWeightsInput, ...],
+        info: ValidationInfo,
+    ) -> tuple[FirefrontCostWeightsInput, ...]:
+        """Reject a per-type weight list that does not match the fleet.
+
+        The entries are matched to `agents` by position, so a length
+        mismatch would silently give some aircraft type the wrong
+        weights. Caught here, at load, not mid-simulation.
+        """
+        if not weights:
+            return weights
+        check_required_fields(["agents"], info.data)
+        agent_count = len(info.data["agents"])
+        if len(weights) != agent_count:
+            raise ValueError(
+                f"weights has {len(weights)} entries but the scenario defines "
+                f"{agent_count} aircraft type(s); give exactly one weight set "
+                "per entry of `agents`, in the same order."
+            )
+        return weights
+
+    def firefront_cost_weights(
+        self, ac_type_id: int | None = None
+    ) -> "FirefrontCostWeightsInput | WildfireParameters":  # noqa: UP037
+        """Firefront-selection weights for one aircraft type.
+
+        Returns the `weights` entry for `ac_type_id` when the scenario
+        defines per-type weights, and otherwise `self` - which carries
+        the same five attribute names scenario-wide. Callers read
+        `.distance_cost_weight` and friends off whatever comes back,
+        so a scenario with no `weights` key behaves exactly as it did
+        before the key existed.
+
+        The return annotation stays quoted: this class is not yet
+        bound while its own body is executing.
+        """
+        if (
+            self.weights
+            and ac_type_id is not None
+            and 0 <= ac_type_id < len(self.weights)
+        ):
+            return self.weights[ac_type_id]
+        return self
 
     @property
     def cell_size(self):

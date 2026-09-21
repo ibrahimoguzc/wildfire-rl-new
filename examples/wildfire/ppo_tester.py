@@ -758,6 +758,16 @@ def main() -> None:
         help="Upper bound for --random-seeds sampling (default: 2**31 - 1).",
     )
     parser.add_argument(
+        "--seed-file",
+        help=(
+            "Path to a text file with one integer sim seed per line, replayed "
+            "in order for every scenario (e.g. the sim_seed column of a "
+            "training summary CSV, to re-run its exact fire instances). "
+            "Overrides --seed/--random-seeds, and the line count replaces "
+            "--runs-per-scenario."
+        ),
+    )
+    parser.add_argument(
         "--stochastic",
         action="store_true",
         help="Use stochastic actions (default is deterministic policy).",
@@ -966,7 +976,16 @@ def main() -> None:
     deterministic = not args.stochastic
     eval_start = time.perf_counter()
 
-    if args.random_seeds:
+    explicit_seeds: list[int] | None = None
+    if args.seed_file:
+        explicit_seeds = [
+            int(token) for token in Path(args.seed_file).read_text().split()
+        ]
+        if not explicit_seeds:
+            raise ValueError(f"--seed-file {args.seed_file} contains no seeds")
+        args.runs_per_scenario = len(explicit_seeds)
+        print(f"Replaying {len(explicit_seeds)} seeds from {args.seed_file}")
+    elif args.random_seeds:
         seed_rng = np.random.default_rng(args.seed)
         sampled_seeds = seed_rng.integers(
             0, args.seed_pool, size=(len(scenario_paths), args.runs_per_scenario)
@@ -975,7 +994,9 @@ def main() -> None:
     tasks: list[tuple[str, str, str, str, int, int]] = []
     for scenario_idx, scenario_path in enumerate(scenario_paths):
         for run_idx in range(1, args.runs_per_scenario + 1):
-            if args.random_seeds:
+            if explicit_seeds is not None:
+                seed = explicit_seeds[run_idx - 1]
+            elif args.random_seeds:
                 seed = int(sampled_seeds[scenario_idx, run_idx - 1])
             else:
                 seed = args.seed + scenario_idx * args.runs_per_scenario + (run_idx - 1)

@@ -122,7 +122,9 @@ def test_shared_features_keep_directional_order():
 
 
 def test_existing_state_spaces_unchanged():
-    assert SUPPORTED_STATE_SPACES == ("old", "updated", "directional", "directional-2")
+    assert SUPPORTED_STATE_SPACES == (
+        "old", "updated", "directional", "directional-2",
+    )
     assert len(OLD_STATE_FEATURES) == 30
     assert len(UPDATED_STATE_FEATURES) == 34
     assert OLD_STATE_FEATURES[-4:] == list(BOUNDARY_FEATURES)

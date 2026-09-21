@@ -1,0 +1,230 @@
+FINAL EVALUATION - 8 policies x 3 maps x 250 paired ignitions
+generated 2026-08-30T16:28:58-04:00
+
+source: final_evaluation/results.csv
+6,000 rows · 8 policies · 3 scenarios
+
+==============================================================================
+Palisades5sp5ev.json   (250 shared ignition seeds, fully paired)
+==============================================================================
+policy                            contained           95% CI   mean MoE       SE
+arm1_palisades_only                   97.2%     [94.3, 98.6]    +0.9625   0.0111
+arm2_pyrenees_only                    96.8%     [93.8, 98.4]    +0.9572   0.0118
+arm3_even_split_75_75                 96.4%     [93.3, 98.1]    +0.9526   0.0126
+arm4_pal25k_pyr125k                   96.8%     [93.8, 98.4]    +0.9565   0.0118
+arm5_concurrent                       99.2%     [97.1, 99.8]    +0.9839   0.0059
+arm6_palisades_multiweight            98.4%     [96.0, 99.4]    +0.9753   0.0084
+fixed_Pyrenees5sp5ev_heuristic        91.6%     [87.5, 94.4]    +0.8972   0.0188
+random_tactics                        89.2%     [84.7, 92.5]    +0.8744   0.0210
+
+A vs B                                                Δcontain   McNemar      ΔMoE      σ   t(Holm)
+arm5_concurrent vs random_tactics                       +10.0%  1.67e-06   +0.1095   +5.4  4.75e-06
+arm6_palisades_multiweig vs random_tactics               +9.2%  0.000411   +0.1009   +4.6  0.000199
+arm1_palisades_only vs random_tactics                    +8.0%  0.000933   +0.0881   +4.4  0.000443
+arm5_concurrent vs fixed_Pyrenees5sp5ev_heu              +7.6%   0.00165   +0.0867   +4.4  0.000443
+arm2_pyrenees_only vs random_tactics                     +7.6%    0.0193   +0.0828   +3.6   0.00864
+arm4_pal25k_pyr125k vs random_tactics                    +7.6%    0.0126   +0.0821   +3.7   0.00665
+arm3_even_split_75_75 vs random_tactics                  +7.2%     0.042   +0.0782   +3.3    0.0195
+arm6_palisades_multiweig vs fixed_Pyrenees5sp5ev_heu     +6.8%    0.0117   +0.0781   +3.9   0.00263
+arm1_palisades_only vs fixed_Pyrenees5sp5ev_heu          +5.6%    0.0276   +0.0654   +3.7   0.00575
+arm2_pyrenees_only vs fixed_Pyrenees5sp5ev_heu           +5.2%    0.0446   +0.0601   +3.5    0.0104
+arm4_pal25k_pyr125k vs fixed_Pyrenees5sp5ev_heu          +5.2%    0.0446   +0.0593   +3.5    0.0125
+arm3_even_split_75_75 vs fixed_Pyrenees5sp5ev_heu        +4.8%     0.201   +0.0555   +2.9    0.0596  ns
+arm3_even_split_75_75 vs arm5_concurrent                 -2.8%         1   -0.0312   -2.2     0.418  ns
+arm4_pal25k_pyr125k vs arm5_concurrent                   -2.4%         1   -0.0274   -2.1     0.593  ns
+arm2_pyrenees_only vs arm5_concurrent                    -2.4%         1   -0.0266   -2.0     0.614  ns
+fixed_Pyrenees5sp5ev_heu vs random_tactics               +2.4%         1   +0.0228   +1.0         1  ns
+arm3_even_split_75_75 vs arm6_palisades_multiweig        -2.0%         1   -0.0226   -1.5         1  ns
+arm1_palisades_only vs arm5_concurrent                   -2.0%         1   -0.0213   -1.7         1  ns
+arm4_pal25k_pyr125k vs arm6_palisades_multiweig          -1.6%         1   -0.0188   -1.3         1  ns
+arm2_pyrenees_only vs arm6_palisades_multiweig           -1.6%         1   -0.0180   -1.2         1  ns
+arm1_palisades_only vs arm6_palisades_multiweig          -1.2%         1   -0.0127   -1.0         1  ns
+arm1_palisades_only vs arm3_even_split_75_75             +0.8%         1   +0.0099   +0.6         1  ns  <floor
+arm5_concurrent vs arm6_palisades_multiweig              +0.8%         1   +0.0086   +0.8         1  ns
+arm1_palisades_only vs arm4_pal25k_pyr125k               +0.4%         1   +0.0061   +0.4         1  ns  <floor
+arm1_palisades_only vs arm2_pyrenees_only                +0.4%         1   +0.0053   +0.3         1  ns  <floor
+arm2_pyrenees_only vs arm3_even_split_75_75              +0.4%         1   +0.0046   +0.3         1  ns  <floor
+arm3_even_split_75_75 vs arm4_pal25k_pyr125k             -0.4%         1   -0.0038   -0.3         1  ns  <floor
+arm2_pyrenees_only vs arm4_pal25k_pyr125k                +0.0%         1   +0.0008   +0.1         1  ns  <floor
+
+  Δ = A − B. σ is the paired episode-level effect size.
+  'ns'    = not significant after Holm correction across 28 pairwise tests.
+  '<floor'= |σ| below the 0.7 run-to-run replicate floor; treat as indistinguishable regardless of p.
+
+==============================================================================
+Pyrenees5sp5ev.json   (250 shared ignition seeds, fully paired)
+==============================================================================
+policy                            contained           95% CI   mean MoE       SE
+arm1_palisades_only                    7.2%      [4.6, 11.1]    -0.1032   0.0197
+arm2_pyrenees_only                    17.6%     [13.4, 22.8]    +0.0464   0.0280
+arm3_even_split_75_75                 13.6%      [9.9, 18.4]    -0.0112   0.0255
+arm4_pal25k_pyr125k                   17.2%     [13.0, 22.4]    +0.0341   0.0280
+arm5_concurrent                       17.2%     [13.0, 22.4]    +0.0357   0.0279
+arm6_palisades_multiweight             5.6%       [3.4, 9.2]    -0.1151   0.0174
+fixed_Pyrenees5sp5ev_heuristic         9.6%      [6.5, 13.9]    -0.0618   0.0221
+random_tactics                         5.2%       [3.1, 8.7]    -0.1216   0.0169
+
+A vs B                                                Δcontain   McNemar      ΔMoE      σ   t(Holm)
+arm2_pyrenees_only vs random_tactics                    +12.4%  2.61e-08   +0.1679   +6.9  1.16e-09
+arm2_pyrenees_only vs arm6_palisades_multiweig          +12.0%  3.84e-07   +0.1614   +6.5  1.14e-08
+arm5_concurrent vs random_tactics                       +12.0%  5.03e-08   +0.1572   +6.5  1.03e-08
+arm4_pal25k_pyr125k vs random_tactics                   +12.0%  5.03e-08   +0.1557   +6.5  1.32e-08
+arm5_concurrent vs arm6_palisades_multiweig             +11.6%  7.15e-07   +0.1507   +6.0  1.14e-07
+arm1_palisades_only vs arm2_pyrenees_only               -10.4%  4.32e-06   -0.1496   -6.3  3.41e-08
+arm4_pal25k_pyr125k vs arm6_palisades_multiweig         +11.6%  7.15e-07   +0.1492   +6.0  1.17e-07
+arm1_palisades_only vs arm5_concurrent                  -10.0%  1.31e-06   -0.1389   -6.1  8.53e-08
+arm1_palisades_only vs arm4_pal25k_pyr125k              -10.0%  1.31e-06   -0.1374   -6.1  8.57e-08
+arm3_even_split_75_75 vs random_tactics                  +8.4%  1.81e-05   +0.1103   +5.3  4.05e-06
+arm2_pyrenees_only vs fixed_Pyrenees5sp5ev_heu           +8.0%   0.00252   +0.1081   +4.4  0.000284
+arm3_even_split_75_75 vs arm6_palisades_multiweig        +8.0%  0.000197   +0.1038   +4.8   4.2e-05
+arm5_concurrent vs fixed_Pyrenees5sp5ev_heu              +7.6%  0.000357   +0.0974   +4.5  0.000135
+arm4_pal25k_pyr125k vs fixed_Pyrenees5sp5ev_heu          +7.6%   0.00235   +0.0959   +4.1  0.000855
+arm1_palisades_only vs arm3_even_split_75_75             -6.4%   0.00232   -0.0920   -4.7  7.57e-05
+fixed_Pyrenees5sp5ev_heu vs random_tactics               +4.4%    0.0127   +0.0598   +3.9   0.00194
+arm2_pyrenees_only vs arm3_even_split_75_75              +4.0%     0.525   +0.0576   +2.6     0.106  ns
+arm6_palisades_multiweig vs fixed_Pyrenees5sp5ev_heu     -4.0%    0.0762   -0.0533   -3.3    0.0148
+arm3_even_split_75_75 vs fixed_Pyrenees5sp5ev_heu        +4.0%      0.34   +0.0506   +2.5      0.12  ns
+arm3_even_split_75_75 vs arm5_concurrent                 -3.6%     0.627   -0.0469   -2.2     0.235  ns
+arm3_even_split_75_75 vs arm4_pal25k_pyr125k             -3.6%     0.572   -0.0454   -2.2     0.235  ns
+arm1_palisades_only vs fixed_Pyrenees5sp5ev_heu          -2.4%     0.766   -0.0415   -2.7    0.0778  ns
+arm1_palisades_only vs random_tactics                    +2.0%     0.766   +0.0183   +1.5     0.873  ns
+arm2_pyrenees_only vs arm4_pal25k_pyr125k                +0.4%         1   +0.0122   +0.6         1  ns  <floor
+arm1_palisades_only vs arm6_palisades_multiweig          +1.6%         1   +0.0118   +1.0         1  ns
+arm2_pyrenees_only vs arm5_concurrent                    +0.4%         1   +0.0107   +0.5         1  ns  <floor
+arm6_palisades_multiweig vs random_tactics               +0.4%         1   +0.0065   +0.6         1  ns  <floor
+arm4_pal25k_pyr125k vs arm5_concurrent                   +0.0%         1   -0.0015   -0.1         1  ns  <floor
+
+  Δ = A − B. σ is the paired episode-level effect size.
+  'ns'    = not significant after Holm correction across 28 pairwise tests.
+  '<floor'= |σ| below the 0.7 run-to-run replicate floor; treat as indistinguishable regardless of p.
+
+==============================================================================
+Salamis5sp5ev.json   (250 shared ignition seeds, fully paired)
+==============================================================================
+policy                            contained           95% CI   mean MoE       SE
+arm1_palisades_only                  100.0%    [98.5, 100.0]    +0.9603   0.0012
+arm2_pyrenees_only                   100.0%    [98.5, 100.0]    +0.9598   0.0013
+arm3_even_split_75_75                100.0%    [98.5, 100.0]    +0.9584   0.0014
+arm4_pal25k_pyr125k                  100.0%    [98.5, 100.0]    +0.9598   0.0012
+arm5_concurrent                      100.0%    [98.5, 100.0]    +0.9574   0.0016
+arm6_palisades_multiweight           100.0%    [98.5, 100.0]    +0.9617   0.0011
+fixed_Pyrenees5sp5ev_heuristic       100.0%    [98.5, 100.0]    +0.9556   0.0015
+random_tactics                       100.0%    [98.5, 100.0]    +0.9561   0.0013
+
+A vs B                                                Δcontain   McNemar      ΔMoE      σ   t(Holm)
+arm6_palisades_multiweig vs fixed_Pyrenees5sp5ev_heu     +0.0%         1   +0.0061   +8.1  8.19e-13
+arm6_palisades_multiweig vs random_tactics               +0.0%         1   +0.0055   +7.8  3.65e-12
+arm1_palisades_only vs fixed_Pyrenees5sp5ev_heu          +0.0%         1   +0.0047   +5.8   4.3e-07
+arm5_concurrent vs arm6_palisades_multiweig              +0.0%         1   -0.0043   -3.8   0.00398
+arm2_pyrenees_only vs fixed_Pyrenees5sp5ev_heu           +0.0%         1   +0.0042   +6.1  1.08e-07
+arm4_pal25k_pyr125k vs fixed_Pyrenees5sp5ev_heu          +0.0%         1   +0.0042   +5.1  1.32e-05
+arm1_palisades_only vs random_tactics                    +0.0%         1   +0.0041   +5.2  1.15e-05
+arm2_pyrenees_only vs random_tactics                     +0.0%         1   +0.0037   +4.6  0.000154
+arm4_pal25k_pyr125k vs random_tactics                    +0.0%         1   +0.0036   +4.9  3.15e-05
+arm3_even_split_75_75 vs arm6_palisades_multiweig        +0.0%         1   -0.0033   -3.7   0.00486
+arm1_palisades_only vs arm5_concurrent                   +0.0%         1   +0.0029   +2.6     0.138  ns
+arm3_even_split_75_75 vs fixed_Pyrenees5sp5ev_heu        +0.0%         1   +0.0028   +3.5   0.00879
+arm2_pyrenees_only vs arm5_concurrent                    +0.0%         1   +0.0024   +2.8    0.0936  ns
+arm4_pal25k_pyr125k vs arm5_concurrent                   +0.0%         1   +0.0024   +2.7     0.113  ns
+arm3_even_split_75_75 vs random_tactics                  +0.0%         1   +0.0023   +2.7     0.108  ns
+arm4_pal25k_pyr125k vs arm6_palisades_multiweig          +0.0%         1   -0.0019   -2.7     0.108  ns
+arm1_palisades_only vs arm3_even_split_75_75             +0.0%         1   +0.0019   +2.1      0.36  ns
+arm2_pyrenees_only vs arm6_palisades_multiweig           +0.0%         1   -0.0019   -2.4     0.201  ns
+arm5_concurrent vs fixed_Pyrenees5sp5ev_heu              +0.0%         1   +0.0018   +1.9     0.484  ns
+arm2_pyrenees_only vs arm3_even_split_75_75              +0.0%         1   +0.0014   +1.7     0.625  ns
+arm1_palisades_only vs arm6_palisades_multiweig          +0.0%         1   -0.0014   -2.4     0.201  ns
+arm3_even_split_75_75 vs arm4_pal25k_pyr125k             +0.0%         1   -0.0014   -1.9     0.503  ns
+arm5_concurrent vs random_tactics                        +0.0%         1   +0.0013   +1.1         1  ns
+arm3_even_split_75_75 vs arm5_concurrent                 +0.0%         1   +0.0010   +1.2         1  ns
+fixed_Pyrenees5sp5ev_heu vs random_tactics               +0.0%         1   -0.0006   -0.7         1  ns  <floor
+arm1_palisades_only vs arm4_pal25k_pyr125k               +0.0%         1   +0.0005   +0.7         1  ns  <floor
+arm1_palisades_only vs arm2_pyrenees_only                +0.0%         1   +0.0005   +0.6         1  ns  <floor
+arm2_pyrenees_only vs arm4_pal25k_pyr125k                +0.0%         1   +0.0000   +0.0         1  ns  <floor
+
+  Δ = A − B. σ is the paired episode-level effect size.
+  'ns'    = not significant after Holm correction across 28 pairwise tests.
+  '<floor'= |σ| below the 0.7 run-to-run replicate floor; treat as indistinguishable regardless of p.
+
+
+### every policy against the Pyrenees-only arm ###
+source: final_evaluation/results.csv
+6,000 rows · 8 policies · 3 scenarios
+
+==============================================================================
+Palisades5sp5ev.json   (250 shared ignition seeds, fully paired)
+==============================================================================
+policy                            contained           95% CI   mean MoE       SE
+arm1_palisades_only                   97.2%     [94.3, 98.6]    +0.9625   0.0111
+arm2_pyrenees_only                    96.8%     [93.8, 98.4]    +0.9572   0.0118
+arm3_even_split_75_75                 96.4%     [93.3, 98.1]    +0.9526   0.0126
+arm4_pal25k_pyr125k                   96.8%     [93.8, 98.4]    +0.9565   0.0118
+arm5_concurrent                       99.2%     [97.1, 99.8]    +0.9839   0.0059
+arm6_palisades_multiweight            98.4%     [96.0, 99.4]    +0.9753   0.0084
+fixed_Pyrenees5sp5ev_heuristic        91.6%     [87.5, 94.4]    +0.8972   0.0188
+random_tactics                        89.2%     [84.7, 92.5]    +0.8744   0.0210
+
+A vs B                                                Δcontain   McNemar      ΔMoE      σ   t(Holm)
+arm2_pyrenees_only vs random_tactics                     +7.6%   0.00615   +0.0828   +3.6   0.00288
+arm2_pyrenees_only vs fixed_Pyrenees5sp5ev_heu           +5.2%    0.0141   +0.0601   +3.5   0.00312
+arm2_pyrenees_only vs arm5_concurrent                    -2.4%     0.547   -0.0266   -2.0     0.219  ns
+arm2_pyrenees_only vs arm6_palisades_multiweig           -1.6%         1   -0.0180   -1.2     0.853  ns
+arm2_pyrenees_only vs arm1_palisades_only                -0.4%         1   -0.0053   -0.3         1  ns  <floor
+arm2_pyrenees_only vs arm3_even_split_75_75              +0.4%         1   +0.0046   +0.3         1  ns  <floor
+arm2_pyrenees_only vs arm4_pal25k_pyr125k                +0.0%         1   +0.0008   +0.1         1  ns  <floor
+
+  Δ = A − B. σ is the paired episode-level effect size.
+  'ns'    = not significant after Holm correction across 7 pairwise tests.
+  '<floor'= |σ| below the 0.7 run-to-run replicate floor; treat as indistinguishable regardless of p.
+
+==============================================================================
+Pyrenees5sp5ev.json   (250 shared ignition seeds, fully paired)
+==============================================================================
+policy                            contained           95% CI   mean MoE       SE
+arm1_palisades_only                    7.2%      [4.6, 11.1]    -0.1032   0.0197
+arm2_pyrenees_only                    17.6%     [13.4, 22.8]    +0.0464   0.0280
+arm3_even_split_75_75                 13.6%      [9.9, 18.4]    -0.0112   0.0255
+arm4_pal25k_pyr125k                   17.2%     [13.0, 22.4]    +0.0341   0.0280
+arm5_concurrent                       17.2%     [13.0, 22.4]    +0.0357   0.0279
+arm6_palisades_multiweight             5.6%       [3.4, 9.2]    -0.1151   0.0174
+fixed_Pyrenees5sp5ev_heuristic         9.6%      [6.5, 13.9]    -0.0618   0.0221
+random_tactics                         5.2%       [3.1, 8.7]    -0.1216   0.0169
+
+A vs B                                                Δcontain   McNemar      ΔMoE      σ   t(Holm)
+arm2_pyrenees_only vs random_tactics                    +12.4%  6.52e-09   +0.1679   +6.9  2.89e-10
+arm2_pyrenees_only vs arm6_palisades_multiweig          +12.0%  9.22e-08   +0.1614   +6.5  2.62e-09
+arm2_pyrenees_only vs arm1_palisades_only               +10.4%  1.08e-06   +0.1496   +6.3  7.11e-09
+arm2_pyrenees_only vs fixed_Pyrenees5sp5ev_heu           +8.0%   0.00072   +0.1081   +4.4  7.58e-05
+arm2_pyrenees_only vs arm3_even_split_75_75              +4.0%     0.157   +0.0576   +2.6    0.0317
+arm2_pyrenees_only vs arm4_pal25k_pyr125k                +0.4%         1   +0.0122   +0.6         1  ns  <floor
+arm2_pyrenees_only vs arm5_concurrent                    +0.4%         1   +0.0107   +0.5         1  ns  <floor
+
+  Δ = A − B. σ is the paired episode-level effect size.
+  'ns'    = not significant after Holm correction across 7 pairwise tests.
+  '<floor'= |σ| below the 0.7 run-to-run replicate floor; treat as indistinguishable regardless of p.
+
+==============================================================================
+Salamis5sp5ev.json   (250 shared ignition seeds, fully paired)
+==============================================================================
+policy                            contained           95% CI   mean MoE       SE
+arm1_palisades_only                  100.0%    [98.5, 100.0]    +0.9603   0.0012
+arm2_pyrenees_only                   100.0%    [98.5, 100.0]    +0.9598   0.0013
+arm3_even_split_75_75                100.0%    [98.5, 100.0]    +0.9584   0.0014
+arm4_pal25k_pyr125k                  100.0%    [98.5, 100.0]    +0.9598   0.0012
+arm5_concurrent                      100.0%    [98.5, 100.0]    +0.9574   0.0016
+arm6_palisades_multiweight           100.0%    [98.5, 100.0]    +0.9617   0.0011
+fixed_Pyrenees5sp5ev_heuristic       100.0%    [98.5, 100.0]    +0.9556   0.0015
+random_tactics                       100.0%    [98.5, 100.0]    +0.9561   0.0013
+
+A vs B                                                Δcontain   McNemar      ΔMoE      σ   t(Holm)
+arm2_pyrenees_only vs fixed_Pyrenees5sp5ev_heu           +0.0%         1   +0.0042   +6.1  2.91e-08
+arm2_pyrenees_only vs random_tactics                     +0.0%         1   +0.0037   +4.6  4.41e-05
+arm2_pyrenees_only vs arm5_concurrent                    +0.0%         1   +0.0024   +2.8    0.0275
+arm2_pyrenees_only vs arm6_palisades_multiweig           +0.0%         1   -0.0019   -2.4    0.0671  ns
+arm2_pyrenees_only vs arm3_even_split_75_75              +0.0%         1   +0.0014   +1.7     0.268  ns
+arm2_pyrenees_only vs arm1_palisades_only                +0.0%         1   -0.0005   -0.6         1  ns  <floor
+arm2_pyrenees_only vs arm4_pal25k_pyr125k                +0.0%         1   +0.0000   +0.0         1  ns  <floor
+
+  Δ = A − B. σ is the paired episode-level effect size.
+  'ns'    = not significant after Holm correction across 7 pairwise tests.
+  '<floor'= |σ| below the 0.7 run-to-run replicate floor; treat as indistinguishable regardless of p.
+

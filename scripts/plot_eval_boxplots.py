@@ -26,15 +26,19 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
+# Embed TrueType rather than Type-3 so PDF output is submission-safe.
+matplotlib.rcParams["pdf.fonttype"] = 42
+matplotlib.rcParams["ps.fonttype"] = 42
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
-# dataviz reference palette, categorical slots 1-3 (light mode).
-# Validated: worst adjacent CVD dE 9.2 (deutan), normal-vision dE 27.6, all
-# checks pass. The contrast WARN on the green is relieved by the direct axis
-# labels and the printed values under every box.
-HUES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]
+# dataviz reference palette, categorical slots 1-5 (light mode), in the
+# documented adjacent order. Validated as a set of five: worst adjacent CVD
+# dE 9.1 (protan), normal-vision dE 19.6, all hard gates pass. The contrast
+# WARNs on aqua/yellow/magenta are relieved by the direct axis labels, the
+# printed values under every box, and the table view on stdout.
+HUES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"]
 # Status-critical red, used here as an annotation mark (the mean), not as a
 # series identity. 4.68:1 on the light surface. It is the only red in the
 # figure and it is named in the subtitle and printed under every box, so it
@@ -79,6 +83,25 @@ def main() -> None:
         help="display names, one per policy, in the same order as --order",
     )
     parser.add_argument(
+        "--no-header",
+        action="store_true",
+        help=(
+            "omit the title, subtitle and note lines -- for paper figures "
+            "whose caption lives in the document"
+        ),
+    )
+    parser.add_argument(
+        "--colors",
+        nargs="+",
+        help=(
+            "hex color per policy, aligned with --order. Use when the same "
+            "policies appear in several figures in different orders: color "
+            "must follow the entity, not the position, so the caller pins "
+            "each policy's hue explicitly. Validate the resulting adjacent "
+            "sequence per figure."
+        ),
+    )
+    parser.add_argument(
         "--color-by-type",
         action="store_true",
         help=(
@@ -94,9 +117,26 @@ def main() -> None:
             "covering several maps yields one figure per map"
         ),
     )
+    parser.add_argument(
+        "--scenarios",
+        nargs="+",
+        help=(
+            "pool over this subset of maps instead of one map or all of them. "
+            "Pooling weights each map equally only if each contributed the same "
+            "number of runs - true here, since every map gets --runs-per-scenario."
+        ),
+    )
     args = parser.parse_args()
 
     frame = pd.read_csv(args.results)
+    if args.scenarios:
+        sel = frame["scenario_name"].isin(args.scenarios)
+        if not sel.any():
+            raise SystemExit(
+                f"--scenarios {args.scenarios} matched nothing; present: "
+                f"{sorted(set(frame['scenario_name']))}"
+            )
+        frame = frame[sel]
     if args.scenario:
         sel = frame["scenario_name"] == args.scenario
         if not sel.any():
@@ -141,14 +181,30 @@ def main() -> None:
     # zip() against HUES silently drops boxes past the 4th - the strip points
     # and mean line for a 5th policy would just vanish. Either colour by kind
     # (baseline vs learned) or refuse.
-    if args.color_by_type and "policy_type" in frame:
+    if args.colors:
+        if len(args.colors) != len(names):
+            raise SystemExit(
+                f"--colors has {len(args.colors)} entries but there are "
+                f"{len(names)} policies"
+            )
+        hues = list(args.colors)
+    elif args.color_by_type and "policy_type" in frame:
         kinds = [
             frame.loc[frame["policy_name"] == n, "policy_type"].iloc[0] for n in names
         ]
-        model_hues = iter(HUES)
-        hues = [
-            next(model_hues) if k == "ppo_model" else BASELINE_HUE for k in kinds
-        ]
+        n_models = sum(1 for k in kinds if k == "ppo_model")
+        if n_models > len(HUES):
+            # More trained policies than validated categorical slots. Cycling
+            # hues is not allowed and there is no 5th validated slot, so drop
+            # colour as an identity channel entirely: every box takes the
+            # neutral, and the axis labels (always present) carry identity.
+            hues = [BASELINE_HUE] * len(kinds)
+        else:
+            model_hues = iter(HUES)
+            hues = [
+                next(model_hues) if k == "ppo_model" else BASELINE_HUE
+                for k in kinds
+            ]
     elif len(groups) > len(HUES):
         raise SystemExit(
             f"{len(groups)} policies but only {len(HUES)} validated categorical "
@@ -224,25 +280,28 @@ def main() -> None:
         )
 
     n_runs = min(len(g) for g in groups)
-    title = args.title or "Policy comparison, end-of-simulation MoE"
     height = fig.get_figheight()
-    fig.suptitle(title, x=0.008, y=1 - 0.28 / height, ha="left",
-                 fontsize=13, color=INK, weight="bold")
-    fig.text(
-        0.008, 1 - 0.56 / height,
-        f"{n_runs} simulations per policy, paired by ignition seed  ·  "
-        f"red line = mean, black bar = median  ·  source {Path(args.results).name}",
-        ha="left", fontsize=9, color=INK_MUTED,
-    )
-    # The note gets its own line rather than being appended: subtitles that
-    # explain a short axis label are long, and one line runs off the canvas.
-    if args.note:
-        fig.text(0.008, 1 - 0.76 / height, args.note,
-                 ha="left", fontsize=9, color=INK_MUTED)
+    if not args.no_header:
+        title = args.title or "Policy comparison, end-of-simulation MoE"
+        fig.suptitle(title, x=0.008, y=1 - 0.28 / height, ha="left",
+                     fontsize=13, color=INK, weight="bold")
+        fig.text(
+            0.008, 1 - 0.56 / height,
+            f"{n_runs} simulations per policy, paired by ignition seed  ·  "
+            f"red line = mean, black bar = median  ·  source {Path(args.results).name}",
+            ha="left", fontsize=9, color=INK_MUTED,
+        )
+        # The note gets its own line rather than being appended: subtitles that
+        # explain a short axis label are long, and one line runs off the canvas.
+        if args.note:
+            fig.text(0.008, 1 - 0.76 / height, args.note,
+                     ha="left", fontsize=9, color=INK_MUTED)
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    header_inches = 1.05 if args.note else 0.85
+    header_inches = (
+        0.10 if args.no_header else (1.05 if args.note else 0.85)
+    )
     fig.tight_layout(rect=(0, 0, 1, 1 - header_inches / height))
     fig.savefig(out, dpi=130, facecolor=SURFACE)
 

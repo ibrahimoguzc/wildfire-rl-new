@@ -264,6 +264,20 @@ def _normalize_priority_slice(agent, raw_priorities: np.ndarray) -> np.ndarray:
     return np.array(agent.normalize_priorities(list(raw_priorities)), dtype=float)
 
 
+def _cost_weights(agent) -> object:
+    """Firefront-selection weights for this agent's aircraft type.
+
+    A scenario may give each aircraft type its own weight set via its
+    `weights` list; one without that key resolves to the
+    scenario-wide weights, i.e. what comes back still exposes the
+    same five attributes and every aircraft reads the same numbers
+    as before.
+    """
+    return agent.parameters.firefront_cost_weights(
+        getattr(agent, "ac_type_id", None)
+    )
+
+
 def _distance_cost(agent, fire_positions: np.ndarray, map_diagonal: float) -> np.ndarray:
     fire_distances = agent.distance(agent.pos, fire_positions)
     return (map_diagonal - fire_distances) / map_diagonal
@@ -285,9 +299,10 @@ def _select_water_destination(agent) -> np.ndarray | None:
     map_diagonal = _cached_map_diagonal(agent)
     distance_cost = _distance_cost(agent, fire_positions, map_diagonal)
     water_cost = _cached_water_cost(agent)[selected_indices]
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * water_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * water_cost
     )
     return _destination_from_costs(fire_positions, selection_cost)
 
@@ -300,9 +315,10 @@ def _select_vip_destination(agent) -> np.ndarray | None:
     map_diagonal = _cached_map_diagonal(agent)
     distance_cost = _distance_cost(agent, fire_positions, map_diagonal)
     urban_cost = _cached_urban_cost(agent)[selected_indices]
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * urban_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * urban_cost
     )
     return _destination_from_costs(fire_positions, selection_cost)
 
@@ -322,10 +338,11 @@ def _select_vegetation_destination(agent) -> np.ndarray | None:
         agent,
         _cached_raw_vegetation_priority(agent)[selected_indices],
     )
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * vip_cost
-        + agent.parameters.vegetation_cost_weight * vegetation_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * vip_cost
+        + weights.vegetation_cost_weight * vegetation_cost
     )
     return _destination_from_costs(fire_positions, selection_cost)
 
@@ -345,10 +362,11 @@ def _select_topography_destination(agent) -> np.ndarray | None:
         agent,
         _cached_raw_topography_priority(agent)[selected_indices],
     )
+    weights = _cost_weights(agent)
     selection_cost = (
-        agent.parameters.distance_cost_weight * distance_cost
-        + agent.parameters.vip_cost_weight * vip_cost
-        + agent.parameters.topography_cost_weight * topography_cost
+        weights.distance_cost_weight * distance_cost
+        + weights.vip_cost_weight * vip_cost
+        + weights.topography_cost_weight * topography_cost
     )
     return _destination_from_costs(fire_positions, selection_cost)
 

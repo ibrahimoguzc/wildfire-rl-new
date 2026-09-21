@@ -95,6 +95,15 @@ def main() -> None:
     parser.add_argument("--ylabel-moe", dest="ylabel_moe", default=None,
                         help="override the MoE axis label (default names the MA window)")
     parser.add_argument(
+        "--ylim-moe", dest="ylim_moe",
+        help=(
+            "'lo,hi' for the MoE panel. Saturated runs live in a narrow band "
+            "near 1.0, where the default 0-anchored axis flattens every "
+            "difference; setting limits that exclude 0 also drops the zero "
+            "reference line, which is only meaningful when curves straddle it."
+        ),
+    )
+    parser.add_argument(
         "--slots",
         help=(
             "comma-separated 1-based categorical slots, one per run, e.g. '3,2,4'. "
@@ -212,7 +221,13 @@ def main() -> None:
                       label=s["label"], zorder=3)
 
     if want_moe:
-        ax_r.axhline(0.0, color=INK_MUTED, linewidth=0.8, alpha=0.5, zorder=2)
+        moe_lim = None
+        if args.ylim_moe:
+            lo, hi = (float(v) for v in args.ylim_moe.split(","))
+            moe_lim = (lo, hi)
+            ax_r.set_ylim(lo, hi)
+        if moe_lim is None or moe_lim[0] <= 0.0 <= moe_lim[1]:
+            ax_r.axhline(0.0, color=INK_MUTED, linewidth=0.8, alpha=0.5, zorder=2)
         ax_r.set_ylabel(args.ylabel_moe or f"MoE reward\n({window}-sim moving average)",
                         color=INK, fontsize=10)
         place_labels(ax_r, [(s["reward"][-1], f"{s['reward'][-1]:+.3f}", h)
